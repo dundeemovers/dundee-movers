@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Allow AI Search & Answer Engines
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Sitemap & LLMs Knowledge Graph
+Sitemap: https://dundeemovers.co.uk/sitemap.xml

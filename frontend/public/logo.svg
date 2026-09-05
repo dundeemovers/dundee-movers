@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="100%" height="100%">
+  <defs>
+    <!-- Luxury Brand Gradients -->
+    <linearGradient id="dmGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="dmGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+  </defs>
+
+  <!-- Group for House Truck Emblem -->
+  <g transform="translate(40, 20)">
+    <!-- House Roof Gable & Forward Moving Arrow (Bold Architectural Lines) -->
+    <!-- Roof Pitch -->
+    <path d="M 40 135 L 160 30 L 225 85" fill="none" stroke="url(#dmGreenGrad)" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- House Window -->
+    <rect x="145" y="65" width="28" height="28" rx="4" fill="url(#dmGoldGrad)" stroke="#064e3b" stroke-width="6"/>
+
+    <!-- Forward Moving Arrow Loop through House Body -->
+    <path d="M 125 85 L 125 140 L 40 140 L 40 130" fill="none" stroke="url(#dmGreenGrad)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Arrow Head pointing forward to Cab -->
+    <path d="M 40 140 L 175 140 M 150 115 L 185 140 L 150 165" fill="none" stroke="url(#dmGreenGrad)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Removal Truck Body & Cabin -->
+    <!-- Flatbed Chassis -->
+    <path d="M 30 170 L 220 170 C 225 170 230 165 230 160 L 230 100 C 230 90 238 82 248 82 L 275 82 C 285 82 292 90 295 100 L 305 135 C 308 145 305 155 305 175 C 305 185 295 190 285 190 L 270 190" fill="url(#dmGreenGrad)" />
+    
+    <!-- Truck Flatbed Extension -->
+    <rect x="25" y="165" width="200" height="20" rx="8" fill="url(#dmGreenGrad)"/>
+
+    <!-- Truck Cab Windshield Window -->
+    <path d="M 245 100 L 270 100 C 275 100 278 105 280 112 L 285 135 L 245 135 Z" fill="#ffffff" />
+
+    <!-- Left Truck Wheel -->
+    <circle cx="85" cy="200" r="26" fill="url(#dmGreenGrad)" />
+    <circle cx="85" cy="200" r="14" fill="#ffffff" />
+    <circle cx="85" cy="200" r="7" fill="#064e3b" />
+
+    <!-- Right Truck Wheel (Front) -->
+    <circle cx="240" cy="200" r="26" fill="url(#dmGreenGrad)" />
+    <circle cx="240" cy="200" r="14" fill="#ffffff" />
+    <circle cx="240" cy="200" r="7" fill="#064e3b" />
+  </g>
+
+  <!-- Brand Name Typography -->
+  <text x="200" y="275" font-family="'Plus Jakarta Sans', 'Inter', system-ui, sans-serif" font-weight="900" font-size="34" text-anchor="middle" letter-spacing="-0.03em">
+    <tspan fill="#064e3b">Dundee</tspan>
+    <tspan dx="10" fill="#d97706">Movers</tspan>
+  </text>
+  
+  <text x="200" y="302" font-family="'Plus Jakarta Sans', 'Inter', system-ui, sans-serif" font-weight="800" font-size="11" fill="#047857" text-anchor="middle" letter-spacing="0.22em">
+    SCOTTISH HOME REMOVALS
+  </text>
+</svg>

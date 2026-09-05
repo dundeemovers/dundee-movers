@@ -1,0 +1,317 @@
+/* ==========================================================================
+   Dundee Movers CRM Responsive Layout & Sidebar System
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--crm-font);
+  background-color: var(--crm-bg-base);
+  color: var(--crm-text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#crm-app {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Sidebar Nav (>= 768px)
+   -------------------------------------------------------------------------- */
+.crm-sidebar {
+  width: var(--crm-sidebar-width);
+  background: var(--crm-bg-sidebar);
+  color: var(--crm-text-inverse);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  transition: width var(--crm-transition), transform var(--crm-transition);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.crm-sidebar-header {
+  padding: 1.5rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.crm-brand-logo {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--crm-radius-sm);
+  background: var(--crm-primary-light);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.crm-brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.crm-brand-name {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.crm-brand-tag {
+  font-size: 0.7rem;
+  color: var(--crm-primary-light);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.crm-nav-list {
+  list-style: none;
+  padding: 1.25rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.crm-nav-item {
+  width: 100%;
+}
+
+.crm-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  color: #94a3b8;
+  text-decoration: none;
+  border-radius: var(--crm-radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: var(--crm-transition);
+  position: relative;
+}
+
+.crm-nav-link:hover {
+  background: var(--crm-bg-sidebar-hover);
+  color: #ffffff;
+}
+
+.crm-nav-link.active {
+  background: var(--crm-bg-sidebar-active);
+  color: var(--crm-primary-light);
+}
+
+.crm-nav-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 3px;
+  background: var(--crm-primary-light);
+  border-radius: 0 4px 4px 0;
+}
+
+.crm-nav-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  flex-shrink: 0;
+}
+
+.crm-nav-label {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.crm-nav-badge {
+  background: var(--crm-primary-light);
+  color: #064e3b;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 0.15rem 0.45rem;
+  border-radius: 9999px;
+}
+
+.crm-sidebar-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* --------------------------------------------------------------------------
+   Main Content Area
+   -------------------------------------------------------------------------- */
+.crm-main {
+  flex: 1;
+  margin-left: var(--crm-sidebar-width);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left var(--crm-transition);
+}
+
+.crm-top-bar {
+  height: var(--crm-header-height);
+  background: #ffffff;
+  border-bottom: 1px solid var(--crm-border-subtle);
+  padding: 0 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.crm-page-heading {
+  display: flex;
+  flex-direction: column;
+}
+
+.crm-page-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--crm-text-main);
+}
+
+.crm-page-subtitle {
+  font-size: 0.75rem;
+  color: var(--crm-text-muted);
+}
+
+.crm-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.crm-view-container {
+  padding: 1.75rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Drawer & Bottom Bar (< 768px)
+   -------------------------------------------------------------------------- */
+.crm-mobile-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--crm-text-main);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.crm-mobile-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 90;
+}
+
+.crm-mobile-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .crm-sidebar {
+    transform: translateX(-100%);
+    box-shadow: var(--crm-shadow-drawer);
+    width: 280px;
+  }
+
+  .crm-sidebar.drawer-open {
+    transform: translateX(0);
+  }
+
+  .crm-mobile-backdrop.active {
+    display: block;
+  }
+
+  .crm-main {
+    margin-left: 0;
+    padding-bottom: calc(var(--crm-bottom-nav-height) + 1rem);
+  }
+
+  .crm-top-bar {
+    padding: 0 1rem;
+  }
+
+  .crm-mobile-hamburger {
+    display: block;
+  }
+
+  .crm-view-container {
+    padding: 1rem;
+  }
+
+  /* Fixed Floating Mobile Bottom Bar */
+  .crm-mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--crm-bottom-nav-height);
+    background: #ffffff;
+    border-top: 1px solid var(--crm-border-subtle);
+    z-index: 60;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .mobile-bottom-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    text-decoration: none;
+    color: #64748b;
+    font-size: 0.68rem;
+    font-weight: 700;
+    min-height: 48px;
+    transition: color var(--crm-transition);
+  }
+
+  .mobile-bottom-item.active {
+    color: var(--crm-primary);
+  }
+
+  .mobile-bottom-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+}

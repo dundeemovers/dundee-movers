@@ -1,0 +1,256 @@
+/* ==========================================================================
+   Skeuomorphic Floating Capsule Navigation System
+   With Official Dundee Movers House-Truck Logo Integration (Expanded Width & Prominent Logo)
+   ========================================================================== */
+
+.moving-skeuo-nav-wrapper {
+  position: fixed;
+  top: 1.25rem;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding: 0 1.5rem;
+  pointer-events: none;
+}
+
+/* 1. Main Floating Chassis Dock (Expanded Length) */
+.skeuo-dolly-dock {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.5rem 1.25rem 0.5rem 0.85rem;
+  background: linear-gradient(180deg, #242c28 0%, #151c19 100%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+  box-shadow: 
+    0 22px 50px rgba(0, 0, 0, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25),
+    0 0 30px rgba(6, 78, 59, 0.45);
+  max-width: 1320px;
+  width: 100%;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 2. Left: Official House-Truck Logo & Brand Typography (Bigger Logo) */
+.dolly-hero-assembly {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  text-decoration: none;
+  padding: 0.2rem 0.5rem 0.2rem 0.2rem;
+}
+
+.dolly-logo-badge {
+  width: 3.25rem;
+  height: 3.25rem;
+  background: #ffffff;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  padding: 5px;
+  transition: transform 0.3s var(--ease-spring);
+  flex-shrink: 0;
+}
+
+.dolly-hero-assembly:hover .dolly-logo-badge {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.navbar-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.dolly-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.dolly-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.025em;
+}
+
+.dolly-accent { color: #f59e0b; }
+
+.dolly-sub {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: #34d399;
+}
+
+/* 3. Center: Brushed Steel Shaft Nav */
+.dolly-shaft-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.3rem 0.6rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.dolly-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.05rem;
+  border-radius: 9999px;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.nav-btn-icon { font-size: 0.95rem; }
+.dolly-nav-btn:hover { color: #ffffff; background: rgba(255, 255, 255, 0.12); }
+.dolly-nav-btn.active {
+  background: linear-gradient(135deg, #064e3b 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.nav-laser-pip { display: none; width: 5px; height: 5px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px #34d399; }
+.dolly-nav-btn.active .nav-laser-pip { display: block; }
+
+/* 4. Right: Sleek Action Pills */
+.dolly-grip-assembly {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dolly-tag-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.15rem;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  border-radius: 9999px;
+  color: #fef08a;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
+}
+
+.tag-box-icon { font-size: 0.95rem; }
+.dolly-tag-badge:hover {
+  background: rgba(245, 158, 11, 0.28);
+  border-color: #f59e0b;
+  transform: translateY(-1px);
+}
+
+.tag-wobble { animation: tagShake 0.45s ease; }
+@keyframes tagShake {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); background: #f59e0b; color: #ffffff; }
+}
+
+.dolly-rubber-handle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.25rem;
+  background: linear-gradient(180deg, #374151 0%, #1f2937 100%);
+  border: 1px solid #4b5563;
+  border-radius: 9999px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  transition: all 0.25s ease;
+}
+
+.dolly-rubber-handle:hover {
+  background: linear-gradient(180deg, #059669 0%, #064e3b 100%);
+  border-color: #34d399;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.6);
+  transform: translateY(-1px);
+}
+
+.dolly-mobile-toggle { display: none; background: none; border: none; color: #ffffff; cursor: pointer; padding: 0.3rem; }
+
+@media (max-width: 1040px) {
+  .dolly-shaft-nav {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    left: 1rem;
+    right: 1rem;
+    flex-direction: column;
+    background: rgba(21, 28, 25, 0.96);
+    backdrop-filter: blur(20px);
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+  .dolly-shaft-nav.dolly-open { display: flex; }
+  .dolly-nav-btn { width: 100%; justify-content: center; padding: 0.75rem; font-size: 0.85rem; }
+  .handle-phone { display: none; }
+  .dolly-mobile-toggle { display: block; }
+}
+
+/* Hero Section (Padding adjusted for floating dock) */
+.hero-section {
+  padding-top: clamp(7rem, 10vw, 9rem);
+  padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .hero-container { grid-template-columns: 1fr; }
+}
+
+.hero-badge { margin-bottom: 1.25rem; }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent-primary); }
+.hero-title { font-size: var(--text-hero); letter-spacing: -0.035em; line-height: 1.08; margin-bottom: 1.25rem; color: var(--color-text-main); }
+.hero-subtitle { font-size: var(--text-lg); color: var(--color-text-muted); max-width: 540px; margin-bottom: 2.25rem; line-height: 1.6; }
+.hero-cta-group { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
+.hero-trust-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 1.25rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border-subtle); }
+.trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: var(--text-xs); color: var(--color-text-muted); }
+.trust-stars { color: var(--color-accent-gold); font-weight: bold; font-size: 0.95rem; }
+.trust-divider { width: 1px; height: 1.25rem; background: var(--color-border-subtle); }
+
+.hero-card { padding: 2.25rem; position: relative; background: #ffffff; }
+.hero-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.hero-status-live { display: flex; align-items: center; gap: 0.4rem; font-size: var(--text-xs); color: var(--color-accent-primary); font-weight: 700; }
+.pulse-emerald { width: 8px; height: 8px; background: var(--color-accent-primary); border-radius: 50%; }
+
+.hero-quick-features { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.75rem; }
+.quick-feature-row { display: flex; align-items: flex-start; gap: 0.85rem; padding: 0.85rem 1rem; background: var(--color-bg-base); border: 1px solid var(--color-border-subtle); border-radius: 0.6rem; }
+.q-icon { font-size: 1.25rem; }
+.q-text strong { display: block; font-size: var(--text-sm); color: var(--color-text-main); margin-bottom: 0.15rem; }
+.q-text span { font-size: var(--text-xs); color: var(--color-text-muted); }
+
+.hero-card-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: center; padding-top: 1.25rem; border-top: 1px solid var(--color-border-subtle); }
+.hero-stat-box .stat-number { display: block; font-family: var(--font-display); font-size: var(--text-xl); font-weight: 800; color: var(--color-accent-primary); }
+.hero-stat-box .stat-desc { font-size: var(--text-xs); color: var(--color-text-muted); font-weight: 500; }

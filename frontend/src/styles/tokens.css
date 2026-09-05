@@ -1,0 +1,53 @@
+/* ==========================================================================
+   Design Tokens & System Variables: Luxury Light Theme (Alabaster, Forest Spruce & Champagne Gold)
+   ========================================================================== */
+
+:root {
+  /* Fonts */
+  --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Luxury Light Palette */
+  --color-bg-base: oklch(0.975 0.008 85);         /* Warm Alabaster Silk #faf8f5 */
+  --color-bg-surface: #ffffff;                    /* Pure Crisp Porcelain */
+  --color-bg-surface-elevated: oklch(0.99 0.004 85);
+  --color-bg-input: #ffffff;
+
+  --color-text-main: oklch(0.16 0.015 60);       /* Deep Espresso Charcoal #141414 */
+  --color-text-muted: oklch(0.44 0.02 60);       /* Refined Taupe Slate #525252 */
+  --color-text-subtle: oklch(0.62 0.015 60);     /* Soft Cashmere #8a8a8a */
+
+  --color-accent-primary: oklch(0.32 0.09 155);  /* Deep Forest Spruce #064e3b */
+  --color-accent-hover: oklch(0.26 0.08 155);
+  --color-accent-gold: oklch(0.65 0.13 75);      /* Champagne Brass / Ochre #b4833e */
+  --color-accent-light: oklch(0.94 0.03 155);    /* Soft Spruce Mist #ecfdf5 */
+
+  --color-border-subtle: rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(0, 0, 0, 0.18);
+  --color-border-active: oklch(0.32 0.09 155);
+
+  /* Fluid Typography Scale */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.82rem + 0.25vw, 0.95rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.35rem);
+  --text-xl: clamp(1.35rem, 1.2rem + 0.6vw, 1.75rem);
+  --text-2xl: clamp(1.75rem, 1.5rem + 1vw, 2.35rem);
+  --text-3xl: clamp(2.25rem, 1.8rem + 1.8vw, 3.25rem);
+  --text-hero: clamp(2.5rem, 1.8rem + 3.5vw, 4.5rem);
+
+  /* Luxury Elevation & Subtle Shadows */
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 20px 40px -15px rgba(0, 0, 0, 0.10);
+  --shadow-button: 0 4px 14px 0 rgba(6, 78, 59, 0.20);
+
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.2s var(--ease-spring);
+  --transition-normal: 0.35s var(--ease-spring);
+  --transition-slow: 0.6s var(--ease-spring);
+
+  /* Container */
+  --container-max: 1240px;
+  --container-padding: clamp(1rem, 3vw, 2rem);
+}

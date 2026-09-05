@@ -1,0 +1,19 @@
+{
+  "name": "dundee-movers-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "workspaces": [
+    "frontend",
+    "backend-crm"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=frontend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:crm": "npm run dev --workspace=backend-crm",
+    "build": "npm run build --workspaces --if-present",
+    "build:frontend": "npm run build --workspace=frontend",
+    "build:crm": "npm run build --workspace=backend-crm --if-present",
+    "preview": "npm run preview --workspace=frontend"
+  }
+}
