@@ -59,7 +59,13 @@ export function renderEmailsView(logs = []) {
             </tr>
           </thead>
           <tbody>
-            ${logs.map(log => `
+            ${logs.length === 0 ? `
+              <tr>
+                <td colspan="5" style="text-align: center; padding: 3rem 1.5rem; color: #64748b; font-size: 0.85rem;">
+                  No automated emails dispatched yet. As moves progress and quotes are sent, your audit logs will record here.
+                </td>
+              </tr>
+            ` : logs.map(log => `
               <tr style="border-bottom: 1px solid #f1f5f9;">
                 <td style="padding: 0.85rem 1.25rem; font-weight: 700; color: #0f172a;">
                   ${log.recipientName}<br>

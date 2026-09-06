@@ -4,49 +4,8 @@
  */
 import { executeSupabaseQuery, isSupabaseConfigured } from './supabaseClient.js';
 
-// Initial starter seed leads for Dundee Movers
-const leadsDatabase = [
-  {
-    id: 'lead-001',
-    createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
-    customerName: 'Fiona MacLeod',
-    customerPhone: '07700 900123',
-    customerEmail: 'fiona.m@example.co.uk',
-    moveType: 'House / Flat Move',
-    moveDate: '2026-09-12',
-    pickupAddress: 'Flat 2/1, 45 Perth Road, Dundee, DD1 4LN',
-    pickupFloor: '2nd Floor (Tenement)',
-    pickupLift: false,
-    deliveryAddress: '12 Strathmartine Road, Dundee, DD3 7SD',
-    deliveryFloor: 'Ground Floor / Bungalow',
-    deliveryLift: false,
-    estimatedVolumeM3: 14.5,
-    recommendedVan: '1x 3.5T Long Wheelbase (LWB) High-Roof Van',
-    recommendedCrew: '2–3 Professional Movers (Stair Equipment)',
-    status: 'new',
-    notes: 'Heavy antique oak dresser in master bedroom'
-  },
-  {
-    id: 'lead-002',
-    createdAt: new Date(Date.now() - 3600000 * 6).toISOString(),
-    customerName: 'Callum Stewart',
-    customerPhone: '07811 234567',
-    customerEmail: 'c.stewart@example.com',
-    moveType: 'Student Move',
-    moveDate: '2026-09-18',
-    pickupAddress: 'Seabraes Halls, Roseangle, Dundee, DD1 4LR',
-    pickupFloor: '1st Floor',
-    pickupLift: true,
-    deliveryAddress: '5 Market Street, St Andrews, KY16 9NS',
-    deliveryFloor: '1st Floor',
-    deliveryLift: false,
-    estimatedVolumeM3: 5.2,
-    recommendedVan: '1x Dedicated Medium Wheelbase (MWB) Van',
-    recommendedCrew: '1–2 Professional Movers',
-    status: 'quoted',
-    notes: 'Desk, monitor, 8 packing cartons, and bike'
-  }
-];
+// Production in-memory leads store (starts empty)
+const leadsDatabase = [];
 
 export async function getAllLeads(filter = {}) {
   if (isSupabaseConfigured()) {

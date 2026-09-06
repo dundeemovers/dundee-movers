@@ -3,28 +3,8 @@
  * Creates branded HTML emails for instant quotes, van hold follow-ups, and review requests.
  */
 
-let emailLogsDatabase = [
-  {
-    id: 'email-101',
-    createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-    recipientEmail: 'fiona.m@example.co.uk',
-    recipientName: 'Fiona MacLeod',
-    templateType: 'instant_quote',
-    subject: 'Your Guaranteed Move Estimate — Dundee Movers',
-    status: 'delivered',
-    openedAt: new Date(Date.now() - 3600000 * 3.5).toISOString()
-  },
-  {
-    id: 'email-102',
-    createdAt: new Date(Date.now() - 3600000 * 12).toISOString(),
-    recipientEmail: 'c.stewart@example.com',
-    recipientName: 'Callum Stewart',
-    templateType: 'van_hold_followup',
-    subject: 'Still moving on Sep 18? Holding your Dedicated MWB Van',
-    status: 'opened',
-    openedAt: new Date(Date.now() - 3600000 * 11).toISOString()
-  }
-];
+// Production in-memory email logs database (starts empty)
+let emailLogsDatabase = [];
 
 export function getEmailLogs() {
   return [...emailLogsDatabase];
