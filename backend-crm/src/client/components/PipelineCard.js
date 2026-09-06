@@ -2,7 +2,7 @@
  * Dundee Movers CRM — Pipeline Card Component.
  * High-performance, stage-aware Kanban and List card component.
  */
-import { parseManifestItems, extractCustomerNotes, generateWhatsAppMessage } from '../utils/leadFormatters.js';
+import { extractCustomerNotes, generateWhatsAppMessage } from '../utils/leadFormatters.js';
 import { calculateSuggestedPrice } from '../utils/smartPricing.js';
 
 function formatMoveType(type) {
@@ -15,7 +15,6 @@ function formatMoveType(type) {
 export function renderPipelineCard(lead, viewMode = 'board') {
   const status = lead.status || 'new';
   const isAccepted = status === 'confirmed' || status === 'booked' || Boolean(lead.acceptedAt);
-  const manifestItems = parseManifestItems(lead);
   const customerNotes = extractCustomerNotes(lead.notes);
   const pricing = calculateSuggestedPrice(lead);
   const currentPrice = lead.quotedPrice || pricing.recommendedPrice;
@@ -27,8 +26,6 @@ export function renderPipelineCard(lead, viewMode = 'board') {
   const pickupDisplay = lead.pickupAddress || lead.pickupPostcode || 'Address to be confirmed';
   const deliveryDisplay = lead.deliveryAddress || lead.deliveryPostcode || 'Address to be confirmed';
   const moveDateDisplay = lead.moveDate || 'Flexible Date';
-  const assignedVan = lead.recommendedVan || '3.5T Luton Van with Tail-Lift';
-  const assignedCrew = lead.recommendedCrew || '2-Man Tenement Crew';
 
   return `
     <div 
@@ -118,31 +115,6 @@ export function renderPipelineCard(lead, viewMode = 'board') {
         </div>
       </div>
 
-      <!-- Resource Allocation Bento (Full-Width Vehicle + 3 Equal Metric Pills) -->
-      <div class="pcard-specs-bento">
-        <div class="pspec-vehicle-card" title="Allocated Vehicle: ${assignedVan}">
-          <span class="pspec-vehicle-icon" aria-hidden="true">🚚</span>
-          <div class="pspec-vehicle-info">
-            <span class="pspec-sub-label">RECOMMENDED VEHICLE</span>
-            <span class="pspec-vehicle-title">${assignedVan}</span>
-          </div>
-        </div>
-
-        <div class="pspec-metrics-strip">
-          <div class="pspec-pill" title="Crew Size: ${assignedCrew}">
-            <span class="pill-icon" aria-hidden="true">👥</span>
-            <span class="pill-val">${assignedCrew}</span>
-          </div>
-          <div class="pspec-pill" title="Estimated Volume">
-            <span class="pill-icon" aria-hidden="true">📦</span>
-            <span class="pill-val">~${lead.estimatedVolumeM3 || 10} m³</span>
-          </div>
-          <div class="pspec-pill" title="Inventory Items">
-            <span class="pill-icon" aria-hidden="true">📋</span>
-            <span class="pill-val">${manifestItems.length > 0 ? `${manifestItems.length} items` : 'Quick Est.'}</span>
-          </div>
-        </div>
-      </div>
 
       <!-- Customer Note (if present) -->
       ${customerNotes ? `

@@ -191,67 +191,6 @@
   line-height: 1.35;
 }
 
-/* ==========================================================================
-   4. Resource Allocation Bento (Vehicle Card + 3 Metric Pills)
-   ========================================================================== */
-.pcard-specs-bento {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  margin-bottom: 0.75rem;
-  width: 100%;
-}
-.pspec-vehicle-card {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: #f0f9ff;
-  border: 1px solid #bae6fd;
-  border-radius: 0.55rem;
-  padding: 0.45rem 0.65rem;
-  width: 100%;
-  box-sizing: border-box;
-}
-.pspec-vehicle-icon { font-size: 1.2rem; flex-shrink: 0; }
-.pspec-vehicle-info { display: flex; flex-direction: column; min-width: 0; flex: 1; }
-.pspec-sub-label {
-  font-size: 0.58rem;
-  font-weight: 800;
-  color: #0284c7;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-.pspec-vehicle-title {
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: #0369a1;
-  word-break: break-word;
-  line-height: 1.25;
-}
-.pspec-metrics-strip { display: flex; gap: 0.35rem; width: 100%; box-sizing: border-box; }
-.pspec-pill {
-  flex: 1 1 0;
-  min-width: 0;
-  width: 0;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.45rem;
-  padding: 0.35rem 0.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  box-sizing: border-box;
-}
-.pspec-pill .pill-icon { font-size: 0.85rem; flex-shrink: 0; }
-.pspec-pill .pill-val {
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: #334155;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 /* Customer Notes Callout */
 .pcard-customer-note {
