@@ -1,0 +1,400 @@
+/**
+ * Dundee Movers CRM — Mobile Pipeline & Touch Experience Stylesheet.
+ * Dedicated mobile layout for smartphones and tablets (<= 768px).
+ * Implements CSS scroll-snap carousel, sticky stage switcher tab bar,
+ * and high-density responsive cards.
+ */
+
+/* ==========================================================================
+   1. Desktop Defaults (Hidden)
+   ========================================================================== */
+.mobile-stage-bar {
+  display: none;
+}
+
+.col-stage-nav {
+  display: none;
+}
+
+/* ==========================================================================
+   2. Mobile Responsiveness (<= 768px Viewports)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .pipeline-view {
+    gap: 0.75rem;
+    padding-bottom: calc(var(--crm-bottom-nav-height, 64px) + 1.5rem);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Compact 1-Row Hero Metric Strip */
+  .pipeline-hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .pstat-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem 0.35rem;
+    gap: 0.2rem;
+    min-width: 0;
+    width: 100%;
+    border-radius: 0.65rem;
+    box-sizing: border-box;
+  }
+
+  .pstat-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.9rem;
+    border-radius: 0.4rem;
+  }
+
+  .pstat-meta {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .pstat-label {
+    font-size: 0.6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 100%;
+  }
+
+  .pstat-value {
+    font-size: 1rem;
+    line-height: 1.15;
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+  }
+
+  .pstat-value small {
+    font-size: 0.66rem;
+    font-weight: 800;
+  }
+
+  .pstat-sub {
+    display: none;
+  }
+
+  /* Mobile Toolbar (Search & View Modes) */
+  .pipeline-toolbar {
+    padding: 0.6rem 0.7rem;
+    gap: 0.45rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .pipeline-search-box {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .pipeline-view-modes {
+    width: 100%;
+  }
+
+  .btn-view-mode {
+    flex: 1;
+    justify-content: center;
+    padding: 0.45rem 0.5rem;
+    font-size: 0.76rem;
+  }
+
+  /* Sticky Top Mobile Stage Switcher Bar */
+  .mobile-stage-bar {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 35;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 0.3rem;
+    border-radius: 0.75rem;
+    border: 1.5px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+    gap: 0.25rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mobile-stage-tab {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.15rem;
+    background: #f8fafc;
+    border: 1.5px solid transparent;
+    border-radius: 0.55rem;
+    color: #64748b;
+    font-size: 0.76rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+  }
+
+  .mobile-stage-tab .mstage-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-stage-tab .mstage-icon {
+    font-size: 0.85rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .mobile-stage-tab .mstage-badge {
+    padding: 0.12rem 0.35rem;
+    border-radius: 9999px;
+    font-size: 0.68rem;
+    font-weight: 900;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .mstage-badge.badge-new { background: #dbeafe; color: #1e40af; }
+  .mstage-badge.badge-quoted { background: #fef3c7; color: #92400e; }
+  .mstage-badge.badge-confirmed { background: #d1fae5; color: #065f46; }
+
+  /* Active stage states */
+  .mobile-stage-tab.stage-new-tab.active {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1d4ed8;
+    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.15);
+  }
+
+  .mobile-stage-tab.stage-quoted-tab.active {
+    background: #fffbeb;
+    border-color: #f59e0b;
+    color: #b45309;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
+  }
+
+  .mobile-stage-tab.stage-confirmed-tab.active {
+    background: #ecfdf5;
+    border-color: #10b981;
+    color: #047857;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.15);
+  }
+
+  /* Native Touch Scroll-Snap Carousel Container */
+  .pipeline-board {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.75rem;
+    padding-bottom: 2.5rem;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .pipeline-board::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pipeline-column {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    min-height: auto;
+    border-radius: 0.875rem;
+    box-sizing: border-box;
+  }
+
+  .column-header {
+    padding: 0.75rem 0.875rem;
+    border-top-left-radius: 0.875rem;
+    border-top-right-radius: 0.875rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .col-title {
+    font-size: 0.95rem;
+  }
+
+  .col-subtitle {
+    font-size: 0.72rem;
+  }
+
+  /* Header Stage Jump Navigation Pills */
+  .col-stage-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    width: 100%;
+    padding-top: 0.35rem;
+    border-top: 1px dashed #e2e8f0;
+    justify-content: space-between;
+  }
+
+  .col-stage-dots {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .col-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    transition: background 0.2s ease;
+  }
+
+  .col-dot.active-dot-new { background: #3b82f6; width: 16px; border-radius: 9999px; }
+  .col-dot.active-dot-quoted { background: #f59e0b; width: 16px; border-radius: 9999px; }
+  .col-dot.active-dot-confirmed { background: #10b981; width: 16px; border-radius: 9999px; }
+
+  .btn-stage-jump {
+    padding: 0.25rem 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.4rem;
+    color: #475569;
+    cursor: pointer;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-stage-jump:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .column-cards-container {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  /* Mobile Card Optimizations */
+  .pipeline-card {
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+  }
+
+  .pcard-header {
+    margin-bottom: 0.55rem;
+  }
+
+  .pcard-name {
+    font-size: 0.92rem;
+  }
+
+  .pcard-contact-strip {
+    gap: 0.25rem;
+  }
+
+  .pcard-contact-link {
+    font-size: 0.74rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .pcard-route {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    padding: 0.6rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .pcard-route-col {
+    width: 100%;
+  }
+
+  .pcard-route-arrow {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    transform: rotate(90deg);
+    margin: -0.15rem 0;
+  }
+
+  .route-address {
+    font-size: 0.82rem;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .pcard-bento-specs {
+    gap: 0.35rem;
+    padding: 0.45rem 0.55rem;
+    margin-bottom: 0.55rem;
+  }
+
+  .pspec-val {
+    font-size: 0.72rem;
+  }
+
+  .pdeck-presets {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .btn-preset-chip {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.75rem;
+    min-height: 32px;
+  }
+
+  .pdeck-input-action-row {
+    flex-direction: row;
+    gap: 0.35rem;
+  }
+
+  .btn-primary-pass {
+    height: 40px;
+    font-size: 0.82rem;
+  }
+
+  .pdeck-price-box {
+    height: 40px;
+  }
+
+  .pdeck-price-box .card-price-input {
+    width: 55px;
+    font-size: 0.95rem;
+  }
+
+  .btn-pdeck-sec, .btn-pdeck-wa, .btn-confirm-lead, .btn-goto-dispatch {
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

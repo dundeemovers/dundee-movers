@@ -98,6 +98,40 @@ export function renderLeadsView(leads = [], currentFilter = 'all', searchQuery =
         </div>
       </div>
 
+      <!-- 2.5. Mobile Sticky Stage Switcher Tab Bar -->
+      <nav class="mobile-stage-bar" id="mobile-stage-bar" aria-label="Pipeline Stages">
+        <button 
+          type="button" 
+          class="mobile-stage-tab stage-new-tab active" 
+          data-target-stage="new"
+          aria-label="View New Inquiries column"
+        >
+          <span class="mstage-icon" aria-hidden="true">📥</span>
+          <span class="mstage-name">New</span>
+          <span class="mstage-badge badge-new">${newLeads.length}</span>
+        </button>
+        <button 
+          type="button" 
+          class="mobile-stage-tab stage-quoted-tab" 
+          data-target-stage="quoted"
+          aria-label="View Move Pass Sent column"
+        >
+          <span class="mstage-icon" aria-hidden="true">🎟️</span>
+          <span class="mstage-name">Quoted</span>
+          <span class="mstage-badge badge-quoted">${quotedLeads.length}</span>
+        </button>
+        <button 
+          type="button" 
+          class="mobile-stage-tab stage-confirmed-tab" 
+          data-target-stage="confirmed"
+          aria-label="View Confirmed Moves column"
+        >
+          <span class="mstage-icon" aria-hidden="true">🎉</span>
+          <span class="mstage-name">Booked</span>
+          <span class="mstage-badge badge-confirmed">${confirmedLeads.length}</span>
+        </button>
+      </nav>
+
       <!-- 3. Pipeline Content (Board vs List) -->
       ${activeViewMode === 'board' ? `
         <div class="pipeline-board">
@@ -112,6 +146,18 @@ export function renderLeadsView(leads = [], currentFilter = 'all', searchQuery =
                 <p class="col-subtitle">Awaiting quote & stair review</p>
               </div>
               <span class="col-counter-badge">${newLeads.length}</span>
+
+              <!-- Mobile Header Quick Nav -->
+              <div class="col-stage-nav">
+                <div class="col-stage-dots" aria-hidden="true">
+                  <span class="col-dot active-dot-new"></span>
+                  <span class="col-dot"></span>
+                  <span class="col-dot"></span>
+                </div>
+                <button type="button" class="btn-stage-jump" data-jump-stage="quoted" aria-label="Jump to Quoted column">
+                  Next: Quoted ➔
+                </button>
+              </div>
             </div>
 
             <div class="column-cards-container" data-stage="new">
@@ -135,6 +181,23 @@ export function renderLeadsView(leads = [], currentFilter = 'all', searchQuery =
                 <p class="col-subtitle">Pass delivered to customer</p>
               </div>
               <span class="col-counter-badge">${quotedLeads.length}</span>
+
+              <!-- Mobile Header Quick Nav -->
+              <div class="col-stage-nav">
+                <div class="col-stage-dots" aria-hidden="true">
+                  <span class="col-dot"></span>
+                  <span class="col-dot active-dot-quoted"></span>
+                  <span class="col-dot"></span>
+                </div>
+                <div style="display: flex; gap: 0.35rem;">
+                  <button type="button" class="btn-stage-jump" data-jump-stage="new" aria-label="Jump to New Inquiries column">
+                    ⮜ New
+                  </button>
+                  <button type="button" class="btn-stage-jump" data-jump-stage="confirmed" aria-label="Jump to Confirmed column">
+                    Booked ➔
+                  </button>
+                </div>
+              </div>
             </div>
 
             <div class="column-cards-container" data-stage="quoted">
@@ -158,6 +221,18 @@ export function renderLeadsView(leads = [], currentFilter = 'all', searchQuery =
                 <p class="col-subtitle">Deposit paid & date locked</p>
               </div>
               <span class="col-counter-badge">${confirmedLeads.length}</span>
+
+              <!-- Mobile Header Quick Nav -->
+              <div class="col-stage-nav">
+                <div class="col-stage-dots" aria-hidden="true">
+                  <span class="col-dot"></span>
+                  <span class="col-dot"></span>
+                  <span class="col-dot active-dot-confirmed"></span>
+                </div>
+                <button type="button" class="btn-stage-jump" data-jump-stage="quoted" aria-label="Jump to Quoted column">
+                  ⮜ Quoted
+                </button>
+              </div>
             </div>
 
             <div class="column-cards-container" data-stage="confirmed">
@@ -272,6 +347,63 @@ export function initLeadsEvents(container, { onSendPass, onSavePrice, onUpdateSt
 
   // Native HTML5 Drag and Drop across Kanban Columns
   setupKanbanDragAndDrop(container, onUpdateStatus);
+
+  // Mobile Horizontal Carousel & Stage Tab Synchronization
+  setupMobileStageControls(container);
+}
+
+function setupMobileStageControls(container) {
+  const board = container.querySelector('.pipeline-board');
+  const tabs = container.querySelectorAll('.mobile-stage-tab');
+  const columns = container.querySelectorAll('.pipeline-column');
+  const jumpBtns = container.querySelectorAll('.btn-stage-jump');
+
+  const scrollToStage = (stage) => {
+    const targetCol = container.querySelector(`.pipeline-column[data-stage="${stage}"]`);
+    if (targetCol && board) {
+      board.scrollTo({ left: targetCol.offsetLeft - board.offsetLeft, behavior: 'smooth' });
+      tabs.forEach(tab => {
+        const isMatch = tab.getAttribute('data-target-stage') === stage;
+        tab.classList.toggle('active', isMatch);
+        tab.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+      });
+    }
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const stage = tab.getAttribute('data-target-stage');
+      scrollToStage(stage);
+    });
+  });
+
+  jumpBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const stage = btn.getAttribute('data-jump-stage');
+      scrollToStage(stage);
+    });
+  });
+
+  // Keep active mobile stage tab updated in real-time when swiping horizontally
+  if ('IntersectionObserver' in window && board && columns.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const stage = entry.target.getAttribute('data-stage');
+          tabs.forEach(tab => {
+            const isMatch = tab.getAttribute('data-target-stage') === stage;
+            tab.classList.toggle('active', isMatch);
+            tab.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+          });
+        }
+      });
+    }, {
+      root: board,
+      threshold: 0.55
+    });
+
+    columns.forEach(col => observer.observe(col));
+  }
 }
 
 function setupKanbanDragAndDrop(container, onUpdateStatus) {
