@@ -92,6 +92,7 @@ export async function createLead(leadData) {
     recommendedCrew: leadData.recommendedCrew || '2-Man Tenement Crew',
     status: 'new',
     notes: leadData.notes || '',
+    items: leadData.items || {},
     quotedPrice: null,
     depositAmount: 50,
     quoteExpiresAt: null,
@@ -122,6 +123,7 @@ export async function createLead(leadData) {
         recommended_van: newLead.recommendedVan,
         recommended_crew: newLead.recommendedCrew,
         custom_notes: newLead.notes,
+        items: newLead.items,
         status: 'new',
         source: 'website_wizard'
       };
@@ -204,6 +206,16 @@ export async function prepareAndSendMovePass(leadId, quoteData = {}) {
 
   // Construct direct interactive pass URL
   const passUrl = `https://dundeemovers.co.uk/#pass/${lead.id}`;
+
+  if (quoteData.sendEmail === false) {
+    return {
+      success: true,
+      lead,
+      passUrl,
+      emailResult: { success: true, skipped: true }
+    };
+  }
+
   const emailHtml = generateTailoredQuoteEmailHtml(lead, {
     quotePrice: `£${quotedPrice}`,
     depositAmount: `£${depositAmount}`,

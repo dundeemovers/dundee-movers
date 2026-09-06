@@ -4,12 +4,15 @@
 import { renderSidebar, initSidebarEvents } from './components/SidebarNav.js';
 import { renderFrontDeskView, initFrontDeskEvents } from './components/FrontDeskView.js';
 import { renderLeadsView, initLeadsEvents } from './components/LeadsView.js';
+import { renderLeadDetailsModal, initLeadDetailsModalEvents } from './components/LeadDetailsModal.js';
 import { renderEmailsView } from './components/EmailsView.js';
 import { renderSettingsView } from './components/SettingsView.js';
 
 const state = {
   currentRoute: 'front-desk',
   activeFrontDeskTab: 'today',
+  leadsFilter: 'all',
+  leadsSearch: '',
   todayJobs: [],
   tomorrowJobs: [],
   leads: [],
@@ -146,51 +149,93 @@ function renderApp() {
       }
     );
   } else if (state.currentRoute === 'leads') {
-    viewContainer.innerHTML = renderLeadsView(state.leads);
-    initLeadsEvents(
-      viewContainer,
-      async leadId => {
-        const lead = state.leads.find(l => l.id === leadId);
-        const defaultPrice = lead?.quotedPrice || 280;
-        const priceInput = window.prompt(`Enter guaranteed move price for ${lead?.customerName || 'Customer'} (£):`, String(defaultPrice));
-        if (priceInput === null) return;
-        const quotePrice = parseFloat(priceInput) || 280;
+    viewContainer.innerHTML = renderLeadsView(state.leads, state.leadsFilter, state.leadsSearch);
 
-        showToast('Preparing and dispatching Move Pass email via Resend...');
-        try {
-          const res = await fetch(`/api/leads/${leadId}/prepare-pass`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              quotePrice,
-              depositAmount: 50,
-              assignedVan: lead?.recommendedVan || '3.5T Luton Van with Tail-Lift',
-              assignedCrew: lead?.recommendedCrew || '2-Man Tenement Crew'
-            })
-          }).then(r => r.json());
+    const handleSendPassWithPrice = async (leadId, quotedPrice, depositAmount) => {
+      const lead = state.leads.find(l => l.id === leadId);
+      showToast('Dispatching Move Pass email via Resend...');
+      try {
+        const res = await fetch(`/api/leads/${leadId}/prepare-pass`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            quotedPrice,
+            depositAmount,
+            sendEmail: true,
+            assignedVan: lead?.recommendedVan || '3.5T Luton Van with Tail-Lift',
+            assignedCrew: lead?.recommendedCrew || '2-Man Tenement Crew'
+          })
+        }).then(r => r.json());
 
-          if (res.success) {
-            showToast(`Move Pass dispatched to ${lead?.customerEmail || 'customer'}!`);
-          } else {
-            showToast(`Failed: ${res.error || 'Could not send pass'}`, 'error');
-          }
-        } catch (err) {
-          showToast('Failed to contact server API', 'error');
+        if (res.success) {
+          showToast(`✓ Move Pass dispatched to ${lead?.customerEmail || 'customer'}!`);
+        } else {
+          showToast(`Failed: ${res.error || 'Could not send pass'}`, 'error');
         }
-        await fetchCrmData();
+      } catch (err) {
+        showToast('Failed to contact server API', 'error');
+      }
+      await fetchCrmData();
+      renderApp();
+    };
+
+    const handleSavePrice = async (leadId, quotedPrice, depositAmount) => {
+      const lead = state.leads.find(l => l.id === leadId);
+      try {
+        await fetch(`/api/leads/${leadId}/prepare-pass`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            quotedPrice,
+            depositAmount,
+            sendEmail: false,
+            assignedVan: lead?.recommendedVan || '3.5T Luton Van with Tail-Lift',
+            assignedCrew: lead?.recommendedCrew || '2-Man Tenement Crew'
+          })
+        });
+        showToast(`✓ Quote price £${quotedPrice} saved for #${leadId.slice(0, 8)}!`);
+      } catch (err) {
+        showToast('Failed to save price', 'error');
+      }
+      await fetchCrmData();
+      renderApp();
+    };
+
+    initLeadsEvents(viewContainer, {
+      onSendPass: handleSendPassWithPrice,
+      onSavePrice: handleSavePrice,
+      onViewSurvey: leadId => {
+        const lead = state.leads.find(l => l.id === leadId);
+        if (!lead) return;
+        const modalContainer = document.createElement('div');
+        modalContainer.innerHTML = renderLeadDetailsModal(lead);
+        document.body.appendChild(modalContainer);
+        initLeadDetailsModalEvents(
+          modalContainer,
+          lead,
+          handleSendPassWithPrice,
+          handleSavePrice
+        );
+      },
+      onFilterChange: filter => {
+        state.leadsFilter = filter;
         renderApp();
       },
-      async (leadId, newStatus) => {
+      onSearchChange: q => {
+        state.leadsSearch = q;
+        renderApp();
+      },
+      onUpdateStatus: async (leadId, newStatus) => {
         await fetch(`/api/leads/${leadId}/status`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status: newStatus })
         });
-        showToast(`Lead #${leadId} updated to ${newStatus}!`);
+        showToast(`Lead status updated to ${newStatus}!`);
         await fetchCrmData();
         renderApp();
       }
-    );
+    });
   } else if (state.currentRoute === 'emails') {
     viewContainer.innerHTML = renderEmailsView(state.emailLogs);
   } else if (state.currentRoute === 'settings') {

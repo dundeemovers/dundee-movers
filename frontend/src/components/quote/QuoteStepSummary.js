@@ -206,6 +206,7 @@ export function initStepSummary(container, onRestart, state) {
       estimatedVolumeM3: sizing.volumeM3,
       recommendedVan: 'Manual Dispatch Review',
       recommendedCrew: 'Manual Dispatch Review',
+      items: state.items,
       notes: `Ref: #${quoteRef}${customNotes ? ' | Notes: ' + customNotes : ''}${itemsSummary ? ' | Manifest: ' + itemsSummary : ''}`
     };
 

@@ -1,0 +1,395 @@
+/* ==========================================================================
+   Dundee Movers CRM — Leads Pipeline, Smart Pricing & Survey Modal Styles
+   ========================================================================== */
+
+.lead-card-accepted {
+  border-left: 4px solid #10b981;
+}
+
+/* Pipeline Top Bar, Filter Tabs & Search */
+.pipeline-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background: #ffffff;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--crm-radius-md);
+  border: 1px solid var(--crm-border-subtle);
+}
+
+.pipeline-filter-tabs {
+  display: flex;
+  background: #f1f5f9;
+  padding: 0.25rem;
+  border-radius: 8px;
+  gap: 0.25rem;
+}
+
+.filter-tab {
+  border: none;
+  background: transparent;
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-tab.active {
+  background: #ffffff;
+  color: #064e3b;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.pipeline-search-wrap {
+  min-width: 240px;
+}
+
+.pipeline-search-input {
+  width: 100%;
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.pipeline-search-input:focus {
+  border-color: var(--crm-primary);
+  box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.1);
+}
+
+/* Card Manifest Strip */
+.btn-inspect-survey {
+  border: 1px solid #10b981;
+  background: #ecfdf5;
+  color: #065f46;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.25rem 0.55rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.btn-inspect-survey:hover {
+  background: #064e3b;
+  color: #ffffff;
+}
+
+.card-manifest-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #f1f5f9;
+}
+
+.manifest-pill-compact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.74rem;
+  color: #334155;
+}
+
+.manifest-pill-compact strong {
+  color: #064e3b;
+}
+
+.manifest-pill-more {
+  font-size: 0.72rem;
+  color: #0284c7;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Inline Pricing Deck on Cards */
+.card-pricing-deck {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-top: 2px solid #10b981;
+  border-radius: 8px;
+  padding: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.smart-estimate-chip {
+  display: inline-block;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.6rem;
+  border-radius: 20px;
+}
+
+.preset-chips-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.btn-preset-mini {
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-preset-mini:hover {
+  background: #064e3b;
+  color: #ffffff;
+  border-color: #064e3b;
+}
+
+.inline-quote-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.price-input-group {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid #064e3b;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 38px;
+}
+
+.input-currency-tag {
+  background: #064e3b;
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 0.95rem;
+  padding: 0 0.6rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.card-price-input {
+  border: none;
+  outline: none;
+  width: 75px;
+  padding: 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.flash-highlight {
+  background: #fef08a !important;
+  transition: background 0.4s ease;
+}
+
+/* Lead Details Modal / Drawer Styles */
+.lead-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.lead-modal-content {
+  background: #ffffff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 820px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+}
+
+.lead-modal-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: sticky;
+  top: 0;
+  background: #ffffff;
+  z-index: 10;
+}
+
+.lead-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+.lead-modal-close:hover { color: #0f172a; background: #f1f5f9; }
+
+.lead-modal-body {
+  padding: 1.5rem;
+}
+
+.survey-section-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #064e3b;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.6rem;
+}
+
+.manifest-item-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.82rem;
+}
+
+.item-count-badge {
+  background: #064e3b;
+  color: #ffffff;
+  font-weight: 800;
+  padding: 0.3rem 0.6rem;
+}
+
+.item-name-text {
+  padding: 0.3rem 0.75rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.fleet-metrics-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.metric-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.metric-val {
+  display: block;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 0.2rem;
+}
+
+.smart-quote-deck {
+  background: #f8fafc;
+  border: 2px solid #10b981;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.btn-preset-chip {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #064e3b;
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-preset-chip:hover {
+  background: #064e3b;
+  color: #ffffff;
+}
+
+.quote-inputs-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.quote-input-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #334155;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+}
+
+.currency-input-wrap {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid #064e3b;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 42px;
+}
+
+.currency-symbol {
+  background: #064e3b;
+  color: #ffffff;
+  font-weight: 900;
+  padding: 0 0.8rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.quote-number-field {
+  border: none;
+  outline: none;
+  width: 90px;
+  padding: 0 0.75rem;
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #0f172a;
+}
