@@ -210,7 +210,7 @@
   .dolly-shaft-nav.dolly-open { display: flex; }
   .dolly-nav-btn { width: 100%; justify-content: center; padding: 0.75rem; font-size: 0.85rem; }
   .handle-phone { display: none; }
-  .dolly-mobile-toggle { display: block; }
+  .dolly-mobile-toggle { display: inline-flex; align-items: center; justify-content: center; }
 }
 
 /* Hero Section (Padding adjusted for floating dock) */
@@ -231,7 +231,9 @@
 }
 
 .hero-badge { margin-bottom: 1.25rem; }
-.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent-primary); }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent-primary); flex-shrink: 0; }
+.hero-badge-mobile { display: none; }
+.hero-badge-full { display: inline; }
 .hero-title { font-size: var(--text-hero); letter-spacing: -0.035em; line-height: 1.08; margin-bottom: 1.25rem; color: var(--color-text-main); }
 .hero-subtitle { font-size: var(--text-lg); color: var(--color-text-muted); max-width: 540px; margin-bottom: 2.25rem; line-height: 1.6; }
 .hero-cta-group { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
@@ -254,3 +256,149 @@
 .hero-card-details { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: center; padding-top: 1.25rem; border-top: 1px solid var(--color-border-subtle); }
 .hero-stat-box .stat-number { display: block; font-family: var(--font-display); font-size: var(--text-xl); font-weight: 800; color: var(--color-accent-primary); }
 .hero-stat-box .stat-desc { font-size: var(--text-xs); color: var(--color-text-muted); font-weight: 500; }
+
+/* Mobile Optimizations (<= 640px Viewports) */
+@media (max-width: 640px) {
+  .moving-skeuo-nav-wrapper {
+    top: 0.5rem;
+    padding: 0 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .skeuo-dolly-dock {
+    gap: 0.35rem;
+    padding: 0.35rem 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+  }
+
+  .dolly-hero-assembly {
+    gap: 0.45rem;
+    padding: 0;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .dolly-logo-badge {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.45rem;
+    padding: 2px;
+    flex-shrink: 0;
+  }
+
+  .dolly-brand-text {
+    line-height: 1.1;
+    min-width: 0;
+  }
+
+  .dolly-name {
+    font-size: 0.92rem;
+    white-space: nowrap;
+  }
+
+  .dolly-sub {
+    font-size: 0.48rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .dolly-grip-assembly {
+    gap: 0.3rem;
+    flex-shrink: 0;
+  }
+
+  .dolly-tag-badge {
+    padding: 0.35rem 0.55rem;
+    font-size: 0.75rem;
+    gap: 0.25rem;
+  }
+
+  .dolly-rubber-handle {
+    width: 2.15rem;
+    height: 2.15rem;
+    min-width: 2.15rem;
+    padding: 0;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .dolly-mobile-toggle {
+    width: 2.15rem;
+    height: 2.15rem;
+    min-width: 2.15rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .dolly-shaft-nav {
+    left: 0.5rem;
+    right: 0.5rem;
+    top: calc(100% + 0.5rem);
+    padding: 0.85rem;
+    border-radius: 1rem;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding-top: 5rem;
+    padding-bottom: 2.25rem;
+  }
+
+  .hero-badge {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.72rem;
+    white-space: normal;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .hero-badge-full { display: none; }
+  .hero-badge-mobile { display: inline; }
+
+  .hero-title {
+    font-size: clamp(1.85rem, 7.5vw, 2.35rem);
+    line-height: 1.14;
+    letter-spacing: -0.025em;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .hero-trust-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding-top: 1.25rem;
+  }
+
+  .trust-divider { display: none; }
+  .trust-item { font-size: 0.8rem; }
+}

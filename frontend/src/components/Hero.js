@@ -9,7 +9,8 @@ export function renderHero() {
         <div class="hero-content">
           <div class="badge hero-badge">
             <span class="badge-dot"></span>
-            <span>1 Move At A Time Policy • Dedicated Vans & Zero Shared Loads</span>
+            <span class="hero-badge-full">1 Move At A Time Policy • Dedicated Vans & Zero Shared Loads</span>
+            <span class="hero-badge-mobile">1 Move At A Time • Zero Shared Loads</span>
           </div>
 
           <h1 class="hero-title">
