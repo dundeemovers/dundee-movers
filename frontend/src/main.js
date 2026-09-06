@@ -12,6 +12,7 @@ import { renderGuidesBlog, initGuidesBlog } from './components/GuidesBlog.js';
 import { renderReviews } from './components/Reviews.js';
 import { renderFAQ, initFAQ } from './components/FAQ.js';
 import { renderFooter } from './components/Footer.js';
+import { renderMovePass, initMovePass } from './components/MovePass.js';
 
 function initSpotlightEffect() {
   document.addEventListener('mousemove', (e) => {
@@ -76,6 +77,15 @@ function mountApp() {
   const app = document.getElementById('app');
   if (!app) return;
 
+  const hash = window.location.hash || '';
+
+  if (hash.startsWith('#pass')) {
+    const passId = hash.replace(/^#pass\/?/, '') || 'demo';
+    app.innerHTML = renderMovePass(passId);
+    initMovePass(passId);
+    return;
+  }
+
   app.innerHTML = `
     ${renderNavbar()}
     <main>
@@ -99,6 +109,8 @@ function mountApp() {
   initSpotlightEffect();
   initParticleCanvas();
 }
+
+window.addEventListener('hashchange', mountApp);
 
 // Bootstrap once DOM is ready
 if (document.readyState === 'loading') {

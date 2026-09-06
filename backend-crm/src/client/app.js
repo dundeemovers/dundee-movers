@@ -150,21 +150,32 @@ function renderApp() {
     initLeadsEvents(
       viewContainer,
       async leadId => {
-        showToast('Sending quote email via Resend...');
+        const lead = state.leads.find(l => l.id === leadId);
+        const defaultPrice = lead?.quotedPrice || 280;
+        const priceInput = window.prompt(`Enter guaranteed move price for ${lead?.customerName || 'Customer'} (£):`, String(defaultPrice));
+        if (priceInput === null) return;
+        const quotePrice = parseFloat(priceInput) || 280;
+
+        showToast('Preparing and dispatching Move Pass email via Resend...');
         try {
-          const res = await fetch('/api/emails/send-quote', {
+          const res = await fetch(`/api/leads/${leadId}/prepare-pass`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ leadId })
+            body: JSON.stringify({
+              quotePrice,
+              depositAmount: 50,
+              assignedVan: lead?.recommendedVan || '3.5T Luton Van with Tail-Lift',
+              assignedCrew: lead?.recommendedCrew || '2-Man Tenement Crew'
+            })
           }).then(r => r.json());
 
           if (res.success) {
-            showToast('Guaranteed quote email dispatched via Resend!');
+            showToast(`Move Pass dispatched to ${lead?.customerEmail || 'customer'}!`);
           } else {
-            showToast(`Email failed: ${res.error || 'Could not send'}`, 'error');
+            showToast(`Failed: ${res.error || 'Could not send pass'}`, 'error');
           }
         } catch (err) {
-          showToast('Failed to contact email API', 'error');
+          showToast('Failed to contact server API', 'error');
         }
         await fetchCrmData();
         renderApp();

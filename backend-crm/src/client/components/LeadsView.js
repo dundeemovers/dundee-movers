@@ -1,5 +1,5 @@
 /**
- * Leads & Quotes Pipeline View Component.
+ * Leads & Quotes Pipeline View Component with Move Pass Actions.
  */
 
 export function renderLeadsView(leads = []) {
@@ -8,7 +8,7 @@ export function renderLeadsView(leads = []) {
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem;">
         <div>
           <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a;">Incoming Quotes & Leads Pipeline</h2>
-          <p style="font-size: 0.8rem; color: #64748b;">Live quote submissions from the website wizard with exact tenement floor levels.</p>
+          <p style="font-size: 0.8rem; color: #64748b;">Review access, allocate van & crew, and dispatch interactive Move Passes.</p>
         </div>
         <div style="display: flex; gap: 0.5rem;">
           <span class="metric-badge badge-green">${leads.length} Total Inquiries</span>
@@ -22,6 +22,9 @@ export function renderLeadsView(leads = []) {
           </div>
         ` : leads.map(lead => {
           const statusClass = `status-${lead.status || 'new'}`;
+          const isAccepted = lead.status === 'confirmed' || lead.status === 'booked' || Boolean(lead.acceptedAt);
+          const passUrl = `http://localhost:4173/#pass/${lead.id}`;
+
           return `
             <div class="lead-card" data-lead-id="${lead.id}">
               <div class="lead-header">
@@ -31,8 +34,17 @@ export function renderLeadsView(leads = []) {
                     ${lead.customerPhone || 'No Phone'} • ${lead.customerEmail || 'No Email'} • Ref: <strong>#${lead.id}</strong>
                   </div>
                 </div>
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                  <span class="lead-status-badge ${statusClass}">${lead.status || 'NEW'}</span>
+                <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                  ${isAccepted ? `
+                    <span class="metric-badge badge-green" style="font-weight: 800;">
+                      ✓ PASS ACCEPTED (£${lead.quotedPrice || '280'})
+                    </span>
+                  ` : (lead.status === 'quoted' ? `
+                    <span class="metric-badge badge-green" style="background: #e0f2fe; color: #0369a1; border-color: #7dd3fc;">
+                      🎟️ PASS ACTIVE
+                    </span>
+                  ` : '')}
+                  <span class="lead-status-badge ${statusClass}">${(lead.status || 'NEW').toUpperCase()}</span>
                 </div>
               </div>
 
@@ -56,10 +68,10 @@ export function renderLeadsView(leads = []) {
 
               <!-- Sizing & Recommended Vehicle -->
               <div style="display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: #475569; border-top: 1px solid #f1f5f9; padding-top: 0.6rem;">
-                <span>🚐 Recommended: <strong>${lead.recommendedVan}</strong></span>
-                <span>📦 Volume: <strong>~${lead.estimatedVolumeM3} m³</strong></span>
+                <span>🚐 Fleet: <strong>${lead.recommendedVan}</strong></span>
                 <span>👥 Crew: <strong>${lead.recommendedCrew}</strong></span>
-                <span>📅 Preferred Date: <strong>${lead.moveDate || 'Flexible'}</strong></span>
+                <span>📅 Date: <strong>${lead.moveDate || 'Flexible'}</strong></span>
+                ${lead.quotedPrice ? `<span>💰 Quoted: <strong>£${lead.quotedPrice}</strong> (Deposit: £${lead.depositAmount || 50})</span>` : ''}
               </div>
 
               ${lead.notes ? `
@@ -70,11 +82,14 @@ export function renderLeadsView(leads = []) {
 
               <!-- Lead Action Bar -->
               <div class="job-actions-row">
-                <button type="button" class="btn-crm btn-crm-email" data-action="send-quote-email" data-lead-id="${lead.id}">
-                  ✉️ Send Instant Quote Email
+                <button type="button" class="btn-crm btn-crm-email" data-action="send-move-pass" data-lead-id="${lead.id}">
+                  🎟️ Send Move Pass Email
                 </button>
+                <a href="${passUrl}" target="_blank" class="btn-crm btn-crm-outline">
+                  👁️ Open Pass
+                </a>
                 <a href="https://wa.me/${lead.customerPhone ? lead.customerPhone.replace(/[^0-9]/g, '') : ''}" target="_blank" class="btn-crm btn-crm-whatsapp">
-                  💬 Chat WhatsApp
+                  💬 WhatsApp
                 </a>
                 <select class="btn-crm btn-crm-outline lead-status-select" data-lead-id="${lead.id}" style="padding: 0.45rem 0.65rem;">
                   <option value="new" ${lead.status === 'new' ? 'selected' : ''}>Status: New</option>
@@ -91,11 +106,11 @@ export function renderLeadsView(leads = []) {
   `;
 }
 
-export function initLeadsEvents(container, onSendEmail, onUpdateStatus) {
-  container.querySelectorAll('[data-action="send-quote-email"]').forEach(btn => {
+export function initLeadsEvents(container, onSendPass, onUpdateStatus) {
+  container.querySelectorAll('[data-action="send-move-pass"]').forEach(btn => {
     btn.addEventListener('click', () => {
       const leadId = btn.getAttribute('data-lead-id');
-      if (leadId && onSendEmail) onSendEmail(leadId);
+      if (leadId && onSendPass) onSendPass(leadId);
     });
   });
 

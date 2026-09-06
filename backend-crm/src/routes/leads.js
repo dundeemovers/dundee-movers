@@ -1,7 +1,14 @@
 /**
- * Leads API Route Handler
+ * Leads & Interactive Move Pass API Route Handler
  */
-import { getAllLeads, getLeadById, createLead, updateLeadStatus } from '../services/leadsService.js';
+import {
+  getAllLeads,
+  getLeadById,
+  createLead,
+  updateLeadStatus,
+  prepareAndSendMovePass,
+  acceptQuotePass
+} from '../services/leadsService.js';
 
 export async function handleLeadsRoute(req, res, pathname, query, body) {
   // GET /api/leads
@@ -12,10 +19,38 @@ export async function handleLeadsRoute(req, res, pathname, query, body) {
     return res.end(JSON.stringify({ count: leads.length, leads }, null, 2));
   }
 
+  // POST /api/leads/:id/prepare-pass
+  const matchPrepare = pathname.match(/^\/api\/leads\/([^/]+)\/prepare-pass$/);
+  if (req.method === 'POST' && matchPrepare) {
+    try {
+      const payload = typeof body === 'string' ? JSON.parse(body || '{}') : body;
+      const result = await prepareAndSendMovePass(matchPrepare[1], payload);
+      res.writeHead(result.success ? 200 : 400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify(result, null, 2));
+    } catch (err) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: err.message }));
+    }
+  }
+
+  // POST /api/leads/:id/accept
+  const matchAccept = pathname.match(/^\/api\/leads\/([^/]+)\/accept$/);
+  if (req.method === 'POST' && matchAccept) {
+    try {
+      const payload = typeof body === 'string' ? JSON.parse(body || '{}') : body;
+      const result = await acceptQuotePass(matchAccept[1], payload);
+      res.writeHead(result.success ? 200 : 400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify(result, null, 2));
+    } catch (err) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: err.message }));
+    }
+  }
+
   // GET /api/leads/:id
   const matchSingle = pathname.match(/^\/api\/leads\/([^/]+)$/);
   if (req.method === 'GET' && matchSingle) {
-    const lead = getLeadById(matchSingle[1]);
+    const lead = await getLeadById(matchSingle[1]);
     if (!lead) {
       res.writeHead(404, { 'Content-Type': 'application/json' });
       return res.end(JSON.stringify({ error: 'Lead not found' }));

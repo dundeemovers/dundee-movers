@@ -1,0 +1,494 @@
+/**
+ * Dundee Movers — Interactive Move Pass & Digital Boarding Pass Styles.
+ * Rich aesthetics: Boarding-pass perforations, Scottish Emerald, Gold accents, glassmorphism.
+ */
+
+.move-pass-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 0%, #064e3b 0%, #0a1128 45%, #020617 100%);
+  color: #0f172a;
+  padding: 2.5rem 1rem 4rem 1rem;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.move-pass-nav-bar {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.move-pass-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #a7f3d0;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+  background: rgba(6, 78, 59, 0.4);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.move-pass-back-btn:hover {
+  background: rgba(16, 185, 129, 0.2);
+  color: #ffffff;
+  border-color: #10b981;
+}
+
+.move-pass-card {
+  width: 100%;
+  max-width: 680px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Header with Emerald Gradient and Golden Divider */
+.pass-header {
+  background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+  padding: 2rem 2rem 1.75rem 2rem;
+  color: #ffffff;
+  position: relative;
+}
+
+.pass-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pass-logo-lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.pass-logo-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 4px;
+  border: 2px solid #10b981;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  object-fit: contain;
+}
+
+.pass-brand-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.pass-brand-tagline {
+  margin: 0.15rem 0 0 0;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #6ee7b7;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pass-hold-badge {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid #f59e0b;
+  color: #fef3c7;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pass-gold-bar {
+  height: 4px;
+  background: linear-gradient(90deg, #d97706, #f59e0b, #d97706);
+}
+
+/* Body Content */
+.pass-body {
+  padding: 2rem;
+}
+
+/* Passenger / Customer Metadata Strip */
+.pass-meta-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.pass-meta-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.05em;
+}
+
+.pass-meta-val {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 0.2rem;
+}
+
+/* Route Trajectory Display */
+.pass-route-card {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-bottom: 1.75rem;
+  position: relative;
+}
+
+.route-stop {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.route-stop-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.icon-pickup {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.icon-dest {
+  background: #fffbeb;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.route-connector-line {
+  margin-left: 15px;
+  border-left: 2px dashed #cbd5e1;
+  height: 28px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.route-addr-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.route-floor-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #475569;
+  background: #f1f5f9;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  margin-top: 0.25rem;
+}
+
+/* Vehicle & Crew Badges */
+.pass-fleet-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.pass-fleet-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pass-fleet-box-icon {
+  font-size: 1.5rem;
+}
+
+.pass-fleet-box-title {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.pass-fleet-box-val {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 0.15rem;
+}
+
+/* Boarding Pass Perforated Tear Line */
+.pass-perforated-tear {
+  position: relative;
+  border-top: 2px dashed #cbd5e1;
+  margin: 2rem -2rem;
+}
+
+.pass-perforated-tear::before,
+.pass-perforated-tear::after {
+  content: '';
+  position: absolute;
+  top: -14px;
+  width: 28px;
+  height: 28px;
+  background: radial-gradient(circle at 50% 50%, #0a1128, #020617);
+  border-radius: 50%;
+}
+
+.pass-perforated-tear::before {
+  left: -14px;
+}
+
+.pass-perforated-tear::after {
+  right: -14px;
+}
+
+/* Optional Add-Ons Section */
+.pass-addons-section {
+  margin-bottom: 2rem;
+}
+
+.pass-addons-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.pass-addons-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.addon-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.85rem 1.1rem;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.addon-card:hover {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+
+.addon-card.active {
+  border-color: #059669;
+  background: #ecfdf5;
+  box-shadow: 0 0 0 1px #059669;
+}
+
+.addon-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.addon-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #064e3b;
+  cursor: pointer;
+}
+
+.addon-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.addon-desc {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-top: 0.1rem;
+}
+
+.addon-price {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #064e3b;
+}
+
+/* Guaranteed Price & Deposit Box */
+.pass-pricing-hero {
+  background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 25px rgba(6, 78, 59, 0.25);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.price-guarantee-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #a7f3d0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.price-main-display {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0.25rem 0;
+}
+
+.price-deposit-note {
+  font-size: 0.78rem;
+  color: #fef08a;
+  font-weight: 700;
+}
+
+/* Acceptance Form Section */
+.pass-acceptance-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.pass-sign-input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  background: #ffffff;
+  margin: 0.5rem 0 1rem 0;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.pass-sign-input:focus {
+  border-color: #059669;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.pass-accept-btn {
+  width: 100%;
+  padding: 1.1rem;
+  background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(6, 78, 59, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.pass-accept-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(6, 78, 59, 0.4);
+}
+
+.pass-accept-btn:active {
+  transform: translateY(1px);
+}
+
+/* Confirmed Success State */
+.pass-confirmed-container {
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+.pass-confirmed-icon {
+  width: 64px;
+  height: 64px;
+  background: #ecfdf5;
+  color: #059669;
+  border: 2px solid #a7f3d0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.pass-confirmed-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .move-pass-page {
+    padding: 1rem 0.5rem;
+  }
+  .pass-body {
+    padding: 1.25rem;
+  }
+  .pass-perforated-tear {
+    margin: 1.5rem -1.25rem;
+  }
+  .pass-fleet-grid {
+    grid-template-columns: 1fr;
+  }
+  .pass-header {
+    padding: 1.5rem 1.25rem;
+  }
+}

@@ -8,6 +8,7 @@ import {
   wrapEmailLayout,
   generateInquiryReceivedEmailHtml,
   generateTailoredQuoteEmailHtml,
+  generateQuoteAcceptedEmailHtml,
   generateInternalLeadNotificationHtml
 } from './emailTemplates.js';
 
@@ -15,6 +16,7 @@ export {
   wrapEmailLayout,
   generateInquiryReceivedEmailHtml,
   generateTailoredQuoteEmailHtml,
+  generateQuoteAcceptedEmailHtml,
   generateInternalLeadNotificationHtml
 };
 

@@ -2,7 +2,14 @@
  * Cloudflare Edge Worker for Dundee Movers Operations CRM.
  * Serves API endpoints (/api/*) and routes client dashboard static assets.
  */
-import { getAllLeads, getLeadById, createLead, updateLeadStatus } from './services/leadsService.js';
+import {
+  getAllLeads,
+  getLeadById,
+  createLead,
+  updateLeadStatus,
+  prepareAndSendMovePass,
+  acceptQuotePass
+} from './services/leadsService.js';
 import { getTodayJobs, getTomorrowJobs, updateJobStatus, updatePaymentStatus } from './services/jobsService.js';
 import {
   getEmailLogs,
@@ -64,9 +71,31 @@ export default {
       return jsonResponse({ count: leads.length, leads });
     }
 
+    const prepareMatch = pathname.match(/^\/api\/leads\/([^/]+)\/prepare-pass$/);
+    if (prepareMatch && request.method === 'POST') {
+      try {
+        const body = await request.json();
+        const result = await prepareAndSendMovePass(prepareMatch[1], body);
+        return jsonResponse(result, result.success ? 200 : 400);
+      } catch (err) {
+        return jsonResponse({ error: err.message }, 400);
+      }
+    }
+
+    const acceptMatch = pathname.match(/^\/api\/leads\/([^/]+)\/accept$/);
+    if (acceptMatch && request.method === 'POST') {
+      try {
+        const body = await request.json();
+        const result = await acceptQuotePass(acceptMatch[1], body);
+        return jsonResponse(result, result.success ? 200 : 400);
+      } catch (err) {
+        return jsonResponse({ error: err.message }, 400);
+      }
+    }
+
     const leadMatch = pathname.match(/^\/api\/leads\/([^/]+)$/);
     if (leadMatch && request.method === 'GET') {
-      const lead = getLeadById(leadMatch[1]);
+      const lead = await getLeadById(leadMatch[1]);
       if (!lead) return jsonResponse({ error: 'Lead not found' }, 404);
       return jsonResponse(lead);
     }
