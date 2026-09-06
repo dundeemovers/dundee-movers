@@ -88,11 +88,11 @@ export function renderStepSummary(state) {
       <!-- Primary Customer Online Submission Form (Zero WhatsApp) -->
       <div class="quote-submit-card">
         <div class="quote-submit-header">
-          <span class="quote-submit-badge">⚡ Instant Dispatch Booking</span>
-          <h4 class="quote-submit-title">Submit For Guaranteed Fixed Quote</h4>
+          <span class="quote-submit-badge">📋 Tailored Quote Request</span>
+          <h4 class="quote-submit-title">Request Your Fixed-Price Move Quote</h4>
         </div>
         <p class="quote-submit-sub">
-          Enter your contact details below to route your move manifest directly into our Dundee Operations Dispatch Cockpit. We will immediately hold your dedicated van for 24 hours with zero deposit obligation.
+          Enter your contact details below. Our team will review your inventory, property access, and route details to calculate your tailored fixed quote. Once you review and accept the quote, we will confirm your moving date and take your deposit to secure your booking.
         </p>
 
         <form id="quote-direct-submit-form">
@@ -118,13 +118,13 @@ export function renderStepSummary(state) {
 
           <button type="submit" id="quote-submit-btn" class="btn-submit-quote">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            <span>Submit Move Request & Lock In Fixed Quote</span>
+            <span>Request Free Fixed Move Quote</span>
           </button>
 
           <div class="quote-trust-row">
             <span>🔒 100% Free & No Obligation</span>
-            <span>🛡️ £50k Goods in Transit Included</span>
-            <span>⏱️ 24-Hr Vehicle Hold Guaranteed</span>
+            <span>📋 Tailored Fixed-Price Quote</span>
+            <span>🛡️ £50,000 Goods in Transit Included</span>
             <span>🚚 1 Move At A Time (Zero Shared Loads)</span>
           </div>
         </form>
@@ -132,15 +132,15 @@ export function renderStepSummary(state) {
         <!-- Celebratory Success Banner -->
         <div id="quote-success-banner" style="display: none;" class="quote-success-box">
           <div style="font-size: 2.75rem; margin-bottom: 0.5rem;">🎉</div>
-          <h4 style="color: #166534; margin: 0 0 0.5rem; font-size: 1.35rem; font-weight: 800;">Move Request Submitted Successfully!</h4>
+          <h4 style="color: #166534; margin: 0 0 0.5rem; font-size: 1.35rem; font-weight: 800;">Quote Request Received!</h4>
           <div style="display: inline-block; background: #dcfce7; color: #166534; font-weight: 800; font-size: 0.95rem; padding: 0.35rem 0.85rem; border-radius: 9999px; margin-bottom: 1rem; border: 1px solid #bbf7d0;">
-            Move Reference: <span id="quote-ref-badge">#DND-LIVE</span>
+            Quote Reference: <span id="quote-ref-badge">#DND-LIVE</span>
           </div>
           <p style="font-size: 0.95rem; color: #1e293b; margin: 0 0 0.75rem; line-height: 1.6;">
-            Thank you, <strong id="quote-success-name">Customer</strong>! Your move manifest and property floor access details have been received at Dundee Central Dispatch.
+            Thank you, <strong id="quote-success-name">Customer</strong>! We have received your move details, itemized inventory, and property floor access.
           </p>
           <p style="font-size: 0.85rem; color: #475569; margin: 0 0 1.5rem; line-height: 1.5;">
-            We have placed a complimentary 24-hour hold on your recommended <strong id="quote-success-van">${sizing.vanRecommendation}</strong>. A moving coordinator will review your exact tenement floor access and get in touch shortly via phone or email to confirm final arrangements.
+            Our operations team will review your details and send your tailored fixed quote shortly by phone or email. Once you accept the quote, we will lock in your date and take your deposit to confirm your booking.
           </p>
           <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
             <a href="tel:+441382932840" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.4rem; background: #064e3b; color: #fff; text-decoration: none; border-radius: 8px; font-weight: 700;">
@@ -201,7 +201,7 @@ export function initStepSummary(container, onRestart, state) {
       submitBtn.disabled = true;
       submitBtn.innerHTML = `
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spin"><circle cx="12" cy="12" r="10" stroke-dasharray="30 60"/></svg>
-        <span>Transmitting to Operations CRM...</span>
+        <span>Sending Quote Request...</span>
       `;
     }
 

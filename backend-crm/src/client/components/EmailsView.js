@@ -27,9 +27,9 @@ export function renderEmailsView(logs = []) {
         </div>
         <div class="crm-metric-card">
           <div>
-            <div class="metric-title">2. 24-Hour Van Hold</div>
+            <div class="metric-title">2. 24-Hour Quote Follow-up</div>
             <div style="font-size: 0.85rem; font-weight: 700; color: #0369a1; margin-top: 0.25rem;">+24h Follow-up</div>
-            <div style="font-size: 0.7rem; color: #64748b;">Urgency reminder on vehicle hold</div>
+            <div style="font-size: 0.7rem; color: #64748b;">Follow-up on tailored quote & deposit</div>
           </div>
           <span class="metric-badge badge-green">Active</span>
         </div>
