@@ -4,7 +4,7 @@
  */
 import { renderSidebar, initSidebarEvents } from './components/SidebarNav.js';
 import { renderFrontDeskView, initFrontDeskEvents } from './components/FrontDeskView.js';
-import { renderLeadsView, initLeadsEvents } from './components/LeadsView.js?v=2';
+import { renderLeadsView, initLeadsEvents } from './components/LeadsView.js?v=3';
 import { renderLeadDetailsModal, initLeadDetailsModalEvents } from './components/LeadDetailsModal.js';
 import { renderEmailsView } from './components/EmailsView.js';
 import { renderSettingsView } from './components/SettingsView.js';

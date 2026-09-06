@@ -1,754 +1,9 @@
-/* ==========================================================================
-   Dundee Movers CRM — High-Legibility Leads Pipeline & Smart Pricing Styles
-   ========================================================================== */
-
-/* Pipeline Top Bar, Filter Tabs & Search */
-.pipeline-top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-  background: #ffffff;
-  padding: 1.25rem 1.5rem;
-  border-radius: var(--crm-radius-md, 12px);
-  border: 1px solid var(--crm-border-subtle, #e2e8f0);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-}
-
-.pipeline-heading {
-  font-size: 1.35rem;
-  font-weight: 900;
-  color: #0f172a;
-  margin: 0 0 0.35rem 0;
-  letter-spacing: -0.01em;
-}
-
-.pipeline-subheading {
-  font-size: 0.85rem;
-  color: #475569;
-  margin: 0;
-  line-height: 1.4;
-}
-
-.pipeline-controls {
-  display: flex;
-  gap: 0.85rem;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.pipeline-filter-tabs {
-  display: flex;
-  background: #f1f5f9;
-  padding: 0.3rem;
-  border-radius: 8px;
-  gap: 0.25rem;
-}
-
-.filter-tab {
-  border: none;
-  background: transparent;
-  padding: 0.5rem 0.9rem;
-  border-radius: 6px;
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: #475569;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.filter-tab.active {
-  background: #ffffff;
-  color: #064e3b;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-}
-
-.pipeline-search-wrap {
-  min-width: 260px;
-}
-
-.pipeline-search-input {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0.6rem 0.9rem;
-  border-radius: 8px;
-  border: 1.5px solid #cbd5e1;
-  font-size: 0.85rem;
-  color: #0f172a;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.pipeline-search-input:focus {
-  border-color: #064e3b;
-  box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.12);
-}
-
-.empty-leads-state {
-  text-align: center;
-  padding: 4rem 1.5rem;
-  background: #ffffff;
-  border-radius: 12px;
-  border: 2px dashed #cbd5e1;
-}
-
-/* ==========================================================================
-   Lead Card Layout & High-Legibility Structure
-   ========================================================================== */
-.leads-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.lead-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-left: 6px solid #0284c7; /* Default blue bar for new leads */
-  border-radius: 14px;
-  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
-  padding: 1.35rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.lead-card:hover {
-  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
-  border-color: #cbd5e1;
-}
-
-.lead-card.lead-card-accepted {
-  border-left: 6px solid #10b981; /* Emerald bar for confirmed jobs */
-}
-
-/* Card Top Row */
-.lead-card-top-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 0.85rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.lead-card-identity {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.lead-card-name-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  flex-wrap: wrap;
-}
-
-.lead-card-name {
-  font-size: 1.25rem;
-  font-weight: 900;
-  color: #0f172a;
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-.lead-ref-badge {
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
-  color: #334155;
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 0.2rem 0.55rem;
-  border-radius: 6px;
-  letter-spacing: 0.03em;
-}
-
-.lead-date-badge {
-  background: #eff6ff;
-  border: 1px solid #bfdbfe;
-  color: #1d4ed8;
-  font-size: 0.8rem;
-  font-weight: 800;
-  padding: 0.2rem 0.6rem;
-  border-radius: 6px;
-}
-
-/* Contact Links Strip */
-.lead-contact-strip {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  font-size: 0.85rem;
-}
-
-.lead-contact-link {
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: all 0.15s ease;
-}
-
-.lead-contact-link.phone {
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
-  color: #065f46;
-}
-
-.lead-contact-link.phone:hover {
-  background: #064e3b;
-  color: #ffffff;
-  border-color: #064e3b;
-}
-
-.lead-contact-link.email {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  color: #334155;
-}
-
-.lead-contact-link.email:hover {
-  background: #e2e8f0;
-  color: #0f172a;
-}
-
-.lead-movetype-tag {
-  color: #475569;
-  font-weight: 600;
-  background: #f1f5f9;
-  padding: 0.2rem 0.55rem;
-  border-radius: 6px;
-  font-size: 0.78rem;
-}
-
-/* Badges & Actions in Top Row */
-.lead-card-badges-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-}
-
-.btn-inspect-survey {
-  border: 1.5px solid #064e3b;
-  background: #ecfdf5;
-  color: #064e3b;
-  font-size: 0.8rem;
-  font-weight: 800;
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.btn-inspect-survey:hover {
-  background: #064e3b;
-  color: #ffffff;
-}
-
-.badge-status-highlight {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 900;
-  letter-spacing: 0.02em;
-}
-
-.badge-status-highlight.badge-accepted {
-  background: #ecfdf5;
-  border: 1.5px solid #10b981;
-  color: #065f46;
-}
-
-.badge-status-highlight.badge-quoted {
-  background: #eff6ff;
-  border: 1.5px solid #60a5fa;
-  color: #1e40af;
-}
-
-.badge-status-highlight.badge-new {
-  background: #f1f5f9;
-  border: 1.5px solid #94a3b8;
-  color: #334155;
-}
-
-/* ==========================================================================
-   Route Journey Section (Clear Visual Itinerary)
-   ========================================================================== */
-.lead-route-journey {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 1rem;
-  background: #f8fafc;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 1.15rem 1.25rem;
-}
-
-@media (max-width: 860px) {
-  .lead-route-journey {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
-}
-
-.route-card-col {
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-  padding: 0.95rem 1.15rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.pickup-col {
-  border-top: 3px solid #10b981;
-}
-
-.delivery-col {
-  border-top: 3px solid #ef4444;
-}
-
-.route-col-header {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.route-marker-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-}
-
-.dot-green { background: #10b981; }
-.dot-red { background: #ef4444; }
-
-.route-col-tag {
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.route-address-text {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #0f172a;
-  line-height: 1.35;
-  word-break: break-word;
-}
-
-.route-access-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.35rem;
-}
-
-.route-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 0.25rem 0.55rem;
-  border-radius: 6px;
-  border: 1px solid transparent;
-}
-
-.floor-chip {
-  background: #f1f5f9;
-  border-color: #cbd5e1;
-  color: #1e293b;
-}
-
-.stairs-warning {
-  background: #fff1f2;
-  border-color: #fecdd3;
-  color: #be123c;
-  font-weight: 800;
-}
-
-.lift-yes {
-  background: #ecfdf5;
-  border-color: #a7f3d0;
-  color: #065f46;
-  font-weight: 800;
-}
-
-.route-journey-arrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.arrow-circle {
-  width: 32px;
-  height: 32px;
-  background: #ffffff;
-  border: 1.5px solid #cbd5e1;
-  border-radius: 50%;
-  color: #064e3b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
-  font-weight: 900;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-@media (max-width: 860px) {
-  .arrow-circle {
-    transform: rotate(90deg);
-  }
-}
-
-/* ==========================================================================
-   Bento Logistics Specs Strip
-   ========================================================================== */
-.lead-bento-specs {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.65rem;
-}
-
-@media (max-width: 900px) {
-  .lead-bento-specs {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.bento-spec-item {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 0.65rem 0.85rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.spec-label {
-  font-size: 0.7rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #64748b;
-}
-
-.spec-val {
-  font-size: 0.875rem;
-  font-weight: 700;
-  color: #0f172a;
-}
-
-/* Quick Manifest Preview */
-.lead-manifest-preview {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 0.65rem 0.85rem;
-  background: #f8fafc;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-}
-
-.manifest-strip-title {
-  font-size: 0.8rem;
-  font-weight: 800;
-  color: #064e3b;
-}
-
-.manifest-chips-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  align-items: center;
-}
-
-.manifest-chip {
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
-  color: #1e293b;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.2rem 0.55rem;
-  border-radius: 4px;
-}
-
-.manifest-chip strong {
-  color: #064e3b;
-}
-
-.btn-more-items {
-  background: transparent;
-  border: none;
-  color: #0284c7;
-  font-size: 0.8rem;
-  font-weight: 800;
-  cursor: pointer;
-  text-decoration: underline;
-  padding: 0.2rem 0.4rem;
-}
-
-/* Customer Notes Callout */
-.lead-notes-callout {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.55rem;
-  background: #fffbeb;
-  border: 1px solid #fef3c7;
-  border-left: 4px solid #f59e0b;
-  padding: 0.65rem 0.95rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  color: #78350f;
-  line-height: 1.45;
-}
-
-/* ==========================================================================
-   Command Pricing & Action Dock (Bottom Bar)
-   ========================================================================== */
-.lead-action-dock {
-  background: #ffffff;
-  border: 1.5px solid #cbd5e1;
-  border-top: 3px solid #064e3b;
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-}
-
-/* Pricing Engine Zone */
-.pricing-engine-zone {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.pricing-meta-row {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  flex-wrap: wrap;
-}
-
-.pricing-rec-badge {
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
-  color: #065f46;
-  font-size: 0.82rem;
-  font-weight: 700;
-  padding: 0.25rem 0.65rem;
-  border-radius: 6px;
-}
-
-.pricing-presets {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.presets-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #64748b;
-}
-
-.btn-preset-chip {
-  border: 1px solid #cbd5e1;
-  background: #ffffff;
-  color: #1e293b;
-  font-size: 0.8rem;
-  font-weight: 800;
-  padding: 0.25rem 0.55rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.btn-preset-chip:hover {
-  background: #064e3b;
-  color: #ffffff;
-  border-color: #064e3b;
-}
-
-.pricing-input-row {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.price-input-control {
-  display: inline-flex;
-  align-items: center;
-  background: #ffffff;
-  border: 2px solid #064e3b;
-  border-radius: 8px;
-  overflow: hidden;
-  height: 42px;
-}
-
-.currency-prefix {
-  background: #064e3b;
-  color: #ffffff;
-  font-size: 1.15rem;
-  font-weight: 900;
-  padding: 0 0.75rem;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.card-price-input {
-  border: none;
-  outline: none;
-  font-size: 1.25rem;
-  font-weight: 900;
-  color: #0f172a;
-  width: 90px;
-  padding: 0 0.65rem;
-  height: 100%;
-}
-
-.price-deposit-hint {
-  font-size: 0.8rem;
-  color: #64748b;
-  font-weight: 600;
-}
-
-/* Dispatch Actions Zone */
-.dispatch-actions-zone {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  flex-wrap: wrap;
-}
-
-.btn-action-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  padding: 0.7rem 1.25rem;
-  font-size: 0.92rem;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(6, 78, 59, 0.3);
-  transition: all 0.2s ease;
-  height: 42px;
-  box-sizing: border-box;
-}
-
-.btn-action-primary:hover {
-  background: linear-gradient(135deg, #047857 0%, #065f46 100%);
-  box-shadow: 0 6px 18px rgba(6, 78, 59, 0.4);
-  transform: translateY(-1px);
-}
-
-.secondary-actions-group {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  flex-wrap: wrap;
-}
-
-.btn-action-secondary {
-  display: inline-flex;
-  align-items: center;
-  background: #ffffff;
-  border: 1.5px solid #cbd5e1;
-  color: #1e293b;
-  border-radius: 8px;
-  padding: 0 0.85rem;
-  font-size: 0.82rem;
-  font-weight: 800;
-  height: 42px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  box-sizing: border-box;
-}
-
-.btn-action-secondary:hover {
-  background: #f1f5f9;
-  border-color: #94a3b8;
-  color: #0f172a;
-}
-
-.btn-action-whatsapp {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  background: #25d366;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  padding: 0 0.85rem;
-  font-size: 0.82rem;
-  font-weight: 800;
-  height: 42px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  box-sizing: border-box;
-}
-
-.btn-action-whatsapp:hover {
-  background: #1ebc57;
-  transform: translateY(-1px);
-}
-
-.action-status-select {
-  border: 1.5px solid #cbd5e1;
-  background: #ffffff;
-  color: #1e293b;
-  border-radius: 8px;
-  padding: 0 0.75rem;
-  font-size: 0.82rem;
-  font-weight: 800;
-  height: 42px;
-  cursor: pointer;
-  outline: none;
-  box-sizing: border-box;
-}
-
-.action-status-select:focus {
-  border-color: #064e3b;
-}
-
-.flash-highlight {
-  background: #fef08a !important;
-  transition: background 0.4s ease;
-}
-
-/* ==========================================================================
-   Full Survey Modal Styles
-   ========================================================================== */
+/**
+ * Dundee Movers CRM — Lead Details & Move Survey Modal Styles.
+ * High-legibility modal dialog for deep-dive customer survey inspections.
+ */
+
+/* Modal Backdrop & Overlay */
 .lead-modal-backdrop {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -775,7 +30,7 @@
 }
 
 .lead-modal-header {
-  padding: 1.5rem;
+  padding: 1.25rem 1.5rem;
   border-bottom: 1px solid #e2e8f0;
   display: flex;
   justify-content: space-between;
@@ -795,5 +50,137 @@
   cursor: pointer;
   padding: 0.25rem 0.5rem;
   border-radius: 6px;
+  transition: all 0.15s ease;
 }
-.lead-modal-close:hover { color: #0f172a; background: #f1f5f9; }
+.lead-modal-close:hover {
+  color: #0f172a;
+  background: #f1f5f9;
+}
+
+.lead-modal-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.survey-section-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Modal Manifest & Items Table */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 0.85rem;
+}
+
+.items-table th {
+  background: #f8fafc;
+  padding: 0.65rem 1rem;
+  text-align: left;
+  font-weight: 800;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.items-table td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: #1e293b;
+}
+
+.items-table tr:last-child td {
+  border-bottom: none;
+}
+
+.items-count-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-radius: 4px;
+  font-weight: 800;
+}
+
+/* Modal Pricing Box */
+.modal-pricing-box {
+  background: #f0fdf4;
+  border: 1.5px solid #a7f3d0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-pricing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.modal-pricing-inputs {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.modal-price-input {
+  width: 110px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #0f172a;
+  border: 2px solid #059669;
+  border-radius: 8px;
+  background: #ffffff;
+  outline: none;
+}
+
+.modal-btn-primary {
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: #059669;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.15s ease;
+}
+.modal-btn-primary:hover {
+  background: #047857;
+  transform: translateY(-1px);
+}
+
+.modal-btn-secondary {
+  padding: 0.65rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #334155;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.modal-btn-secondary:hover {
+  background: #f1f5f9;
+}

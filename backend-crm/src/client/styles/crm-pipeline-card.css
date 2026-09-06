@@ -1,0 +1,446 @@
+/**
+ * Dundee Movers CRM — Pipeline Card & Stage Action Deck Stylesheet.
+ * Card micro-layout, route journey, bento specs, and stage-specific actions.
+ */
+
+/* 1. Pipeline Card Container */
+.pipeline-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 0.875rem;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  cursor: grab;
+  position: relative;
+}
+.pipeline-card:active { cursor: grabbing; }
+.pipeline-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 16px -4px rgba(15, 23, 42, 0.08);
+}
+.pipeline-card.card-accepted {
+  border-color: #10b981;
+  background: linear-gradient(to bottom, #f0fdf4 0%, #ffffff 40px);
+}
+.pipeline-card.card-list-mode { cursor: default; }
+
+/* 2. Card Header & Identity */
+.pcard-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-bottom: 0.75rem;
+}
+.pcard-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.pcard-drag-indicator {
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  line-height: 1;
+  user-select: none;
+  cursor: grab;
+}
+.pcard-identity {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.pcard-name {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.25;
+}
+.pcard-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+.pcard-ref-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #475569;
+  background: #f1f5f9;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.35rem;
+  font-family: monospace;
+}
+.pcard-date-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #1e40af;
+  background: #eff6ff;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.35rem;
+}
+.btn-pcard-survey {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #065f46;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.btn-pcard-survey:hover {
+  background: #059669;
+  color: #ffffff;
+  border-color: #059669;
+}
+
+/* Contact Links */
+.pcard-contact-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+.pcard-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.76rem;
+  text-decoration: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.35rem;
+}
+.pcard-contact-link.phone { background: #ecfdf5; color: #065f46; font-weight: 700; }
+.pcard-contact-link.email {
+  background: #f8fafc;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pcard-movetype-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.35rem;
+}
+
+/* 3. Route Itinerary & Access */
+.pcard-route {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.625rem;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.pcard-route-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.route-tag-row { display: flex; align-items: center; gap: 0.35rem; }
+.route-dot { width: 7px; height: 7px; border-radius: 50%; }
+.route-dot.dot-green { background: #10b981; }
+.route-dot.dot-red { background: #ef4444; }
+.route-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+.route-address {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.route-chips { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.rchip {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.25rem;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+}
+.rchip.stairs-warn {
+  background: #fff1f2;
+  border-color: #fecdd3;
+  color: #be123c;
+  font-weight: 800;
+}
+.rchip.lift-yes {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #047857;
+}
+.pcard-route-arrow {
+  color: #94a3b8;
+  font-size: 1rem;
+  font-weight: 900;
+  user-select: none;
+}
+
+/* Bento Specs & Notes */
+.pcard-bento-specs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.35rem;
+  background: #f1f5f9;
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  margin-bottom: 0.75rem;
+}
+.pspec { display: flex; flex-direction: column; }
+.pspec-label {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+}
+.pspec-val {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pcard-customer-note {
+  background: #fffbeb;
+  border-left: 3px solid #f59e0b;
+  padding: 0.4rem 0.65rem;
+  border-radius: 0.35rem;
+  font-size: 0.75rem;
+  color: #92400e;
+  margin-bottom: 0.75rem;
+  display: flex;
+  gap: 0.35rem;
+  align-items: flex-start;
+}
+.pcard-customer-note .note-text { font-style: italic; font-weight: 600; }
+
+/* 4. Stage Action Decks */
+.pcard-action-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Stage 1: New Inquiry */
+.pdeck-pricing-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+}
+.pdeck-suggested {
+  font-size: 0.72rem;
+  color: #0f172a;
+  background: #fefce8;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.35rem;
+  border: 1px solid #fef08a;
+}
+.pdeck-presets { display: flex; gap: 0.2rem; }
+.btn-preset-chip {
+  padding: 0.2rem 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #0f172a;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+.btn-preset-chip:hover {
+  background: #059669;
+  color: #ffffff;
+  border-color: #059669;
+}
+.pdeck-input-action-row {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+.pdeck-price-box {
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  border: 1.5px solid #059669;
+  border-radius: 0.5rem;
+  padding: 0 0.35rem;
+  height: 36px;
+}
+.pdeck-price-box .curr-sign {
+  font-size: 0.9rem;
+  font-weight: 900;
+  color: #059669;
+}
+.pdeck-price-box .card-price-input {
+  width: 60px;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: #0f172a;
+  padding: 0 0.2rem;
+  outline: none;
+}
+.pdeck-price-box .dep-hint {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #64748b;
+  white-space: nowrap;
+}
+.btn-primary-pass {
+  flex: 1;
+  height: 36px;
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2);
+}
+.btn-primary-pass:hover {
+  background: #047857;
+  transform: translateY(-1px);
+}
+
+/* Stage 2: Quoted */
+.pdeck-quoted-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.65rem;
+}
+.quoted-badge-label {
+  font-size: 0.66rem;
+  font-weight: 800;
+  color: #92400e;
+  text-transform: uppercase;
+}
+.quoted-badge-val {
+  font-size: 1rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0 0.25rem;
+}
+.quoted-badge-dep { font-size: 0.66rem; color: #b45309; }
+.btn-confirm-lead {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.74rem;
+  font-weight: 800;
+  background: #10b981;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.35rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-confirm-lead:hover { background: #059669; }
+.pdeck-buttons-row { display: flex; gap: 0.35rem; }
+.btn-pdeck-sec {
+  flex: 1;
+  text-align: center;
+  padding: 0.35rem 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #334155;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.35rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-pdeck-sec:hover { background: #e2e8f0; }
+.btn-pdeck-wa {
+  flex: 1.2;
+  text-align: center;
+  padding: 0.35rem 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ffffff;
+  background: #25D366;
+  border: none;
+  border-radius: 0.35rem;
+  text-decoration: none;
+}
+.btn-pdeck-wa:hover { background: #20bd5a; }
+
+/* Stage 3: Confirmed */
+.pdeck-confirmed-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.65rem;
+}
+.confirmed-shield { font-size: 1.15rem; }
+.confirmed-info { flex: 1; display: flex; flex-direction: column; }
+.confirmed-title { font-size: 0.76rem; font-weight: 900; color: #065f46; }
+.confirmed-price { font-size: 0.7rem; font-weight: 700; color: #047857; }
+.btn-goto-dispatch {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.74rem;
+  font-weight: 800;
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 0.35rem;
+  text-decoration: none;
+}
+.btn-goto-dispatch:hover { background: #1e293b; }
+
+/* Quick Stage Move Dropdown */
+.pdeck-stage-move-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  padding-top: 0.25rem;
+}
+.stage-move-label { font-size: 0.66rem; font-weight: 700; color: #94a3b8; }
+.pdeck-stage-move-row select {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #475569;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.35rem;
+  padding: 0.15rem 0.35rem;
+  outline: none;
+  cursor: pointer;
+}
