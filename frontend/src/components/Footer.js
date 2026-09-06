@@ -125,8 +125,8 @@ export function renderFooter() {
               </form>
 
               <div class="footer-social-bar">
-                <a href="https://wa.me/441382932840" target="_blank" rel="noopener" class="social-icon-btn" aria-label="WhatsApp">
-                  <span>WA</span>
+                <a href="mailto:bookings@dundeemovers.co.uk" class="social-icon-btn" aria-label="Email Dispatch">
+                  <span>EMAIL</span>
                 </a>
                 <a href="tel:+441382932840" class="social-icon-btn" aria-label="Phone">
                   <span>TEL</span>

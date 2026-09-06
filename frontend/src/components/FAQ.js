@@ -10,7 +10,7 @@ const FAQS = [
   },
   {
     q: 'How do I get a tailored quote for my move?',
-    a: 'Simply use our online request form above to search your exact pickup and delivery addresses, choose the furniture and boxes you need moved, and note any access requirements. Our team will review your itemized inventory and provide a fast, guaranteed quote via WhatsApp or phone.'
+    a: 'Simply use our online request form above to search your exact pickup and delivery addresses, choose the furniture and boxes you need moved, and note any access requirements. Our team will review your itemized inventory and provide a fast, guaranteed quote via phone or email.'
   },
   {
     q: 'Do you provide removals from Dundee to anywhere in the UK?',
