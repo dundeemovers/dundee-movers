@@ -1,13 +1,18 @@
 /**
  * Modern Leads & Quotes Pipeline View Component for Dundee Movers CRM.
- * Features inline pricing decks, smart quote suggestions, itemized manifest preview,
- * and comprehensive survey inspection.
+ * High-legibility dispatch cards, route itinerary, smart pricing deck, and survey inspection.
  */
-import { parseManifestItems, generateWhatsAppMessage } from '../utils/leadFormatters.js';
+import { parseManifestItems, extractCustomerNotes, generateWhatsAppMessage } from '../utils/leadFormatters.js';
 import { calculateSuggestedPrice } from '../utils/smartPricing.js';
 
+function formatMoveType(type) {
+  if (!type) return 'House / Flat Move';
+  return type
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
 export function renderLeadsView(leads = [], currentFilter = 'all', searchQuery = '') {
-  // Filter leads by status and search term
   let filtered = [...leads];
   if (currentFilter !== 'all') {
     filtered = filtered.filter(l => (l.status || 'new') === currentFilter);
@@ -19,7 +24,9 @@ export function renderLeadsView(leads = [], currentFilter = 'all', searchQuery =
       (l.customerPhone || '').includes(q) ||
       (l.customerEmail || '').toLowerCase().includes(q) ||
       (l.pickupAddress || '').toLowerCase().includes(q) ||
+      (l.pickupPostcode || '').toLowerCase().includes(q) ||
       (l.deliveryAddress || '').toLowerCase().includes(q) ||
+      (l.deliveryPostcode || '').toLowerCase().includes(q) ||
       (l.notes || '').toLowerCase().includes(q)
     );
   }
@@ -36,15 +43,13 @@ export function renderLeadsView(leads = [], currentFilter = 'all', searchQuery =
       <!-- Pipeline Header & Search Bar -->
       <div class="pipeline-top-bar">
         <div>
-          <h2 style="font-size: 1.3rem; font-weight: 900; color: #0f172a; margin: 0 0 0.25rem 0;">
-            Quotes & Inquiries Pipeline
-          </h2>
-          <p style="font-size: 0.82rem; color: #64748b; margin: 0;">
-            Review item inventories, assess tenement stairs, calculate smart pricing, and dispatch Move Passes.
+          <h2 class="pipeline-heading">Quotes & Inquiries Pipeline</h2>
+          <p class="pipeline-subheading">
+            Review customer manifests, assess tenement stairways, configure guaranteed pricing, and dispatch Move Passes.
           </p>
         </div>
 
-        <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+        <div class="pipeline-controls">
           <!-- Filter Tabs -->
           <div class="pipeline-filter-tabs">
             <button type="button" class="filter-tab ${currentFilter === 'all' ? 'active' : ''}" data-filter="all">
@@ -67,7 +72,7 @@ export function renderLeadsView(leads = [], currentFilter = 'all', searchQuery =
               type="text" 
               id="lead-search-input" 
               class="pipeline-search-input" 
-              placeholder="🔍 Search name, phone, item..." 
+              placeholder="🔍 Search name, phone, Dundee address..." 
               value="${searchQuery}" 
             />
           </div>
@@ -77,157 +82,234 @@ export function renderLeadsView(leads = [], currentFilter = 'all', searchQuery =
       <!-- Leads List Container -->
       <div class="leads-container">
         ${filtered.length === 0 ? `
-          <div style="text-align: center; padding: 3.5rem 1.5rem; background: #fff; border-radius: 12px; border: 1px dashed #cbd5e1; color: #64748b;">
-            <p style="font-size: 1.1rem; font-weight: 700; color: #334155; margin-bottom: 0.25rem;">No matching inquiries found</p>
-            <p style="font-size: 0.85rem; margin: 0;">Try adjusting your search query or filter criteria.</p>
+          <div class="empty-leads-state">
+            <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">📋</div>
+            <h3 style="font-size: 1.15rem; font-weight: 800; color: #0f172a; margin: 0 0 0.25rem 0;">No matching inquiries found</h3>
+            <p style="font-size: 0.875rem; color: #64748b; margin: 0;">Try adjusting your search query or selecting a different status filter.</p>
           </div>
         ` : filtered.map(lead => {
-          const statusClass = `status-${lead.status || 'new'}`;
-          const isAccepted = lead.status === 'confirmed' || lead.status === 'booked' || Boolean(lead.acceptedAt);
+          const status = lead.status || 'new';
+          const isAccepted = status === 'confirmed' || status === 'booked' || Boolean(lead.acceptedAt);
           const manifestItems = parseManifestItems(lead);
+          const customerNotes = extractCustomerNotes(lead.notes);
           const pricing = calculateSuggestedPrice(lead);
           const currentPrice = lead.quotedPrice || pricing.recommendedPrice;
           const depositAmount = lead.depositAmount || 50;
           const passUrl = `https://dundeemovers.co.uk/#pass/${lead.id}`;
           const waUrl = `https://wa.me/${lead.customerPhone ? lead.customerPhone.replace(/[^0-9]/g, '') : ''}?text=${generateWhatsAppMessage(lead, currentPrice, passUrl)}`;
+          const shortRef = (lead.id || '').replace(/^lead-/, '').slice(0, 6).toUpperCase();
+          const pickupDisplay = lead.pickupAddress || lead.pickupPostcode || 'Address to be confirmed';
+          const deliveryDisplay = lead.deliveryAddress || lead.deliveryPostcode || 'Address to be confirmed';
+          const moveDateDisplay = lead.moveDate || 'Flexible Moving Date';
 
           return `
             <div class="lead-card ${isAccepted ? 'lead-card-accepted' : ''}" data-lead-id="${lead.id}">
-              <!-- Lead Header -->
-              <div class="lead-header">
-                <div>
-                  <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-                    <span class="lead-name">${lead.customerName}</span>
-                    <button type="button" class="btn-inspect-survey" data-action="view-survey" data-lead-id="${lead.id}">
-                      🔍 Full Survey & Manifest
-                    </button>
+              
+              <!-- Card Header Bar -->
+              <div class="lead-card-top-row">
+                <div class="lead-card-identity">
+                  <div class="lead-card-name-wrap">
+                    <h3 class="lead-card-name">${lead.customerName || 'Inquiry Customer'}</h3>
+                    <span class="lead-ref-badge" title="Booking Reference Code">Ref: #${shortRef}</span>
+                    <span class="lead-date-badge">📅 ${moveDateDisplay}</span>
                   </div>
-                  <div style="font-size: 0.78rem; color: #64748b; margin-top: 0.2rem;">
-                    📞 <a href="tel:${lead.customerPhone}" style="color: #064e3b; font-weight: 700;">${lead.customerPhone || 'No Phone'}</a> &nbsp;•&nbsp; 
-                    ✉️ <a href="mailto:${lead.customerEmail}" style="color: #047857;">${lead.customerEmail || 'No Email'}</a> &nbsp;•&nbsp; 
-                    Ref: <strong>#${lead.id}</strong>
+
+                  <!-- Contact Links -->
+                  <div class="lead-contact-strip">
+                    ${lead.customerPhone ? `
+                      <a href="tel:${lead.customerPhone}" class="lead-contact-link phone" title="Call Customer">
+                        📞 <span style="font-weight: 800;">${lead.customerPhone}</span>
+                      </a>
+                    ` : '<span class="lead-contact-empty">No phone provided</span>'}
+                    
+                    ${lead.customerEmail ? `
+                      <a href="mailto:${lead.customerEmail}" class="lead-contact-link email" title="Email Customer">
+                        ✉️ <span>${lead.customerEmail}</span>
+                      </a>
+                    ` : ''}
+
+                    <span class="lead-movetype-tag">
+                      🏠 ${formatMoveType(lead.moveType)}
+                    </span>
                   </div>
                 </div>
 
-                <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                <!-- Status & Survey Inspection Action -->
+                <div class="lead-card-badges-actions">
+                  <button type="button" class="btn-inspect-survey" data-action="view-survey" data-lead-id="${lead.id}" title="Inspect full inventory & access details">
+                    🔍 Full Survey & Manifest
+                  </button>
+
                   ${isAccepted ? `
-                    <span class="metric-badge badge-green" style="font-weight: 800; font-size: 0.8rem;">
+                    <span class="badge-status-highlight badge-accepted">
                       ✓ PASS ACCEPTED (£${lead.quotedPrice || currentPrice})
                     </span>
-                  ` : (lead.status === 'quoted' ? `
-                    <span class="metric-badge badge-green" style="background: #e0f2fe; color: #0369a1; border-color: #7dd3fc; font-size: 0.8rem;">
+                  ` : (status === 'quoted' ? `
+                    <span class="badge-status-highlight badge-quoted">
                       🎟️ PASS ACTIVE (£${currentPrice})
                     </span>
-                  ` : '')}
-                  <span class="lead-status-badge ${statusClass}">${(lead.status || 'NEW').toUpperCase()}</span>
+                  ` : `
+                    <span class="badge-status-highlight badge-new">
+                      ● NEW INQUIRY
+                    </span>
+                  `)}
                 </div>
               </div>
 
-              <!-- Route & Floor Access Grid -->
-              <div class="job-route-grid" style="background: #f8fafc; padding: 0.85rem; border-radius: 8px; border: 1px solid #e2e8f0;">
-                <div class="route-point">
-                  <span class="route-label">Collection Property</span>
-                  <span class="route-address">${lead.pickupAddress}</span>
-                  <div style="margin-top: 0.35rem; display: flex; flex-wrap: wrap; gap: 0.35rem;">
-                    <span class="route-floor-chip">
-                      🏢 ${lead.pickupFloor}
+              <!-- High-Contrast Route & Property Access Journey -->
+              <div class="lead-route-journey">
+                <!-- Pickup Point -->
+                <div class="route-card-col pickup-col">
+                  <div class="route-col-header">
+                    <span class="route-marker-dot dot-green" aria-hidden="true"></span>
+                    <span class="route-col-tag">COLLECTION PROPERTY</span>
+                  </div>
+                  <div class="route-address-text">${pickupDisplay}</div>
+                  <div class="route-access-chips">
+                    <span class="route-chip floor-chip">
+                      🏢 ${lead.pickupFloor || 'Ground Floor'}
                     </span>
-                    <span class="route-floor-chip" style="background: ${lead.pickupLift ? '#ecfdf5' : '#fff1f2'}; color: ${lead.pickupLift ? '#065f46' : '#be123c'}; border-color: ${lead.pickupLift ? '#a7f3d0' : '#fecdd3'};">
-                      ${lead.pickupLift ? '🛗 Lift' : '🪜 Stairs Only'}
+                    <span class="route-chip ${lead.pickupLift ? 'lift-yes' : 'stairs-warning'}">
+                      ${lead.pickupLift ? '🛗 Lift Access' : '🪜 Stairs Only (No Lift)'}
                     </span>
                   </div>
                 </div>
 
-                <div class="route-point">
-                  <span class="route-label">Delivery Destination</span>
-                  <span class="route-address">${lead.deliveryAddress}</span>
-                  <div style="margin-top: 0.35rem; display: flex; flex-wrap: wrap; gap: 0.35rem;">
-                    <span class="route-floor-chip">
-                      🏁 ${lead.deliveryFloor}
+                <!-- Connector Arrow -->
+                <div class="route-journey-arrow" aria-hidden="true">
+                  <div class="arrow-circle">➔</div>
+                </div>
+
+                <!-- Delivery Point -->
+                <div class="route-card-col delivery-col">
+                  <div class="route-col-header">
+                    <span class="route-marker-dot dot-red" aria-hidden="true"></span>
+                    <span class="route-col-tag">DELIVERY DESTINATION</span>
+                  </div>
+                  <div class="route-address-text">${deliveryDisplay}</div>
+                  <div class="route-access-chips">
+                    <span class="route-chip floor-chip">
+                      🏁 ${lead.deliveryFloor || 'Ground Floor'}
                     </span>
-                    <span class="route-floor-chip" style="background: ${lead.deliveryLift ? '#ecfdf5' : '#fff1f2'}; color: ${lead.deliveryLift ? '#065f46' : '#be123c'}; border-color: ${lead.deliveryLift ? '#a7f3d0' : '#fecdd3'};">
-                      ${lead.deliveryLift ? '🛗 Lift' : '🪜 Stairs Only'}
+                    <span class="route-chip ${lead.deliveryLift ? 'lift-yes' : 'stairs-warning'}">
+                      ${lead.deliveryLift ? '🛗 Lift Access' : '🪜 Stairs Only (No Lift)'}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <!-- Items & Manifest Badges Strip -->
+              <!-- Bento Logistics Specifications Strip -->
+              <div class="lead-bento-specs">
+                <div class="bento-spec-item">
+                  <span class="spec-label">Assigned Van</span>
+                  <span class="spec-val">🚐 ${lead.recommendedVan || '3.5T Luton Van Tail-Lift'}</span>
+                </div>
+                <div class="bento-spec-item">
+                  <span class="spec-label">Allocated Crew</span>
+                  <span class="spec-val">👥 ${lead.recommendedCrew || '2-Man Tenement Crew'}</span>
+                </div>
+                <div class="bento-spec-item">
+                  <span class="spec-label">Estimated Volume</span>
+                  <span class="spec-val">📦 ~${lead.estimatedVolumeM3 || 10} m³</span>
+                </div>
+                <div class="bento-spec-item">
+                  <span class="spec-label">Catalogued Items</span>
+                  <span class="spec-val">🛋️ ${manifestItems.length > 0 ? `${manifestItems.length} items listed` : 'Quick Estimate'}</span>
+                </div>
+              </div>
+
+              <!-- Quick Inventory Chips Preview -->
               ${manifestItems.length > 0 ? `
-                <div class="card-manifest-strip">
-                  <span style="font-size: 0.72rem; font-weight: 800; color: #064e3b; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.25rem;">
-                    📦 Manifest:
-                  </span>
-                  ${manifestItems.slice(0, 5).map(it => `
-                    <span class="manifest-pill-compact"><strong>${it.count}x</strong> ${it.name}</span>
-                  `).join('')}
-                  ${manifestItems.length > 5 ? `
-                    <span class="manifest-pill-more" data-action="view-survey" data-lead-id="${lead.id}">
-                      +${manifestItems.length - 5} more...
-                    </span>
-                  ` : ''}
+                <div class="lead-manifest-preview">
+                  <span class="manifest-strip-title">Items to Move:</span>
+                  <div class="manifest-chips-wrap">
+                    ${manifestItems.slice(0, 6).map(it => `
+                      <span class="manifest-chip"><strong>${it.count}x</strong> ${it.name}</span>
+                    `).join('')}
+                    ${manifestItems.length > 6 ? `
+                      <button type="button" class="btn-more-items" data-action="view-survey" data-lead-id="${lead.id}">
+                        +${manifestItems.length - 6} more items...
+                      </button>
+                    ` : ''}
+                  </div>
                 </div>
               ` : ''}
 
-              <!-- Vehicle Sizing Meta -->
-              <div style="display: flex; flex-wrap: wrap; gap: 0.85rem; font-size: 0.78rem; color: #475569; padding: 0.35rem 0;">
-                <span>🚐 <strong>${lead.recommendedVan}</strong></span>
-                <span>👥 <strong>${lead.recommendedCrew}</strong></span>
-                <span>📅 <strong>${lead.moveDate || 'Flexible Date'}</strong></span>
-                <span>📦 Volume: <strong>~${lead.estimatedVolumeM3 || 10} m³</strong></span>
-              </div>
+              <!-- Customer Special Instructions Callout -->
+              ${customerNotes ? `
+                <div class="lead-notes-callout">
+                  <span class="notes-icon">📝</span>
+                  <div class="notes-body">
+                    <strong>Customer Note:</strong> "${customerNotes}"
+                  </div>
+                </div>
+              ` : ''}
 
-              <!-- Inline Smart Pricing Deck (No Popups!) -->
-              <div class="card-pricing-deck">
-                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
-                  <span class="smart-estimate-chip">
-                    💡 Suggested: £${pricing.suggestedMin} – £${pricing.suggestedMax}
-                  </span>
-                  <div class="preset-chips-row">
-                    <span style="font-size: 0.7rem; color: #64748b; font-weight: 600;">Presets:</span>
-                    ${[180, 240, 280, 350].map(p => `
-                      <button type="button" class="btn-preset-mini" data-lead-id="${lead.id}" data-val="${p}">£${p}</button>
-                    `).join('')}
+              <!-- Command Pricing & Action Dock -->
+              <div class="lead-action-dock">
+                <!-- Left: Smart Pricing Engine -->
+                <div class="pricing-engine-zone">
+                  <div class="pricing-meta-row">
+                    <span class="pricing-rec-badge">
+                      💡 Suggested: <strong>£${pricing.suggestedMin} – £${pricing.suggestedMax}</strong>
+                    </span>
+                    <div class="pricing-presets">
+                      <span class="presets-label">Presets:</span>
+                      ${[180, 240, 280, 350].map(p => `
+                        <button type="button" class="btn-preset-chip" data-lead-id="${lead.id}" data-val="${p}">
+                          £${p}
+                        </button>
+                      `).join('')}
+                    </div>
+                  </div>
+
+                  <div class="pricing-input-row">
+                    <div class="price-input-control">
+                      <span class="currency-prefix">£</span>
+                      <input 
+                        type="number" 
+                        class="card-price-input" 
+                        id="card-price-${lead.id}" 
+                        value="${currentPrice}" 
+                        step="5" 
+                        aria-label="Guaranteed Quote Price"
+                        title="Enter guaranteed price" 
+                      />
+                    </div>
+                    <span class="price-deposit-hint">£${depositAmount} deposit</span>
                   </div>
                 </div>
 
-                <div class="inline-quote-row">
-                  <div class="price-input-group">
-                    <span class="input-currency-tag">£</span>
-                    <input 
-                      type="number" 
-                      class="card-price-input" 
-                      id="card-price-${lead.id}" 
-                      value="${currentPrice}" 
-                      step="5" 
-                      title="Enter guaranteed price" 
-                    />
+                <!-- Right: High-Priority Dispatch Action Buttons -->
+                <div class="dispatch-actions-zone">
+                  <button type="button" class="btn-action-primary btn-dispatch-pass" data-action="dispatch-move-pass" data-lead-id="${lead.id}">
+                    <span class="btn-icon">🎟️</span>
+                    <span>Send Move Pass Email</span>
+                  </button>
+
+                  <div class="secondary-actions-group">
+                    <button type="button" class="btn-action-secondary" data-action="save-card-price" data-lead-id="${lead.id}" title="Save quote price without sending email">
+                      💾 Save Price
+                    </button>
+
+                    <a href="${passUrl}" target="_blank" class="btn-action-secondary" title="Open digital move pass in new window">
+                      👁️ View Pass
+                    </a>
+
+                    <a href="${waUrl}" target="_blank" class="btn-action-whatsapp" title="Send WhatsApp quote message">
+                      💬 WhatsApp
+                    </a>
+
+                    <select class="action-status-select" data-lead-id="${lead.id}" aria-label="Update Lead Status">
+                      <option value="new" ${status === 'new' ? 'selected' : ''}>Status: New</option>
+                      <option value="quoted" ${status === 'quoted' ? 'selected' : ''}>Status: Quoted</option>
+                      <option value="confirmed" ${status === 'confirmed' ? 'selected' : ''}>Status: Confirmed</option>
+                      <option value="booked" ${status === 'booked' ? 'selected' : ''}>Status: Booked</option>
+                    </select>
                   </div>
-
-                  <button type="button" class="btn-crm btn-crm-email" data-action="dispatch-move-pass" data-lead-id="${lead.id}">
-                    🎟️ Send Move Pass Email
-                  </button>
-
-                  <button type="button" class="btn-crm btn-crm-outline" data-action="save-card-price" data-lead-id="${lead.id}" title="Save quote price without sending email">
-                    💾 Save
-                  </button>
-
-                  <a href="${passUrl}" target="_blank" class="btn-crm btn-crm-outline" title="Open digital move pass">
-                    👁️ Open
-                  </a>
-
-                  <a href="${waUrl}" target="_blank" class="btn-crm btn-crm-whatsapp" title="Send WhatsApp quote">
-                    💬 WhatsApp
-                  </a>
-
-                  <select class="btn-crm btn-crm-outline lead-status-select" data-lead-id="${lead.id}">
-                    <option value="new" ${lead.status === 'new' ? 'selected' : ''}>New</option>
-                    <option value="quoted" ${lead.status === 'quoted' ? 'selected' : ''}>Quoted</option>
-                    <option value="confirmed" ${lead.status === 'confirmed' ? 'selected' : ''}>Confirmed</option>
-                    <option value="booked" ${lead.status === 'booked' ? 'selected' : ''}>Booked</option>
-                  </select>
                 </div>
               </div>
+
             </div>
           `;
         }).join('')}
@@ -237,61 +319,64 @@ export function renderLeadsView(leads = [], currentFilter = 'all', searchQuery =
 }
 
 export function initLeadsEvents(container, { onSendPass, onSavePrice, onUpdateStatus, onFilterChange, onSearchChange, onViewSurvey }) {
-  // Preset buttons
-  container.querySelectorAll('.btn-preset-mini').forEach(btn => {
+  // Preset click handlers
+  container.querySelectorAll('.btn-preset-chip').forEach(btn => {
     btn.addEventListener('click', () => {
       const leadId = btn.getAttribute('data-lead-id');
       const val = btn.getAttribute('data-val');
-      const input = container.querySelector(`#card-price-${leadId}`);
+      const input = document.getElementById(`card-price-${leadId}`);
       if (input && val) {
         input.value = val;
         input.classList.add('flash-highlight');
-        setTimeout(() => input.classList.remove('flash-highlight'), 300);
+        setTimeout(() => input.classList.remove('flash-highlight'), 500);
       }
     });
   });
 
-  // Direct Send Move Pass button (No Popups!)
+  // Send Move Pass Email button
   container.querySelectorAll('[data-action="dispatch-move-pass"]').forEach(btn => {
     btn.addEventListener('click', () => {
       const leadId = btn.getAttribute('data-lead-id');
-      const priceInput = container.querySelector(`#card-price-${leadId}`);
-      const price = parseFloat(priceInput?.value) || 240;
-      if (leadId && onSendPass) onSendPass(leadId, price, 50);
+      const input = document.getElementById(`card-price-${leadId}`);
+      const price = parseFloat(input?.value || 180);
+      const deposit = Math.round(price * 0.25);
+      if (onSendPass) {
+        onSendPass(leadId, price, deposit);
+      }
     });
   });
 
-  // Direct Save Price button
+  // Save Price button
   container.querySelectorAll('[data-action="save-card-price"]').forEach(btn => {
-    btn.addEventListener('click', async () => {
+    btn.addEventListener('click', () => {
       const leadId = btn.getAttribute('data-lead-id');
-      const priceInput = container.querySelector(`#card-price-${leadId}`);
-      const price = parseFloat(priceInput?.value) || 240;
-      btn.disabled = true;
-      btn.textContent = 'Saving...';
-      if (leadId && onSavePrice) await onSavePrice(leadId, price, 50);
-      btn.textContent = '✓ Saved';
-      setTimeout(() => {
-        btn.disabled = false;
-        btn.textContent = '💾 Save';
-      }, 1500);
+      const input = document.getElementById(`card-price-${leadId}`);
+      const price = parseFloat(input?.value || 180);
+      const deposit = Math.round(price * 0.25);
+      if (onSavePrice) {
+        onSavePrice(leadId, price, deposit);
+      }
     });
   });
 
-  // View full survey modal
+  // View Survey modal button
   container.querySelectorAll('[data-action="view-survey"]').forEach(btn => {
     btn.addEventListener('click', () => {
       const leadId = btn.getAttribute('data-lead-id');
-      if (leadId && onViewSurvey) onViewSurvey(leadId);
+      if (onViewSurvey && leadId) {
+        onViewSurvey(leadId);
+      }
     });
   });
 
-  // Status select dropdown
-  container.querySelectorAll('.lead-status-select').forEach(sel => {
-    sel.addEventListener('change', () => {
-      const leadId = sel.getAttribute('data-lead-id');
-      const newStatus = sel.value;
-      if (leadId && onUpdateStatus) onUpdateStatus(leadId, newStatus);
+  // Status dropdown selector
+  container.querySelectorAll('.action-status-select').forEach(select => {
+    select.addEventListener('change', e => {
+      const leadId = select.getAttribute('data-lead-id');
+      const newStatus = e.target.value;
+      if (onUpdateStatus && leadId) {
+        onUpdateStatus(leadId, newStatus);
+      }
     });
   });
 
@@ -299,15 +384,21 @@ export function initLeadsEvents(container, { onSendPass, onSavePrice, onUpdateSt
   container.querySelectorAll('.filter-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       const filter = tab.getAttribute('data-filter');
-      if (filter && onFilterChange) onFilterChange(filter);
+      if (onFilterChange && filter) {
+        onFilterChange(filter);
+      }
     });
   });
 
-  // Search input
+  // Search input debounced
   const searchInput = container.querySelector('#lead-search-input');
-  if (searchInput) {
-    searchInput.addEventListener('input', e => {
-      if (onSearchChange) onSearchChange(e.target.value);
-    });
-  }
+  let searchTimer = null;
+  searchInput?.addEventListener('input', e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+      if (onSearchChange) {
+        onSearchChange(e.target.value);
+      }
+    }, 250);
+  });
 }
