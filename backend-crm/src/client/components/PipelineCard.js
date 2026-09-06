@@ -19,7 +19,7 @@ export function renderPipelineCard(lead, viewMode = 'board') {
   const customerNotes = extractCustomerNotes(lead.notes);
   const pricing = calculateSuggestedPrice(lead);
   const currentPrice = lead.quotedPrice || pricing.recommendedPrice;
-  const depositAmount = lead.depositAmount || 50;
+  const depositAmount = lead.depositAmount || Math.round(currentPrice * 0.25);
   const passUrl = `https://dundeemovers.co.uk/#pass/${lead.id}`;
   const waPhone = lead.customerPhone ? lead.customerPhone.replace(/[^0-9]/g, '') : '';
   const waUrl = `https://wa.me/${waPhone}?text=${generateWhatsAppMessage(lead, currentPrice, passUrl)}`;
@@ -27,6 +27,8 @@ export function renderPipelineCard(lead, viewMode = 'board') {
   const pickupDisplay = lead.pickupAddress || lead.pickupPostcode || 'Address to be confirmed';
   const deliveryDisplay = lead.deliveryAddress || lead.deliveryPostcode || 'Address to be confirmed';
   const moveDateDisplay = lead.moveDate || 'Flexible Date';
+  const assignedVan = lead.recommendedVan || '3.5T Luton Van with Tail-Lift';
+  const assignedCrew = lead.recommendedCrew || '2-Man Tenement Crew';
 
   return `
     <div 
@@ -45,6 +47,7 @@ export function renderPipelineCard(lead, viewMode = 'board') {
             </h4>
             <div class="pcard-tags">
               <span class="pcard-ref-badge" title="Booking Reference Code">#${shortRef}</span>
+              <span class="pcard-movetype-tag">🏠 ${formatMoveType(lead.moveType)}</span>
               <span class="pcard-date-badge">📅 ${moveDateDisplay}</span>
             </div>
           </div>
@@ -59,7 +62,7 @@ export function renderPipelineCard(lead, viewMode = 'board') {
           </button>
         </div>
 
-        <!-- Contact Links -->
+        <!-- Contact Links Strip -->
         <div class="pcard-contact-strip">
           ${lead.customerPhone ? `
             <a href="tel:${lead.customerPhone}" class="pcard-contact-link phone" title="Call Customer">
@@ -72,68 +75,79 @@ export function renderPipelineCard(lead, viewMode = 'board') {
               ✉️ <span>${lead.customerEmail}</span>
             </a>
           ` : ''}
-
-          <span class="pcard-movetype-tag">🏠 ${formatMoveType(lead.moveType)}</span>
         </div>
       </div>
 
-      <!-- Route Journey Details -->
-      <div class="pcard-route">
-        <div class="pcard-route-col pickup">
-          <div class="route-tag-row">
-            <span class="route-dot dot-green" aria-hidden="true"></span>
-            <span class="route-tag">COLLECTION</span>
+      <!-- Route Journey: Vertical 2-Point Track (No Address Truncation) -->
+      <div class="pcard-route-track">
+        <div class="route-stop pickup">
+          <div class="route-marker-col">
+            <span class="route-marker-pin pin-green" aria-hidden="true"></span>
+            <span class="route-marker-line" aria-hidden="true"></span>
           </div>
-          <div class="route-address" title="${pickupDisplay}">${pickupDisplay}</div>
-          <div class="route-chips">
-            <span class="rchip">${lead.pickupFloor || 'Ground Floor'}</span>
-            <span class="rchip ${lead.pickupLift ? 'lift-yes' : 'stairs-warn'}">
-              ${lead.pickupLift ? '🛗 Lift' : '🪜 Stairs Only'}
-            </span>
+          <div class="route-stop-details">
+            <div class="route-stop-meta">
+              <span class="route-stop-badge badge-pickup">COLLECTION</span>
+              <div class="route-stop-chips">
+                <span class="rchip">${lead.pickupFloor || 'Ground Floor'}</span>
+                <span class="rchip ${lead.pickupLift ? 'lift-yes' : 'stairs-warn'}">
+                  ${lead.pickupLift ? '🛗 Lift' : '🪜 Stairs Only'}
+                </span>
+              </div>
+            </div>
+            <div class="route-stop-address" title="${pickupDisplay}">${pickupDisplay}</div>
           </div>
         </div>
 
-        <div class="pcard-route-arrow" aria-hidden="true">➔</div>
-
-        <div class="pcard-route-col delivery">
-          <div class="route-tag-row">
-            <span class="route-dot dot-red" aria-hidden="true"></span>
-            <span class="route-tag">DELIVERY</span>
+        <div class="route-stop delivery">
+          <div class="route-marker-col">
+            <span class="route-marker-pin pin-red" aria-hidden="true"></span>
           </div>
-          <div class="route-address" title="${deliveryDisplay}">${deliveryDisplay}</div>
-          <div class="route-chips">
-            <span class="rchip">${lead.deliveryFloor || 'Ground Floor'}</span>
-            <span class="rchip ${lead.deliveryLift ? 'lift-yes' : 'stairs-warn'}">
-              ${lead.deliveryLift ? '🛗 Lift' : '🪜 Stairs Only'}
-            </span>
+          <div class="route-stop-details">
+            <div class="route-stop-meta">
+              <span class="route-stop-badge badge-delivery">DELIVERY</span>
+              <div class="route-stop-chips">
+                <span class="rchip">${lead.deliveryFloor || 'Ground Floor'}</span>
+                <span class="rchip ${lead.deliveryLift ? 'lift-yes' : 'stairs-warn'}">
+                  ${lead.deliveryLift ? '🛗 Lift' : '🪜 Stairs Only'}
+                </span>
+              </div>
+            </div>
+            <div class="route-stop-address" title="${deliveryDisplay}">${deliveryDisplay}</div>
           </div>
         </div>
       </div>
 
-      <!-- Compact Bento Specs Strip -->
-      <div class="pcard-bento-specs">
-        <div class="pspec" title="Assigned Van">
-          <span class="pspec-label">Van</span>
-          <span class="pspec-val">🚐 ${lead.recommendedVan || '3.5T Luton'}</span>
+      <!-- Resource Allocation Bento (Full-Width Vehicle + 3 Equal Metric Pills) -->
+      <div class="pcard-specs-bento">
+        <div class="pspec-vehicle-card" title="Allocated Vehicle: ${assignedVan}">
+          <span class="pspec-vehicle-icon" aria-hidden="true">🚚</span>
+          <div class="pspec-vehicle-info">
+            <span class="pspec-sub-label">RECOMMENDED VEHICLE</span>
+            <span class="pspec-vehicle-title">${assignedVan}</span>
+          </div>
         </div>
-        <div class="pspec" title="Allocated Crew">
-          <span class="pspec-label">Crew</span>
-          <span class="pspec-val">👥 ${lead.recommendedCrew || '2 Movers'}</span>
-        </div>
-        <div class="pspec" title="Estimated Volume">
-          <span class="pspec-label">Volume</span>
-          <span class="pspec-val">📦 ~${lead.estimatedVolumeM3 || 10} m³</span>
-        </div>
-        <div class="pspec" title="Catalogued Items">
-          <span class="pspec-label">Items</span>
-          <span class="pspec-val">🛋️ ${manifestItems.length > 0 ? `${manifestItems.length} listed` : 'Quick Est.'}</span>
+
+        <div class="pspec-metrics-strip">
+          <div class="pspec-pill" title="Crew Size: ${assignedCrew}">
+            <span class="pill-icon" aria-hidden="true">👥</span>
+            <span class="pill-val">${assignedCrew}</span>
+          </div>
+          <div class="pspec-pill" title="Estimated Volume">
+            <span class="pill-icon" aria-hidden="true">📦</span>
+            <span class="pill-val">~${lead.estimatedVolumeM3 || 10} m³</span>
+          </div>
+          <div class="pspec-pill" title="Inventory Items">
+            <span class="pill-icon" aria-hidden="true">📋</span>
+            <span class="pill-val">${manifestItems.length > 0 ? `${manifestItems.length} items` : 'Quick Est.'}</span>
+          </div>
         </div>
       </div>
 
       <!-- Customer Note (if present) -->
       ${customerNotes ? `
         <div class="pcard-customer-note" title="${customerNotes}">
-          <span class="note-icon">📝</span>
+          <span class="note-icon" aria-hidden="true">📝</span>
           <span class="note-text">"${customerNotes}"</span>
         </div>
       ` : ''}
@@ -203,7 +217,7 @@ export function renderPipelineCard(lead, viewMode = 'board') {
               👁️ View Pass
             </a>
             <a href="${waUrl}" target="_blank" class="btn-pdeck-wa" title="Send WhatsApp follow-up message">
-              💬 WhatsApp Follow-up
+              💬 WhatsApp
             </a>
             <button 
               type="button" 
@@ -218,7 +232,7 @@ export function renderPipelineCard(lead, viewMode = 'board') {
         ` : `
           <!-- STAGE 3: CONFIRMED & BOOKED -->
           <div class="pdeck-confirmed-banner">
-            <span class="confirmed-shield">🎉</span>
+            <span class="confirmed-shield" aria-hidden="true">🎉</span>
             <div class="confirmed-info">
               <span class="confirmed-title">✓ BOOKED & CONFIRMED</span>
               <span class="confirmed-price">Guaranteed Quote: £${lead.quotedPrice || currentPrice}</span>
