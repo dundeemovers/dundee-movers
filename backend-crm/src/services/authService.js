@@ -57,7 +57,9 @@ async function signString(str, secretKey) {
   const keyData = enc.encode(secretKey);
   const data = enc.encode(str);
 
-  const cryptoObj = typeof crypto !== 'undefined' ? crypto : (await import('crypto')).webcrypto;
+  const cryptoObj = typeof globalThis.crypto !== 'undefined' && globalThis.crypto?.subtle
+    ? globalThis.crypto
+    : (await import('node:crypto')).webcrypto;
   const key = await cryptoObj.subtle.importKey(
     'raw',
     keyData,
