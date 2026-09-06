@@ -19,6 +19,14 @@ import {
   generateInquiryReceivedEmailHtml
 } from './services/emailService.js';
 import { getSupabaseConfig, setSupabaseCredentials } from './services/supabaseClient.js';
+import {
+  setCrmAccessKey,
+  setCrmJwtSecret,
+  verifyPassword,
+  generateSessionToken,
+  validateSessionToken,
+  extractBearerToken
+} from './services/authService.js';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -48,6 +56,12 @@ export default {
     if (env && (env.RESEND_API_KEY || env.EMAIL_FROM)) {
       setEmailCredentials(env.RESEND_API_KEY, env.EMAIL_FROM);
     }
+    if (env?.CRM_ACCESS_KEY) {
+      setCrmAccessKey(env.CRM_ACCESS_KEY);
+    }
+    if (env?.CRM_JWT_SECRET) {
+      setCrmJwtSecret(env.CRM_JWT_SECRET);
+    }
 
     if (request.method === 'OPTIONS') {
       return new Response(null, { headers: CORS_HEADERS });
@@ -62,6 +76,84 @@ export default {
         timestamp: new Date().toISOString(),
         supabase: getSupabaseConfig()
       });
+    }
+
+    // 2. Authentication API
+    if (pathname === '/api/auth/login' && request.method === 'POST') {
+      try {
+        const body = await request.json();
+        const { accessKey, role } = body || {};
+
+        if (!accessKey) {
+          return jsonResponse({ success: false, error: 'Master passkey is required' }, 400);
+        }
+
+        const isValid = verifyPassword(accessKey);
+        if (!isValid) {
+          return jsonResponse({ success: false, error: 'Incorrect master passkey. Access denied.' }, 401);
+        }
+
+        const assignedRole = role || 'dispatch_coordinator';
+        const token = await generateSessionToken(assignedRole);
+
+        return jsonResponse({
+          success: true,
+          token,
+          user: {
+            role: assignedRole,
+            title: 'Operations Dispatcher',
+            portal: 'Dundee Operations Cockpit'
+          }
+        });
+      } catch (err) {
+        return jsonResponse({ success: false, error: 'Failed to process login: ' + err.message }, 400);
+      }
+    }
+
+    if (pathname === '/api/auth/verify' && request.method === 'POST') {
+      try {
+        let token = extractBearerToken(request.headers.get('Authorization'));
+        if (!token) {
+          const body = await request.json().catch(() => ({}));
+          token = body?.token;
+        }
+
+        if (!token) {
+          return jsonResponse({ valid: false, error: 'No session token provided' }, 401);
+        }
+
+        const validation = await validateSessionToken(token);
+        if (!validation.valid) {
+          return jsonResponse({ valid: false, error: validation.reason }, 401);
+        }
+
+        return jsonResponse({ valid: true, payload: validation.payload });
+      } catch (err) {
+        return jsonResponse({ valid: false, error: 'Token verification failed' }, 401);
+      }
+    }
+
+    // Guard sensitive CRM routes
+    function isProtectedEdgeEndpoint(path, method) {
+      if (!path.startsWith('/api/')) return false;
+      if (path === '/api/health') return false;
+      if (path.startsWith('/api/auth/')) return false;
+      if (path === '/api/leads' && method === 'POST') return false;
+      if (path.match(/^\/api\/leads\/[^/]+$/) && method === 'GET') return false;
+      if (path.match(/^\/api\/leads\/[^/]+\/accept$/) && method === 'POST') return false;
+      if (path.startsWith('/api/emails/preview/')) return false;
+      return true;
+    }
+
+    if (isProtectedEdgeEndpoint(pathname, request.method)) {
+      const bearer = extractBearerToken(request.headers.get('Authorization'));
+      const session = await validateSessionToken(bearer);
+      if (!session.valid) {
+        return jsonResponse({
+          error: 'Unauthorized: Operations passkey required',
+          reason: session.reason
+        }, 401);
+      }
     }
 
     // 2. Leads API

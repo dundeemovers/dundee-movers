@@ -10,7 +10,8 @@ export const NAV_ITEMS = [
   { id: 'settings', label: 'Supabase & Settings', icon: '⚙️', hash: '#settings' }
 ];
 
-export function renderSidebar(currentRoute = 'front-desk') {
+export function renderSidebar(currentRoute = 'front-desk', user = null) {
+  const operatorTitle = user?.title || 'Active Dispatcher';
   return `
     <aside class="crm-sidebar" id="crm-sidebar">
       <div class="crm-sidebar-header">
@@ -19,6 +20,16 @@ export function renderSidebar(currentRoute = 'front-desk') {
           <span class="crm-brand-name">Dundee Movers</span>
           <span class="crm-brand-tag">Operations CRM</span>
         </div>
+      </div>
+
+      <div class="crm-sidebar-operator">
+        <div class="crm-sidebar-operator-info">
+          <span class="crm-sidebar-operator-title">Authenticated</span>
+          <span class="crm-sidebar-operator-name">${operatorTitle}</span>
+        </div>
+        <button type="button" class="crm-sidebar-lock-btn" id="crm-lock-btn" title="Lock Cockpit and exit session">
+          🔒 Lock
+        </button>
       </div>
 
       <ul class="crm-nav-list">
@@ -37,8 +48,8 @@ export function renderSidebar(currentRoute = 'front-desk') {
       </ul>
 
       <div class="crm-sidebar-footer">
-        <span>v1.0.0 • Supabase Ready</span>
-        <span style="color: #10b981; font-weight: 700;">● Online</span>
+        <span>v1.0.0 • 256-bit Auth</span>
+        <span style="color: #10b981; font-weight: 700;">● Guarded</span>
       </div>
     </aside>
 
@@ -55,14 +66,20 @@ export function renderSidebar(currentRoute = 'front-desk') {
           </a>
         `;
       }).join('')}
+      <button type="button" class="mobile-bottom-item" id="crm-mobile-lock-btn" style="background:none; border:none; color:inherit; cursor:pointer;" title="Lock">
+        <span class="mobile-bottom-icon">🔒</span>
+        <span>Lock</span>
+      </button>
     </nav>
   `;
 }
 
-export function initSidebarEvents(onNavigate) {
+export function initSidebarEvents(onNavigate, onLogout) {
   const sidebar = document.getElementById('crm-sidebar');
   const backdrop = document.getElementById('crm-backdrop');
   const hamburger = document.getElementById('crm-hamburger-btn');
+  const lockBtn = document.getElementById('crm-lock-btn');
+  const mobileLockBtn = document.getElementById('crm-mobile-lock-btn');
 
   function closeDrawer() {
     sidebar?.classList.remove('drawer-open');
@@ -83,6 +100,16 @@ export function initSidebarEvents(onNavigate) {
   });
 
   backdrop?.addEventListener('click', closeDrawer);
+
+  lockBtn?.addEventListener('click', () => {
+    closeDrawer();
+    if (onLogout) onLogout();
+  });
+
+  mobileLockBtn?.addEventListener('click', () => {
+    closeDrawer();
+    if (onLogout) onLogout();
+  });
 
   document.querySelectorAll('[data-route]').forEach(link => {
     link.addEventListener('click', () => {

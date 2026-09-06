@@ -12,6 +12,8 @@ import { handleHealthCheck } from './routes/health.js';
 import { handleLeadsRoute } from './routes/leads.js';
 import { handleJobsRoute } from './routes/jobs.js';
 import { handleEmailsRoute } from './routes/emails.js';
+import { handleAuthRoute } from './routes/auth.js';
+import { validateSessionToken, extractBearerToken } from './services/authService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -66,6 +68,21 @@ function serveStaticFile(req, res, pathname) {
   }
 }
 
+function isProtectedEndpoint(pathname, method) {
+  if (!pathname.startsWith('/api/')) return false;
+  if (pathname === '/api/health') return false;
+  if (pathname.startsWith('/api/auth/')) return false;
+  // Public website wizard quote submission
+  if (pathname === '/api/leads' && method === 'POST') return false;
+  // Customer viewing digital Move Pass
+  if (pathname.match(/^\/api\/leads\/[^/]+$/) && method === 'GET') return false;
+  // Customer accepting digital Move Pass
+  if (pathname.match(/^\/api\/leads\/[^/]+\/accept$/) && method === 'POST') return false;
+  // Email template previews
+  if (pathname.startsWith('/api/emails/preview/')) return false;
+  return true;
+}
+
 const server = http.createServer(async (req, res) => {
   setCorsHeaders(res);
 
@@ -95,6 +112,24 @@ const server = http.createServer(async (req, res) => {
     } catch (err) {
       res.writeHead(400, { 'Content-Type': 'application/json' });
       return res.end(JSON.stringify({ error: 'Failed to read request body' }));
+    }
+  }
+
+  // Authentication API
+  if (pathname.startsWith('/api/auth/')) {
+    return handleAuthRoute(req, res, pathname, searchParams, body);
+  }
+
+  // Guard protected operational routes
+  if (isProtectedEndpoint(pathname, req.method)) {
+    const bearer = extractBearerToken(req.headers['authorization']);
+    const session = await validateSessionToken(bearer);
+    if (!session.valid) {
+      res.writeHead(401, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({
+        error: 'Unauthorized: Operations passkey required',
+        reason: session.reason
+      }));
     }
   }
 
