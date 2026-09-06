@@ -51,7 +51,7 @@ export default {
     // 2. Leads API
     if (pathname === '/api/leads' && request.method === 'GET') {
       const status = searchParams.get('status');
-      const leads = getAllLeads(status ? { status } : {});
+      const leads = await getAllLeads(status ? { status } : {});
       return jsonResponse({ count: leads.length, leads });
     }
 
@@ -65,7 +65,7 @@ export default {
     if (pathname === '/api/leads' && request.method === 'POST') {
       try {
         const body = await request.json();
-        const created = createLead(body);
+        const created = await createLead(body);
         return jsonResponse({ success: true, lead: created }, 201);
       } catch (_) {
         return jsonResponse({ error: 'Invalid JSON payload' }, 400);

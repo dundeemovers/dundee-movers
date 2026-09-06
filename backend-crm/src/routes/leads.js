@@ -7,7 +7,7 @@ export async function handleLeadsRoute(req, res, pathname, query, body) {
   // GET /api/leads
   if (req.method === 'GET' && pathname === '/api/leads') {
     const statusFilter = query.get('status');
-    const leads = getAllLeads(statusFilter ? { status: statusFilter } : {});
+    const leads = await getAllLeads(statusFilter ? { status: statusFilter } : {});
     res.writeHead(200, { 'Content-Type': 'application/json' });
     return res.end(JSON.stringify({ count: leads.length, leads }, null, 2));
   }
@@ -28,7 +28,7 @@ export async function handleLeadsRoute(req, res, pathname, query, body) {
   if (req.method === 'POST' && pathname === '/api/leads') {
     try {
       const payload = typeof body === 'string' ? JSON.parse(body || '{}') : body;
-      const created = createLead(payload);
+      const created = await createLead(payload);
       res.writeHead(201, { 'Content-Type': 'application/json' });
       return res.end(JSON.stringify({ success: true, lead: created }, null, 2));
     } catch (err) {
