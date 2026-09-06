@@ -2,15 +2,33 @@
  * Supabase Connection & Hybrid Data Store Adapter.
  * Connects to Supabase when environment variables are supplied,
  * with zero-config local in-memory fallback.
+ * Works seamlessly in both Node.js server and Cloudflare Edge Workers.
  */
 
+let runtimeConfig = {
+  supabaseUrl: '',
+  supabaseKey: ''
+};
+
+export function setSupabaseCredentials(url, key) {
+  if (url) runtimeConfig.supabaseUrl = url;
+  if (key) runtimeConfig.supabaseKey = key;
+}
+
+function getCredentials() {
+  const envUrl = (typeof process !== 'undefined' && process.env?.SUPABASE_URL) || runtimeConfig.supabaseUrl || '';
+  const envKey = (typeof process !== 'undefined' && process.env?.SUPABASE_ANON_KEY) || runtimeConfig.supabaseKey || '';
+  return { url: envUrl, key: envKey };
+}
+
 export function isSupabaseConfigured() {
-  return Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY);
+  const { url, key } = getCredentials();
+  return Boolean(url && key);
 }
 
 export function getSupabaseConfig() {
   const configured = isSupabaseConfigured();
-  const url = process.env.SUPABASE_URL || '';
+  const { url } = getCredentials();
   return {
     isConfigured: configured,
     url: url ? url : 'Not connected (Using Local Store)',
@@ -26,8 +44,7 @@ export async function executeSupabaseQuery(table, options = {}) {
     return null; // Will trigger local fallback in callers
   }
 
-  const supabaseUrl = process.env.SUPABASE_URL;
-  const anonKey = process.env.SUPABASE_ANON_KEY;
+  const { url: supabaseUrl, key: anonKey } = getCredentials();
 
   try {
     const endpoint = `${supabaseUrl}/rest/v1/${table}`;
