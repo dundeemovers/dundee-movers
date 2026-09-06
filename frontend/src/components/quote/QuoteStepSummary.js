@@ -1,6 +1,6 @@
 /**
- * Step 4 Sub-Component: Move Summary, Live Volume (m3) Sizing, Van Recommendation,
- * and Direct Operations CRM Lead Submission (Zero WhatsApp).
+ * Step 4 Sub-Component: Move Summary, Itemized Manifest Review,
+ * and Direct Operations CRM Lead Submission (Zero Automated Vehicle Recommendations).
  */
 import { formatFullAddress, formatAccessDescription } from '../../utils/formatters.js';
 import { calculateMoveVolumeAndVan } from '../../utils/quoteCalculator.js';
@@ -12,7 +12,6 @@ export function renderStepSummary(state) {
   const destFull = formatFullAddress(state.destAddr);
   const pickupAccessDesc = formatAccessDescription(state.pickupAccess);
   const destAccessDesc = formatAccessDescription(state.destAccess);
-  const sizing = calculateMoveVolumeAndVan(state.items, state.moveType, state.pickupAccess, state.destAccess);
 
   return `
     <div class="wizard-step-content quote-summary-content">
@@ -20,30 +19,8 @@ export function renderStepSummary(state) {
         <span class="badge">Guaranteed Move Manifest Ready</span>
       </div>
 
-      <h3 class="summary-hero-title">Your Tailored Move Estimate</h3>
-      <p class="summary-hero-sub">Review your vehicle recommendation, volume sizing, and itemized manifest below.</p>
-
-      <!-- Live Volume & Van Sizing Recommendation Box -->
-      <div class="volume-sizing-card" style="margin-bottom: 1.5rem; background: rgba(6, 78, 59, 0.05); border: 1.5px solid #064e3b; border-radius: var(--radius-lg); padding: 1.25rem;">
-        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="font-size: 1.5rem;">🚐</span>
-            <div>
-              <strong style="display: block; color: var(--color-text-main); font-size: 1rem;">Recommended Vehicle: ${sizing.vanRecommendation}</strong>
-              <span style="font-size: 0.75rem; color: #065f46; font-weight: 700;">${sizing.vanBadge}</span>
-            </div>
-          </div>
-          <div style="background: #ffffff; border: 1.5px solid #d97706; padding: 0.4rem 0.85rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 800; color: #b45309;">
-            Est. Volume: ~${sizing.volumeM3} m³
-          </div>
-        </div>
-        <div style="display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 0.8rem; color: var(--color-text-muted); border-top: 1px solid rgba(0,0,0,0.06); padding-top: 0.75rem;">
-          <span>👥 Crew: <strong style="color: var(--color-text-main);">${sizing.crewRecommendation}</strong></span>
-          <span>🛡️ Insurance: <strong style="color: var(--color-text-main);">£50,000 Included Free</strong></span>
-          <span>🪜 Access: <strong style="color: #b45309;">${sizing.stairEquipmentNote}</strong></span>
-          <span>🔒 Policy: <strong style="color: #065f46;">1 Move At A Time (Zero Shared Loads)</strong></span>
-        </div>
-      </div>
+      <h3 class="summary-hero-title">Your Tailored Move Summary</h3>
+      <p class="summary-hero-sub">Review your collection route, floor access, and itemized manifest below.</p>
 
       <!-- Itemized Manifest & Route Breakdown -->
       <div class="summary-breakdown-card">
@@ -85,14 +62,14 @@ export function renderStepSummary(state) {
         ` : ''}
       </div>
 
-      <!-- Primary Customer Online Submission Form (Zero WhatsApp) -->
+      <!-- Primary Customer Online Submission Form -->
       <div class="quote-submit-card">
         <div class="quote-submit-header">
           <span class="quote-submit-badge">📋 Tailored Quote Request</span>
           <h4 class="quote-submit-title">Request Your Fixed-Price Move Quote</h4>
         </div>
         <p class="quote-submit-sub">
-          Enter your contact details below. Our team will review your inventory, property access, and route details to calculate your tailored fixed quote. Once you review and accept the quote, we will confirm your moving date and take your deposit to secure your booking.
+          Enter your contact details below. Our team will review your inventory, property access, and route details to assign the appropriate vehicle and calculate your tailored fixed quote. Once you review and accept the quote, we will confirm your moving date and take your deposit to secure your booking.
         </p>
 
         <form id="quote-direct-submit-form">
@@ -140,7 +117,7 @@ export function renderStepSummary(state) {
             Thank you, <strong id="quote-success-name">Customer</strong>! We have received your move details, itemized inventory, and property floor access.
           </p>
           <p style="font-size: 0.85rem; color: #475569; margin: 0 0 1.5rem; line-height: 1.5;">
-            Our operations team will review your details and send your tailored fixed quote shortly by phone or email. Once you accept the quote, we will lock in your date and take your deposit to confirm your booking.
+            Our operations team will review your requirements, determine the best vehicle and team for your move, and send your tailored fixed quote shortly by phone or email. Once you accept the quote, we will lock in your date and take your deposit to confirm your booking.
           </p>
           <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
             <a href="tel:+441382932840" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.4rem; background: #064e3b; color: #fff; text-decoration: none; border-radius: 8px; font-weight: 700;">
@@ -178,7 +155,6 @@ export function initStepSummary(container, onRestart, state) {
   const successBanner = container.querySelector('#quote-success-banner');
   const refBadge = container.querySelector('#quote-ref-badge');
   const successName = container.querySelector('#quote-success-name');
-  const successVan = container.querySelector('#quote-success-van');
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -228,8 +204,8 @@ export function initStepSummary(container, onRestart, state) {
       deliveryFloor: state.destAccess?.floor || 'Ground Floor / Bungalow',
       deliveryLift: Boolean(state.destAccess?.hasLift),
       estimatedVolumeM3: sizing.volumeM3,
-      recommendedVan: sizing.vanRecommendation,
-      recommendedCrew: sizing.crewRecommendation,
+      recommendedVan: 'Manual Dispatch Review',
+      recommendedCrew: 'Manual Dispatch Review',
       notes: `Ref: #${quoteRef}${customNotes ? ' | Notes: ' + customNotes : ''}${itemsSummary ? ' | Manifest: ' + itemsSummary : ''}`
     };
 
@@ -255,7 +231,6 @@ export function initStepSummary(container, onRestart, state) {
     if (successBanner) successBanner.style.display = 'block';
     if (refBadge) refBadge.textContent = `#${quoteRef}`;
     if (successName) successName.textContent = name;
-    if (successVan) successVan.textContent = sizing.vanRecommendation;
 
     try {
       confetti({ particleCount: 90, spread: 70, origin: { y: 0.6 } });
