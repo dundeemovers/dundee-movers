@@ -8,7 +8,8 @@ import {
   generateInquiryReceivedEmailHtml,
   generateTailoredQuoteEmailHtml,
   generateQuoteAcceptedEmailHtml,
-  generateInternalLeadNotificationHtml
+  generateInternalLeadNotificationHtml,
+  getAdminNotificationEmail
 } from './emailService.js';
 
 // Production in-memory leads store (starts empty)
@@ -151,7 +152,7 @@ export async function createLead(leadData) {
       }
 
       await sendEmailWithResend({
-        to: 'bookings@dundeemovers.co.uk',
+        to: getAdminNotificationEmail(),
         subject: `🚨 New Move Inquiry: ${newLead.customerName} (${newLead.pickupFloor} ➔ ${newLead.deliveryFloor})`,
         html: generateInternalLeadNotificationHtml(newLead),
         customerName: 'Dundee Movers Team',
@@ -314,7 +315,7 @@ export async function acceptQuotePass(leadId, acceptanceData = {}) {
       }
 
       await sendEmailWithResend({
-        to: 'bookings@dundeemovers.co.uk',
+        to: getAdminNotificationEmail(),
         subject: `🎉 MOVE PASS ACCEPTED: ${lead.customerName} (£${finalPrice})`,
         html: `
           <div style="font-family: sans-serif; padding: 20px; color: #064e3b;">

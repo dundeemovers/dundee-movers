@@ -53,8 +53,8 @@ export default {
     if (env && (env.SUPABASE_URL || env.SUPABASE_ANON_KEY)) {
       setSupabaseCredentials(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
     }
-    if (env && (env.RESEND_API_KEY || env.EMAIL_FROM)) {
-      setEmailCredentials(env.RESEND_API_KEY, env.EMAIL_FROM);
+    if (env && (env.RESEND_API_KEY || env.EMAIL_FROM || env.NOTIFICATION_EMAIL || env.REPLY_TO_EMAIL)) {
+      setEmailCredentials(env.RESEND_API_KEY, env.EMAIL_FROM, env.NOTIFICATION_EMAIL, env.REPLY_TO_EMAIL);
     }
     if (env?.CRM_ACCESS_KEY) {
       setCrmAccessKey(env.CRM_ACCESS_KEY);

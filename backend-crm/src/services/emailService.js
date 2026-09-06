@@ -22,12 +22,24 @@ export {
 
 let runtimeConfig = {
   apiKey: '',
-  fromEmail: 'Dundee Movers <bookings@dundeemovers.co.uk>'
+  fromEmail: 'Dundee Movers <bookings@dundeemovers.co.uk>',
+  notificationEmail: 'dundeemovers@gmail.com',
+  replyToEmail: 'dundeemovers@gmail.com'
 };
 
-export function setEmailCredentials(apiKey, fromEmail) {
+export function setEmailCredentials(apiKey, fromEmail, notificationEmail, replyToEmail) {
   if (apiKey) runtimeConfig.apiKey = apiKey;
   if (fromEmail) runtimeConfig.fromEmail = fromEmail;
+  if (notificationEmail) runtimeConfig.notificationEmail = notificationEmail;
+  if (replyToEmail) runtimeConfig.replyToEmail = replyToEmail;
+}
+
+export function getAdminNotificationEmail() {
+  return (typeof process !== 'undefined' && process.env?.NOTIFICATION_EMAIL) || runtimeConfig.notificationEmail || 'dundeemovers@gmail.com';
+}
+
+export function getReplyToEmail() {
+  return (typeof process !== 'undefined' && process.env?.REPLY_TO_EMAIL) || runtimeConfig.replyToEmail || 'dundeemovers@gmail.com';
 }
 
 function getEmailCredentials() {
@@ -124,9 +136,11 @@ export async function sendEmailWithResend({
   text,
   customerName = 'Customer',
   templateType = 'instant_quote',
-  quoteId = null
+  quoteId = null,
+  replyTo = null
 }) {
   const { apiKey, fromEmail } = getEmailCredentials();
+  const effectiveReplyTo = replyTo || getReplyToEmail();
   const recipientList = Array.isArray(to) ? to : [to];
   const recipientStr = recipientList.join(', ');
 
@@ -145,19 +159,25 @@ export async function sendEmailWithResend({
   }
 
   try {
+    const payload = {
+      from: fromEmail,
+      to: recipientList,
+      subject,
+      html,
+      text: text || undefined
+    };
+
+    if (effectiveReplyTo) {
+      payload.reply_to = effectiveReplyTo;
+    }
+
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        from: fromEmail,
-        to: recipientList,
-        subject,
-        html,
-        text: text || undefined
-      })
+      body: JSON.stringify(payload)
     });
 
     const data = await response.json();

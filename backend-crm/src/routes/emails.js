@@ -6,7 +6,8 @@ import {
   sendEmailWithResend,
   generateInquiryReceivedEmailHtml,
   generateTailoredQuoteEmailHtml,
-  generateInternalLeadNotificationHtml
+  generateInternalLeadNotificationHtml,
+  getAdminNotificationEmail
 } from '../services/emailService.js';
 import { getLeadById, updateLeadStatus } from '../services/leadsService.js';
 
@@ -72,7 +73,7 @@ export async function handleEmailsRoute(req, res, pathname, query, body) {
   if (req.method === 'POST' && pathname === '/api/emails/send-test') {
     try {
       const payload = typeof body === 'string' ? JSON.parse(body || '{}') : body;
-      const to = payload.to || 'bookings@dundeemovers.co.uk';
+      const to = payload.to || getAdminNotificationEmail();
 
       const result = await sendEmailWithResend({
         to,
