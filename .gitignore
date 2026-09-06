@@ -14,6 +14,9 @@ frontend/dist/
 .env*.local
 backend-crm/.env
 frontend/.env
+*.dev.vars
+.dev.vars
+backend-crm/.dev.vars
 !*.env.example
 
 # Logs & debugging

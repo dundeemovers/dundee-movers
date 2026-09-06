@@ -10,9 +10,14 @@ export function renderEmailsView(logs = []) {
           <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a;">Automated Communications & Email Engine</h2>
           <p style="font-size: 0.8rem; color: #64748b;">Instant quote deliveries, 24-hr follow-ups, and post-move review triggers.</p>
         </div>
-        <a href="/api/emails/preview/instant_quote" target="_blank" class="btn-crm btn-crm-outline">
-          👁️ Preview Email Template
-        </a>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <a href="/api/emails/preview/quote" target="_blank" class="btn-crm btn-crm-outline">
+            👁️ Preview Quote Email
+          </a>
+          <a href="/api/emails/preview/inquiry" target="_blank" class="btn-crm btn-crm-outline">
+            👁️ Preview Inquiry Confirmation
+          </a>
+        </div>
       </div>
 
       <!-- Automation Sequences Cards -->

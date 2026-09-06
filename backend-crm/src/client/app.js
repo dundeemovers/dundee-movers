@@ -150,17 +150,24 @@ function renderApp() {
     initLeadsEvents(
       viewContainer,
       async leadId => {
-        const res = await fetch('/api/emails/send-quote', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ leadId })
-        }).then(r => r.json());
+        showToast('Sending quote email via Resend...');
+        try {
+          const res = await fetch('/api/emails/send-quote', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ leadId })
+          }).then(r => r.json());
 
-        if (res.success) {
-          showToast(`Automated quote email dispatched!`);
-          await fetchCrmData();
-          renderApp();
+          if (res.success) {
+            showToast('Guaranteed quote email dispatched via Resend!');
+          } else {
+            showToast(`Email failed: ${res.error || 'Could not send'}`, 'error');
+          }
+        } catch (err) {
+          showToast('Failed to contact email API', 'error');
         }
+        await fetchCrmData();
+        renderApp();
       },
       async (leadId, newStatus) => {
         await fetch(`/api/leads/${leadId}/status`, {

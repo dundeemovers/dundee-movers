@@ -4,7 +4,13 @@
  */
 import { getAllLeads, getLeadById, createLead, updateLeadStatus } from './services/leadsService.js';
 import { getTodayJobs, getTomorrowJobs, updateJobStatus, updatePaymentStatus } from './services/jobsService.js';
-import { getEmailLogs, generateInstantQuoteEmailHtml } from './services/emailService.js';
+import {
+  getEmailLogs,
+  sendEmailWithResend,
+  setEmailCredentials,
+  generateTailoredQuoteEmailHtml,
+  generateInquiryReceivedEmailHtml
+} from './services/emailService.js';
 import { getSupabaseConfig, setSupabaseCredentials } from './services/supabaseClient.js';
 
 const CORS_HEADERS = {
@@ -28,9 +34,12 @@ export default {
     const url = new URL(request.url);
     const { pathname, searchParams } = url;
 
-    // Set Supabase credentials from Worker environment bindings
+    // Set Supabase & Resend credentials from Worker environment bindings
     if (env && (env.SUPABASE_URL || env.SUPABASE_ANON_KEY)) {
       setSupabaseCredentials(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
+    }
+    if (env && (env.RESEND_API_KEY || env.EMAIL_FROM)) {
+      setEmailCredentials(env.RESEND_API_KEY, env.EMAIL_FROM);
     }
 
     if (request.method === 'OPTIONS') {
@@ -122,41 +131,67 @@ export default {
 
     // 4. Automated Communications & Email API
     if (pathname === '/api/emails/logs' && request.method === 'GET') {
-      const logs = getEmailLogs();
+      const logs = await getEmailLogs();
       return jsonResponse({ count: logs.length, logs });
     }
 
     if (pathname === '/api/emails/send-quote' && request.method === 'POST') {
       try {
         const body = await request.json();
-        const emailLog = {
-          id: `email-${Date.now()}`,
-          createdAt: new Date().toISOString(),
-          recipientEmail: body.recipientEmail || 'customer@example.co.uk',
-          recipientName: body.recipientName || 'Valued Customer',
-          templateType: 'instant_quote',
-          subject: 'Your Guaranteed Move Estimate — Dundee Movers',
-          status: 'sent'
+        const lead = body.leadId ? (getLeadById(body.leadId) || body.leadData) : body.leadData;
+        const recipientEmail = body.recipientEmail || lead?.customerEmail;
+        const recipientName = body.recipientName || lead?.customerName || 'Valued Customer';
+
+        if (!recipientEmail) {
+          return jsonResponse({ error: 'Customer email address is required' }, 400);
+        }
+
+        const quoteOptions = {
+          quotePrice: body.quotePrice,
+          depositAmount: body.depositAmount,
+          assignedVan: body.assignedVan,
+          assignedCrew: body.assignedCrew
         };
-        return jsonResponse({ success: true, message: 'Quote email queued successfully', emailLog });
-      } catch (_) {
-        return jsonResponse({ error: 'Invalid JSON payload' }, 400);
+
+        const html = generateTailoredQuoteEmailHtml(lead || { customerName: recipientName }, quoteOptions);
+        const subject = 'Your Guaranteed Move Quote — Dundee Movers';
+
+        const result = await sendEmailWithResend({
+          to: recipientEmail,
+          subject,
+          html,
+          customerName: recipientName,
+          templateType: 'tailored_quote',
+          quoteId: lead?.id || null
+        });
+
+        if (lead?.id) {
+          updateLeadStatus(lead.id, 'quoted');
+        }
+
+        return jsonResponse(result, result.success ? 200 : 502);
+      } catch (err) {
+        return jsonResponse({ error: 'Failed to process email dispatch: ' + err.message }, 400);
       }
     }
 
-    if (pathname === '/api/emails/preview/instant_quote' && request.method === 'GET') {
+    if (pathname.startsWith('/api/emails/preview/') && request.method === 'GET') {
+      const template = pathname.split('/').pop();
       const sampleLead = {
         customerName: 'Alistair Campbell',
         pickupAddress: 'Flat 3/2, 112 Nethergate, Dundee',
         deliveryAddress: '14 Panmure Terrace, Broughty Ferry',
-        recommendedVan: 'Luton Van with Electric Tail-Lift',
+        recommendedVan: '3.5T Luton Van with Electric Tail-Lift',
         estimatedVolumeM3: '16.5',
         pickupFloor: '3rd Floor (Tenement)',
         deliveryFloor: 'Ground Floor',
-        estimatedPriceMin: 280,
-        estimatedPriceMax: 360
+        moveDate: 'Friday, 19th September 2026'
       };
-      const html = generateInstantQuoteEmailHtml(sampleLead);
+
+      const html = template === 'inquiry' 
+        ? generateInquiryReceivedEmailHtml(sampleLead) 
+        : generateTailoredQuoteEmailHtml(sampleLead);
+
       return new Response(html, {
         headers: { 'Content-Type': 'text/html; charset=utf-8', ...CORS_HEADERS }
       });

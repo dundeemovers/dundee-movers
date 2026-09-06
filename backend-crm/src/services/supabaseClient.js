@@ -51,7 +51,8 @@ export async function executeSupabaseQuery(table, options = {}) {
     const headers = {
       'apikey': anonKey,
       'Authorization': `Bearer ${anonKey}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation'
     };
 
     const response = await fetch(endpoint, {
@@ -65,7 +66,8 @@ export async function executeSupabaseQuery(table, options = {}) {
       return null;
     }
 
-    return await response.json();
+    const text = await response.text();
+    return text ? JSON.parse(text) : null;
   } catch (err) {
     console.warn(`[Supabase REST] Network error connecting to Supabase:`, err.message);
     return null;
