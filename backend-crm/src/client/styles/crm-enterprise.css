@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Dundee Movers CRM — Enterprise Tools (Calculator, Materials, Analytics)
+   ========================================================================== */
+/* --------------------------------------------------------------------------
+   5. Volume Calculator Styles
+   -------------------------------------------------------------------------- */
+.calc-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.calc-item-card {
+  background: #ffffff;
+  border: 1.5px solid var(--crm-border-subtle);
+  border-radius: var(--crm-radius-md);
+  padding: 0.85rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--crm-transition);
+}
+
+.calc-item-card.card-selected {
+  border-color: var(--crm-primary);
+  background: #f0fdf4;
+}
+
+.calc-item-title { font-size: 0.85rem; font-weight: 800; color: var(--crm-text-main); }
+.calc-item-volume { font-size: 0.72rem; color: #64748b; margin-top: 0.15rem; }
+
+.calc-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-step-qty {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--crm-radius-sm);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  font-size: 1.1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--crm-text-main);
+  transition: var(--crm-transition);
+}
+
+.btn-step-qty:hover:not(:disabled) {
+  background: var(--crm-primary);
+  color: #ffffff;
+  border-color: var(--crm-primary);
+}
+
+.btn-step-qty:disabled { opacity: 0.35; cursor: not-allowed; }
+.calc-qty-num { font-size: 1rem; font-weight: 900; min-width: 1.5rem; text-align: center; color: #064e3b; }
+
+.calc-actions-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #ffffff;
+  padding: 1rem 1.25rem;
+  border-radius: var(--crm-radius-md);
+  border: 1px solid var(--crm-border-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   6. Materials Shop & Bundles
+   -------------------------------------------------------------------------- */
+.bundles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.bundle-card {
+  background: #ffffff;
+  border: 1.5px solid var(--crm-border-subtle);
+  border-radius: var(--crm-radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.bundle-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+.bundle-title { font-size: 0.95rem; font-weight: 800; color: #0f172a; }
+.bundle-price { font-size: 1.3rem; font-weight: 900; color: #064e3b; }
+.bundle-rec { font-size: 0.72rem; font-weight: 700; color: #0369a1; margin-bottom: 0.5rem; }
+.bundle-items { font-size: 0.78rem; color: #475569; line-height: 1.5; flex: 1; }
+
+/* --------------------------------------------------------------------------
+   7. Analytics Funnel & Corridors
+   -------------------------------------------------------------------------- */
+.analytics-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .analytics-grid-2 { grid-template-columns: 1fr; }
+}
+
+.funnel-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.funnel-step { display: flex; flex-direction: column; gap: 0.35rem; }
+.funnel-step-label { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700; }
+.funnel-bar { height: 16px; background: #e2e8f0; border-radius: 9999px; overflow: hidden; }
+.funnel-fill { height: 100%; border-radius: 9999px; transition: width 0.6s ease; }
+.fill-1 { background: #0284c7; }
+.fill-2 { background: #10b981; }
+.fill-3 { background: #064e3b; }
+
+.corridor-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.corridor-row { display: flex; flex-direction: column; gap: 0.25rem; }
+.corridor-name { font-size: 0.78rem; font-weight: 700; color: #334155; }
+.corridor-bar-wrap { display: flex; align-items: center; gap: 0.75rem; }
+.corridor-bar { height: 10px; background: #10b981; border-radius: 9999px; }
+.corridor-pct { font-size: 0.75rem; font-weight: 800; color: #064e3b; min-width: 35px; }

@@ -10,7 +10,17 @@ import {
   prepareAndSendMovePass,
   acceptQuotePass
 } from './services/leadsService.js';
-import { getTodayJobs, getTomorrowJobs, updateJobStatus, updatePaymentStatus } from './services/jobsService.js';
+import {
+  getAllJobs,
+  getTodayJobs,
+  getTomorrowJobs,
+  getJobsByDate,
+  getJobById,
+  createJob,
+  updateJobStatus,
+  updateJobAssignment,
+  updatePaymentStatus
+} from './services/jobsService.js';
 import {
   getEmailLogs,
   sendEmailWithResend,
@@ -224,6 +234,46 @@ export default {
     if (pathname === '/api/jobs/tomorrow' && request.method === 'GET') {
       const jobs = getTomorrowJobs();
       return jsonResponse({ count: jobs.length, jobs });
+    }
+
+    if (pathname === '/api/jobs' && request.method === 'GET') {
+      const jobs = getAllJobs();
+      return jsonResponse({ count: jobs.length, jobs });
+    }
+
+    if (pathname === '/api/jobs' && request.method === 'POST') {
+      try {
+        const body = await request.json();
+        const created = createJob(body);
+        return jsonResponse({ success: true, job: created }, 201);
+      } catch (err) {
+        return jsonResponse({ error: 'Failed to create job: ' + err.message }, 400);
+      }
+    }
+
+    const jobDateMatch = pathname.match(/^\/api\/jobs\/date\/([^/]+)$/);
+    if (jobDateMatch && request.method === 'GET') {
+      const jobs = getJobsByDate(jobDateMatch[1]);
+      return jsonResponse({ count: jobs.length, jobs });
+    }
+
+    const jobSingleMatch = pathname.match(/^\/api\/jobs\/([^/]+)$/);
+    if (jobSingleMatch && request.method === 'GET') {
+      const job = getJobById(jobSingleMatch[1]);
+      if (!job) return jsonResponse({ error: 'Job not found' }, 404);
+      return jsonResponse(job);
+    }
+
+    const jobAssignmentMatch = pathname.match(/^\/api\/jobs\/([^/]+)\/assignment$/);
+    if (jobAssignmentMatch && request.method === 'PATCH') {
+      try {
+        const body = await request.json();
+        const updated = updateJobAssignment(jobAssignmentMatch[1], body.vehicle, body.crew);
+        if (!updated) return jsonResponse({ error: 'Job not found' }, 404);
+        return jsonResponse({ success: true, job: updated });
+      } catch (_) {
+        return jsonResponse({ error: 'Invalid JSON payload' }, 400);
+      }
     }
 
     const jobStatusMatch = pathname.match(/^\/api\/jobs\/([^/]+)\/status$/);

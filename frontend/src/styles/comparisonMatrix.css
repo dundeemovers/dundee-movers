@@ -1,0 +1,319 @@
+/* ==========================================================================
+   Why Choose Dundee Movers: High-Converting Comparison Matrix Styles
+   Scottish Emerald vs Casual Risk Visual Distinction & Responsive Grids
+   ========================================================================== */
+
+.home-why-us-section {
+  padding: 3.5rem 1.5rem 4.5rem 1.5rem;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.why-us-badge {
+  background: rgba(5, 150, 105, 0.1);
+  border: 1px solid rgba(5, 150, 105, 0.28);
+  color: #065f46;
+  font-weight: 800;
+}
+
+.why-us-comparison-grid {
+  display: grid;
+  grid-template-columns: 1.14fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+  margin: 0 auto;
+}
+
+.comparison-card {
+  padding: 2.35rem 2.25rem;
+  border-radius: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+/* Dundee Movers Winner Card */
+.standard-card {
+  background: linear-gradient(180deg, #ffffff 0%, #f7fdf9 100%);
+  border: 2px solid #059669;
+  box-shadow: 0 20px 45px -15px rgba(5, 150, 105, 0.2), 0 0 0 1px rgba(5, 150, 105, 0.15);
+}
+
+.standard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 55px -12px rgba(5, 150, 105, 0.28), 0 0 0 2px #059669;
+}
+
+/* Casual Man & Van Risk Card */
+.casual-card {
+  background: #f8fafc;
+  border: 1.5px solid #fecaca;
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.05);
+}
+
+.card-winner-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #059669;
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.45rem 1.15rem;
+  border-radius: 9999px;
+  margin-bottom: 1.5rem;
+  align-self: flex-start;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+.ribbon-sparkle {
+  color: #fef08a;
+}
+
+.card-risk-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.45rem 1.15rem;
+  border-radius: 9999px;
+  margin-bottom: 1.5rem;
+  align-self: flex-start;
+  border: 1px solid #fca5a5;
+}
+
+.card-header-block {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.06);
+}
+
+.header-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.brand-avatar-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.45rem;
+  flex-shrink: 0;
+}
+
+.pro-avatar {
+  background: #d1fae5;
+  border: 1px solid #a7f3d0;
+}
+
+.danger-avatar {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+}
+
+.card-brand-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 0.15rem 0;
+  letter-spacing: -0.02em;
+}
+
+.card-brand-tagline {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #059669;
+}
+
+.casual-card .card-brand-tagline {
+  color: #dc2626;
+}
+
+.card-intro-text {
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.55;
+  margin: 0.85rem 0 0 0;
+}
+
+.comparison-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.75rem;
+  flex: 1;
+}
+
+.comparison-item-row {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.comparison-item-row:last-child {
+  border-bottom: none;
+}
+
+.item-status-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.pro-icon {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+  box-shadow: 0 2px 6px rgba(21, 128, 61, 0.12);
+}
+
+.danger-icon {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.item-content {
+  flex: 1;
+}
+
+.item-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+}
+
+.item-title {
+  font-size: 0.94rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.item-desc {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.item-pill {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.pro-pill {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.danger-pill {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.card-footer-cta {
+  margin-top: 0.5rem;
+}
+
+.card-cta-btn {
+  width: 100%;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: 0.98rem;
+  font-weight: 800;
+  border-radius: 0.85rem;
+}
+
+.warning-callout-box {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.85rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.84rem;
+  color: #991b1b;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.warning-icon {
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+/* Trust Guarantee Strip */
+.why-us-trust-strip {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1.25rem;
+  padding: 1.15rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+  margin-top: 2.25rem;
+}
+
+.trust-strip-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+.trust-strip-divider {
+  width: 1px;
+  height: 24px;
+  background: #e2e8f0;
+}
+
+@media (max-width: 960px) {
+  .why-us-comparison-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  
+  .trust-strip-divider {
+    display: none;
+  }
+  
+  .why-us-trust-strip {
+    justify-content: center;
+    gap: 1.25rem;
+  }
+}

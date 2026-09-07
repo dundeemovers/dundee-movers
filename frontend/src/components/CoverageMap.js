@@ -8,8 +8,8 @@ const COVERAGE_DATA = {
     title: 'Dundee City & Surrounds (DD1 – DD5)',
     time: 'Local & Express Scheduled Slots',
     districts: [
-      { name: 'City Centre & Waterfront (DD1)', notes: 'Council parking permits, tenement stairs, and loading bays arranged.' },
-      { name: 'West End & University (DD2)', notes: 'Specialists in Victorian tenement stairwells, top-floor flats, and student moves.' },
+      { name: 'City Centre & Waterfront (DD1)', notes: 'Council parking permits, multi-storey flat stairs, and loading bays arranged.' },
+      { name: 'West End & University (DD2)', notes: 'Specialists in traditional high-floor flats, spiral staircases, and student moves.' },
       { name: 'Stobswell & Coldside (DD3)', notes: 'Fast local transit for traditional flats, terraces, and family homes.' },
       { name: 'Craigie & Pitkerro (DD4)', notes: 'Residential family home relocations and bungalow moves.' },
       { name: 'Broughty Ferry & Barnhill (DD5)', notes: 'Multi-bedroom detached houses, coastal villas, and estate packing.' }

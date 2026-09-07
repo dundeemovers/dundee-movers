@@ -22,9 +22,9 @@ export function renderFooter() {
                 <span>Tell Us What Needs Moving</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
-              <a href="tel:+441382932840" class="btn btn-secondary footer-btn-call">
+              <a href="tel:+447308420884" class="btn btn-secondary footer-btn-call">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                <span>Call Dispatch: 01382 932840</span>
+                <span>Call Dispatch: 07308 420884</span>
               </a>
             </div>
           </div>
@@ -116,7 +116,7 @@ export function renderFooter() {
                 Tell us your preferred date and destination to check availability and lock in your dedicated van slot.
               </p>
               
-              <form class="footer-enquiry-box" onsubmit="event.preventDefault(); const val = this.querySelector('input').value.trim(); window.location.href='https://wa.me/441382932840?text=' + encodeURIComponent('Hi Dundee Movers, I would like to check dedicated van availability for: ' + val); return false;">
+              <form class="footer-enquiry-box" onsubmit="event.preventDefault(); const val = this.querySelector('input').value.trim(); window.location.href='https://wa.me/447308420884?text=' + encodeURIComponent('Hi Dundee Movers, I would like to check dedicated van availability for: ' + val); return false;">
                 <input type="text" class="footer-email-input" placeholder="Your Phone or Postcode..." required />
                 <button type="submit" class="footer-submit-btn" aria-label="Send enquiry">
                   <span>Inquire</span>
@@ -125,11 +125,11 @@ export function renderFooter() {
               </form>
 
               <div class="footer-social-bar">
-                <a href="mailto:bookings@dundeemovers.co.uk" class="social-icon-btn" aria-label="Email Dispatch">
-                  <span>EMAIL</span>
+                <a href="mailto:bookings@dundeemovers.co.uk" class="social-icon-btn" aria-label="Email Dispatch" style="font-size: 0.78rem; text-transform: none;">
+                  <span>✉️ bookings@dundeemovers.co.uk</span>
                 </a>
-                <a href="tel:+441382932840" class="social-icon-btn" aria-label="Phone">
-                  <span>TEL</span>
+                <a href="tel:+447308420884" class="social-icon-btn" aria-label="Phone" style="font-size: 0.78rem;">
+                  <span>📞 07308 420884</span>
                 </a>
                 <span class="footer-insurance-pill">🛡️ £50k Goods in Transit Included</span>
               </div>

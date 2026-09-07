@@ -23,8 +23,8 @@ export {
 let runtimeConfig = {
   apiKey: '',
   fromEmail: 'Dundee Movers <bookings@dundeemovers.co.uk>',
-  notificationEmail: 'dundeemovers@gmail.com',
-  replyToEmail: 'dundeemovers@gmail.com'
+  notificationEmail: 'bookings@dundeemovers.co.uk',
+  replyToEmail: 'bookings@dundeemovers.co.uk'
 };
 
 export function setEmailCredentials(apiKey, fromEmail, notificationEmail, replyToEmail) {
@@ -35,11 +35,11 @@ export function setEmailCredentials(apiKey, fromEmail, notificationEmail, replyT
 }
 
 export function getAdminNotificationEmail() {
-  return (typeof process !== 'undefined' && process.env?.NOTIFICATION_EMAIL) || runtimeConfig.notificationEmail || 'dundeemovers@gmail.com';
+  return (typeof process !== 'undefined' && process.env?.NOTIFICATION_EMAIL) || runtimeConfig.notificationEmail || 'bookings@dundeemovers.co.uk';
 }
 
 export function getReplyToEmail() {
-  return (typeof process !== 'undefined' && process.env?.REPLY_TO_EMAIL) || runtimeConfig.replyToEmail || 'dundeemovers@gmail.com';
+  return (typeof process !== 'undefined' && process.env?.REPLY_TO_EMAIL) || runtimeConfig.replyToEmail || 'bookings@dundeemovers.co.uk';
 }
 
 function getEmailCredentials() {

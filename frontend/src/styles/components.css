@@ -215,7 +215,7 @@
 
 /* Hero Section (Padding adjusted for floating dock) */
 .hero-section {
-  padding-top: clamp(7rem, 10vw, 9rem);
+  padding-top: clamp(8.75rem, 12vw, 11.25rem);
   padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
 }
 

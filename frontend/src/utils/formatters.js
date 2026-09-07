@@ -68,5 +68,6 @@ export function generateItemizedWhatsAppLink(state) {
     `🛠️ *Additional Services:* ${addons}\n\n` +
     `👤 *Customer:* ${state.userName ? state.userName : 'Customer'} (${state.userPhone ? state.userPhone : 'Via WhatsApp'})`;
 
-  return `https://wa.me/441382932840?text=${encodeURIComponent(message)}`;
+  return `https://wa.me/447308420884?text=${encodeURIComponent(message)}`;
 }
+

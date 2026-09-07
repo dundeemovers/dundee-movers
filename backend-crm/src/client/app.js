@@ -1,17 +1,31 @@
 /**
- * Dundee Movers CRM Client SPA Router & State Manager.
- * Features 256-bit Cryptographic HMAC Session Authentication & Scottish Emerald Aesthetics.
+ * Dundee Movers CRM Client SPA Router & Operations Cockpit.
+ * High-performance, modular ES Modules application with Scottish Emerald & Slate aesthetics.
  */
 import { renderSidebar, initSidebarEvents } from './components/SidebarNav.js';
 import { renderFrontDeskView, initFrontDeskEvents } from './components/FrontDeskView.js';
+import { renderConfirmedJobsView, initConfirmedJobsEvents } from './components/ConfirmedJobsView.js';
+import { renderCalendarView, initCalendarEvents } from './components/CalendarView.js';
 import { renderLeadsView, initLeadsEvents } from './components/LeadsView.js?v=3';
-import { renderLeadDetailsModal, initLeadDetailsModalEvents } from './components/LeadDetailsModal.js';
+import { renderVolumeCalculatorView, initVolumeCalculatorEvents } from './components/VolumeCalculatorView.js';
+import { renderMaterialsView, initMaterialsEvents } from './components/MaterialsView.js';
+import { renderAnalyticsView } from './components/AnalyticsView.js';
 import { renderEmailsView } from './components/EmailsView.js';
 import { renderSettingsView } from './components/SettingsView.js';
 import { renderLoginView, initLoginViewEvents } from './components/LoginView.js';
-
-const TOKEN_STORAGE_KEY = 'dm_crm_auth_token';
-const USER_STORAGE_KEY = 'dm_crm_auth_user';
+import {
+  openJobSheetModal,
+  openInvoiceModal,
+  openNewLeadModal,
+  openLeadSurveyModal
+} from './utils/modalManager.js';
+import {
+  getSavedSession,
+  persistSession,
+  clearSession,
+  showToast,
+  crmFetch as rawCrmFetch
+} from './utils/sessionManager.js';
 
 const state = {
   isAuthenticated: false,
@@ -19,8 +33,14 @@ const state = {
   currentUser: null,
   currentRoute: 'front-desk',
   activeFrontDeskTab: 'today',
+  calendarViewMode: 'week',
+  calendarAnchorDate: new Date(),
+  calculatorActiveTab: 'living',
+  confirmedSearch: '',
+  confirmedFilter: 'active',
   leadsFilter: 'all',
   leadsSearch: '',
+  allJobs: [],
   todayJobs: [],
   tomorrowJobs: [],
   leads: [],
@@ -28,94 +48,28 @@ const state = {
   supabaseConfig: { isConfigured: false, mode: 'local_in_memory' }
 };
 
-function getSavedSession() {
-  const token = localStorage.getItem(TOKEN_STORAGE_KEY) || sessionStorage.getItem(TOKEN_STORAGE_KEY);
-  const userStr = localStorage.getItem(USER_STORAGE_KEY) || sessionStorage.getItem(USER_STORAGE_KEY);
-  let user = null;
-  if (userStr) {
-    try { user = JSON.parse(userStr); } catch (_) {}
-  }
-  return { token, user };
-}
-
-function persistSession(token, user, remember = true) {
-  const storage = remember ? localStorage : sessionStorage;
-  storage.setItem(TOKEN_STORAGE_KEY, token);
-  storage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
-  state.authToken = token;
-  state.currentUser = user;
-  state.isAuthenticated = true;
-}
-
-function clearSession() {
-  localStorage.removeItem(TOKEN_STORAGE_KEY);
-  localStorage.removeItem(USER_STORAGE_KEY);
-  sessionStorage.removeItem(TOKEN_STORAGE_KEY);
-  sessionStorage.removeItem(USER_STORAGE_KEY);
-  state.authToken = null;
-  state.currentUser = null;
-  state.isAuthenticated = false;
-}
-
-function showToast(message, type = 'success') {
-  const existing = document.getElementById('crm-toast');
-  if (existing) existing.remove();
-
-  const toast = document.createElement('div');
-  toast.id = 'crm-toast';
-  const isErr = type === 'error';
-  toast.style.cssText = `
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    background: #0f172a;
-    color: #ffffff;
-    border-left: 4px solid ${isErr ? '#ef4444' : '#10b981'};
-    padding: 12px 18px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 700;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-    z-index: 9999;
-    animation: fadeIn 0.2s ease;
-  `;
-  toast.textContent = message;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 3500);
-}
-
-/**
- * Authenticated API Fetch wrapper
- */
-async function crmFetch(url, options = {}) {
-  const headers = { ...options.headers };
-  if (state.authToken) {
-    headers['Authorization'] = `Bearer ${state.authToken}`;
-  }
-
-  const res = await fetch(url, { ...options, headers });
-
-  if (res.status === 401) {
+function crmFetch(url, options = {}) {
+  return rawCrmFetch(url, options, state.authToken, () => {
     clearSession();
+    state.isAuthenticated = false;
     renderApp();
     showToast('Session expired. Please log in with passkey.', 'error');
-    throw new Error('Unauthorized');
-  }
-
-  return res;
+  });
 }
 
 async function fetchCrmData() {
   if (!state.isAuthenticated) return;
   try {
-    const [todayRes, tomorrowRes, leadsRes, emailLogsRes, healthRes] = await Promise.all([
-      crmFetch('/api/jobs/today').then(r => r.json()),
-      crmFetch('/api/jobs/tomorrow').then(r => r.json()),
-      crmFetch('/api/leads').then(r => r.json()),
-      crmFetch('/api/emails/logs').then(r => r.json()),
-      fetch('/api/health').then(r => r.json())
+    const [allJobsRes, todayRes, tomorrowRes, leadsRes, emailLogsRes, healthRes] = await Promise.all([
+      crmFetch('/api/jobs').then(r => r.json()).catch(() => ({ jobs: [] })),
+      crmFetch('/api/jobs/today').then(r => r.json()).catch(() => ({ jobs: [] })),
+      crmFetch('/api/jobs/tomorrow').then(r => r.json()).catch(() => ({ jobs: [] })),
+      crmFetch('/api/leads').then(r => r.json()).catch(() => ({ leads: [] })),
+      crmFetch('/api/emails/logs').then(r => r.json()).catch(() => ({ logs: [] })),
+      fetch('/api/health').then(r => r.json()).catch(() => ({}))
     ]);
 
+    state.allJobs = allJobsRes.jobs || [];
     state.todayJobs = todayRes.jobs || [];
     state.tomorrowJobs = tomorrowRes.jobs || [];
     state.leads = leadsRes.leads || [];
@@ -128,11 +82,63 @@ async function fetchCrmData() {
   }
 }
 
+// Global modal triggers bound to state
+function handleOpenJobSheet(jobId) {
+  const job = state.allJobs.find(j => j.id === jobId) || state.todayJobs.find(j => j.id === jobId);
+  openJobSheetModal(job, (id) => showToast(`✓ E-Sign recorded for #${id}`));
+}
+
+function handleOpenInvoice(jobId) {
+  const job = state.allJobs.find(j => j.id === jobId) || state.todayJobs.find(j => j.id === jobId);
+  openInvoiceModal(job, async id => {
+    await crmFetch(`/api/jobs/${id}/payment`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: 'settled_in_full', balanceSettled: true })
+    });
+    showToast(`✓ Invoice #${id} marked as Paid!`);
+    await fetchCrmData();
+    renderApp();
+  });
+}
+
+function handleOpenNewMove() {
+  openNewLeadModal({
+    onSaveLead: async leadData => {
+      showToast('Saving lead to pipeline...');
+      const res = await crmFetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(leadData)
+      }).then(r => r.json());
+      if (res.success) {
+        showToast(`✓ Lead logged for ${leadData.customerName}!`);
+        await fetchCrmData();
+        state.currentRoute = 'leads';
+        renderApp();
+      }
+    },
+    onCreateJob: async jobData => {
+      showToast('Booking job to Front Desk...');
+      const res = await crmFetch('/api/jobs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(jobData)
+      }).then(r => r.json());
+      if (res.success) {
+        showToast(`✓ Job #${res.job?.id || ''} confirmed on calendar!`);
+        await fetchCrmData();
+        state.currentRoute = 'confirmed';
+        renderApp();
+      }
+    }
+  });
+}
+
 function renderApp() {
   const appContainer = document.getElementById('crm-app');
   if (!appContainer) return;
 
-  // 1. Guard with Login Portal if unauthenticated
   if (!state.isAuthenticated) {
     appContainer.innerHTML = renderLoginView();
     initLoginViewEvents(async (passkey, remember) => {
@@ -151,17 +157,22 @@ function renderApp() {
           return { success: true };
         }
         return { success: false, error: data.error || 'Incorrect master passkey.' };
-      } catch (err) {
+      } catch (_) {
         return { success: false, error: 'Network error connecting to auth service.' };
       }
     });
     return;
   }
 
-  // 2. Render Authenticated Operations Cockpit
   const routeTitles = {
     'front-desk': { title: 'Front Desk Dispatch Cockpit', subtitle: 'Live move tracking & crew coordination' },
+    'confirmed': { title: 'Active Removals Schedule', subtitle: 'Upcoming & active moves in chronological order (closest date first)' },
+    'archive': { title: 'Completed Removals Archive', subtitle: 'Historical records, signed Bills of Lading & permanent invoices' },
+    'calendar': { title: 'Fleet Dispatch Calendar', subtitle: 'Weekly & monthly schedule and crew roster' },
     'leads': { title: 'Quotes & Inquiries Pipeline', subtitle: 'Live submissions from the website wizard' },
+    'calculator': { title: 'Cubic Volume Estimator', subtitle: 'Room-by-room m³, cubic feet & van recommendation' },
+    'materials': { title: 'Depot Materials & Supplies', subtitle: 'Packaging stock, moving boxes & preset bundles' },
+    'analytics': { title: 'Operations Telemetry & Funnel', subtitle: 'Revenue, conversions & tenement characteristics' },
     'emails': { title: 'Automated Communications', subtitle: 'Instant quotes, follow-ups & review boosters' },
     'settings': { title: 'System Settings & Supabase', subtitle: 'Database connection & operational rules' }
   };
@@ -183,15 +194,16 @@ function renderApp() {
           </div>
         </div>
         <div class="crm-header-actions">
+          <button type="button" class="btn-crm btn-crm-email" id="topbar-btn-new-move">
+            + New Move
+          </button>
           <span style="font-size: 0.75rem; font-weight: 700; color: #10b981;">
             ● Dundee Operations Active
           </span>
         </div>
       </header>
 
-      <div class="crm-view-container" id="crm-view-content">
-        <!-- Rendered view content -->
-      </div>
+      <div class="crm-view-container" id="crm-view-content"></div>
     </main>
   `;
 
@@ -207,31 +219,64 @@ function renderApp() {
     }
   );
 
+  document.getElementById('topbar-btn-new-move')?.addEventListener('click', handleOpenNewMove);
+
   const viewContainer = document.getElementById('crm-view-content');
   if (!viewContainer) return;
 
   if (state.currentRoute === 'front-desk') {
     viewContainer.innerHTML = renderFrontDeskView(state.todayJobs, state.tomorrowJobs, state.activeFrontDeskTab);
-    initFrontDeskEvents(
-      viewContainer,
-      async (jobId, newStage) => {
+    initFrontDeskEvents(viewContainer, {
+      onUpdateStage: async (jobId, newStage) => {
         const res = await crmFetch(`/api/jobs/${jobId}/status`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status: newStage })
         }).then(r => r.json());
-
         if (res.success) {
           showToast(`Job #${jobId} advanced to ${newStage.replace(/_/g, ' ')}!`);
           await fetchCrmData();
           renderApp();
         }
       },
-      tab => {
+      onSwitchTab: tab => {
         state.activeFrontDeskTab = tab;
         renderApp();
       },
-      async jobId => {
+      onSettle: async jobId => {
+        await crmFetch(`/api/jobs/${jobId}/payment`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'settled_in_full', balanceSettled: true })
+        });
+        showToast(`Balance settled in full for Job #${jobId}!`);
+        await fetchCrmData();
+        renderApp();
+      },
+      onOpenJobSheet: handleOpenJobSheet,
+      onOpenInvoice: handleOpenInvoice
+    });
+  } else if (state.currentRoute === 'confirmed' || state.currentRoute === 'archive') {
+    const effectiveFilter = state.currentRoute === 'archive' ? 'archive' : state.confirmedFilter;
+    viewContainer.innerHTML = renderConfirmedJobsView(state.allJobs, state.confirmedSearch, effectiveFilter);
+    initConfirmedJobsEvents(viewContainer, {
+      onSearch: q => {
+        state.confirmedSearch = q;
+        renderApp();
+      },
+      onFilter: f => {
+        state.confirmedFilter = f;
+        if (f === 'archive') {
+          window.location.hash = '#archive';
+        } else if (state.currentRoute === 'archive') {
+          window.location.hash = '#confirmed';
+        } else {
+          renderApp();
+        }
+      },
+      onOpenJobSheet: handleOpenJobSheet,
+      onOpenInvoice: handleOpenInvoice,
+      onSettle: async jobId => {
         await crmFetch(`/api/jobs/${jobId}/payment`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
@@ -241,7 +286,50 @@ function renderApp() {
         await fetchCrmData();
         renderApp();
       }
+    });
+  } else if (state.currentRoute === 'calendar') {
+    viewContainer.innerHTML = renderCalendarView(state.allJobs, state.calendarViewMode, state.calendarAnchorDate);
+    initCalendarEvents(viewContainer, {
+      onPrev: () => {
+        const d = new Date(state.calendarAnchorDate);
+        if (state.calendarViewMode === 'week') d.setDate(d.getDate() - 7);
+        else d.setMonth(d.getMonth() - 1);
+        state.calendarAnchorDate = d;
+        renderApp();
+      },
+      onNext: () => {
+        const d = new Date(state.calendarAnchorDate);
+        if (state.calendarViewMode === 'week') d.setDate(d.getDate() + 7);
+        else d.setMonth(d.getMonth() + 1);
+        state.calendarAnchorDate = d;
+        renderApp();
+      },
+      onToday: () => {
+        state.calendarAnchorDate = new Date();
+        renderApp();
+      },
+      onToggleView: mode => {
+        state.calendarViewMode = mode;
+        renderApp();
+      },
+      onNewMove: handleOpenNewMove,
+      onOpenJobSheet: handleOpenJobSheet
+    });
+  } else if (state.currentRoute === 'calculator') {
+    viewContainer.innerHTML = renderVolumeCalculatorView(state.calculatorActiveTab);
+    initVolumeCalculatorEvents(
+      viewContainer,
+      newTab => {
+        if (newTab) state.calculatorActiveTab = newTab;
+        renderApp();
+      },
+      () => handleOpenNewMove()
     );
+  } else if (state.currentRoute === 'materials') {
+    viewContainer.innerHTML = renderMaterialsView();
+    initMaterialsEvents(viewContainer);
+  } else if (state.currentRoute === 'analytics') {
+    viewContainer.innerHTML = renderAnalyticsView(state.leads, state.allJobs);
   } else if (state.currentRoute === 'leads') {
     viewContainer.innerHTML = renderLeadsView(state.leads, state.leadsFilter, state.leadsSearch);
 
@@ -266,7 +354,7 @@ function renderApp() {
         } else {
           showToast(`Failed: ${res.error || 'Could not send pass'}`, 'error');
         }
-      } catch (err) {
+      } catch (_) {
         showToast('Failed to contact server API', 'error');
       }
       await fetchCrmData();
@@ -288,7 +376,7 @@ function renderApp() {
           })
         });
         showToast(`✓ Quote price £${quotedPrice} saved for #${leadId.slice(0, 8)}!`);
-      } catch (err) {
+      } catch (_) {
         showToast('Failed to save price', 'error');
       }
       await fetchCrmData();
@@ -300,16 +388,7 @@ function renderApp() {
       onSavePrice: handleSavePrice,
       onViewSurvey: leadId => {
         const lead = state.leads.find(l => l.id === leadId);
-        if (!lead) return;
-        const modalContainer = document.createElement('div');
-        modalContainer.innerHTML = renderLeadDetailsModal(lead);
-        document.body.appendChild(modalContainer);
-        initLeadDetailsModalEvents(
-          modalContainer,
-          lead,
-          handleSendPassWithPrice,
-          handleSavePrice
-        );
+        openLeadSurveyModal(lead, handleSendPassWithPrice, handleSavePrice);
       },
       onFilterChange: filter => {
         state.leadsFilter = filter;
@@ -337,14 +416,14 @@ function renderApp() {
   }
 }
 
-// Route listener
 function handleHashChange() {
   if (!state.isAuthenticated) {
     renderApp();
     return;
   }
   const hash = window.location.hash.replace('#', '') || 'front-desk';
-  if (['front-desk', 'leads', 'emails', 'settings'].includes(hash)) {
+  const validRoutes = ['front-desk', 'confirmed', 'archive', 'calendar', 'leads', 'calculator', 'materials', 'analytics', 'emails', 'settings'];
+  if (validRoutes.includes(hash)) {
     state.currentRoute = hash;
   }
   renderApp();
@@ -352,7 +431,6 @@ function handleHashChange() {
 
 window.addEventListener('hashchange', handleHashChange);
 
-// Initial boot
 (async () => {
   const { token, user } = getSavedSession();
   if (token) {

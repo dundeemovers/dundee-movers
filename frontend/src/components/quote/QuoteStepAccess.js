@@ -9,13 +9,13 @@ export const FLOOR_LEVEL_OPTIONS = [
   { id: 'ground', label: 'Ground Floor / Bungalow', shortNum: '0' },
   { id: '1st', label: '1st Floor', shortNum: '1' },
   { id: '2nd', label: '2nd Floor', shortNum: '2' },
-  { id: '3rd', label: '3rd Floor (Tenement / Top)', shortNum: '3' },
+  { id: '3rd', label: '3rd Floor (Top Floor Flat)', shortNum: '3' },
   { id: '4th_plus', label: '4th Floor or Higher', shortNum: '4+' },
   { id: 'basement', label: 'Basement / Lower Ground', shortNum: 'B' }
 ];
 
 export const ACCESS_CHALLENGES = [
-  'Narrow Tenement Stairs',
+  'Narrow Stairwell / Spiral Stairs',
   'Long Carry (> 20m from parking)',
   'Parking Restrictions / Permit'
 ];
@@ -122,12 +122,12 @@ export function renderStepAccess(state) {
       <h3 class="step-title">Property Access & Floor Heights</h3>
       <p class="step-desc">Specify exact floors and stair access for both properties so we allocate the right crew and equipment.</p>
 
-      <!-- Tenement & Pricing Advice Banner -->
+      <!-- Stairway & Pricing Advice Banner -->
       <div class="access-notice-banner">
         <span class="notice-icon">💡</span>
         <div class="notice-text">
           <strong>Why Floor Levels Matter Most for Pricing:</strong>
-          Carrying heavy furniture up 2nd, 3rd, or 4th-floor Dundee tenement stairs requires dedicated porters and electric stair climbers. Letting us know exact floors upfront guarantees an accurate, fixed quote with no surprise fees on move day.
+          Carrying heavy furniture up 2nd, 3rd, or 4th-floor stairs requires dedicated porters and specialist lifting equipment. Letting us know exact floors upfront guarantees an accurate, fixed quote with no surprise fees on move day.
         </div>
       </div>
 

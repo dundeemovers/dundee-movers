@@ -79,7 +79,7 @@ export function calculateMoveVolumeAndVan(items = {}, moveType = 'House / Flat M
 
   const hasAccessChallenge = (acc) => {
     if (!acc || !acc.conditions) return false;
-    return acc.conditions.some(c => c.includes('Tenement') || c.includes('Long Carry'));
+    return acc.conditions.some(c => c.includes('Narrow') || c.includes('Stair') || c.includes('Tenement') || c.includes('Long Carry'));
   };
 
   const heavyStairClimb = isUpperStairs(pickupAccess) || isUpperStairs(destAccess);
@@ -96,7 +96,7 @@ export function calculateMoveVolumeAndVan(items = {}, moveType = 'House / Flat M
   } else if (finalVolumeM3 <= 18) {
     vanRecommendation = '1x 3.5T Long Wheelbase (LWB) High-Roof Van';
     crewRecommendation = stairChallenge ? '2–3 Professional Movers (Stair Equipment)' : '2 Professional Movers';
-    vanBadge = 'Ideal for Tenement / 1-2 Bed';
+    vanBadge = 'Ideal for 1-2 Bed Flat';
   } else if (finalVolumeM3 <= 34) {
     vanRecommendation = '1x 3.5T Luton Van with Electric Tail-Lift';
     crewRecommendation = stairChallenge ? '3 Professional Movers (Heavy Stairs)' : '2 Professional Movers';

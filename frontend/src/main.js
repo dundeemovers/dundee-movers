@@ -1,10 +1,11 @@
 /**
- * Main Application Orchestrator for Dundee Movers.
+ * Main Application Orchestrator & Modular View Router for Dundee Movers.
+ * Replaces the 10,000px monolithic layout with high-performance, focused modular views.
  */
 import './styles/main.css';
 
-import { renderNavbar, initNavbar } from './components/Navbar.js';
-import { renderHero } from './components/Hero.js';
+import { renderNavbar, initNavbar, setActiveNav } from './components/Navbar.js';
+import { renderHomeView, initHomeView } from './components/HomeView.js';
 import { renderQuoteEstimator, initQuoteEstimator } from './components/QuoteEstimator.js';
 import { renderBentoServices } from './components/BentoServices.js';
 import { renderCoverageMap, initCoverageMap } from './components/CoverageMap.js';
@@ -73,46 +74,158 @@ function initParticleCanvas() {
   animate();
 }
 
+function renderViewHeader(crumbText, title, subtitle) {
+  return `
+    <div class="modular-view-header container">
+      <div class="modular-breadcrumbs">
+        <a href="#home" class="breadcrumb-back">‹ Back to Home</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">${crumbText}</span>
+      </div>
+      <div class="modular-title-group">
+        <h1 class="modular-view-title">${title}</h1>
+        <p class="modular-view-subtitle">${subtitle}</p>
+      </div>
+    </div>
+  `;
+}
+
 function mountApp() {
   const app = document.getElementById('app');
   if (!app) return;
 
-  const hash = window.location.hash || '';
+  const rawHash = (window.location.hash || '').toLowerCase();
 
-  if (hash.startsWith('#pass')) {
-    const passId = hash.replace(/^#pass\/?/, '') || 'demo';
+  // 1. Digital Move Pass View
+  if (rawHash.startsWith('#pass')) {
+    const passId = rawHash.replace(/^#pass\/?/, '') || 'demo';
     app.innerHTML = renderMovePass(passId);
     initMovePass(passId);
+    window.scrollTo({ top: 0, behavior: 'instant' });
     return;
   }
 
+  let activeRoute = 'home';
+  let viewHtml = '';
+  let viewInitializer = null;
+
+  const isQuoteTarget = rawHash === '#quote' || rawHash === '#quote-calculator' || rawHash === '#quote-form';
+
+  // 2. Quote Targets Route to Home View & Auto-Scroll to Quote Calculator
+  if (isQuoteTarget) {
+    activeRoute = 'quote';
+    viewHtml = renderHomeView();
+    viewInitializer = () => initHomeView();
+
+  // 3. Specialist Services View
+  } else if (rawHash === '#services') {
+    activeRoute = 'services';
+    viewHtml = `
+      ${renderViewHeader(
+        'Specialist Services',
+        'Bespoke Scottish Removal Services',
+        'From high-floor flats and townhouses to express direct UK long-distance relocations.'
+      )}
+      <div class="modular-view-body">
+        ${renderBentoServices()}
+      </div>
+      <div class="container modular-view-footer-cta">
+        <a href="#quote-calculator" class="btn btn-primary">Ready to Move? Calculate Price ➔</a>
+      </div>
+    `;
+
+  // 4. Coverage & Corridors View
+  } else if (rawHash === '#coverage') {
+    activeRoute = 'coverage';
+    viewHtml = `
+      ${renderViewHeader(
+        'Coverage & Corridors',
+        'Dundee, Angus, Fife & UK Coverage Map',
+        'Interactive service territory, daily departures from Dundee Central Depot, and corridor transit times.'
+      )}
+      <div class="modular-view-body">
+        ${renderCoverageMap()}
+      </div>
+      <div class="container modular-view-footer-cta">
+        <a href="#quote-calculator" class="btn btn-primary">Book Your Dedicated Move ➔</a>
+      </div>
+    `;
+    viewInitializer = () => initCoverageMap();
+
+  // 5. Moving Guides & Advice View
+  } else if (rawHash === '#guides') {
+    activeRoute = 'guides';
+    viewHtml = `
+      ${renderViewHeader(
+        'Moving Knowledge Hub',
+        'Scottish Moving Guides & Logistics Advice',
+        'Stairwell moving logistics, Dundee parking suspension guidelines, and packing advice from professional movers.'
+      )}
+      <div class="modular-view-body">
+        ${renderGuidesBlog()}
+      </div>
+      <div class="container modular-view-footer-cta">
+        <a href="#quote-calculator" class="btn btn-primary">Get Your Quote in 2 Minutes ➔</a>
+      </div>
+    `;
+    viewInitializer = () => initGuidesBlog();
+
+  // 6. Reviews & FAQ View
+  } else if (rawHash === '#reviews' || rawHash === '#faq') {
+    activeRoute = 'reviews';
+    viewHtml = `
+      ${renderViewHeader(
+        'Reviews & FAQ',
+        'Verified Customer Reviews & Moving FAQs',
+        '100% genuine Scottish removals feedback and answers to common customer questions.'
+      )}
+      <div class="modular-view-body">
+        ${renderReviews()}
+        ${renderFAQ()}
+      </div>
+      <div class="container modular-view-footer-cta">
+        <a href="#quote-calculator" class="btn btn-primary">Check Availability & Price ➔</a>
+      </div>
+    `;
+    viewInitializer = () => initFAQ();
+
+  // 7. Curated Landing Home View
+  } else {
+    activeRoute = 'home';
+    viewHtml = renderHomeView();
+    viewInitializer = () => initHomeView();
+  }
+
   app.innerHTML = `
-    ${renderNavbar()}
-    <main>
-      ${renderHero()}
-      ${renderQuoteEstimator()}
-      ${renderBentoServices()}
-      ${renderCoverageMap()}
-      ${renderGuidesBlog()}
-      ${renderReviews()}
-      ${renderFAQ()}
+    ${renderNavbar(activeRoute)}
+    <main class="modular-main-content">
+      ${viewHtml}
     </main>
     ${renderFooter()}
   `;
 
-  // Initialize interactive component states & listeners
+  // Reset scroll position unless targeting quote calculator
+  if (isQuoteTarget) {
+    setTimeout(() => {
+      const el = document.getElementById('quote-calculator') || document.getElementById('quote-form');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 80);
+  } else {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  // Initialize view behaviors
   initNavbar();
-  initQuoteEstimator();
-  initCoverageMap();
-  initGuidesBlog();
-  initFAQ();
+  setActiveNav(activeRoute);
+  if (viewInitializer) viewInitializer();
   initSpotlightEffect();
   initParticleCanvas();
 }
 
 window.addEventListener('hashchange', mountApp);
 
-// Bootstrap once DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', mountApp);
 } else {

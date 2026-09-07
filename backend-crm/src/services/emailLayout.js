@@ -4,8 +4,8 @@
  */
 
 export const LOGO_URL = 'https://dundeemovers.co.uk/images/logo.jpg';
-export const PHONE_NUMBER = '01382 932840';
-export const PHONE_TEL = 'tel:01382932840';
+export const PHONE_NUMBER = '07308 420884';
+export const PHONE_TEL = 'tel:+447308420884';
 export const BOOKINGS_EMAIL = 'bookings@dundeemovers.co.uk';
 export const WEBSITE_URL = 'https://dundeemovers.co.uk';
 

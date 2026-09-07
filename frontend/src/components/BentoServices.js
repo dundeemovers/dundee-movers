@@ -49,12 +49,12 @@ export function renderBentoServices() {
             <span class="bento-highlight-text">Direct Door-to-Door • No Depot Transfers</span>
           </div>
 
-          <!-- Local Dundee & Tenement Specialists -->
+          <!-- Local Dundee Flat & Multi-Storey Specialists -->
           <div class="glass-panel bento-card spotlight-card">
             <div class="bento-icon-circle">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="oklch(0.70 0.22 310)" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             </div>
-            <h3 class="bento-title">Tenements & Dundee Flats</h3>
+            <h3 class="bento-title">Flats & Multi-Storey Homes</h3>
             <p class="bento-desc">
               Top-floor flats, tight stairwells, and narrow doorways across the West End, DD1, and Stobswell. Our team is equipped with specialized furniture dollies and stair climbers.
             </p>

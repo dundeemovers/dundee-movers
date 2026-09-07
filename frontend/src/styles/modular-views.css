@@ -1,0 +1,273 @@
+/* ==========================================================================
+   Modular Multi-View Layout & Tailored Quote Home Booking Engine
+   Scottish Emerald & Slate Design Tokens with Glassmorphic Depth
+   ========================================================================== */
+
+/* 1. Dedicated View Headers & Breadcrumbs */
+.modular-view-header {
+  padding: 7.75rem 1.5rem 2rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.modular-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.breadcrumb-back {
+  color: var(--color-accent-emerald, #064e3b);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: transform 0.2s ease;
+}
+
+.breadcrumb-back:hover {
+  transform: translateX(-3px);
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  color: #94a3b8;
+}
+
+.breadcrumb-current {
+  color: #64748b;
+}
+
+.modular-title-group {
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  padding-bottom: 1.5rem;
+}
+
+.modular-view-title {
+  font-size: clamp(1.85rem, 4vw, 2.65rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.modular-view-subtitle {
+  font-size: 1.05rem;
+  color: #475569;
+  max-width: 780px;
+  line-height: 1.55;
+}
+
+.modular-view-body {
+  min-height: 50vh;
+}
+
+.modular-view-footer-cta {
+  padding: 3rem 1.5rem 5rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 2. Home View: Embedded 4-Step Tailored Quote Wizard */
+.home-quote-embed {
+  position: relative;
+  z-index: 10;
+  margin-top: -1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* 3. Why Book With Us Comparison Matrix is styled in comparisonMatrix.css */
+
+
+
+/* 4. Home Features Grid */
+.home-features-section {
+  padding: 2rem 1.5rem 4rem 1.5rem;
+}
+
+.home-section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.home-section-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin: 0.6rem 0 0.5rem 0;
+}
+
+.home-section-desc {
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+.home-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.home-feature-card {
+  padding: 2.25rem 2rem;
+  border-radius: 1.25rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(6, 78, 59, 0.08);
+  border-color: rgba(6, 78, 59, 0.25);
+}
+
+.h-card-icon {
+  font-size: 2.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.h-card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
+}
+
+.h-card-text {
+  font-size: 0.92rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.h-card-link {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #064e3b;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: gap 0.2s ease;
+}
+
+.h-card-link:hover {
+  gap: 0.6rem;
+  text-decoration: underline;
+}
+
+.home-cta-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+/* 5. Home Reviews Preview */
+.home-reviews-preview {
+  padding: 2rem 1.5rem 5rem 1.5rem;
+}
+
+.home-stars-row {
+  font-size: 1.15rem;
+  color: #f59e0b;
+  font-weight: 700;
+  margin-top: 0.35rem;
+}
+
+.home-stars-row span {
+  color: #475569;
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+}
+
+.home-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.home-review-card {
+  padding: 2rem;
+  border-radius: 1.25rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.review-stars {
+  color: #f59e0b;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.review-quote {
+  font-size: 0.95rem;
+  color: #334155;
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.review-author strong {
+  display: block;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+.review-author span {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+/* 6. Responsive Adaptations */
+@media (max-width: 960px) {
+  .form-grid-two-col {
+    grid-template-columns: 1fr;
+  }
+  .form-grid-three-col {
+    grid-template-columns: 1fr;
+  }
+  .why-us-comparison-grid {
+    grid-template-columns: 1fr;
+  }
+  .starter-submit-row {
+    flex-direction: column;
+  }
+  .starter-submit-btn,
+  .starter-whatsapp-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-starter-card {
+    padding: 1.75rem 1.25rem;
+  }
+  .starter-guarantee-strip {
+    gap: 0.75rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  .starter-contact-bar {
+    gap: 0.65rem;
+    flex-direction: column;
+  }
+  .bar-dot {
+    display: none;
+  }
+}

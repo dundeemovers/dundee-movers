@@ -58,6 +58,9 @@ export function renderFrontDeskView(todayJobs = [], tomorrowJobs = [], activeTab
         <button type="button" class="frontdesk-tab-btn ${activeTab === 'tomorrow' ? 'active' : ''}" data-tab="tomorrow">
           <span>📦 Tomorrow's Preparation (${tomorrowJobs.length})</span>
         </button>
+        <a href="#confirmed" class="frontdesk-tab-btn" style="text-decoration: none; margin-left: auto; background: #ecfdf5; color: #065f46; border-color: #a7f3d0;">
+          <span>🚚 View All Confirmed Moves (Closest First) ➔</span>
+        </a>
       </div>
 
       <!-- Job Manifest Cards -->
@@ -147,17 +150,27 @@ export function renderFrontDeskView(todayJobs = [], tomorrowJobs = [], activeTab
                 </div>
               </div>
 
-              <!-- Quick Communication Actions -->
+              <!-- Quick Communication & Document Actions -->
               <div class="job-actions-row">
+                <button type="button" class="btn-crm btn-crm-outline" data-action="open-jobsheet" data-job-id="${job.id}">
+                  📄 Driver Job Sheet
+                </button>
+                <button type="button" class="btn-crm btn-crm-outline" data-action="open-invoice" data-job-id="${job.id}">
+                  🧾 Invoice & BACS
+                </button>
                 <a href="https://wa.me/${job.customerPhone ? job.customerPhone.replace(/[^0-9]/g, '') : ''}" target="_blank" class="btn-crm btn-crm-whatsapp">
-                  💬 WhatsApp Customer
+                  💬 WhatsApp
                 </a>
                 <a href="tel:${job.customerPhone}" class="btn-crm btn-crm-call">
-                  📞 Call: ${job.customerPhone}
+                  📞 Call
                 </a>
-                <button type="button" class="btn-crm btn-crm-outline" data-action="settle-balance" data-job-id="${job.id}">
-                  💳 Settle Balance (£${job.balanceDue})
-                </button>
+                ${job.balanceDue > 0 ? `
+                  <button type="button" class="btn-crm btn-crm-outline" data-action="settle-balance" data-job-id="${job.id}">
+                    💳 Settle (£${job.balanceDue})
+                  </button>
+                ` : `
+                  <span class="metric-badge badge-green" style="font-size: 0.75rem;">✓ Paid</span>
+                `}
               </div>
             </div>
           `;
@@ -167,7 +180,9 @@ export function renderFrontDeskView(todayJobs = [], tomorrowJobs = [], activeTab
   `;
 }
 
-export function initFrontDeskEvents(container, onUpdateStage, onSwitchTab, onSettle) {
+export function initFrontDeskEvents(container, callbacks = {}) {
+  const { onUpdateStage, onSwitchTab, onSettle, onOpenJobSheet, onOpenInvoice } = callbacks;
+
   container.querySelectorAll('.frontdesk-tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const tab = btn.getAttribute('data-tab');
@@ -190,6 +205,24 @@ export function initFrontDeskEvents(container, onUpdateStage, onSwitchTab, onSet
       const jobId = btn.getAttribute('data-job-id');
       if (jobId && onSettle) {
         onSettle(jobId);
+      }
+    });
+  });
+
+  container.querySelectorAll('[data-action="open-jobsheet"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const jobId = btn.getAttribute('data-job-id');
+      if (jobId && onOpenJobSheet) {
+        onOpenJobSheet(jobId);
+      }
+    });
+  });
+
+  container.querySelectorAll('[data-action="open-invoice"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const jobId = btn.getAttribute('data-job-id');
+      if (jobId && onOpenInvoice) {
+        onOpenInvoice(jobId);
       }
     });
   });

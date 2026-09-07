@@ -20,7 +20,7 @@
     "SUPABASE_URL": "https://ozcttsokgyscukrdgxfp.supabase.co",
     "SUPABASE_ANON_KEY": "sb_publishable_VnlNAAw4kVm7CaWlmjxXZQ_reFOSDzV",
     "EMAIL_FROM": "Dundee Movers <bookings@dundeemovers.co.uk>",
-    "NOTIFICATION_EMAIL": "dundeemovers@gmail.com",
-    "REPLY_TO_EMAIL": "dundeemovers@gmail.com"
+    "NOTIFICATION_EMAIL": "bookings@dundeemovers.co.uk",
+    "REPLY_TO_EMAIL": "bookings@dundeemovers.co.uk"
   }
 }

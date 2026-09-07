@@ -41,15 +41,15 @@ function getDemoLead(passId) {
     customerEmail: 'alistair.campbell@example.co.uk',
     customerPhone: '01382 932840',
     pickupAddress: 'Flat 3/2, 112 Nethergate, Dundee',
-    pickupFloor: '3rd Floor Tenement',
+    pickupFloor: '3rd Floor Flat',
     pickupLift: false,
     deliveryAddress: '14 Panmure Terrace, Broughty Ferry, Dundee',
     deliveryFloor: 'Ground Floor / Bungalow',
     deliveryLift: false,
     moveDate: 'Friday, 19th September 2026',
-    moveType: '2-Bedroom Tenement Move',
+    moveType: '2-Bedroom Flat Move',
     recommendedVan: '3.5T Luton Van with 500kg Tail-Lift',
-    recommendedCrew: '2-Man Professional Tenement Movers',
+    recommendedCrew: '2-Man Dedicated Moving Crew',
     quotedPrice: 280,
     depositAmount: 50,
     status: 'quoted',
@@ -215,7 +215,7 @@ function renderPassCard(container, lead) {
           <div>
             <div class="price-guarantee-label">Guaranteed Fixed Move Price</div>
             <div class="price-main-display" id="pass-price-display">£${currentTotal}</div>
-            <div class="price-deposit-note">✓ No hidden tenement fees • Settle £${depositAmount} deposit to lock date</div>
+            <div class="price-deposit-note">✓ No hidden stair fees • Settle £${depositAmount} deposit to lock date</div>
           </div>
           <div style="text-align: right;">
             <div style="font-size: 0.72rem; color: #a7f3d0; text-transform: uppercase;">Goods In Transit</div>

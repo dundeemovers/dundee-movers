@@ -1,7 +1,17 @@
 /**
  * Jobs & Front Desk Route Handler
  */
-import { getAllJobs, getTodayJobs, getTomorrowJobs, getJobById, updateJobStatus, updatePaymentStatus } from '../services/jobsService.js';
+import {
+  getAllJobs,
+  getTodayJobs,
+  getTomorrowJobs,
+  getJobsByDate,
+  getJobById,
+  createJob,
+  updateJobStatus,
+  updateJobAssignment,
+  updatePaymentStatus
+} from '../services/jobsService.js';
 
 export async function handleJobsRoute(req, res, pathname, query, body) {
   // GET /api/jobs/today
@@ -18,11 +28,62 @@ export async function handleJobsRoute(req, res, pathname, query, body) {
     return res.end(JSON.stringify({ count: jobs.length, jobs }, null, 2));
   }
 
+  // GET /api/jobs/date/:date
+  const matchDate = pathname.match(/^\/api\/jobs\/date\/([^/]+)$/);
+  if (req.method === 'GET' && matchDate) {
+    const jobs = getJobsByDate(matchDate[1]);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ count: jobs.length, jobs }, null, 2));
+  }
+
   // GET /api/jobs
   if (req.method === 'GET' && pathname === '/api/jobs') {
     const jobs = getAllJobs();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     return res.end(JSON.stringify({ count: jobs.length, jobs }, null, 2));
+  }
+
+  // POST /api/jobs (Manual phone intake / direct booking)
+  if (req.method === 'POST' && pathname === '/api/jobs') {
+    try {
+      const payload = typeof body === 'string' ? JSON.parse(body || '{}') : body;
+      const created = createJob(payload);
+      res.writeHead(201, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ success: true, job: created }, null, 2));
+    } catch (err) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: 'Failed to create job: ' + err.message }));
+    }
+  }
+
+  // GET /api/jobs/:id
+  const matchSingle = pathname.match(/^\/api\/jobs\/([^/]+)$/);
+  if (req.method === 'GET' && matchSingle) {
+    const job = getJobById(matchSingle[1]);
+    if (!job) {
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: 'Job not found' }));
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify(job, null, 2));
+  }
+
+  // PATCH /api/jobs/:id/assignment
+  const matchAssignment = pathname.match(/^\/api\/jobs\/([^/]+)\/assignment$/);
+  if (req.method === 'PATCH' && matchAssignment) {
+    try {
+      const payload = typeof body === 'string' ? JSON.parse(body || '{}') : body;
+      const updated = updateJobAssignment(matchAssignment[1], payload.vehicle, payload.crew);
+      if (!updated) {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ error: 'Job not found' }));
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ success: true, job: updated }, null, 2));
+    } catch (err) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: 'Invalid JSON body' }));
+    }
   }
 
   // PATCH /api/jobs/:id/status

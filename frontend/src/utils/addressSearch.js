@@ -122,9 +122,9 @@ export async function lookupAddressesByPostcode(rawQuery) {
       });
     }
 
-    // Tenement flat options (typical for Scottish cities & tenements)
-    const tenementFlats = ['Flat 1/1', 'Flat 1/2', 'Flat 2/1', 'Flat 2/2', 'Flat 3/1', 'Flat 3/2'];
-    tenementFlats.forEach(fl => {
+    // Flat options (typical for Scottish cities & multi-storey closes)
+    const scottishFlats = ['Flat 1/1', 'Flat 1/2', 'Flat 2/1', 'Flat 2/2', 'Flat 3/1', 'Flat 3/2'];
+    scottishFlats.forEach(fl => {
       addresses.push({
         house: fl,
         street: road,

@@ -21,8 +21,8 @@ const FAQS = [
     a: 'Yes, we cater to all move sizes. From moving a single sofa or student room to complete 4–5 bedroom family houses and office relocations, we assign the appropriate vehicle and crew members to match your needs.'
   },
   {
-    q: 'Can you handle top-floor Victorian tenement flats with narrow stairs in Dundee?',
-    a: 'Absolutely. Over 60% of our local Dundee moves involve traditional tenements in the West End, City Centre, and Stobswell. Our crews are equipped with specialized straps, blankets, and dollies to safely maneuver bulky furniture through narrow stairwells.'
+    q: 'Can you handle top-floor flats with narrow stairs and tight corners in Dundee?',
+    a: 'Absolutely. A large portion of our local Dundee moves involve traditional multi-storey flats in the West End, City Centre, and Stobswell. Our crews are equipped with specialized lifting straps, padded covers, and stair crawlers to safely maneuver bulky furniture through narrow stairwells.'
   },
   {
     q: 'Are my belongings fully insured during transit?',

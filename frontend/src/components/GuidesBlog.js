@@ -6,9 +6,9 @@ import { CHECKLIST_PHASES } from '../utils/checklistData.js';
 
 const BLOG_ARTICLES = [
   {
-    category: 'Tenement Moving Guide',
-    title: 'Navigating Dundee Tenements: Narrow Stairs & Council Parking Permits',
-    desc: 'How to prepare for moving into top-floor Victorian flats on Perth Road, DD1, and Stobswell without scuffing walls or receiving parking fines.',
+    category: 'Local Property Guide',
+    title: 'Moving Dundee Flats: Navigating Narrow Stairs & Council Parking Permits',
+    desc: 'How to prepare for moving into top-floor flats on Perth Road, DD1, and Stobswell without scuffing walls or receiving parking fines.',
     readTime: '4 min read • Local Advice',
     icon: '🏢'
   },
@@ -35,7 +35,7 @@ export function renderGuidesBlog() {
         <div class="section-header">
           <span class="badge">Moving Guides & Resources</span>
           <h2>Dundee Moving Advice, Checklist & Blog</h2>
-          <p>Explore expert tips, local tenement moving guides, and track your move with our interactive week-by-week planner.</p>
+          <p>Explore expert tips, local property moving guides, and track your move with our interactive week-by-week planner.</p>
         </div>
 
         <!-- 1. Interactive Tool: Moving Day Checklist & Planner -->

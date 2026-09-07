@@ -5,7 +5,7 @@
 const REVIEWS_DATA = [
   {
     name: 'Callum MacLeod',
-    role: 'West End Tenement Move (DD2)',
+    role: 'West End Flat Move (DD2)',
     rating: 5,
     date: 'August 2026',
     comment: 'Moving out of a 3rd-floor flat on Perth Road seemed daunting, but the Dundee Movers team were absolute machines. Wrapped every sofa and negotiated the spiral stairs without a single scratch on the walls.'

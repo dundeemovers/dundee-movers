@@ -1,0 +1,435 @@
+/* ==========================================================================
+   Dundee Movers CRM — Enterprise Modals (Job Sheet BOL, Invoice, Lead Intake)
+   ========================================================================== */
+/* --------------------------------------------------------------------------
+   2. Job Sheet (Digital Bill of Lading) Modal & Print
+   -------------------------------------------------------------------------- */
+.jobsheet-top-bar, .invoice-top-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--crm-border-subtle);
+  background: #f8fafc;
+}
+
+.jobsheet-printable, .invoice-print-sheet {
+  padding: 1.75rem;
+  background: #ffffff;
+  color: #0f172a;
+  line-height: 1.45;
+}
+
+.jobsheet-header, .invoice-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  border-bottom: 2px solid #0f172a;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.jobsheet-brand, .invoice-brand-col {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.jobsheet-logo, .invoice-brand-mark {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 8px;
+  background: #064e3b;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.jobsheet-title, .invoice-company-title {
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: #064e3b;
+  margin: 0;
+}
+
+.jobsheet-subtitle, .invoice-tagline {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.jobsheet-legal, .invoice-legal-info {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin-top: 0.2rem;
+}
+
+.jobsheet-ref-box, .invoice-meta-col {
+  text-align: right;
+  font-size: 0.8rem;
+  background: #f8fafc;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.ref-row, .inv-meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.jobsheet-crew-banner {
+  background: #f1f5f9;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.82rem;
+  margin-bottom: 1.25rem;
+}
+
+.crew-item { display: flex; flex-direction: column; }
+.crew-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; color: #64748b; }
+.crew-value { font-weight: 800; color: #0f172a; margin-top: 0.15rem; }
+
+.section-heading {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: #064e3b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.jobsheet-logistics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.logistics-card {
+  padding: 0.85rem;
+  border-radius: 6px;
+  background: #fafafa;
+  border: 1px solid #e2e8f0;
+}
+
+.pickup-border { border-left: 4px solid #10b981; }
+.delivery-border { border-left: 4px solid #ef4444; }
+
+.logistics-tag { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.04em; margin-bottom: 0.3rem; }
+.tag-pickup { color: #047857; }
+.tag-delivery { color: #b91c1c; }
+.logistics-name { font-size: 0.95rem; font-weight: 800; }
+.logistics-phone { font-size: 0.8rem; color: #475569; margin: 0.15rem 0; }
+.logistics-phone a { color: #064e3b; font-weight: 700; text-decoration: none; }
+.logistics-address { font-size: 0.85rem; font-weight: 700; color: #0f172a; }
+.logistics-access { display: flex; gap: 0.4rem; margin-top: 0.4rem; flex-wrap: wrap; }
+.access-pill { font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.45rem; border-radius: 4px; background: #e2e8f0; color: #334155; }
+.pill-good { background: #dcfce7; color: #166534; }
+.pill-warn { background: #fee2e2; color: #991b1b; }
+
+.jobsheet-table, .invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-top: 0.5rem;
+}
+
+.jobsheet-table th, .invoice-table th {
+  background: #f1f5f9;
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1.5px solid #cbd5e1;
+  text-align: left;
+  font-weight: 800;
+  color: #475569;
+}
+
+.jobsheet-table td, .invoice-table td {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.jobsheet-financials-bar {
+  display: flex;
+  justify-content: space-between;
+  background: #f8fafc;
+  padding: 0.85rem 1.25rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.fin-box { display: flex; flex-direction: column; }
+.fin-label { font-size: 0.7rem; font-weight: 700; color: #64748b; }
+.fin-val { font-size: 1.15rem; font-weight: 900; color: #0f172a; }
+
+.signoff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.signoff-box {
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 0.85rem;
+  background: #fafafa;
+}
+
+.signoff-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #475569; margin-bottom: 0.5rem; }
+.signature-canvas {
+  background: #ffffff;
+  border: 1px dashed #94a3b8;
+  border-radius: 4px;
+  width: 100%;
+  height: 90px;
+  touch-action: none;
+}
+
+.signoff-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.btn-clear-sig, .btn-preset-sig {
+  padding: 0.25rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-clear-sig { background: #ffffff; border: 1px solid #cbd5e1; color: #64748b; }
+.btn-preset-sig { background: #dcfce7; border: 1px solid #86efac; color: #166534; }
+
+.crew-signoff-line {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  padding-top: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. Invoicing Modal Styles
+   -------------------------------------------------------------------------- */
+.invoice-badge-title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #064e3b;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+.invoice-parties-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.invoice-party-box {
+  background: #f8fafc;
+  padding: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.82rem;
+}
+
+.party-label { font-size: 0.68rem; font-weight: 800; color: #64748b; display: block; margin-bottom: 0.25rem; }
+.party-name { font-size: 1rem; font-weight: 900; color: #0f172a; }
+
+.invoice-summary-wrap {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1.5px solid #cbd5e1;
+}
+
+.invoice-bacs-box {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 0.85rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+.bacs-title { font-weight: 800; color: #166534; display: block; margin-bottom: 0.4rem; }
+.bacs-line { display: flex; justify-content: space-between; margin-bottom: 0.2rem; }
+
+.invoice-totals-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.tot-row { display: flex; justify-content: space-between; }
+.tot-due {
+  padding-top: 0.5rem;
+  border-top: 2px solid #0f172a;
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.invoice-footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* --------------------------------------------------------------------------
+   4. New Lead Phone Intake Modal Form
+   -------------------------------------------------------------------------- */
+.form-section-title {
+  font-size: 0.8rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #064e3b;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .form-grid-3, .form-grid-2, .signoff-grid, .invoice-parties-grid, .invoice-summary-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-label {
+  display: block;
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 0.25rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--crm-radius-sm);
+  font-size: 0.82rem;
+  font-family: inherit;
+  transition: var(--crm-transition);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--crm-primary);
+  box-shadow: 0 0 0 2px var(--crm-primary-surface);
+}
+
+.form-box {
+  background: #f8fafc;
+  padding: 0.85rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.form-row-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.form-checkbox-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.nl-pricing-preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 0.85rem 1.25rem;
+  border-radius: 6px;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.nl-price-tag { font-size: 0.8rem; font-weight: 700; color: #065f46; margin-right: 0.5rem; }
+.nl-price-value { font-size: 1.4rem; font-weight: 900; color: #064e3b; }
+.nl-deposit-hint { font-size: 0.75rem; color: #047857; margin-left: 0.35rem; }
+
+.modal-actions-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+
+
+/* --------------------------------------------------------------------------
+   8. Print Media Styles (Clean Black & White PDF / Paper Sheet)
+   -------------------------------------------------------------------------- */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .jobsheet-printable, .jobsheet-printable *,
+  .invoice-print-sheet, .invoice-print-sheet * {
+    visibility: visible;
+  }
+  .jobsheet-modal-content, .invoice-modal-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .lead-modal-backdrop {
+    background: transparent !important;
+    position: static !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

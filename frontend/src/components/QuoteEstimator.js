@@ -15,9 +15,9 @@ export function renderQuoteEstimator() {
     <section id="quote-calculator" class="section-py quote-section">
       <div class="container">
         <div class="section-header">
-          <span class="badge">Bespoke Move Request</span>
-          <h2>Specify What Needs Moving</h2>
-          <p>Provide your exact pickup and drop-off addresses, choose your furniture and boxes, and get a guaranteed quote.</p>
+          <span class="badge">100% Free • Bespoke Scottish Removals</span>
+          <h2>Get Your Free Tailored Moving Quote</h2>
+          <p>Every home in Dundee, Angus, and Fife is unique. Provide your collection and drop-off addresses, select your furniture and boxes, and our dispatch team will calculate your guaranteed fixed price.</p>
         </div>
 
         <div class="glass-panel quote-wizard-card spotlight-card">
@@ -89,6 +89,17 @@ export function initQuoteEstimator() {
     userPhone: '',
     userEmail: ''
   };
+
+  const quickPickup = sessionStorage.getItem('dm_quick_pickup');
+  const quickDest = sessionStorage.getItem('dm_quick_dest');
+  if (quickPickup) {
+    state.pickupAddr.postcode = quickPickup;
+    sessionStorage.removeItem('dm_quick_pickup');
+  }
+  if (quickDest) {
+    state.destAddr.postcode = quickDest;
+    sessionStorage.removeItem('dm_quick_dest');
+  }
 
   function updateStepNav() {
     document.querySelectorAll('.step-nav-btn').forEach(btn => {

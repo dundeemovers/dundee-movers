@@ -12,8 +12,90 @@ import {
   getAdminNotificationEmail
 } from './emailService.js';
 
-// Production in-memory leads store (starts empty)
-const leadsDatabase = [];
+// Production in-memory leads store with Scottish seed leads
+const leadsDatabase = [
+  {
+    id: 'lead-m92j2',
+    createdAt: new Date(Date.now() - 3600000 * 3).toISOString(),
+    customerName: 'Morag MacLeod',
+    customerPhone: '+44 7891 234567',
+    customerEmail: 'morag.macleod@outlook.com',
+    moveType: 'House / Flat Move',
+    moveDate: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+    pickupAddress: '22 Perth Road, Dundee, DD1 4LN',
+    pickupFloor: '1st Floor Flat',
+    pickupLift: true,
+    deliveryAddress: '8 St Andrews Road, Cupar, Fife, KY15 4HA',
+    deliveryFloor: '1st Floor Flat',
+    deliveryLift: false,
+    estimatedVolumeM3: 11.2,
+    recommendedVan: 'LWB High-Roof Sprinter',
+    recommendedCrew: '2-Man Tenement Crew',
+    status: 'new',
+    notes: 'Lift available at Dundee property. Moving to 1st floor flat in Cupar. Several fragile framed oil paintings.',
+    quotedPrice: null,
+    depositAmount: 50,
+    quoteExpiresAt: null,
+    acceptedAt: null,
+    acceptedSignature: null,
+    selectedAddons: [],
+    items: { '2-Seater Sofa': 1, 'Double Bed': 1, 'Desk': 1, 'Medium Boxes': 14 }
+  },
+  {
+    id: 'lead-s29k1',
+    createdAt: new Date(Date.now() - 3600000 * 14).toISOString(),
+    customerName: 'Alistair Campbell',
+    customerPhone: '+44 7700 900412',
+    customerEmail: 'a.campbell.scot@gmail.com',
+    moveType: 'House / Flat Move',
+    moveDate: new Date().toISOString().split('T')[0],
+    pickupAddress: 'Flat 3/2, 112 Nethergate, Dundee, DD1 4AF',
+    pickupFloor: '3rd Floor (Tenement)',
+    pickupLift: false,
+    deliveryAddress: '14 Panmure Terrace, Broughty Ferry, DD5 2QL',
+    deliveryFloor: 'Ground Floor / Cottage',
+    deliveryLift: false,
+    estimatedVolumeM3: 16.5,
+    recommendedVan: '3.5T Luton Box Van with Tail-Lift',
+    recommendedCrew: '2-Man Tenement Crew',
+    status: 'quoted',
+    notes: 'Upper tenement stair carry on Nethergate. Narrow doorway. Dining table and 6 chairs.',
+    quotedPrice: 360,
+    depositAmount: 50,
+    quoteExpiresAt: new Date(Date.now() + 86400000 * 2).toISOString(),
+    acceptedAt: null,
+    acceptedSignature: null,
+    selectedAddons: [],
+    items: { '3-Seater Sofa': 1, 'King Bed': 1, 'Dining Table': 1, 'Washing Machine': 1, 'Boxes': 24 }
+  },
+  {
+    id: 'lead-k18v9',
+    createdAt: new Date(Date.now() - 3600000 * 28).toISOString(),
+    customerName: 'Dr. Fiona Henderson',
+    customerPhone: '+44 7912 345678',
+    customerEmail: 'fiona.henderson@st-andrews.ac.uk',
+    moveType: 'House / Flat Move',
+    moveDate: new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0],
+    pickupAddress: '45 Blackness Road, Dundee, DD1 5PD',
+    pickupFloor: '2nd Floor (Tenement)',
+    pickupLift: false,
+    deliveryAddress: '12 South Street, St Andrews, Fife, KY16 9QU',
+    deliveryFloor: '2nd Floor Flat',
+    deliveryLift: true,
+    estimatedVolumeM3: 19.8,
+    recommendedVan: '3.5T Luton Van with Tail-Lift',
+    recommendedCrew: '3-Man Crew',
+    status: 'confirmed',
+    notes: 'Academic book collection. Customer signed Move Pass and paid £100 deposit via online checkout.',
+    quotedPrice: 480,
+    depositAmount: 100,
+    quoteExpiresAt: null,
+    acceptedAt: new Date(Date.now() - 3600000 * 10).toISOString(),
+    acceptedSignature: 'F. Henderson',
+    selectedAddons: ['Mattress Protector Wraps', 'Wardrobe Boxes'],
+    items: { 'Bookcases': 3, 'King Ottoman Bed': 1, 'Armchairs': 2, 'Heavy Book Boxes': 30 }
+  }
+];
 
 function mapLeadRow(r) {
   return {
