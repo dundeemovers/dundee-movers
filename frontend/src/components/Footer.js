@@ -74,64 +74,85 @@ export function renderFooter() {
           </div>
         </div>
 
-        <!-- Bottom Tier: Deep Obsidian Dark Velvet Container -->
+        <!-- Bottom Tier: Deep Velvet Dark Container -->
         <div class="footer-dark-tier">
           <div class="footer-dark-grid">
             
-            <!-- Col 1: Brand & Navigation -->
+            <!-- Col 1: Brand & Operating Hours -->
             <div class="footer-dark-col">
               <div class="footer-dark-brand">
                 <img src="/images/logo.jpg" alt="Dundee Movers Logo" width="36" height="36" class="footer-logo-img" />
                 <span class="footer-brand-title">Dundee<span class="accent-gold">Movers</span></span>
               </div>
               <p class="footer-dark-bio">
-                Bespoke single-client house and flat relocations across Dundee, Angus, Fife, and nationwide UK.
+                Premier residential house moves, flat relocations, and zero-downtime commercial office moving across Dundee, Angus, Fife, and nationwide UK.
               </p>
+              <div class="footer-trust-badge">
+                <span>🚐 1 Move At A Time Guarantee</span>
+              </div>
+              <div class="footer-hours-note">
+                <span>🕒 Operating 7 Days: 7:30 AM – 8:00 PM</span>
+              </div>
+            </div>
+
+            <!-- Col 2: Removal Services (SEO Powerhouse) -->
+            <div class="footer-dark-col">
+              <h4 class="footer-dark-heading">Removal Services</h4>
               <ul class="footer-dark-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#quote-calculator">Specify Items Form</a></li>
-                <li><a href="#services">1 Move At A Time Service</a></li>
-                <li><a href="#coverage">Whole UK Relocations</a></li>
-                <li><a href="#reviews">Verified Reviews</a></li>
+                <li><a href="#services">🏡 Residential House Removals</a></li>
+                <li><a href="#services">🏢 Commercial & Office Moves</a></li>
+                <li><a href="#services">🏛️ Flats & Multi-Storey Homes</a></li>
+                <li><a href="#coverage">🚚 Express Whole UK Corridors</a></li>
+                <li><a href="#services">📦 Packing & Furniture Assembly</a></li>
+                <li><a href="#quote-calculator">📋 Free Tailored Quote Engine</a></li>
               </ul>
             </div>
 
-            <!-- Col 2: Legal & Local Coverage -->
+            <!-- Col 3: Coverage Areas -->
             <div class="footer-dark-col">
-              <h4 class="footer-dark-heading">Local Coverage & Terms</h4>
+              <h4 class="footer-dark-heading">Local Coverage</h4>
               <ul class="footer-dark-links">
-                <li><a href="#coverage">Dundee City (DD1 - DD5)</a></li>
-                <li><a href="#coverage">Angus (Arbroath & Forfar)</a></li>
-                <li><a href="#coverage">Fife & St Andrews</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="/llms.txt">AI Search Directory</a></li>
+                <li><a href="#coverage">📍 Dundee City (DD1 – DD5)</a></li>
+                <li><a href="#coverage">📍 Broughty Ferry & Monifieth</a></li>
+                <li><a href="#coverage">📍 Angus (Arbroath & Forfar)</a></li>
+                <li><a href="#coverage">📍 Fife & St Andrews</a></li>
+                <li><a href="#coverage">📍 Perthshire & Kinross</a></li>
+                <li><a href="#coverage">📍 Express UK Long Distance</a></li>
               </ul>
             </div>
 
-            <!-- Col 3: Direct Enquiry / Slot Checker -->
+            <!-- Col 4: Direct Dispatch & Availability -->
             <div class="footer-dark-col">
-              <h4 class="footer-dark-heading">Check Move Date Availability</h4>
+              <h4 class="footer-dark-heading">Check Move Availability</h4>
               <p class="footer-newsletter-desc">
-                Tell us your preferred date and destination to check availability and lock in your dedicated van slot.
+                Tell us your preferred date or destination to check dedicated van slot availability.
               </p>
               
               <form class="footer-enquiry-box" onsubmit="event.preventDefault(); const val = this.querySelector('input').value.trim(); window.location.href='https://wa.me/447308420884?text=' + encodeURIComponent('Hi Dundee Movers, I would like to check dedicated van availability for: ' + val); return false;">
-                <input type="text" class="footer-email-input" placeholder="Your Phone or Postcode..." required />
+                <input type="text" class="footer-email-input" placeholder="Postcode or Date..." required />
                 <button type="submit" class="footer-submit-btn" aria-label="Send enquiry">
                   <span>Inquire</span>
                   ➔
                 </button>
               </form>
 
-              <div class="footer-social-bar">
-                <a href="mailto:bookings@dundeemovers.co.uk" class="social-icon-btn" aria-label="Email Dispatch" style="font-size: 0.78rem; text-transform: none;">
-                  <span>✉️ bookings@dundeemovers.co.uk</span>
+              <div class="footer-contact-stack">
+                <a href="tel:+447308420884" class="footer-contact-item">
+                  <span>📞</span>
+                  <span><strong>Direct Line:</strong> 07308 420884</span>
                 </a>
-                <a href="tel:+447308420884" class="social-icon-btn" aria-label="Phone" style="font-size: 0.78rem;">
-                  <span>📞 07308 420884</span>
+                <a href="https://wa.me/447308420884?text=Hi%20Dundee%20Movers,%20I'd%20like%20to%20inquire%20about%20a%20move" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
+                  <span>💬</span>
+                  <span><strong>WhatsApp Priority:</strong> Chat with Team</span>
                 </a>
-                <span class="footer-insurance-pill">🛡️ £50k Goods in Transit Included</span>
+                <a href="mailto:bookings@dundeemovers.co.uk" class="footer-contact-item">
+                  <span>✉️</span>
+                  <span>bookings@dundeemovers.co.uk</span>
+                </a>
+                <div class="footer-insurance-pill">
+                  <span>🛡️</span>
+                  <span>£50k Insurance & £5m Public Liability</span>
+                </div>
               </div>
             </div>
 
@@ -139,7 +160,14 @@ export function renderFooter() {
 
           <!-- Bottom Copyright Bar -->
           <div class="footer-bottom-bar">
-            <p>DUNDEE MOVERS LTD, 2026. ALL RIGHTS RESERVED. REGISTERED IN SCOTLAND.</p>
+            <p class="footer-copyright">DUNDEE MOVERS LTD, 2026. ALL RIGHTS RESERVED. REGISTERED IN SCOTLAND.</p>
+            <div class="footer-bottom-links">
+              <a href="#">Privacy Policy</a>
+              <span class="dot">•</span>
+              <a href="#">Terms & Conditions</a>
+              <span class="dot">•</span>
+              <a href="/llms.txt">AI Search Directory</a>
+            </div>
           </div>
         </div>
 

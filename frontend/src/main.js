@@ -10,6 +10,7 @@ import { renderQuoteEstimator, initQuoteEstimator } from './components/QuoteEsti
 import { renderBentoServices } from './components/BentoServices.js';
 import { renderCoverageMap, initCoverageMap } from './components/CoverageMap.js';
 import { renderGuidesBlog, initGuidesBlog } from './components/GuidesBlog.js';
+import { renderGuidePageView, updateGuideSeoMetadata } from './components/GuidePageView.js';
 import { renderReviews } from './components/Reviews.js';
 import { renderFAQ, initFAQ } from './components/FAQ.js';
 import { renderFooter } from './components/Footer.js';
@@ -90,6 +91,17 @@ function renderViewHeader(crumbText, title, subtitle) {
   `;
 }
 
+function resetDefaultSeoMetadata() {
+  const schemaScript = document.getElementById('guide-article-schema');
+  if (schemaScript) {
+    schemaScript.remove();
+  }
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) {
+    metaDesc.setAttribute('content', 'Premier house and flat removals in Dundee (DD1–DD5), Angus & Fife. 1-move-at-a-time dedicated vans, zero shared loads, £50k insurance & direct UK-wide transit. Get a quote today.');
+  }
+}
+
 function mountApp() {
   const app = document.getElementById('app');
   if (!app) return;
@@ -98,6 +110,7 @@ function mountApp() {
 
   // 1. Digital Move Pass View
   if (rawHash.startsWith('#pass')) {
+    resetDefaultSeoMetadata();
     const passId = rawHash.replace(/^#pass\/?/, '') || 'demo';
     app.innerHTML = renderMovePass(passId);
     initMovePass(passId);
@@ -108,6 +121,11 @@ function mountApp() {
   let activeRoute = 'home';
   let viewHtml = '';
   let viewInitializer = null;
+
+  // Clean up guide-specific SEO metadata if navigating to another page
+  if (!rawHash.startsWith('#guide/') && !rawHash.startsWith('#guides/')) {
+    resetDefaultSeoMetadata();
+  }
 
   const isQuoteTarget = rawHash === '#quote' || rawHash === '#quote-calculator' || rawHash === '#quote-form';
 
@@ -152,9 +170,17 @@ function mountApp() {
     `;
     viewInitializer = () => initCoverageMap();
 
-  // 5. Moving Guides & Advice View
+  // 5. Individual Standalone Guide Page View (Dedicated SEO Page)
+  } else if (rawHash.startsWith('#guide/') || rawHash.startsWith('#guides/')) {
+    activeRoute = 'guides';
+    const guideId = rawHash.replace(/^#(guide|guides)\//, '').split('?')[0];
+    viewHtml = renderGuidePageView(guideId);
+    viewInitializer = () => updateGuideSeoMetadata(guideId);
+
+  // 6. Moving Guides Hub View
   } else if (rawHash === '#guides') {
     activeRoute = 'guides';
+    document.title = 'Moving Guides & Scottish Relocation Advice | Dundee Movers';
     viewHtml = `
       ${renderViewHeader(
         'Moving Knowledge Hub',

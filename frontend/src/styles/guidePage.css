@@ -1,0 +1,566 @@
+/**
+ * Dedicated Standalone Guide Page Styles.
+ * High-authority editorial typography, generous floating navbar clearance,
+ * responsive sticky conversion sidebar, and crisp Scottish removals formatting.
+ */
+
+/* 1. Page Wrapper & Floating Navbar Offset */
+.guide-page-wrapper {
+  padding-top: clamp(8.75rem, 11vw, 10.75rem);
+  padding-bottom: 5rem;
+  background-color: var(--color-bg-base, #faf9f5);
+  min-height: 85vh;
+}
+
+.guide-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 2. Breadcrumbs Navigation */
+.guide-breadcrumb-nav {
+  margin-bottom: 1.5rem;
+}
+
+.guide-breadcrumbs {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: #64748b;
+  padding: 0;
+  margin: 0;
+}
+
+.guide-breadcrumbs a {
+  color: #064e3b;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.guide-breadcrumbs a:hover {
+  color: #047857;
+  text-decoration: underline;
+}
+
+.guide-breadcrumbs .bc-sep {
+  color: #cbd5e1;
+  font-size: 0.75rem;
+}
+
+.guide-breadcrumbs .active {
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* 3. Article Header & Metadata */
+.guide-page-header {
+  margin-bottom: 2.25rem;
+}
+
+.guide-header-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.blog-category-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(6, 78, 59, 0.08);
+  color: #064e3b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 1px solid rgba(6, 78, 59, 0.2);
+  letter-spacing: 0.02em;
+}
+
+.guide-header-readtime,
+.guide-header-date {
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.guide-header-verified {
+  color: #047857;
+  background: #ecfdf5;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid #a7f3d0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.guide-page-h1 {
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  line-height: 1.18;
+  margin-top: 0;
+  margin-bottom: 1.15rem;
+  max-width: 980px;
+}
+
+.guide-page-subtitle {
+  font-size: clamp(1.05rem, 1.8vw, 1.22rem);
+  color: #475569;
+  line-height: 1.6;
+  max-width: 860px;
+  margin-bottom: 1.75rem;
+}
+
+.guide-author-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding-top: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.author-meta-block {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.author-avatar-badge {
+  font-size: 1.5rem;
+  width: 2.85rem;
+  height: 2.85rem;
+  background: rgba(6, 78, 59, 0.08);
+  border: 1px solid rgba(6, 78, 59, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.author-name {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.author-title {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.btn-back-to-guides {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.btn-back-to-guides:hover {
+  border-color: #064e3b;
+  color: #064e3b;
+  transform: translateX(-3px);
+  box-shadow: 0 3px 8px rgba(6, 78, 59, 0.12);
+}
+
+/* 4. Two-Column Layout Grid */
+.guide-content-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .guide-content-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* 5. Left Column: Article Body */
+.guide-article-body {
+  font-size: 1.02rem;
+  color: #334155;
+  line-height: 1.8;
+}
+
+/* Executive Summary Callout */
+.guide-summary-callout {
+  background: linear-gradient(135deg, rgba(6, 78, 59, 0.04) 0%, rgba(240, 253, 244, 0.6) 100%);
+  border: 1px solid rgba(6, 78, 59, 0.15);
+  border-left: 5px solid #064e3b;
+  padding: 1.35rem 1.6rem;
+  border-radius: 0.85rem;
+  margin-bottom: 2.25rem;
+  box-shadow: 0 2px 10px rgba(6, 78, 59, 0.04);
+}
+
+.callout-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #064e3b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.callout-body-text {
+  font-size: 1rem;
+  color: #1e293b;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Content Sections */
+.guide-content-section {
+  margin-bottom: 2.5rem;
+}
+
+.guide-section-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid #e2e8f0;
+  position: relative;
+}
+
+.guide-section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 44px;
+  height: 2px;
+  background: #064e3b;
+}
+
+.guide-section-paragraphs p {
+  font-size: 1.02rem;
+  color: #334155;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+/* Specialist Pro Callout */
+.guide-pro-callout {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 0.85rem;
+  padding: 1.35rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.pro-callout-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #15803d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.pro-tips-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.pro-tips-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  color: #166534;
+  line-height: 1.55;
+}
+
+.pro-tips-list li::before {
+  content: '💡';
+  flex-shrink: 0;
+}
+
+/* Action Checklist Callout */
+.guide-checklist-callout {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  border-radius: 0.85rem;
+  padding: 1.4rem 1.6rem;
+  margin: 1.5rem 0;
+}
+
+.checklist-callout-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.85rem;
+}
+
+.checklist-action-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.checklist-action-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: #334155;
+  line-height: 1.6;
+}
+
+.check-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1.5px solid #10b981;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+/* Author Signature & CTA Card */
+.guide-author-signature {
+  padding: 1.85rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.25rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-top: 2.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.signature-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.signature-content h4 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.signature-content p {
+  font-size: 0.92rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.signature-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+/* 6. Right Column: Sticky Authority Sidebar */
+.guide-sidebar {
+  position: sticky;
+  top: 7.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.sidebar-quote-card,
+.sidebar-contact-card,
+.sidebar-related-card {
+  padding: 1.6rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.15rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.sidebar-badge {
+  margin-bottom: 0.75rem;
+  display: inline-block;
+}
+
+.sidebar-card-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-card-desc {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+
+.sidebar-quote-btn {
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.sidebar-trust-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: #064e3b;
+  font-weight: 700;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 1rem;
+}
+
+.sidebar-subheading {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.sidebar-contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.s-contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  color: #334155;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.s-contact-btn:hover {
+  background: #f0fdf4;
+  border-color: #064e3b;
+  color: #064e3b;
+}
+
+.s-wa-btn:hover {
+  background: rgba(37, 211, 102, 0.1);
+  border-color: #25d366;
+  color: #128c7e;
+}
+
+.related-guides-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.related-guide-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  text-decoration: none;
+  padding: 0.65rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.related-guide-item:hover {
+  background: #f8fafc;
+}
+
+.rel-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.rel-category {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #064e3b;
+  text-transform: uppercase;
+  display: block;
+}
+
+.rel-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.35;
+  margin-top: 0.15rem;
+  margin-bottom: 0;
+  transition: color 0.2s ease;
+}
+
+.related-guide-item:hover .rel-title {
+  color: #064e3b;
+}

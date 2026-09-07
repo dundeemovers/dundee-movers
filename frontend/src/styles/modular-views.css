@@ -117,6 +117,51 @@
   margin-bottom: 2rem;
 }
 
+.home-features-grid.four-col-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1100px) {
+  .home-features-grid.four-col-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .home-features-grid.four-col-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Bento Services SEO Enhancements */
+.bento-commercial .commercial-icon {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.bento-feature-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.bento-mini-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.08);
+  color: #065f46;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.text-emerald {
+  color: #059669 !important;
+}
+
 .home-feature-card {
   padding: 2.25rem 2rem;
   border-radius: 1.25rem;

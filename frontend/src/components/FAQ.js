@@ -27,6 +27,10 @@ const FAQS = [
   {
     q: 'Are my belongings fully insured during transit?',
     a: 'Yes, every move automatically includes £50,000 Goods in Transit insurance and £5,000,000 Public Liability insurance at no extra charge.'
+  },
+  {
+    q: 'Do you provide office and commercial removals in Dundee and Scotland?',
+    a: 'Yes. We offer complete office and business relocation services throughout Dundee, Angus, Fife, and across Scotland. We provide weekend and evening moves to minimize commercial downtime, crate hire, secure IT and desktop computer transport, office furniture dismantling/assembly, and tailored B2B invoicing with full VAT receipts.'
   }
 ];
 

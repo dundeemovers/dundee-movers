@@ -245,29 +245,37 @@ export function renderHomeView() {
       <!-- 4. Key Services Snapshot -->
       <section class="container home-features-section">
         <div class="home-section-header">
-          <span class="badge">Specialist Services</span>
+          <span class="badge">Comprehensive Removal Services</span>
           <h2 class="home-section-title">Everything You Need for a Seamless Move</h2>
+          <p class="home-section-desc">From family homes and student flats to commercial offices and nationwide relocations.</p>
         </div>
 
-        <div class="home-features-grid">
+        <div class="home-features-grid four-col-grid">
           <div class="glass-panel home-feature-card spotlight-card">
-            <div class="h-card-icon">🏛️</div>
-            <h3 class="h-card-title">Flats, Apartments & Townhouses</h3>
-            <p class="h-card-text">Specialized moving for Perth Road, Nethergate, and West End properties. We handle spiral stairwells, tight landings, and heavy furniture with ease.</p>
-            <a href="#services" class="h-card-link">Explore Flat & House Removals ➔</a>
+            <div class="h-card-icon">🏡</div>
+            <h3 class="h-card-title">Residential House Removals</h3>
+            <p class="h-card-text">Complete household moves for 1 to 5-bedroom houses, flats, and villas across Dundee, Broughty Ferry, Angus, and Fife.</p>
+            <a href="#services" class="h-card-link">Explore House Removals ➔</a>
+          </div>
+
+          <div class="glass-panel home-feature-card spotlight-card">
+            <div class="h-card-icon">🏢</div>
+            <h3 class="h-card-title">Commercial & Office Moves</h3>
+            <p class="h-card-text">Zero-downtime office relocations, IT & server transit, archive transport, and commercial crate hire with weekend flexibility.</p>
+            <a href="#services" class="h-card-link">Explore Commercial Moves ➔</a>
           </div>
 
           <div class="glass-panel home-feature-card spotlight-card">
             <div class="h-card-icon">🚐</div>
             <h3 class="h-card-title">1 Move At A Time Guarantee</h3>
-            <p class="h-card-text">Your van and 2-man crew are 100% exclusive to your home. No multi-drop detours or mixed boxes with other customers.</p>
+            <p class="h-card-text">Your van and crew are 100% exclusive to your home. No multi-drop detours or mixed boxes with other customers.</p>
             <a href="#services" class="h-card-link">Why Dedicated Matters ➔</a>
           </div>
 
           <div class="glass-panel home-feature-card spotlight-card">
-            <div class="h-card-icon">🇬🇧</div>
+            <div class="h-card-icon">🚚</div>
             <h3 class="h-card-title">Express Nationwide UK Transit</h3>
-            <p class="h-card-text">Direct door-to-door relocations from Dundee to Edinburgh, Glasgow, Manchester, Birmingham, and London with zero overnight warehousing delay.</p>
+            <p class="h-card-text">Direct door-to-door relocations from Dundee to Edinburgh, Glasgow, Manchester, Birmingham, and London with zero depot delay.</p>
             <a href="#coverage" class="h-card-link">View UK Routes & Transit Times ➔</a>
           </div>
         </div>
