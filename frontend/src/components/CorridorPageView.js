@@ -8,8 +8,8 @@ export function renderCorridorPageView(corridorId) {
   const corridor = CORRIDOR_DATA.find(c => c.id === corridorId) || CORRIDOR_DATA[0];
 
   return `
-    <div class="corridor-page-wrapper">
-      <div class="container corridor-page-container">
+    <div class="corridor-page-wrapper guide-page-wrapper">
+      <div class="container corridor-page-container guide-page-container">
         
         <!-- Breadcrumb Navigation Bar -->
         <nav class="guide-breadcrumb-nav" aria-label="Breadcrumb">

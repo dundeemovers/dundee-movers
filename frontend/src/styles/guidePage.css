@@ -5,14 +5,24 @@
  */
 
 /* 1. Page Wrapper & Floating Navbar Offset */
-.guide-page-wrapper {
-  padding-top: clamp(8.75rem, 11vw, 10.75rem);
+.guide-page-wrapper,
+.corridor-page-wrapper {
+  padding-top: clamp(8.5rem, 10vw, 10.5rem);
   padding-bottom: 5rem;
   background-color: var(--color-bg-base, #faf9f5);
   min-height: 85vh;
 }
 
-.guide-page-container {
+@media (max-width: 768px) {
+  .guide-page-wrapper,
+  .corridor-page-wrapper {
+    padding-top: 6.25rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+.guide-page-container,
+.corridor-page-container {
   max-width: 1200px;
   margin: 0 auto;
 }
