@@ -1,45 +1,12 @@
 /**
- * Comprehensive Coverage & Regional Corridors Master Hub Component.
+ * Simplified, Customer-Friendly Coverage Hub Component.
  * Optimized for local Dundee & Scottish technical SEO, mobile touch UX, and high conversion.
  * Strictly complies with AGENTS.md SRP & 500-line limits.
  */
 
-import { COVERAGE_DATA, getPostcodeCoverageResult } from '../utils/coverageData.js';
-
-export { COVERAGE_DATA };
-
-function renderRegionContent(data) {
-  return `
-    <div class="region-header-row">
-      <div class="region-title-block">
-        <h3 class="region-title">${data.title}</h3>
-        <span class="region-time-badge">⏱️ ${data.time}</span>
-      </div>
-      <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
-        <a href="${data.corridorPath}" class="h-card-link" style="font-size: 0.88rem; font-weight: 700; color: var(--color-accent-primary, #064e3b); text-decoration: none;">${data.corridorLabel}</a>
-        <a href="/#quote-calculator" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Book This Route</a>
-      </div>
-    </div>
-
-    <div class="districts-grid">
-      ${data.districts.map(d => `
-        <div class="district-card">
-          <div class="district-pin">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div class="district-info">
-            <h4 class="district-name">${d.name}</h4>
-            <p class="district-notes">${d.notes}</p>
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
+import { getPostcodeCoverageResult } from '../utils/coverageData.js';
 
 export function renderCoverageMap() {
-  const initialRegion = COVERAGE_DATA.dundee;
-
   return `
     <div class="coverage-hub-container">
       
@@ -48,17 +15,17 @@ export function renderCoverageMap() {
         <nav class="modular-breadcrumbs" aria-label="Breadcrumb">
           <a href="/" class="breadcrumb-back">‹ Back to Home</a>
           <span class="breadcrumb-separator">/</span>
-          <span class="breadcrumb-current">Coverage & Corridors</span>
+          <span class="breadcrumb-current">Coverage Areas</span>
         </nav>
 
         <div class="coverage-status-row">
           <span class="coverage-depot-chip">
             <span class="depot-pulse-dot"></span>
-            Dundee Central Depot Active • Daily Departures across DD1–DD5, Fife & UK
+            Dundee Depot Active • Daily Departures across DD1–DD5, Fife & All UK
           </span>
         </div>
 
-        <h1 class="coverage-main-title">Dundee, Angus, Fife & UK Coverage Corridors</h1>
+        <h1 class="coverage-main-title">Dundee & UK Removals Coverage</h1>
         <p class="coverage-hero-desc">
           We operate a strict <strong>1-move-at-a-time guarantee</strong>. Your vehicle and crew are 100% dedicated to your property from loading to delivery—meaning zero shared loads, direct door-to-door transit, and £50,000 Goods in Transit insurance included on every run.
         </p>
@@ -101,207 +68,116 @@ export function renderCoverageMap() {
             <span><strong>£50k Insurance</strong> Included Free</span>
           </div>
           <div class="c-trust-item">
-            <span style="font-size: 1.25rem;">📍</span>
-            <span><strong>DD1–DD5 to Whole UK</strong> Direct Transit</span>
+            <span style="font-size: 1.25rem;">🪜</span>
+            <span><strong>Flats & Tenement Stairs</strong> Specialists</span>
           </div>
         </div>
       </section>
 
-      <!-- 4. Interactive Regional Explorer (Pre-rendered for Instant SEO Crawling) -->
-      <section class="coverage-explorer-section">
+      <!-- 4. Simple 4 Main Service Areas (Visual & Clear) -->
+      <section class="coverage-areas-section">
         <div class="section-subheading-group">
-          <span class="subheading-badge">Interactive Route Explorer</span>
-          <h2 class="subheading-title">Explore Territories & Daily Departures</h2>
+          <span class="subheading-badge">Service Territories</span>
+          <h2 class="subheading-title">Main Areas We Cover</h2>
+          <p class="section-lead-text">From local Dundee streets to long-distance UK relocations, our dedicated crews provide direct door-to-door service.</p>
         </div>
 
-        <div class="coverage-tabs-nav" id="coverage-tabs" role="tablist" aria-label="Coverage Territories">
-          <button class="coverage-tab-btn active" data-region="dundee" role="tab" aria-selected="true">
-            <span>📍</span> <span>Dundee (DD1–DD5)</span>
-          </button>
-          <button class="coverage-tab-btn" data-region="fife" role="tab" aria-selected="false">
-            <span>🏛️</span> <span>Fife & St Andrews</span>
-          </button>
-          <button class="coverage-tab-btn" data-region="angus" role="tab" aria-selected="false">
-            <span>🌾</span> <span>Angus Towns</span>
-          </button>
-          <button class="coverage-tab-btn" data-region="ukwide" role="tab" aria-selected="false">
-            <span>🚚</span> <span>Whole UK Corridors</span>
-          </button>
-        </div>
+        <div class="simple-areas-grid">
+          
+          <!-- Dundee City & Suburbs -->
+          <div class="area-card spotlight-card">
+            <div class="area-card-top">
+              <span class="area-badge">15–30 Mins Local Response</span>
+              <h3 class="area-card-title">📍 Dundee City & Suburbs (DD1 – DD5)</h3>
+              <p class="area-card-locations"><strong>Key Districts:</strong> City Centre, West End, Broughty Ferry, Barnhill, Stobswell, Coldside, Craigie.</p>
+              <p class="area-card-text">Specialists in traditional high-floor tenement flats, spiral staircases, parking bay suspensions, and family homes throughout Dundee.</p>
+            </div>
+            <div class="area-card-bottom">
+              <a href="/areas/broughty-ferry" class="area-card-link">View Broughty Ferry & DD5 Area Hub ➔</a>
+            </div>
+          </div>
 
-        <!-- Pre-rendered default region prevents empty flash on load / SSG -->
-        <div class="coverage-content-area" id="coverage-content">
-          ${renderRegionContent(initialRegion)}
+          <!-- Fife & St Andrews -->
+          <div class="area-card spotlight-card">
+            <div class="area-card-top">
+              <span class="area-badge">20–35 Mins via Tay Bridge</span>
+              <h3 class="area-card-title">🏛️ Fife & St Andrews (KY16, DD6, KY15)</h3>
+              <p class="area-card-locations"><strong>Key Districts:</strong> St Andrews, Tayport, Newport-on-Tay, Cupar, Leuchars, East Neuk.</p>
+              <p class="area-card-text">University student moves, academic library collections, coastal village properties, and family relocations directly across the Tay Road Bridge.</p>
+            </div>
+            <div class="area-card-bottom">
+              <a href="/areas/st-andrews" class="area-card-link">View St Andrews & Fife Area Hub ➔</a>
+            </div>
+          </div>
+
+          <!-- Angus Towns & Countryside -->
+          <div class="area-card spotlight-card">
+            <div class="area-card-top">
+              <span class="area-badge">Daily A90 / A92 Corridors</span>
+              <h3 class="area-card-title">🌾 Angus & Tayside (DD7 – DD11)</h3>
+              <p class="area-card-locations"><strong>Key Districts:</strong> Arbroath, Forfar, Montrose, Carnoustie, Brechin, Monifieth.</p>
+              <p class="area-card-text">Daily scheduled removals connecting Dundee to Angus coastal towns, detached villas, rural farmsteads, and Perthshire commuter homes.</p>
+            </div>
+            <div class="area-card-bottom">
+              <a href="/areas/arbroath-angus" class="area-card-link">View Arbroath & Angus Area Hub ➔</a>
+            </div>
+          </div>
+
+          <!-- Whole UK Direct Transit -->
+          <div class="area-card spotlight-card">
+            <div class="area-card-top">
+              <span class="area-badge">Direct Non-Stop UK Transit</span>
+              <h3 class="area-card-title">🚚 London & Entire UK Nationwide</h3>
+              <p class="area-card-locations"><strong>Key Corridors:</strong> London, Manchester, Leeds, Birmingham, Edinburgh, Glasgow.</p>
+              <p class="area-card-text">Direct long-distance moves with your own locked Luton van. We never combine loads or pass through sorting depots—guaranteed next-day delivery.</p>
+            </div>
+            <div class="area-card-bottom" style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <a href="/routes/dundee-to-london" class="area-card-link">View Dundee to London Corridor ➔</a>
+              <a href="/routes/dundee-to-edinburgh" class="area-card-link" style="color: #64748b; font-size: 0.82rem;">View Dundee to Edinburgh Corridor ➔</a>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <!-- 5. Strategic Local Corridor Hubs Showcase (Bento Cards) -->
+      <!-- 5. How We Make Scottish Moves Easy -->
       <section class="logistics-guide-section">
         <div class="section-subheading-group">
-          <span class="subheading-badge">Dedicated Area Guides</span>
-          <h2 class="subheading-title">Dedicated Regional Moving Hubs</h2>
-        </div>
-
-        <div class="corridors-bento-grid">
-          <div class="corridor-hub-card spotlight-card">
-            <div class="c-hub-top">
-              <div class="c-hub-badge-row">
-                <span class="c-postcode-pill">DD5 1, DD5 2, DD5 3</span>
-                <span class="c-time-pill">10–20 Mins Transit</span>
-              </div>
-              <h3 class="c-hub-title">Broughty Ferry & Barnhill</h3>
-              <p class="c-hub-desc">Specialist moving for seafront villas, esplanade flats, fragile antiques, and Balgillo family homes with exclusive vehicles.</p>
-            </div>
-            <a href="/areas/broughty-ferry" class="c-hub-link">Explore Broughty Ferry Hub ➔</a>
-          </div>
-
-          <div class="corridor-hub-card spotlight-card">
-            <div class="c-hub-top">
-              <div class="c-hub-badge-row">
-                <span class="c-postcode-pill">KY16 & East Neuk</span>
-                <span class="c-time-pill">25–35 Mins via Tay Bridge</span>
-              </div>
-              <h3 class="c-hub-title">St Andrews & Fife</h3>
-              <p class="c-hub-desc">University student flats, academic library collections, cobbled street access, and luxury North East Fife coastal properties.</p>
-            </div>
-            <a href="/areas/st-andrews" class="c-hub-link">Explore St Andrews Hub ➔</a>
-          </div>
-
-          <div class="corridor-hub-card spotlight-card">
-            <div class="c-hub-top">
-              <div class="c-hub-badge-row">
-                <span class="c-postcode-pill">Direct Door-to-Door</span>
-                <span class="c-time-pill">Next-Day Delivery</span>
-              </div>
-              <h3 class="c-hub-title">Dundee to London & South UK</h3>
-              <p class="c-hub-desc">100% exclusive Luton van transit with zero multi-drop courier detours, guaranteed delivery windows, and ULEZ compliance.</p>
-            </div>
-            <a href="/routes/dundee-to-london" class="c-hub-link">Explore London Corridor ➔</a>
-          </div>
-
-          <div class="corridor-hub-card spotlight-card">
-            <div class="c-hub-top">
-              <div class="c-hub-badge-row">
-                <span class="c-postcode-pill">M90 Corridor</span>
-                <span class="c-time-pill">1 hr 20 Mins Same-Day</span>
-              </div>
-              <h3 class="c-hub-title">Dundee to Edinburgh & Lothians</h3>
-              <p class="c-hub-desc">Same-day relocations across the Queensferry Crossing. Morning loading in Dundee with afternoon placement in Edinburgh.</p>
-            </div>
-            <a href="/routes/dundee-to-edinburgh" class="c-hub-link">Explore Edinburgh Corridor ➔</a>
-          </div>
-
-          <div class="corridor-hub-card spotlight-card">
-            <div class="c-hub-top">
-              <div class="c-hub-badge-row">
-                <span class="c-postcode-pill">DD11, DD8, DD7, DD10</span>
-                <span class="c-time-pill">20–40 Mins Transit</span>
-              </div>
-              <h3 class="c-hub-title">Arbroath, Forfar & Angus Towns</h3>
-              <p class="c-hub-desc">Comprehensive county-wide moving across Arbroath, Forfar, Carnoustie, and Montrose, including rural cottages and farmhouses.</p>
-            </div>
-            <a href="/areas/arbroath-angus" class="c-hub-link">Explore Angus Towns Hub ➔</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- 6. Local Logistics & Council Regulations Guidance -->
-      <section class="logistics-guide-section">
-        <div class="section-subheading-group">
-          <span class="subheading-badge">Local Scottish Moving Logistics</span>
-          <h2 class="subheading-title">How We Handle Local Dundee & Scottish Access</h2>
+          <span class="subheading-badge">Local Moving Specialists</span>
+          <h2 class="subheading-title">How We Make Your Move Effortless</h2>
         </div>
 
         <div class="logistics-cards-row">
           <div class="logistics-info-card">
             <span class="logistics-card-icon">🅿️</span>
-            <h3 class="logistics-card-title">Dundee Parking Suspensions</h3>
+            <h3 class="logistics-card-title">Parking & Council Permits</h3>
             <p class="logistics-card-text">
-              For busy streets across DD1 and DD2 (including Perth Road and City Quay), our team can assist in booking official parking bay suspensions with Dundee City Council to guarantee curb access directly outside your front door.
+              Moving on a busy Dundee street like Perth Road or City Quay? We assist with booking official Dundee City Council parking bay suspensions to ensure curb access right outside your door.
             </p>
           </div>
 
           <div class="logistics-info-card">
-            <span class="logistics-card-icon">🏛️</span>
-            <h3 class="logistics-card-title">High-Floor Tenements & Narrow Stairs</h3>
+            <span class="logistics-card-icon">🪜</span>
+            <h3 class="logistics-card-title">Tenement Stairs & Bulky Items</h3>
             <p class="logistics-card-text">
-              Traditional spiral stairwells and 3rd/4th floor flats are our daily specialty. Our crews are equipped with specialized stair-climbing gear, heavy-duty quilted covers, and door jamb protectors to maneuver bulky furniture safely.
+              Narrow turn stairwells and 3rd-floor flats are our daily bread. Our crews carry heavy-duty stair-climbing gear, protective door blankets, and quilted furniture covers to navigate tight spaces.
             </p>
           </div>
 
           <div class="logistics-info-card">
             <span class="logistics-card-icon">🌉</span>
-            <h3 class="logistics-card-title">Bridge Crossings & Direct Transit</h3>
+            <h3 class="logistics-card-title">Guaranteed Fixed Rates</h3>
             <p class="logistics-card-text">
-              Daily crossings over the Tay Road Bridge to Fife and direct Queensferry Crossing transit to Edinburgh. What we quote is strictly fixed: zero toll surcharges or mileage penalties on moving day.
+              Crossings over the Tay Road Bridge and Queensferry Crossing are fully included. What we quote upfront is strictly fixed—zero surprise mileage charges or fuel surcharges on moving day.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- 7. Postcode & Territory SEO Matrix Table -->
-      <section class="postcode-matrix-section">
-        <div class="section-subheading-group">
-          <span class="subheading-badge">Postal Code Directory</span>
-          <h2 class="subheading-title">Full Coverage & Availability Matrix</h2>
-        </div>
-
-        <div class="table-responsive-wrapper">
-          <table class="postcode-table">
-            <thead>
-              <tr>
-                <th>Postcode District</th>
-                <th>Coverage Region</th>
-                <th>Daily Availability</th>
-                <th>Transit Mode</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="postcode-code-badge">DD1, DD2, DD3</span></td>
-                <td>Dundee Central, West End, Stobswell & Law</td>
-                <td>Daily Scheduled & Same-Day Slots</td>
-                <td>100% Dedicated Van & 2-Man Crew</td>
-              </tr>
-              <tr>
-                <td><span class="postcode-code-badge">DD4, DD5</span></td>
-                <td>Craigie, Broughty Ferry & Barnhill</td>
-                <td>Daily Scheduled Departures</td>
-                <td>Dedicated Villa & Flat Removals</td>
-              </tr>
-              <tr>
-                <td><span class="postcode-code-badge">DD6, KY16, KY10</span></td>
-                <td>Tayport, Newport-on-Tay, St Andrews & East Neuk</td>
-                <td>Daily Departures via Tay Road Bridge</td>
-                <td>Student & Residential Removals</td>
-              </tr>
-              <tr>
-                <td><span class="postcode-code-badge">DD7, DD8, DD11</span></td>
-                <td>Carnoustie, Forfar, Arbroath & Angus</td>
-                <td>Daily Departures along A90/A92</td>
-                <td>Town & Rural Farmhouse Moving</td>
-              </tr>
-              <tr>
-                <td><span class="postcode-code-badge">EH1 – EH26</span></td>
-                <td>Edinburgh City Centre, Leith & Lothians</td>
-                <td>Same-Day Express Runs via M90</td>
-                <td>Direct Intercity Relocations</td>
-              </tr>
-              <tr>
-                <td><span class="postcode-code-badge">London & All UK</span></td>
-                <td>Greater London, Midlands, Manchester & England</td>
-                <td>Confirmed Dedicated Slots</td>
-                <td>Direct Non-Stop Door-to-Door</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- 8. Local Coverage FAQs -->
+      <!-- 6. Local Coverage FAQs -->
       <section class="coverage-faq-section">
         <div class="section-subheading-group">
-          <span class="subheading-badge">Coverage Questions</span>
+          <span class="subheading-badge">Got Questions?</span>
           <h2 class="subheading-title">Frequently Asked Questions</h2>
         </div>
 
@@ -312,7 +188,7 @@ export function renderCoverageMap() {
           </div>
 
           <div class="coverage-faq-item">
-            <h3 class="coverage-faq-q">How does the 1-move-at-a-time guarantee work for long distances?</h3>
+            <h3 class="coverage-faq-q">How does the 1-move-at-a-time guarantee work?</h3>
             <p class="coverage-faq-a">When we load your items in Dundee, our van is locked and exclusively dedicated to your destination (e.g. London, Manchester). We never combine your belongings with other clients or divert to third-party sorting depots.</p>
           </div>
 
@@ -328,7 +204,7 @@ export function renderCoverageMap() {
         </div>
       </section>
 
-      <!-- 9. High-Converting Bottom Banner -->
+      <!-- 7. High-Converting Bottom Banner -->
       <div class="coverage-footer-cta-card">
         <h2>Ready to Book Your Dedicated Move?</h2>
         <p>Calculate your guaranteed fixed price in less than 2 minutes. No obligations and no automated guesswork.</p>
@@ -348,28 +224,7 @@ export function renderCoverageMap() {
 }
 
 export function initCoverageMap() {
-  // 1. Regional Explorer Tab Switcher
-  const contentArea = document.getElementById('coverage-content');
-  const tabs = document.querySelectorAll('.coverage-tab-btn');
-
-  if (contentArea && tabs.length > 0) {
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => {
-          t.classList.remove('active');
-          t.setAttribute('aria-selected', 'false');
-        });
-        tab.classList.add('active');
-        tab.setAttribute('aria-selected', 'true');
-
-        const regionKey = tab.getAttribute('data-region') || 'dundee';
-        const regionData = COVERAGE_DATA[regionKey] || COVERAGE_DATA.dundee;
-        contentArea.innerHTML = renderRegionContent(regionData);
-      });
-    });
-  }
-
-  // 2. Interactive Instant Postcode Coverage Checker
+  // Interactive Instant Postcode Coverage Checker
   const form = document.getElementById('coverage-checker-form');
   const input = document.getElementById('checker-postcode-input');
   const resultArea = document.getElementById('checker-result-area');
