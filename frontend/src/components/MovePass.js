@@ -5,6 +5,7 @@
  */
 import confetti from 'canvas-confetti';
 import '../styles/movePass.css';
+import '../styles/movePassEssentials.css';
 
 const ADDON_CATALOG = [
   { id: 'assembly', name: 'Bed Frame & Wardrobe Assembly / Disassembly', price: 40, desc: 'Professional de-rigging and rebuild by crew' },
@@ -210,6 +211,8 @@ function renderPassCard(container, lead) {
           </div>
         </div>
 
+        ${renderMovingDayEssentials()}
+
         <!-- Guaranteed Price Showcase -->
         <div class="pass-pricing-hero">
           <div>
@@ -237,9 +240,11 @@ function renderPassCard(container, lead) {
           </label>
           <input type="text" id="pass-sign-input" class="pass-sign-input" value="${lead.customerName}" placeholder="Your Full Name" />
 
-          <label style="display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.78rem; color: #475569; margin-bottom: 1.25rem; cursor: pointer;">
-            <input type="checkbox" id="pass-terms-check" checked style="width: 16px; height: 16px; accent-color: #064e3b; margin-top: 2px;" />
-            <span>I accept the guaranteed fixed quote and authorize Dundee Movers to schedule this removal.</span>
+          <label style="display: flex; align-items: flex-start; gap: 0.65rem; font-size: 0.78rem; color: #334155; margin-bottom: 1.25rem; line-height: 1.5; cursor: pointer;">
+            <input type="checkbox" id="pass-terms-check" checked style="width: 17px; height: 17px; accent-color: #064e3b; margin-top: 2px; flex-shrink: 0;" />
+            <span>
+              I accept this guaranteed quote and agree to the <a href="/terms" target="_blank" style="color: #047857; font-weight: 700; text-decoration: underline;">Terms & Conditions</a> (payment by cash or direct bank transfer only upon completion, and £40/hr van standby rate for key handover delays).
+            </span>
           </label>
 
           <button type="button" class="pass-accept-btn" id="pass-accept-btn">
@@ -385,6 +390,61 @@ function renderAcceptedCard(lead) {
           💬 Chat on WhatsApp
         </a>
       </div>
+
+      ${renderMovingDayEssentials()}
     </div>
   `;
 }
+
+function renderMovingDayEssentials() {
+  return `
+    <div class="pass-essentials-box">
+      <div class="pass-essentials-header">
+        <span class="pass-essentials-badge">⚠️ Moving Day Essentials</span>
+        <h4 class="pass-essentials-title">Key Rules to Know Before We Arrive</h4>
+      </div>
+      <div class="pass-essentials-grid">
+        <div class="pass-essential-item">
+          <div class="pass-essential-icon">💵</div>
+          <div class="pass-essential-content">
+            <strong>Payment Method</strong>
+            <p>Cash or direct bank transfer only on moving day upon completion. We do not accept card payments or cheques.</p>
+          </div>
+        </div>
+        <div class="pass-essential-item">
+          <div class="pass-essential-icon">⏱️</div>
+          <div class="pass-essential-content">
+            <strong>Key Handover & Delays</strong>
+            <p>30-min free courtesy window upon arrival. Thereafter, delays are charged at £40 per van per hour.</p>
+          </div>
+        </div>
+        <div class="pass-essential-item">
+          <div class="pass-essential-icon">🅿️</div>
+          <div class="pass-essential-content">
+            <strong>Parking Space</strong>
+            <p>Please reserve legal vehicle parking space directly outside both addresses before the removals van arrives.</p>
+          </div>
+        </div>
+        <div class="pass-essential-item">
+          <div class="pass-essential-icon">🔌</div>
+          <div class="pass-essential-content">
+            <strong>Appliances Disconnected</strong>
+            <p>Washing machines, dishwashers, and fridges must be drained, defrosted, and disconnected prior to arrival.</p>
+          </div>
+        </div>
+        <div class="pass-essential-item">
+          <div class="pass-essential-icon">📦</div>
+          <div class="pass-essential-content">
+            <strong>Boxes & Inspection</strong>
+            <p>Self-packed boxes max 20kg. Keep cash/passports with you. Inspect goods at delivery; damage claims within 48h.</p>
+          </div>
+        </div>
+      </div>
+      <div class="pass-essentials-footer">
+        <span>Complete legal protections:</span>
+        <a href="/terms" target="_blank" class="pass-terms-link">Read Full Terms & Conditions (16 Sections) →</a>
+      </div>
+    </div>
+  `;
+}
+

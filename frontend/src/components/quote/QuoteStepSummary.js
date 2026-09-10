@@ -93,6 +93,15 @@ export function renderStepSummary(state) {
             <textarea id="quote-notes" rows="2" placeholder="Any fragile items, parking access details, or specific move timing preferences...">${state.customNotes || ''}</textarea>
           </div>
 
+          <div class="quote-terms-agreement-box" style="margin-bottom: 1.25rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.85rem 1rem;">
+            <label style="display: flex; align-items: flex-start; gap: 0.65rem; font-size: 0.82rem; color: #334155; line-height: 1.5; cursor: pointer; margin: 0;">
+              <input type="checkbox" id="quote-terms-checkbox" required checked style="margin-top: 3px; width: 16px; height: 16px; accent-color: #064e3b; flex-shrink: 0;" />
+              <span>
+                I agree to the <a href="/terms" target="_blank" style="color: #047857; font-weight: 700; text-decoration: underline;">Terms & Conditions</a>. I understand that payment is strictly by <strong>cash or bank transfer only</strong> upon completion, waiting time for key delays is charged at £40/hr per van, and reasonable parking space must be kept outside the property.
+              </span>
+            </label>
+          </div>
+
           <button type="submit" id="quote-submit-btn" class="btn-submit-quote">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
             <span>Request Free Fixed Move Quote</span>
@@ -165,6 +174,14 @@ export function initStepSummary(container, onRestart, state) {
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    const termsCheck = container.querySelector('#quote-terms-checkbox');
+    if (termsCheck && !termsCheck.checked) {
+      alert('Please agree to the Terms & Conditions to proceed with your quote request.');
+      termsCheck.focus();
+      return;
+    }
+
     const nameInput = container.querySelector('#quote-name');
     const phoneInput = container.querySelector('#quote-phone');
     const emailInput = container.querySelector('#quote-email');
