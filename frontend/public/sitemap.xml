@@ -2,69 +2,108 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dundeemovers.co.uk/</loc>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://dundeemovers.co.uk/#services</loc>
-    <lastmod>2026-09-07</lastmod>
+    <loc>https://dundeemovers.co.uk/services</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://dundeemovers.co.uk/#coverage</loc>
-    <lastmod>2026-09-07</lastmod>
+    <loc>https://dundeemovers.co.uk/coverage</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://dundeemovers.co.uk/#guides</loc>
-    <lastmod>2026-09-07</lastmod>
+    <loc>https://dundeemovers.co.uk/guides</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- Dedicated Standalone SEO Guides -->
   <url>
-    <loc>https://dundeemovers.co.uk/#guide/scottish-moving-house-checklist</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://dundeemovers.co.uk/reviews</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Strategic Local Area & Transit Corridor Landing Pages -->
+  <url>
+    <loc>https://dundeemovers.co.uk/areas/broughty-ferry</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://dundeemovers.co.uk/#guide/office-commercial-relocation-checklist</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://dundeemovers.co.uk/areas/st-andrews</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://dundeemovers.co.uk/#guide/moving-house-costs-scotland</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://dundeemovers.co.uk/areas/arbroath-angus</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://dundeemovers.co.uk/#guide/moving-dundee-flats-stairs-permits</loc>
-    <lastmod>2026-09-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://dundeemovers.co.uk/routes/dundee-to-edinburgh</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://dundeemovers.co.uk/#guide/scotland-to-london-uk-removals</loc>
-    <lastmod>2026-09-07</lastmod>
+    <loc>https://dundeemovers.co.uk/routes/dundee-to-london</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Dedicated Standalone SEO Moving Guides -->
+  <url>
+    <loc>https://dundeemovers.co.uk/guides/scottish-moving-house-checklist</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://dundeemovers.co.uk/#guide/pro-packing-fragile-antiques</loc>
-    <lastmod>2026-09-07</lastmod>
+    <loc>https://dundeemovers.co.uk/guides/office-commercial-relocation-checklist</loc>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://dundeemovers.co.uk/guides/moving-house-costs-scotland</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://dundeemovers.co.uk/guides/moving-dundee-flats-stairs-permits</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://dundeemovers.co.uk/guides/scotland-to-london-uk-removals</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://dundeemovers.co.uk/guides/pro-packing-fragile-antiques</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://dundeemovers.co.uk/llms.txt</loc>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
 </urlset>

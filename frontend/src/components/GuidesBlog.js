@@ -108,12 +108,12 @@ function renderArticleCards(articles) {
         <span class="blog-category-badge">${art.categoryTag || art.category}</span>
       </div>
       <h3 class="blog-card-title">
-        <a href="#guide/${art.id}" style="color: inherit; text-decoration: none;">${art.title}</a>
+        <a href="/guides/${art.id}" style="color: inherit; text-decoration: none;">${art.title}</a>
       </h3>
       <p class="blog-card-desc">${art.desc}</p>
       <div class="blog-card-footer">
         <span class="blog-read-time">${art.readTime}</span>
-        <a href="#guide/${art.id}" class="blog-read-btn" data-guide-id="${art.id}">
+        <a href="/guides/${art.id}" class="blog-read-btn" data-guide-id="${art.id}">
           <span>Read Full Guide</span>
           ➔
         </a>

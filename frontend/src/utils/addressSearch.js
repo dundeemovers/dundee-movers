@@ -4,7 +4,7 @@
  * powered by authoritative Royal Mail / Postcodes.io coordinates & Mapbox Geocoding.
  */
 
-const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || '';
+const MAPBOX_TOKEN = import.meta.env?.VITE_MAPBOX_TOKEN || '';
 const DUNDEE_PROXIMITY = '-2.9707,56.4620'; // Dundee City Center coordinates
 
 export const UK_POSTCODE_REGEX = /([A-Z]{1,2}[0-9][A-Z0-9]?)\s*([0-9][A-Z]{2})/i;

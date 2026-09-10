@@ -15,9 +15,9 @@ export function renderGuidePageView(articleId) {
         <!-- Breadcrumb Navigation Bar -->
         <nav class="guide-breadcrumb-nav" aria-label="Breadcrumb">
           <ol class="guide-breadcrumbs">
-            <li><a href="#home">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><span class="bc-sep">/</span></li>
-            <li><a href="#guides">Moving Guides</a></li>
+            <li><a href="/guides">Moving Guides</a></li>
             <li><span class="bc-sep">/</span></li>
             <li class="active" aria-current="page">${article.categoryTag || article.category}</li>
           </ol>
@@ -43,7 +43,7 @@ export function renderGuidePageView(articleId) {
                 <span class="author-title">Dundee Movers Removals Specialist • 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Local Logistics</span>
               </div>
             </div>
-            <a href="#guides" class="btn-back-to-guides">
+            <a href="/guides" class="btn-back-to-guides">
               <span>← Back to All Guides</span>
             </a>
           </div>
@@ -164,7 +164,7 @@ export function renderGuidePageView(articleId) {
             <h4 class="sidebar-subheading">Related Moving Guides</h4>
             <div class="related-guides-list">
               ${relatedArticles.map(rel => `
-                <a href="#guide/${rel.id}" class="related-guide-item">
+                <a href="/guides/${rel.id}" class="related-guide-item">
                   <span class="rel-icon">${rel.icon}</span>
                   <div>
                     <span class="rel-category">${rel.categoryTag || rel.category}</span>
@@ -193,11 +193,26 @@ export function updateGuideSeoMetadata(articleId) {
   // 1. Update Title Tag
   document.title = `${article.title} | Dundee Movers`;
 
-  // 2. Update Meta Description
+  // 2. Update Meta Description and Open Graph tags
   const metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) {
     metaDesc.setAttribute('content', article.desc);
   }
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.setAttribute('content', `${article.title} | Dundee Movers`);
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc) ogDesc.setAttribute('content', article.desc);
+  const guideUrl = `https://dundeemovers.co.uk/guides/${article.id}`;
+  const ogUrl = document.querySelector('meta[property="og:url"]');
+  if (ogUrl) ogUrl.setAttribute('content', guideUrl);
+
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.setAttribute('rel', 'canonical');
+    document.head.appendChild(canonical);
+  }
+  canonical.setAttribute('href', guideUrl);
 
   // 3. Inject / Update JSON-LD Article Schema
   let schemaScript = document.getElementById('guide-article-schema');
@@ -227,8 +242,8 @@ export function updateGuideSeoMetadata(articleId) {
       }
     },
     "datePublished": "2026-01-15T08:00:00+00:00",
-    "dateModified": "2026-09-07T08:00:00+00:00",
-    "mainEntityOfPage": `https://dundeemovers.co.uk/#guide/${article.id}`
+    "dateModified": "2026-09-10T08:00:00+00:00",
+    "mainEntityOfPage": guideUrl
   };
 
   schemaScript.textContent = JSON.stringify(articleSchema, null, 2);

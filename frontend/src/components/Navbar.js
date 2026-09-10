@@ -9,10 +9,10 @@ export function renderNavbar(activeRoute = 'home') {
       <div class="skeuo-dolly-dock">
         
         <!-- Left: Official House-Truck Logo & Brand Name -->
-        <a href="#home" class="dolly-hero-assembly" aria-label="Dundee Movers Homepage">
+        <a href="/" class="dolly-hero-assembly" aria-label="Dundee Movers Homepage">
           <!-- Official House-Truck Vector Logo Badge -->
           <div class="dolly-logo-badge">
-            <img src="/images/logo.jpg" alt="Dundee Movers Logo" class="navbar-logo-img" width="44" height="44" />
+            <img src="/logo.svg" alt="Dundee Movers Logo" class="navbar-logo-img" width="44" height="44" />
           </div>
 
           <!-- Brand Typography -->
@@ -24,32 +24,32 @@ export function renderNavbar(activeRoute = 'home') {
 
         <!-- Center: Brushed Metal Dolly Shaft Navigation -->
         <nav class="dolly-shaft-nav" id="nav-links" aria-label="Main Navigation">
-          <a href="#home" class="dolly-nav-btn ${activeRoute === 'home' ? 'active' : ''}" data-target="home">
+          <a href="/" class="dolly-nav-btn ${activeRoute === 'home' ? 'active' : ''}" data-target="home">
             <span class="nav-btn-icon">🏡</span>
             <span class="nav-btn-text">Home</span>
             <span class="nav-laser-pip"></span>
           </a>
-          <a href="#quote-calculator" class="dolly-nav-btn ${activeRoute === 'quote' ? 'active' : ''}" data-target="quote">
+          <a href="/#quote-calculator" class="dolly-nav-btn ${activeRoute === 'quote' ? 'active' : ''}" data-target="quote">
             <span class="nav-btn-icon">📦</span>
             <span class="nav-btn-text">Get Quote</span>
             <span class="nav-laser-pip"></span>
           </a>
-          <a href="#services" class="dolly-nav-btn ${activeRoute === 'services' ? 'active' : ''}" data-target="services">
+          <a href="/services" class="dolly-nav-btn ${activeRoute === 'services' ? 'active' : ''}" data-target="services">
             <span class="nav-btn-icon">🚚</span>
             <span class="nav-btn-text">Services</span>
             <span class="nav-laser-pip"></span>
           </a>
-          <a href="#coverage" class="dolly-nav-btn ${activeRoute === 'coverage' ? 'active' : ''}" data-target="coverage">
+          <a href="/coverage" class="dolly-nav-btn ${activeRoute === 'coverage' ? 'active' : ''}" data-target="coverage">
             <span class="nav-btn-icon">🗺️</span>
             <span class="nav-btn-text">Coverage</span>
             <span class="nav-laser-pip"></span>
           </a>
-          <a href="#guides" class="dolly-nav-btn ${activeRoute === 'guides' ? 'active' : ''}" data-target="guides">
+          <a href="/guides" class="dolly-nav-btn ${activeRoute === 'guides' ? 'active' : ''}" data-target="guides">
             <span class="nav-btn-icon">📚</span>
             <span class="nav-btn-text">Guides</span>
             <span class="nav-laser-pip"></span>
           </a>
-          <a href="#reviews" class="dolly-nav-btn ${activeRoute === 'reviews' ? 'active' : ''}" data-target="reviews">
+          <a href="/reviews" class="dolly-nav-btn ${activeRoute === 'reviews' ? 'active' : ''}" data-target="reviews">
             <span class="nav-btn-icon">⭐</span>
             <span class="nav-btn-text">Reviews & FAQ</span>
             <span class="nav-laser-pip"></span>
@@ -59,7 +59,7 @@ export function renderNavbar(activeRoute = 'home') {
         <!-- Right: Sleek Parcel Counter Pill & Dispatch Call Button -->
         <div class="dolly-grip-assembly">
           <!-- Live Parcel Count Pill -->
-          <a href="#quote-calculator" class="dolly-tag-badge" id="nav-inventory-badge" title="View selected moving items">
+          <a href="/#quote-calculator" class="dolly-tag-badge" id="nav-inventory-badge" title="View selected moving items">
             <span class="tag-box-icon">📦</span>
             <span class="tag-count"><strong id="nav-item-count">0</strong> Items</span>
           </a>
@@ -129,14 +129,14 @@ export function initNavbar() {
   });
 
   // Smooth scroll to quote calculator if already on page
-  const quoteNavLinks = document.querySelectorAll('a[href="#quote-calculator"], a[href="#quote"], a[href="#quote-form"]');
+  const quoteNavLinks = document.querySelectorAll('a[href="#quote-calculator"], a[href="#quote"], a[href="#quote-form"], a[href="/#quote-calculator"]');
   quoteNavLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       const targetEl = document.getElementById('quote-calculator') || document.getElementById('quote-form');
-      const currentHash = (window.location.hash || '').toLowerCase();
-      if (targetEl && (!currentHash || currentHash === '#home' || currentHash === '#quote-calculator' || currentHash === '#quote' || currentHash === '#quote-form')) {
+      const pathname = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
+      if (targetEl && (pathname === '/' || pathname === '/home')) {
         e.preventDefault();
-        window.history.pushState(null, '', '#quote-calculator');
+        window.history.pushState(null, '', '/#quote-calculator');
         setActiveNav('quote');
         targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }

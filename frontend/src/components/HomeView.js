@@ -255,28 +255,28 @@ export function renderHomeView() {
             <div class="h-card-icon">🏡</div>
             <h3 class="h-card-title">Residential House Removals</h3>
             <p class="h-card-text">Complete household moves for 1 to 5-bedroom houses, flats, and villas across Dundee, Broughty Ferry, Angus, and Fife.</p>
-            <a href="#services" class="h-card-link">Explore House Removals ➔</a>
+            <a href="/services" class="h-card-link">Explore House Removals ➔</a>
           </div>
 
           <div class="glass-panel home-feature-card spotlight-card">
             <div class="h-card-icon">🏢</div>
             <h3 class="h-card-title">Commercial & Office Moves</h3>
             <p class="h-card-text">Zero-downtime office relocations, IT & server transit, archive transport, and commercial crate hire with weekend flexibility.</p>
-            <a href="#services" class="h-card-link">Explore Commercial Moves ➔</a>
+            <a href="/services" class="h-card-link">Explore Commercial Moves ➔</a>
           </div>
 
           <div class="glass-panel home-feature-card spotlight-card">
             <div class="h-card-icon">🚐</div>
             <h3 class="h-card-title">1 Move At A Time Guarantee</h3>
             <p class="h-card-text">Your van and crew are 100% exclusive to your home. No multi-drop detours or mixed boxes with other customers.</p>
-            <a href="#services" class="h-card-link">Why Dedicated Matters ➔</a>
+            <a href="/services" class="h-card-link">Why Dedicated Matters ➔</a>
           </div>
 
           <div class="glass-panel home-feature-card spotlight-card">
             <div class="h-card-icon">🚚</div>
             <h3 class="h-card-title">Express Nationwide UK Transit</h3>
             <p class="h-card-text">Direct door-to-door relocations from Dundee to Edinburgh, Glasgow, Manchester, Birmingham, and London with zero depot delay.</p>
-            <a href="#coverage" class="h-card-link">View UK Routes & Transit Times ➔</a>
+            <a href="/coverage" class="h-card-link">View UK Routes & Transit Times ➔</a>
           </div>
         </div>
       </section>
@@ -319,7 +319,7 @@ export function renderHomeView() {
         </div>
 
         <div class="home-cta-center">
-          <a href="#reviews" class="btn btn-secondary">
+          <a href="/reviews" class="btn btn-secondary">
             <span>Read All Verified Reviews & FAQs ➔</span>
           </a>
         </div>

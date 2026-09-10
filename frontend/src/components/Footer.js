@@ -18,7 +18,7 @@ export function renderFooter() {
             </p>
             
             <div class="footer-cta-actions">
-              <a href="#quote-calculator" class="btn btn-primary footer-btn-quote">
+              <a href="/#quote-calculator" class="btn btn-primary footer-btn-quote">
                 <span>Tell Us What Needs Moving</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
@@ -81,7 +81,7 @@ export function renderFooter() {
             <!-- Col 1: Brand & Operating Hours -->
             <div class="footer-dark-col">
               <div class="footer-dark-brand">
-                <img src="/images/logo.jpg" alt="Dundee Movers Logo" width="36" height="36" class="footer-logo-img" />
+                <img src="/logo.svg" alt="Dundee Movers Logo" width="36" height="36" class="footer-logo-img" />
                 <span class="footer-brand-title">Dundee<span class="accent-gold">Movers</span></span>
               </div>
               <p class="footer-dark-bio">
@@ -99,12 +99,12 @@ export function renderFooter() {
             <div class="footer-dark-col">
               <h4 class="footer-dark-heading">Removal Services</h4>
               <ul class="footer-dark-links">
-                <li><a href="#services">🏡 Residential House Removals</a></li>
-                <li><a href="#services">🏢 Commercial & Office Moves</a></li>
-                <li><a href="#services">🏛️ Flats & Multi-Storey Homes</a></li>
-                <li><a href="#coverage">🚚 Express Whole UK Corridors</a></li>
-                <li><a href="#services">📦 Packing & Furniture Assembly</a></li>
-                <li><a href="#quote-calculator">📋 Free Tailored Quote Engine</a></li>
+                <li><a href="/services">🏡 Residential House Removals</a></li>
+                <li><a href="/services">🏢 Commercial & Office Moves</a></li>
+                <li><a href="/services">🏛️ Flats & Multi-Storey Homes</a></li>
+                <li><a href="/coverage">🚚 Express Whole UK Corridors</a></li>
+                <li><a href="/services">📦 Packing & Furniture Assembly</a></li>
+                <li><a href="/#quote-calculator">📋 Free Tailored Quote Engine</a></li>
               </ul>
             </div>
 
@@ -112,12 +112,12 @@ export function renderFooter() {
             <div class="footer-dark-col">
               <h4 class="footer-dark-heading">Local Coverage</h4>
               <ul class="footer-dark-links">
-                <li><a href="#coverage">📍 Dundee City (DD1 – DD5)</a></li>
-                <li><a href="#coverage">📍 Broughty Ferry & Monifieth</a></li>
-                <li><a href="#coverage">📍 Angus (Arbroath & Forfar)</a></li>
-                <li><a href="#coverage">📍 Fife & St Andrews</a></li>
-                <li><a href="#coverage">📍 Perthshire & Kinross</a></li>
-                <li><a href="#coverage">📍 Express UK Long Distance</a></li>
+                <li><a href="/coverage">📍 Dundee City (DD1 – DD5)</a></li>
+                <li><a href="/areas/broughty-ferry">📍 Broughty Ferry & Barnhill (DD5)</a></li>
+                <li><a href="/areas/st-andrews">📍 St Andrews & Fife (KY16)</a></li>
+                <li><a href="/areas/arbroath-angus">📍 Arbroath & Angus Towns</a></li>
+                <li><a href="/routes/dundee-to-edinburgh">📍 Dundee to Edinburgh Express</a></li>
+                <li><a href="/routes/dundee-to-london">📍 Dundee to London & Whole UK</a></li>
               </ul>
             </div>
 

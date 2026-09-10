@@ -7,6 +7,8 @@ const COVERAGE_DATA = {
   dundee: {
     title: 'Dundee City & Surrounds (DD1 – DD5)',
     time: 'Local & Express Scheduled Slots',
+    corridorPath: '/areas/broughty-ferry',
+    corridorLabel: 'Explore Broughty Ferry & DD5 Area Hub ➔',
     districts: [
       { name: 'City Centre & Waterfront (DD1)', notes: 'Council parking permits, multi-storey flat stairs, and loading bays arranged.' },
       { name: 'West End & University (DD2)', notes: 'Specialists in traditional high-floor flats, spiral staircases, and student moves.' },
@@ -18,6 +20,8 @@ const COVERAGE_DATA = {
   angus: {
     title: 'Angus & Tayside Region',
     time: '20 – 45 Mins Local Transit',
+    corridorPath: '/areas/arbroath-angus',
+    corridorLabel: 'Explore Arbroath & Angus Area Hub ➔',
     districts: [
       { name: 'Arbroath & Coastal Towns', notes: 'Daily removal routes along the A92 corridor.' },
       { name: 'Forfar & Strathmore', notes: 'Full rural and town house removals with protective packing.' },
@@ -28,6 +32,8 @@ const COVERAGE_DATA = {
   fife: {
     title: 'Fife, Perth & St Andrews',
     time: '15 – 35 Mins Direct Route',
+    corridorPath: '/areas/st-andrews',
+    corridorLabel: 'Explore St Andrews & Fife Area Hub ➔',
     districts: [
       { name: 'St Andrews & University Halls', notes: 'Student flat moves, academic relocations, and international student storage.' },
       { name: 'Tayport & Newport-on-Tay', notes: 'Instant cross-river removals directly over the Tay Bridge.' },
@@ -38,6 +44,8 @@ const COVERAGE_DATA = {
   ukwide: {
     title: 'Whole UK Nationwide Relocations',
     time: 'Direct Non-Shared Door-to-Door Delivery',
+    corridorPath: '/routes/dundee-to-london',
+    corridorLabel: 'Explore Dundee to London Corridor ➔',
     districts: [
       { name: 'Dundee ➔ London & South England', notes: 'Dedicated direct Luton vans. Your items travel alone with guaranteed next-day delivery.' },
       { name: 'Dundee ➔ Manchester, Leeds & Birmingham', notes: 'Express relocations to the Midlands & North West England.' },
@@ -89,7 +97,10 @@ export function initCoverageMap() {
             <h3 class="region-title">${data.title}</h3>
             <span class="region-time-badge">${data.time}</span>
           </div>
-          <a href="#quote-calculator" class="btn btn-primary region-cta">Book This Route</a>
+          <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+            <a href="${data.corridorPath}" class="h-card-link" style="font-size: 0.85rem; font-weight: 600; color: var(--color-accent-primary); text-decoration: none;">${data.corridorLabel}</a>
+            <a href="/#quote-calculator" class="btn btn-primary region-cta">Book This Route</a>
+          </div>
         </div>
 
         <div class="districts-grid">
