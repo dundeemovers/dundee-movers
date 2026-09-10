@@ -1,12 +1,51 @@
 /**
  * Simplified, Customer-Friendly Coverage Hub Component.
- * Optimized for local Dundee & Scottish technical SEO, mobile touch UX, and high conversion.
+ * Features instant 1-tap route transit selector (no typing required), 
+ * 4 core area cards, logistics highlights, and FAQs.
  * Strictly complies with AGENTS.md SRP & 500-line limits.
  */
 
-import { getPostcodeCoverageResult } from '../utils/coverageData.js';
+const ROUTE_TRANSIT_DATA = {
+  dundee: {
+    badge: '⏱️ 15–30 Mins Local Response • Daily Van Slots',
+    title: 'Dundee City Centre, West End, Broughty Ferry & Suburbs (DD1–DD5)',
+    desc: 'Daily local departures from Dundee Central Depot. Equipped with specialized stair-climbing gear for 3rd-floor tenement flats, spiral stairs, and Dundee City Council parking bay suspensions.',
+    link: '/areas/broughty-ferry',
+    linkLabel: 'Explore Broughty Ferry & DD5 Hub ➔'
+  },
+  fife: {
+    badge: '⏱️ 20–35 Mins via Tay Road Bridge',
+    title: 'Fife, St Andrews, Tayport & Newport-on-Tay (KY16, DD6, KY15)',
+    desc: 'Rapid cross-river transit directly across the Tay Road Bridge. Specialists in University of St Andrews student moves, academic library collections, and luxury coastal family villas.',
+    link: '/areas/st-andrews',
+    linkLabel: 'Explore St Andrews & Fife Hub ➔'
+  },
+  angus: {
+    badge: '⏱️ Daily Scheduled A90 & A92 Corridors',
+    title: 'Angus Towns: Arbroath, Forfar, Montrose & Carnoustie (DD7–DD11)',
+    desc: 'County-wide moving coverage connecting Dundee to coastal towns and Strathmore rural properties. Includes full furniture dismantling, protective blankets, and farmhouse moving.',
+    link: '/areas/arbroath-angus',
+    linkLabel: 'Explore Angus Towns Hub ➔'
+  },
+  edinburgh: {
+    badge: '⏱️ 1 hr 20 Mins Same-Day Express Transit',
+    title: 'Dundee ➔ Edinburgh & Lothians (EH1–EH26)',
+    desc: 'Same-day express intercity relocations via M90 and Queensferry Crossing. Morning loading in Dundee with afternoon placement in Edinburgh flats and homes.',
+    link: '/routes/dundee-to-edinburgh',
+    linkLabel: 'Explore Edinburgh Corridor ➔'
+  },
+  london: {
+    badge: '⏱️ Guaranteed Next-Day Direct Delivery',
+    title: 'Dundee ➔ London, Midlands, Manchester & Entire UK',
+    desc: '100% exclusive Luton van transit with zero multi-drop courier detours or third-party sorting hubs. Your belongings travel alone directly to your new UK address.',
+    link: '/routes/dundee-to-london',
+    linkLabel: 'Explore Dundee to London Corridor ➔'
+  }
+};
 
 export function renderCoverageMap() {
+  const initial = ROUTE_TRANSIT_DATA.dundee;
+
   return `
     <div class="coverage-hub-container">
       
@@ -30,31 +69,34 @@ export function renderCoverageMap() {
           We operate a strict <strong>1-move-at-a-time guarantee</strong>. Your vehicle and crew are 100% dedicated to your property from loading to delivery—meaning zero shared loads, direct door-to-door transit, and £50,000 Goods in Transit insurance included on every run.
         </p>
 
-        <!-- 2. Interactive Instant Postcode Coverage Checker -->
-        <div class="postcode-checker-box">
-          <h2 class="checker-prompt-title">
-            <span>🔍</span>
-            <span>Check Moving Coverage & Transit Window</span>
-          </h2>
-          <p class="checker-prompt-subtitle">Enter your collection or delivery postcode to see immediate vehicle availability and estimated transit times.</p>
-          
-          <form id="coverage-checker-form" class="checker-input-row" onsubmit="return false;">
-            <input 
-              type="text" 
-              id="checker-postcode-input" 
-              class="checker-input" 
-              placeholder="e.g. DD1, DD5, KY16, EH1, SW1..." 
-              maxlength="10" 
-              aria-label="Enter Postcode" 
-              required 
-            />
-            <button type="submit" class="btn btn-primary checker-btn" id="checker-submit-btn">
-              <span>Check Coverage</span>
-              ➔
-            </button>
-          </form>
+        <!-- 2. One-Tap Quick Route Transit Board (No Typing Needed) -->
+        <div class="transit-board-box">
+          <div class="transit-board-header">
+            <span class="transit-board-label">⚡ Tap any destination to view transit time & availability:</span>
+          </div>
 
-          <div id="checker-result-area"></div>
+          <div class="route-pills-row" id="route-pills">
+            <button class="route-pill-btn active" data-route="dundee" type="button">📍 Dundee Core (DD1–DD5)</button>
+            <button class="route-pill-btn" data-route="fife" type="button">🏛️ St Andrews & Fife</button>
+            <button class="route-pill-btn" data-route="angus" type="button">🌾 Angus Towns</button>
+            <button class="route-pill-btn" data-route="edinburgh" type="button">🏰 Edinburgh Same-Day</button>
+            <button class="route-pill-btn" data-route="london" type="button">🚚 London & UK Non-Stop</button>
+          </div>
+
+          <div class="route-live-card" id="route-live-card">
+            <div class="route-live-content">
+              <div class="route-live-left">
+                <span class="route-live-badge" id="live-route-badge">${initial.badge}</span>
+                <h3 class="route-live-title" id="live-route-title">${initial.title}</h3>
+                <p class="route-live-desc" id="live-route-desc">${initial.desc}</p>
+              </div>
+              <div class="route-live-right">
+                <a href="${initial.link}" class="btn btn-primary" id="live-route-link" style="font-size: 0.88rem; padding: 0.6rem 1.25rem; white-space: nowrap;">
+                  ${initial.linkLabel}
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- 3. Trust Highlights Ribbon -->
@@ -224,53 +266,27 @@ export function renderCoverageMap() {
 }
 
 export function initCoverageMap() {
-  // Interactive Instant Postcode Coverage Checker
-  const form = document.getElementById('coverage-checker-form');
-  const input = document.getElementById('checker-postcode-input');
-  const resultArea = document.getElementById('checker-result-area');
+  const pills = document.querySelectorAll('.route-pill-btn');
+  const badgeEl = document.getElementById('live-route-badge');
+  const titleEl = document.getElementById('live-route-title');
+  const descEl = document.getElementById('live-route-desc');
+  const linkEl = document.getElementById('live-route-link');
 
-  if (form && input && resultArea) {
-    function evaluatePostcode(val) {
-      const res = getPostcodeCoverageResult(val);
-      if (!res) {
-        resultArea.innerHTML = '';
-        return;
-      }
+  if (pills.length > 0 && badgeEl && titleEl && descEl && linkEl) {
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
 
-      if (res.type === 'invalid') {
-        resultArea.innerHTML = `
-          <div class="checker-result-card result-invalid">
-            <span>${res.badge}</span>
-            <span>${res.desc}</span>
-          </div>
-        `;
-        return;
-      }
+        const key = pill.getAttribute('data-route') || 'dundee';
+        const data = ROUTE_TRANSIT_DATA[key] || ROUTE_TRANSIT_DATA.dundee;
 
-      const cardClass = res.type === 'available' ? 'result-available' : 'result-uk';
-      resultArea.innerHTML = `
-        <div class="checker-result-card ${cardClass}">
-          <span style="font-size: 1.35rem;">${res.badge}</span>
-          <div>
-            <strong>${res.title}</strong>
-            <p style="margin-top: 0.25rem;">${res.desc}</p>
-            <a href="/#quote-calculator" class="btn btn-primary" style="margin-top: 0.65rem; padding: 0.4rem 1rem; font-size: 0.82rem;">${res.ctaText}</a>
-          </div>
-        </div>
-      `;
-    }
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      evaluatePostcode(input.value);
-    });
-
-    input.addEventListener('input', () => {
-      if (input.value.trim().length >= 2) {
-        evaluatePostcode(input.value);
-      } else {
-        resultArea.innerHTML = '';
-      }
+        badgeEl.textContent = data.badge;
+        titleEl.textContent = data.title;
+        descEl.textContent = data.desc;
+        linkEl.setAttribute('href', data.link);
+        linkEl.textContent = data.linkLabel;
+      });
     });
   }
 }
