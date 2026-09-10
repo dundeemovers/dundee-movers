@@ -6,6 +6,7 @@
 import confetti from 'canvas-confetti';
 import '../styles/movePass.css';
 import '../styles/movePassEssentials.css';
+import { renderMovePassCompletion, initMovePassCompletion } from './movepass/MovePassCompletion.js';
 
 const ADDON_CATALOG = [
   { id: 'assembly', name: 'Bed Frame & Wardrobe Assembly / Disassembly', price: 40, desc: 'Professional de-rigging and rebuild by crew' },
@@ -258,6 +259,8 @@ function renderPassCard(container, lead) {
   if (!isAccepted) {
     attachAddonListeners(container, basePrice, selectedAddons);
     attachAcceptListener(container, lead, selectedAddons);
+  } else {
+    initMovePassCompletion(container, lead, (updatedLead) => renderPassCard(container, updatedLead));
   }
 }
 
@@ -382,7 +385,7 @@ function renderAcceptedCard(lead) {
         </p>
       </div>
 
-      <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+      <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
         <a href="tel:01382932840" style="display: inline-flex; align-items: center; gap: 0.5rem; background: #064e3b; color: #ffffff; padding: 1rem 1.8rem; border-radius: 8px; font-weight: 800; text-decoration: none; font-size: 1rem;">
           📞 Call Office: 01382 932840
         </a>
@@ -390,6 +393,8 @@ function renderAcceptedCard(lead) {
           💬 Chat on WhatsApp
         </a>
       </div>
+
+      ${renderMovePassCompletion(lead)}
 
       ${renderMovingDayEssentials()}
     </div>
