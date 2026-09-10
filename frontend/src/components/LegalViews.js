@@ -25,7 +25,7 @@ export function renderTermsView() {
 
         <div class="legal-body">
           <div class="legal-highlight-box">
-            <strong>Key Summary:</strong> We provide written or emailed quotations based on information you supply, valid for a stated period. When booked, your move has a 100% dedicated van and crew with full insurance. Extra costs apply if job conditions are more difficult than described, and waiting time due to client or solicitor key delays is charged at £40 per van per hour.
+            <strong>Key Summary:</strong> We provide written or emailed quotations valid for a stated period, dedicated 1-move-at-a-time vans, and comprehensive Goods in Transit insurance. Payment is by cash or direct bank transfer only upon completion. Extra costs apply if job conditions are more difficult than described, waiting time is charged at £40 per van per hour, and any transit damage claims must be submitted in writing within 48 hours.
           </div>
 
           <h2>1. Dedicated 1-Move-At-A-Time Guarantee</h2>
@@ -80,21 +80,89 @@ export function renderTermsView() {
             <li><strong>Cancellations:</strong> Cancellations made with more than 48 hours notice before moving morning will receive a deposit credit toward future moves.</li>
           </ul>
 
-          <h2>7. Goods in Transit Insurance Cover</h2>
+          <h2>7. Payment Terms: Cash or Bank Transfer Only</h2>
           <p>
-            Dundee Movers is fully insured. Every move includes comprehensive Goods in Transit and Public Liability insurance cover at no additional charge.
+            Payment settlement is straightforward and transparent:
           </p>
           <ul>
-            <li><strong>Owner-Packed Boxes:</strong> If you choose to pack your own cartons, boxes must be properly taped and labeled. We cannot accept liability for pre-damaged goods or breakables packed without protective bubble wrap or paper.</li>
-            <li><strong>High-Value Items:</strong> Any exceptionally high-value or antique single item should be declared to our team prior to moving day.</li>
+            <li><strong>Accepted Payment Methods:</strong> We accept payment by <strong>cash or direct bank transfer only</strong>. We do not accept card payments or personal cheques.</li>
+            <li><strong>Timing of Settlement:</strong> The remaining balance (total quoted price minus your initial deposit, plus any agreed waiting time or access adjustments) is strictly payable upon completion of the move on moving day.</li>
+            <li><strong>Receipts & Invoices:</strong> Formal itemized commercial receipts and invoices are provided for all completed moves.</li>
           </ul>
 
-          <h2>8. Deliveries to Customer-Chosen Self-Storage</h2>
+          <h2>8. Customer Supervision & Final Property Sweep</h2>
+          <p>
+            To ensure complete accuracy and prevent items being left behind:
+          </p>
+          <ul>
+            <li><strong>Authorized Presence:</strong> The customer or an authorized adult representative (aged 18+) must be present on-site throughout both the loading and unloading phases.</li>
+            <li><strong>Final Inspection:</strong> It is the customer's sole responsibility to ensure that all items intended for relocation are loaded. Please conduct a thorough final inspection of all rooms, lofts, cupboards, attics, garages, and garden outbuildings before the removals vehicle departs the collection address. Dundee Movers cannot accept liability for items overlooked or left behind after departure.</li>
+          </ul>
+
+          <h2>9. Appliance Preparation & Plumbing Disconnection</h2>
+          <p>
+            Removals crews are professional movers and are not certified plumbers or electricians:
+          </p>
+          <ul>
+            <li><strong>Pre-Move Disconnection:</strong> All washing machines, dishwashers, and refrigeration appliances must be fully drained, defrosted, and disconnected from water and power supplies prior to our crew's arrival.</li>
+            <li><strong>Transit Bolts:</strong> Drum stabilizer transit bolts should be fitted to washing machines by the customer where applicable.</li>
+            <li><strong>Liability Limitation:</strong> Dundee Movers is not liable for water leaks, damp damage, or internal mechanical and electrical faults resulting from pre-existing plumbing issues or appliances not properly prepared prior to moving.</li>
+          </ul>
+
+          <h2>10. Furniture Dismantling & Flat-Pack (MDF / Particle Board)</h2>
+          <p>
+            Flat-pack or composite chipboard/MDF furniture (such as IKEA wardrobes, chests of drawers, and modular shelving) is designed by manufacturers for single assembly and can be structurally compromised when moved:
+          </p>
+          <ul>
+            <li><strong>Pre-Dismantling Recommendation:</strong> We strongly advise that customers dismantle large flat-pack wardrobes and units prior to moving morning.</li>
+            <li><strong>Transit of Assembled Units:</strong> If flat-pack furniture is moved assembled at the customer's request, Dundee Movers cannot accept liability for structural joint failure, stripped screw sockets, or wood dowel fractures inherent to composite wood during normal transit.</li>
+            <li><strong>Assembly Assistance:</strong> Basic furniture disassembly and reassembly can be requested in advance as part of your quotation.</li>
+          </ul>
+
+          <h2>11. Self-Packed Boxes (PBO) & Fragile Goods</h2>
+          <p>
+            Where packing is completed by the customer rather than our removals team (Packed By Owner / PBO):
+          </p>
+          <ul>
+            <li><strong>Packing Standards:</strong> Cartons must be sturdy, well-taped, and fragile items individually wrapped with bubble wrap or packing paper. Boxes should not be overloaded beyond 20kg for safe handling.</li>
+            <li><strong>Internal Breakage Liability:</strong> Dundee Movers cannot accept liability for internal damage or breakages inside customer-packed cartons unless there is clear external physical damage to the box caused by crew mishandling.</li>
+          </ul>
+
+          <h2>12. Excluded Items & Personal Valuables</h2>
+          <p>
+            Certain high-value and sensitive personal possessions must not be packed inside removals cartons or loaded into our vehicles. The customer must retain personal custody of:
+          </p>
+          <ul>
+            <li>Cash, banknotes, currency, deeds, securities, passports, and essential identity documents.</li>
+            <li>High-value fine jewellery, luxury watches, and precious gemstones.</li>
+            <li>Essential prescription medications and critical daily medical equipment.</li>
+          </ul>
+
+          <h2>13. Goods in Transit Insurance Cover & 48-Hour Damage Claims</h2>
+          <p>
+            Dundee Movers is fully insured. Every relocation includes comprehensive Goods in Transit and Public Liability insurance cover:
+          </p>
+          <ul>
+            <li><strong>Delivery Inspection:</strong> The customer must inspect goods during unloading at the destination property.</li>
+            <li><strong>48-Hour Notification Window:</strong> In the unlikely event of loss or damage to your belongings, written notice with clear photographic evidence must be submitted to dispatch within <strong>48 hours</strong> of job completion. Claims submitted after 48 hours cannot be accepted under our transit insurance.</li>
+            <li><strong>High-Value Items:</strong> Any single antique, artwork, or high-value item exceeding standard domestic furniture value should be explicitly declared in writing prior to moving day.</li>
+          </ul>
+
+          <h2>14. Unforeseen Delays & Force Majeure (Weather & Road Closures)</h2>
+          <p>
+            While our team prides itself on punctual timekeeping and dependable logistics, certain external circumstances are beyond our control:
+          </p>
+          <ul>
+            <li>We cannot be held financially liable for delays resulting from severe Scottish weather (heavy snow, ice, blizzards), police road closures, high-wind closures of major bridges (e.g. Tay Road Bridge, Queensferry Crossing), or unavoidable traffic gridlock.</li>
+            <li>In such events, our dispatch team maintains active communication and will take every safe, reasonable step to complete your relocation as promptly as conditions allow.</li>
+          </ul>
+
+          <h2>15. Deliveries to Customer-Chosen Self-Storage</h2>
           <p>
             Dundee Movers does not operate a public warehouse storage facility. However, our team regularly provides direct transport to and from any licensed self-storage facility of the customer's choice (including Kangaroo Self Storage, Armadillo, or local units).
           </p>
 
-          <h2>9. Prohibited & Hazardous Goods</h2>
+          <h2>16. Prohibited & Hazardous Goods</h2>
           <p>
             For safety and insurance compliance, our crews cannot transport flammable gases, petrol/diesel fuel canisters, open chemicals, firearms, or illegal contraband.
           </p>

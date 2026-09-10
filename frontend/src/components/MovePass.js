@@ -373,7 +373,7 @@ function renderAcceptedCard(lead) {
           Guaranteed Price: £${lead.quotedPrice || 280}
         </div>
         <p style="font-size: 0.85rem; color: #064e3b; line-height: 1.6; margin: 0;">
-          Our dispatch team has been notified. You can pay your refundable £${deposit} deposit by debit/credit card or bank transfer by calling our Dundee dispatch office:
+          Our dispatch team has been notified. You can pay your refundable £${deposit} deposit by bank transfer or cash by calling our Dundee dispatch office:
         </p>
       </div>
 

@@ -33,6 +33,10 @@ const FAQS = [
     a: 'In Scottish property purchases, key release delays can happen. We provide a 30-minute complimentary courtesy window upon arrival at your new property. If key handover is delayed beyond this by solicitors or previous occupants, waiting time is charged at a standard rate of £40 per van per hour.'
   },
   {
+    q: 'What payment methods do you accept?',
+    a: 'We accept payment by direct bank transfer or cash only. The remaining balance (total quoted price minus your initial deposit, plus any waiting time if applicable) is payable upon completion of your move on moving day. Formal itemized commercial invoices and receipts are issued upon payment.'
+  },
+  {
     q: 'Do you provide office and commercial removals in Dundee and Scotland?',
     a: 'Yes. We offer complete office and business relocation services throughout Dundee, Angus, Fife, and across Scotland. We provide weekend and evening moves to minimize commercial downtime, crate hire, secure IT and desktop computer transport, office furniture dismantling/assembly, and tailored B2B invoicing with formal itemized commercial receipts.'
   }
