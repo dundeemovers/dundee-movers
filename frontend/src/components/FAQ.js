@@ -29,6 +29,10 @@ const FAQS = [
     a: 'Yes, we are fully insured. Every move automatically includes comprehensive Goods in Transit and Public Liability insurance at no extra charge.'
   },
   {
+    q: 'What happens if there is a delay getting the keys on moving day?',
+    a: 'In Scottish property purchases, key release delays can happen. We provide a 30-minute complimentary courtesy window upon arrival at your new property. If key handover is delayed beyond this by solicitors or previous occupants, waiting time is charged at a standard rate of £40 per van per hour.'
+  },
+  {
     q: 'Do you provide office and commercial removals in Dundee and Scotland?',
     a: 'Yes. We offer complete office and business relocation services throughout Dundee, Angus, Fife, and across Scotland. We provide weekend and evening moves to minimize commercial downtime, crate hire, secure IT and desktop computer transport, office furniture dismantling/assembly, and tailored B2B invoicing with formal itemized commercial receipts.'
   }

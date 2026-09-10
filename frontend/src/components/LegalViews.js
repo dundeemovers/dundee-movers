@@ -20,12 +20,12 @@ export function renderTermsView() {
             <span style="font-size: 0.78rem; font-weight: 700; color: #059669;">✓ Updated September 2026</span>
           </div>
           <h1 class="legal-title">Terms & Conditions of Service</h1>
-          <p class="legal-meta">Please read these terms carefully before confirming your moving booking with Dundee Movers.</p>
+          <p class="legal-meta">Please review these terms and conditions carefully before confirming your relocation booking with Dundee Movers.</p>
         </header>
 
         <div class="legal-body">
           <div class="legal-highlight-box">
-            <strong>Key Summary:</strong> We operate a strict 1-move-at-a-time policy with 100% dedicated vans, full insurance cover, and fixed transparent pricing. Customers are responsible for reserving legal curb parking space outside their property.
+            <strong>Key Summary:</strong> We provide written or emailed quotations based on information you supply, valid for a stated period. When booked, your move has a 100% dedicated van and crew with full insurance. Extra costs apply if job conditions are more difficult than described, and waiting time due to client or solicitor key delays is charged at £40 per van per hour.
           </div>
 
           <h2>1. Dedicated 1-Move-At-A-Time Guarantee</h2>
@@ -33,16 +33,36 @@ export function renderTermsView() {
             When you book Dundee Movers, your assigned vehicle and crew are 100% exclusive to your relocation from collection to delivery. We never combine multiple customers' belongings into shared loads or route cargo through third-party sorting hubs.
           </p>
 
-          <h2>2. Quotations & Fixed Pricing</h2>
+          <h2>2. Quotations & Validity Period</h2>
           <p>
-            All quotations provided via our website, phone, or email are based on the item inventory, property access, and floor levels you declare during the booking process.
+            We provide a formal written or emailed quote based strictly on the information, inventory list, property access details, and floor levels you supply during the quotation process.
           </p>
           <ul>
-            <li><strong>Guaranteed Price:</strong> The price agreed is fixed with zero surprise fuel surcharges or mileage markups on moving day.</li>
-            <li><strong>Inventory Changes:</strong> If substantial additional furniture, unlisted rooms, or extra flights of stairs are added on the day, our team will review the adjustment with you prior to loading.</li>
+            <li><strong>Limited Time Validity:</strong> Every quotation is valid for a limited time, as stated on your written estimate (standard validity is 14 calendar days from issue date, unless an alternate date is explicitly specified in writing). Bookings remain subject to van and crew schedule availability at the moment your booking deposit is received.</li>
+            <li><strong>Fixed Price Integrity:</strong> Provided that the actual inventory, access conditions, and addresses match what was declared, your agreed move price is guaranteed and fixed with zero surprise fuel surcharges or hidden mileage fees on moving day.</li>
           </ul>
 
-          <h2>3. Parking & Street Curb Access</h2>
+          <h2>3. Job Accuracy & Scope Adjustments (Extra Difficulty)</h2>
+          <p>
+            Our quotations and crew allocations are calculated precisely upon the details you provide. Extra costs may apply if the actual job is materially more difficult or extensive than described during booking:
+          </p>
+          <ul>
+            <li><strong>Undeclared Items & Excess Volume:</strong> If additional large furniture pieces, extra unlisted rooms, lofts, garden sheds, or heavy loose cargo are added on moving morning, our team will review the adjustment with you prior to loading.</li>
+            <li><strong>Access Obstacles & Extended Walking Distance:</strong> Extra costs may apply if property access differs from what was described (e.g. undisclosed high floor levels without an elevator, narrow spiral closes, difficult gate clearances, or walking carry distances exceeding 20 meters from vehicle to entrance).</li>
+            <li><strong>Unprepared Goods & Specialist Labor:</strong> If furniture requires unexpected dismantling, door removal, or specialist maneuvering that was not stated during booking, additional labor time will be charged fairly.</li>
+          </ul>
+
+          <h2>4. Waiting Time & Client Delays (£40/hr per Van)</h2>
+          <p>
+            In Scottish property purchases and relocations, completion delays between collection and key handover can occasionally happen (such as delayed settlement of missives, banking transfer holdups, or late estate agent key releases).
+          </p>
+          <ul>
+            <li><strong>Waiting Time Rate:</strong> Waiting time due to client, solicitor, or third-party handover delays is charged at <strong>£40 per van per hour</strong> (calculated in fair 30-minute intervals).</li>
+            <li><strong>Courtesy Window:</strong> To assist you during the stress of key handover, we provide a complimentary courtesy grace period of 30 minutes upon arrival at the destination address before waiting charges commence.</li>
+            <li><strong>Exclusive Dedication:</strong> Because our crew and locked van remain 100% dedicated to your belongings and cannot take on other work while waiting on standby, this fee ensures fair compensation for our team's operational time.</li>
+          </ul>
+
+          <h2>5. Parking & Street Curb Access</h2>
           <p>
             Adequate and safe parking space directly outside both the collection and delivery addresses is essential for swift loading and unloading.
           </p>
@@ -51,7 +71,7 @@ export function renderTermsView() {
             <li><strong>Restricted Streets:</strong> If parking requires permits or special arrangements, the customer must arrange this in advance. Any unavoidable parking penalty charge notices resulting from customer-directed illegal parking without reasonable curb space remain the responsibility of the customer.</li>
           </ul>
 
-          <h2>4. Bookings, Deposits & Rescheduling</h2>
+          <h2>6. Bookings, Deposits & Rescheduling</h2>
           <p>
             To secure your dedicated vehicle and removals crew for your chosen date, a standard booking deposit is payable upon quotation acceptance.
           </p>
@@ -60,7 +80,7 @@ export function renderTermsView() {
             <li><strong>Cancellations:</strong> Cancellations made with more than 48 hours notice before moving morning will receive a deposit credit toward future moves.</li>
           </ul>
 
-          <h2>5. Goods in Transit Insurance Cover</h2>
+          <h2>7. Goods in Transit Insurance Cover</h2>
           <p>
             Dundee Movers is fully insured. Every move includes comprehensive Goods in Transit and Public Liability insurance cover at no additional charge.
           </p>
@@ -69,12 +89,12 @@ export function renderTermsView() {
             <li><strong>High-Value Items:</strong> Any exceptionally high-value or antique single item should be declared to our team prior to moving day.</li>
           </ul>
 
-          <h2>6. Deliveries to Customer-Chosen Self-Storage</h2>
+          <h2>8. Deliveries to Customer-Chosen Self-Storage</h2>
           <p>
             Dundee Movers does not operate a public warehouse storage facility. However, our team regularly provides direct transport to and from any licensed self-storage facility of the customer's choice (including Kangaroo Self Storage, Armadillo, or local units).
           </p>
 
-          <h2>7. Prohibited & Hazardous Goods</h2>
+          <h2>9. Prohibited & Hazardous Goods</h2>
           <p>
             For safety and insurance compliance, our crews cannot transport flammable gases, petrol/diesel fuel canisters, open chemicals, firearms, or illegal contraband.
           </p>
@@ -82,7 +102,7 @@ export function renderTermsView() {
           <div class="legal-contact-box">
             <div class="legal-contact-text">
               <strong>Have questions regarding our terms or your move?</strong><br />
-              Our Dundee dispatch team is available 7 days a week.
+              Our Dundee dispatch team is available 7 days a week to assist you.
             </div>
             <a href="tel:+447308420884" class="legal-contact-btn">Speak with Dispatch</a>
           </div>
