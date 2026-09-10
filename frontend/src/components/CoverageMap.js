@@ -74,8 +74,9 @@ export function renderCoverageMap() {
               <p class="area-card-locations"><strong>Key Districts:</strong> City Centre, West End, Broughty Ferry, Barnhill, Stobswell, Coldside, Craigie.</p>
               <p class="area-card-text">Specialists in traditional high-floor tenement flats, narrow spiral staircases, Dundee City Council parking bay permits, and family homes throughout Dundee.</p>
             </div>
-            <div class="area-card-bottom">
-              <a href="/areas/broughty-ferry" class="area-card-link">View Broughty Ferry & DD5 Area Hub ➔</a>
+            <div class="area-card-bottom" style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <a href="/areas/broughty-ferry" class="area-card-link">View Broughty Ferry & Barnhill ➔</a>
+              <a href="/areas/dundee-west-end" class="area-card-link" style="color: #64748b; font-size: 0.84rem;">View Dundee West End & Perth Road ➔</a>
             </div>
           </div>
 
@@ -87,8 +88,10 @@ export function renderCoverageMap() {
               <p class="area-card-locations"><strong>Key Districts:</strong> St Andrews, Tayport, Newport-on-Tay, Cupar, Leuchars, East Neuk.</p>
               <p class="area-card-text">University student flat moves, academic library collections, coastal village properties, and family relocations directly across the Tay Road Bridge.</p>
             </div>
-            <div class="area-card-bottom">
-              <a href="/areas/st-andrews" class="area-card-link">View St Andrews & Fife Area Hub ➔</a>
+            <div class="area-card-bottom" style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <a href="/areas/st-andrews" class="area-card-link">View St Andrews & East Neuk ➔</a>
+              <a href="/areas/perth" class="area-card-link" style="color: #64748b; font-size: 0.84rem;">View Perth & Perthshire Hub ➔</a>
+              <a href="/areas/cupar-fife" class="area-card-link" style="color: #64748b; font-size: 0.84rem;">View Cupar & Howe of Fife Hub ➔</a>
             </div>
           </div>
 
@@ -100,8 +103,9 @@ export function renderCoverageMap() {
               <p class="area-card-locations"><strong>Key Districts:</strong> Arbroath, Forfar, Montrose, Carnoustie, Brechin, Monifieth.</p>
               <p class="area-card-text">Scheduled removals connecting Dundee to Angus coastal towns, detached villas, rural farmsteads, and cottages with full furniture protection.</p>
             </div>
-            <div class="area-card-bottom">
-              <a href="/areas/arbroath-angus" class="area-card-link">View Arbroath & Angus Area Hub ➔</a>
+            <div class="area-card-bottom" style="display: flex; flex-direction: column; gap: 0.35rem;">
+              <a href="/areas/arbroath-angus" class="area-card-link">View Arbroath, Forfar & Angus ➔</a>
+              <a href="/areas/monifieth" class="area-card-link" style="color: #64748b; font-size: 0.84rem;">View Monifieth & Balmossie Hub ➔</a>
             </div>
           </div>
 
@@ -115,7 +119,10 @@ export function renderCoverageMap() {
             </div>
             <div class="area-card-bottom" style="display: flex; flex-direction: column; gap: 0.35rem;">
               <a href="/routes/dundee-to-london" class="area-card-link">View Dundee to London Route ➔</a>
-              <a href="/routes/dundee-to-edinburgh" class="area-card-link" style="color: #64748b; font-size: 0.82rem;">View Dundee to Edinburgh Route ➔</a>
+              <a href="/routes/dundee-to-edinburgh" class="area-card-link" style="color: #64748b; font-size: 0.84rem;">View Dundee to Edinburgh Route ➔</a>
+              <a href="/routes/dundee-to-glasgow" class="area-card-link" style="color: #64748b; font-size: 0.84rem;">View Dundee to Glasgow Route ➔</a>
+              <a href="/routes/dundee-to-manchester" class="area-card-link" style="color: #64748b; font-size: 0.84rem;">View Dundee to Manchester Route ➔</a>
+              <a href="/routes/dundee-to-aberdeen" class="area-card-link" style="color: #64748b; font-size: 0.84rem;">View Dundee to Aberdeen Route ➔</a>
             </div>
           </div>
 

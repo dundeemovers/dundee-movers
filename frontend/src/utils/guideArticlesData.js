@@ -219,5 +219,42 @@ Long-distance moves (e.g. Dundee to London or Manchester) include mileage, fuel 
         ]
       }
     ]
+  },
+  {
+    id: 'packing-services-dundee',
+    category: 'Packing & Protection',
+    categoryTag: 'Packing Services',
+    icon: '📦',
+    title: 'Professional Packing Services Dundee: Complete Home & Fragile Packing',
+    desc: 'Full house packing, delicate glassware wrapping, wardrobe carton services, and eco-friendly packing box delivery in Dundee & Tayside.',
+    readTime: '5 min read',
+    updatedDate: 'Updated September 2026',
+    author: 'Head of Packing Logistics',
+    summary: 'Everything you need to know about professional packing services in Dundee: full-service packing vs fragile-only packing, material standards, and pricing transparency.',
+    sections: [
+      {
+        heading: 'Full House Packing vs Fragile-Only Packing',
+        content: `Packing up an entire family home takes an average of 40 to 60 hours for a working family. Dundee Movers offers two bespoke packing tiers designed to eliminate moving stress:
+- **Full House Packing Service:** Our certified crew arrives 24 to 48 hours prior to your move date with all materials (double-walled cartons, acid-free tissue, heavy-duty tape, and bubble wrap). We systematically wrap, pack, and label every room from the kitchen pantry to the attic.
+- **Fragile-Only Packing:** Perfect for customers who prefer to pack their own clothes and books, but want professional peace of mind for porcelain dinner sets, crystal glassware, oil paintings, mirrors, and delicate heirlooms.`,
+        tips: [
+          'Choose Fragile-Only packing if you want to keep costs down while fully protecting delicate items.',
+          'All packing materials supplied and packed by our team are 100% covered under our £50,000 Goods in Transit insurance policy.'
+        ]
+      },
+      {
+        heading: 'Commercial-Grade Packing Materials Used',
+        content: `Standard supermarket or single-wall postal boxes easily buckle when stacked inside a removals van. We supply only commercial-grade materials:
+- **Double-Wall Corrugated Cartons:** Heavy-gauge boxes that stack safely up to the van ceiling without crushing contents.
+- **Acid-Free Tissue & Newsprint:** Prevents ink transfer onto fine bone china, glazed ceramics, and silverware.
+- **Porta-Robe Tall Wardrobe Boxes:** Fitted with metal hanging rails so suits, evening dresses, and winter coats transfer directly from your wardrobe without creasing or needing ironing.
+- **Anti-Static Screen Covers & Mattress Wraps:** Heavy-duty 400-gauge waterproof hygiene seals protecting mattresses from stairwell dust and damp Scottish weather.`,
+        checklist: [
+          'Request an eco-packing starter kit delivered directly to your Dundee home 2 weeks prior.',
+          'Keep personal valuables (jewelry, prescription medication, passports, keys) packed separately in your essentials bag.',
+          'Ask our team about unpacking services at your destination address to have kitchen cupboards and beds ready on moving night.'
+        ]
+      }
+    ]
   }
 ];

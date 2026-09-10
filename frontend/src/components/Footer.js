@@ -100,10 +100,10 @@ export function renderFooter() {
               <h4 class="footer-dark-heading">Removal Services</h4>
               <ul class="footer-dark-links">
                 <li><a href="/services">🏡 Residential House Removals</a></li>
-                <li><a href="/services">🏢 Commercial & Office Moves</a></li>
                 <li><a href="/services">🏛️ Flats & Multi-Storey Homes</a></li>
+                <li><a href="/guides/packing-services-dundee">📦 Packing Service Dundee Removals</a></li>
+                <li><a href="/services">🏢 Commercial & Office Moves</a></li>
                 <li><a href="/coverage">🚚 Express Whole UK Corridors</a></li>
-                <li><a href="/services">📦 Packing & Furniture Assembly</a></li>
                 <li><a href="/#quote-calculator">📋 Free Tailored Quote Engine</a></li>
               </ul>
             </div>
@@ -112,12 +112,13 @@ export function renderFooter() {
             <div class="footer-dark-col">
               <h4 class="footer-dark-heading">Local Coverage</h4>
               <ul class="footer-dark-links">
-                <li><a href="/coverage">📍 Dundee City (DD1 – DD5)</a></li>
                 <li><a href="/areas/broughty-ferry">📍 Broughty Ferry & Barnhill (DD5)</a></li>
-                <li><a href="/areas/st-andrews">📍 St Andrews & Fife (KY16)</a></li>
-                <li><a href="/areas/arbroath-angus">📍 Arbroath & Angus Towns</a></li>
-                <li><a href="/routes/dundee-to-edinburgh">📍 Dundee to Edinburgh Express</a></li>
-                <li><a href="/routes/dundee-to-london">📍 Dundee to London & Whole UK</a></li>
+                <li><a href="/areas/dundee-west-end">📍 Dundee West End & Perth Rd</a></li>
+                <li><a href="/areas/monifieth">📍 Monifieth & Angus Coast</a></li>
+                <li><a href="/areas/perth">📍 Perth & Perthshire Removals</a></li>
+                <li><a href="/areas/st-andrews">📍 St Andrews & East Neuk</a></li>
+                <li><a href="/areas/cupar-fife">📍 Cupar & Central Fife</a></li>
+                <li><a href="/areas/arbroath-angus">📍 Arbroath, Forfar & Angus</a></li>
               </ul>
             </div>
 
@@ -156,6 +157,22 @@ export function renderFooter() {
               </div>
             </div>
 
+          </div>
+
+          <!-- Intercity Direct Routes Strip (Uncluttered, High-SEO Authority) -->
+          <div class="footer-corridor-strip">
+            <span class="corridor-strip-label">Direct Express Routes:</span>
+            <div class="corridor-strip-links">
+              <a href="/routes/dundee-to-glasgow">Dundee to Glasgow Removals</a>
+              <span class="corridor-sep">•</span>
+              <a href="/routes/dundee-to-aberdeen">Dundee to Aberdeen Removals</a>
+              <span class="corridor-sep">•</span>
+              <a href="/routes/dundee-to-manchester">Dundee to Manchester Removals</a>
+              <span class="corridor-sep">•</span>
+              <a href="/routes/dundee-to-edinburgh">Dundee to Edinburgh Removals</a>
+              <span class="corridor-sep">•</span>
+              <a href="/routes/dundee-to-london">Dundee to London Removals</a>
+            </div>
           </div>
 
           <!-- Bottom Copyright Bar -->
