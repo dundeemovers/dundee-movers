@@ -16,6 +16,7 @@ import { renderReviews } from './components/Reviews.js';
 import { renderFAQ, initFAQ } from './components/FAQ.js';
 import { renderFooter } from './components/Footer.js';
 import { renderMovePass, initMovePass } from './components/MovePass.js';
+import { renderTermsView, renderPrivacyView } from './components/LegalViews.js';
 
 function initSpotlightEffect() {
   document.addEventListener('mousemove', (e) => {
@@ -185,7 +186,7 @@ function mountApp() {
     viewInitializer = () => initHomeView();
     updateRouteMetadata({
       title: 'Instant Removals Quote Dundee & UK | Dundee Movers',
-      description: 'Calculate your tailored Scottish moving cost in 2 minutes. 100% dedicated vans, zero shared loads, £50k insurance included.',
+      description: 'Calculate your tailored Scottish moving cost in 2 minutes. 100% dedicated vans, zero shared loads, fully insured.',
       canonicalPath: '/'
     });
 
@@ -195,7 +196,7 @@ function mountApp() {
     viewHtml = renderServicesView();
     updateRouteMetadata({
       title: 'Removal Services Dundee, Angus & UK | Dundee Movers',
-      description: 'Professional house removals, tenement flat moves, packing services & office relocations in Dundee (DD1–DD5), Angus & UK. 100% dedicated vans, £50k insurance.',
+      description: 'Professional house removals, tenement flat moves, packing services & office relocations in Dundee (DD1–DD5), Angus & UK. 100% dedicated vans, fully insured.',
       canonicalPath: '/services'
     });
 
@@ -271,14 +272,34 @@ function mountApp() {
       canonicalPath: '/reviews'
     });
 
-  // 8. Curated Landing Home View
+  // 8. Terms & Conditions View
+  } else if (pathname === '/terms' || pathname === '/terms-and-conditions') {
+    activeRoute = 'terms';
+    viewHtml = renderTermsView();
+    updateRouteMetadata({
+      title: 'Terms & Conditions of Service | Dundee Movers',
+      description: 'Transparent customer service agreement, booking conditions, parking access responsibilities, and insurance protections for Dundee Movers.',
+      canonicalPath: '/terms'
+    });
+
+  // 9. Privacy Policy View
+  } else if (pathname === '/privacy' || pathname === '/privacy-policy') {
+    activeRoute = 'privacy';
+    viewHtml = renderPrivacyView();
+    updateRouteMetadata({
+      title: 'Privacy Policy & UK GDPR Protection | Dundee Movers',
+      description: 'How Dundee Movers collects, protects, and handles personal relocation data under the UK GDPR. Zero third-party data broker sharing.',
+      canonicalPath: '/privacy'
+    });
+
+  // 10. Curated Landing Home View
   } else {
     activeRoute = 'home';
     viewHtml = renderHomeView();
     viewInitializer = () => initHomeView();
     updateRouteMetadata({
       title: 'Dundee Movers | Removals Dundee, Angus, Fife & UK',
-      description: 'Premier house and flat removals in Dundee (DD1–DD5), Angus & Fife. 1-move-at-a-time dedicated vans, zero shared loads, £50k insurance & direct UK-wide transit. Get a quote today.',
+      description: 'Premier house and flat removals in Dundee (DD1–DD5), Angus & Fife. 1-move-at-a-time dedicated vans, zero shared loads, fully insured with direct UK-wide transit. Get a quote today.',
       canonicalPath: '/'
     });
   }

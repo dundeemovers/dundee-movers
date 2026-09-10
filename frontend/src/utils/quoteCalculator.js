@@ -108,8 +108,8 @@ export function calculateMoveVolumeAndVan(items = {}, moveType = 'House / Flat M
   }
 
   const stairEquipmentNote = stairChallenge
-    ? 'Specialist Stair Dolly & Heavy Straps Included'
-    : 'Standard Removal Equipment Included';
+    ? 'Heavy-Duty Lifting Straps & Quilted Blankets Included'
+    : 'Standard Protective Removal Equipment Included';
 
   return {
     volumeM3: finalVolumeM3,

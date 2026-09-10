@@ -20,7 +20,7 @@ export const GUIDE_ARTICLES = [
         heading: '8 to 6 Weeks Before: The Planning & Legal Phase',
         content: `In Scotland, moving house hinges on the 'Conclusion of Missives'—the formal binding contract between solicitor conveyancers. Once missives are concluding, lock in your moving date immediately. In high-demand periods (end of month, Scottish school holidays, and Friday completion dates), reputable removal crews with dedicated vehicles book out weeks in advance.`,
         checklist: [
-          'Request tailored quotes from licensed removal firms with £50,000+ Goods in Transit cover.',
+          'Request tailored quotes from licensed removal firms that are fully insured with Goods in Transit cover.',
           'Verify that your removal firm operates a 1-move-at-a-time policy so you have an exclusive van on key handover day.',
           'Start a home inventory room by room; separate items to sell, donate to Dundee charity shops, or recycle.',
           'Gather vital documents (passports, birth certificates, deeds) in a single secure, transportable folder.'
@@ -76,15 +76,15 @@ export const GUIDE_ARTICLES = [
           'Execute a full off-site cloud and physical server backup prior to physical hardware disassembly.',
           'Number and color-code all commercial crates by department, floor, and employee ID.',
           'Separate confidential HR and financial archives into tamper-evident, security-sealed security crates.',
-          'Ensure commercial Public Liability (£5,000,000) and Goods in Transit (£50,000+) are active and verified.'
+          'Ensure commercial Public Liability and Goods in Transit insurance are active and verified.'
         ]
       },
       {
-        heading: 'VAT Invoicing, Risk Assessments & Health/Safety Handover',
-        content: `Corporate accounts require formal Health and Safety Method Statements (RAMS), building damage liability sign-offs, and VAT-itemized billing. Our team supplies floor and elevator protection runners to prevent scuffs in prestigious commercial office buildings across Dundee, Angus, Fife, and Edinburgh.`,
+        heading: 'Itemized Invoicing, Risk Assessments & Health/Safety Handover',
+        content: `Corporate accounts require formal Health and Safety Method Statements (RAMS), building damage liability sign-offs, and formal itemized commercial billing. Our team supplies floor and elevator protection runners to prevent scuffs in prestigious commercial office buildings across Dundee, Angus, Fife, and Edinburgh.`,
         tips: [
           'Provide our dispatch team with destination floor plans 7 days before move date for instant desk zoning.',
-          'Request full VAT commercial invoicing for business expense accounting and asset write-down tracking.'
+          'Request full itemized commercial invoicing for business expense accounting and asset write-down tracking.'
         ]
       }
     ]
@@ -111,7 +111,7 @@ export const GUIDE_ARTICLES = [
 Long-distance moves (e.g. Dundee to London or Manchester) include mileage, fuel surcharges, driver rest regulations, and express direct door-to-door transit without depot handling.`,
         tips: [
           'Be wary of quotes under £200 for full house moves; these often indicate casual uninsured operators who cancel on moving morning for higher offers.',
-          'Always demand written confirmation of £50,000 Goods in Transit insurance and £5,000,000 Public Liability.'
+          'Always demand written confirmation of comprehensive Goods in Transit and Public Liability insurance.'
         ]
       },
       {
@@ -139,7 +139,7 @@ Long-distance moves (e.g. Dundee to London or Manchester) include mileage, fuel 
     sections: [
       {
         heading: 'Conquering Multi-Storey Flats with Specialized Equipment',
-        content: `A significant proportion of Dundee homes in the West End, Perth Road, Stobswell, and City Centre are traditional stone-built flats. Moving heavy wardrobes and solid oak tables up 3 or 4 flights of stairs requires professional technique. Our crews utilize heavy-duty stair crawlers, high-tensile shoulder lifting straps, and quilted corner guards to maneuver bulky items without scraping historic cornices or scuffing fresh paintwork.`,
+        content: `A significant proportion of Dundee homes in the West End, Perth Road, Stobswell, and City Centre are traditional stone-built flats. Moving heavy wardrobes and solid oak tables up 3 or 4 flights of stairs requires professional technique. Our crews utilize high-tensile shoulder lifting straps, thick padded furniture blankets, and quilted corner guards to maneuver bulky items without scraping historic cornices or scuffing fresh paintwork.`,
         tips: [
           'Measure your stairwell turnings and front doorway widths before moving day; note any tight 90-degree landings.',
           'Remove door stops and pin back entrance doors to create maximum clearance for wide armchairs and mattresses.',
@@ -182,7 +182,7 @@ Long-distance moves (e.g. Dundee to London or Manchester) include mileage, fuel 
         content: `Our 1-Move-At-A-Time promise applies UK-wide. When our team loads your items on moving morning in Scotland, the doors are locked and the vehicle departs immediately. A move from Dundee to London or the South East is delivered directly the next morning, allowing you to settle into your new home without living out of suitcases in a hotel for two weeks.`,
         checklist: [
           'Direct GPS tracking and regular driver updates from departure to arrival.',
-          'Full £50,000 Goods in Transit insurance covering road transit, loading, and unloading.',
+          'Full Goods in Transit insurance covering road transit, loading, and unloading.',
           'No secondary handling, cross-docking, or warehouse risk for fragile electronics or antique furniture.'
         ]
       }
@@ -239,7 +239,7 @@ Long-distance moves (e.g. Dundee to London or Manchester) include mileage, fuel 
 - **Fragile-Only Packing:** Perfect for customers who prefer to pack their own clothes and books, but want professional peace of mind for porcelain dinner sets, crystal glassware, oil paintings, mirrors, and delicate heirlooms.`,
         tips: [
           'Choose Fragile-Only packing if you want to keep costs down while fully protecting delicate items.',
-          'All packing materials supplied and packed by our team are 100% covered under our £50,000 Goods in Transit insurance policy.'
+          'All packing materials supplied and packed by our team are 100% covered under our comprehensive Goods in Transit insurance policy.'
         ]
       },
       {

@@ -40,7 +40,7 @@ export function renderReviews() {
         <div class="section-header">
           <span class="badge">Verified Dundee Feedback</span>
           <h2>Trusted by Homeowners, Students & Businesses</h2>
-          <p>Read why Dundee residents rate us 4.94 / 5 stars across Google and Trustpilot.</p>
+          <p>Read why Dundee and Scottish residents rate us 5 stars for reliability, speed, and care.</p>
         </div>
 
         <div class="reviews-grid">

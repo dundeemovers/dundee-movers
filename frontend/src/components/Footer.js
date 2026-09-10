@@ -29,8 +29,12 @@ export function renderFooter() {
             </div>
           </div>
 
-          <!-- Right: Mobile App / Live Move Tracker Mockup -->
+          <!-- Right: Digital Move Confirmation & Web Tracker Mockup -->
           <div class="footer-mockup-wrapper">
+            <div class="footer-mockup-badge">
+              <span class="pulse-dot"></span>
+              <span>Digital Move Confirmation & Live Web Tracker</span>
+            </div>
             <div class="footer-phone-frame">
               <div class="phone-status-bar">
                 <span>9:41</span>
@@ -152,7 +156,7 @@ export function renderFooter() {
                 </a>
                 <div class="footer-insurance-pill">
                   <span>🛡️</span>
-                  <span>£50k Insurance & £5m Public Liability</span>
+                  <span>Fully Insured • Goods in Transit & Public Liability</span>
                 </div>
               </div>
             </div>
@@ -177,11 +181,11 @@ export function renderFooter() {
 
           <!-- Bottom Copyright Bar -->
           <div class="footer-bottom-bar">
-            <p class="footer-copyright">DUNDEE MOVERS LTD, 2026. ALL RIGHTS RESERVED. REGISTERED IN SCOTLAND.</p>
+            <p class="footer-copyright">DUNDEE MOVERS, 2026. ALL RIGHTS RESERVED.</p>
             <div class="footer-bottom-links">
-              <a href="#">Privacy Policy</a>
+              <a href="/privacy">Privacy Policy</a>
               <span class="dot">•</span>
-              <a href="#">Terms & Conditions</a>
+              <a href="/terms">Terms & Conditions</a>
               <span class="dot">•</span>
               <a href="/llms.txt">AI Search Directory</a>
             </div>

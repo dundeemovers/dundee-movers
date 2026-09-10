@@ -30,6 +30,7 @@ import { renderGuidePageView } from '../src/components/GuidePageView.js';
 import { renderCorridorPageView } from '../src/components/CorridorPageView.js';
 import { renderReviews } from '../src/components/Reviews.js';
 import { renderFAQ } from '../src/components/FAQ.js';
+import { renderTermsView, renderPrivacyView } from '../src/components/LegalViews.js';
 
 // Import Route Data
 import { GUIDE_ARTICLES } from '../src/utils/guideArticlesData.js';
@@ -58,7 +59,7 @@ const routes = [
     path: '/',
     filePath: 'index.html',
     title: 'Dundee Movers | Removals Dundee, Angus, Fife & UK',
-    description: 'Premier house and flat removals in Dundee (DD1–DD5), Angus & Fife. 1-move-at-a-time dedicated vans, zero shared loads, £50k insurance & direct UK-wide transit. Get a quote today.',
+    description: 'Premier house and flat removals in Dundee (DD1–DD5), Angus & Fife. 1-move-at-a-time dedicated vans, zero shared loads, fully insured with direct UK-wide transit. Get a quote today.',
     render: () => `
       ${renderNavbar('home')}
       <main class="modular-main-content">
@@ -73,7 +74,7 @@ const routes = [
     path: '/services',
     filePath: 'services/index.html',
     title: 'Removal Services Dundee, Angus & UK | Dundee Movers',
-    description: 'Professional house removals, tenement flat moves, packing services & office relocations in Dundee (DD1–DD5), Angus & UK. 100% dedicated vans, £50k insurance.',
+    description: 'Professional house removals, tenement flat moves, packing services & office relocations in Dundee (DD1–DD5), Angus & UK. 100% dedicated vans, fully insured.',
     render: () => `
       ${renderNavbar('services')}
       <main class="modular-main-content">
@@ -319,7 +320,37 @@ const routes = [
         "description": "Free Tailored Moving Quote"
       }
     }
-  }))
+  })),
+  // 8. Terms & Conditions
+  {
+    path: '/terms',
+    filePath: 'terms/index.html',
+    title: 'Terms & Conditions of Service | Dundee Movers',
+    description: 'Transparent customer service agreement, booking conditions, parking access responsibilities, and insurance protections for Dundee Movers.',
+    render: () => `
+      ${renderNavbar('terms')}
+      <main class="modular-main-content">
+        ${renderTermsView()}
+      </main>
+      ${renderFooter()}
+    `,
+    schema: null
+  },
+  // 9. Privacy Policy
+  {
+    path: '/privacy',
+    filePath: 'privacy/index.html',
+    title: 'Privacy Policy & UK GDPR Protection | Dundee Movers',
+    description: 'How Dundee Movers collects, protects, and handles personal relocation data under the UK GDPR. Zero third-party data broker sharing.',
+    render: () => `
+      ${renderNavbar('privacy')}
+      <main class="modular-main-content">
+        ${renderPrivacyView()}
+      </main>
+      ${renderFooter()}
+    `,
+    schema: null
+  }
 ];
 
 console.log(`[SSG] Starting pre-rendering for ${routes.length} routes...`);

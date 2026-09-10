@@ -22,15 +22,15 @@ const FAQS = [
   },
   {
     q: 'Can you handle top-floor flats with narrow stairs and tight corners in Dundee?',
-    a: 'Absolutely. A large portion of our local Dundee moves involve traditional multi-storey flats in the West End, City Centre, and Stobswell. Our crews are equipped with specialized lifting straps, padded covers, and stair crawlers to safely maneuver bulky furniture through narrow stairwells.'
+    a: 'Absolutely. A large portion of our local Dundee moves involve traditional multi-storey flats in the West End, City Centre, and Stobswell. Our crews are equipped with specialized high-tensile lifting straps, thick padded furniture blankets, and corner protectors to safely maneuver bulky furniture through narrow stairwells.'
   },
   {
     q: 'Are my belongings fully insured during transit?',
-    a: 'Yes, every move automatically includes £50,000 Goods in Transit insurance and £5,000,000 Public Liability insurance at no extra charge.'
+    a: 'Yes, we are fully insured. Every move automatically includes comprehensive Goods in Transit and Public Liability insurance at no extra charge.'
   },
   {
     q: 'Do you provide office and commercial removals in Dundee and Scotland?',
-    a: 'Yes. We offer complete office and business relocation services throughout Dundee, Angus, Fife, and across Scotland. We provide weekend and evening moves to minimize commercial downtime, crate hire, secure IT and desktop computer transport, office furniture dismantling/assembly, and tailored B2B invoicing with full VAT receipts.'
+    a: 'Yes. We offer complete office and business relocation services throughout Dundee, Angus, Fife, and across Scotland. We provide weekend and evening moves to minimize commercial downtime, crate hire, secure IT and desktop computer transport, office furniture dismantling/assembly, and tailored B2B invoicing with formal itemized commercial receipts.'
   }
 ];
 

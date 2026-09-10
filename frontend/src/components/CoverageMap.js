@@ -19,13 +19,13 @@ export function renderCoverageMap() {
         <div class="coverage-status-row">
           <span class="coverage-depot-chip">
             <span class="depot-pulse-dot"></span>
-            Dundee Depot Active • Covering Dundee, Fife, Angus & Entire UK
+            Dundee Base Active • Covering Dundee, Fife, Angus & Entire UK
           </span>
         </div>
 
         <h1 class="coverage-main-title">Dundee & UK Removals Coverage</h1>
         <p class="coverage-hero-desc">
-          We operate a strict <strong>1-move-at-a-time guarantee</strong>. When you book us, your van and crew are 100% dedicated to your property from loading to delivery—meaning zero shared loads, direct door-to-door moving, and £50,000 Goods in Transit insurance included on every move.
+          We operate a strict <strong>1-move-at-a-time guarantee</strong>. When you book us, your van and crew are 100% dedicated to your property from loading to delivery—meaning zero shared loads, direct door-to-door moving, and comprehensive Goods in Transit insurance included on every move.
         </p>
 
         <!-- 2. Direct Action CTAs -->
@@ -47,7 +47,7 @@ export function renderCoverageMap() {
           </div>
           <div class="c-trust-item">
             <span style="font-size: 1.25rem;">🛡️</span>
-            <span><strong>£50k Insurance</strong> Included Free</span>
+            <span><strong>Fully Insured</strong> on Every Move</span>
           </div>
           <div class="c-trust-item">
             <span style="font-size: 1.25rem;">🪜</span>
@@ -188,7 +188,7 @@ export function renderCoverageMap() {
 
           <div class="coverage-faq-item">
             <h3 class="coverage-faq-q">Are all moves covered by insurance across the UK?</h3>
-            <p class="coverage-faq-a">Yes, every move automatically includes £50,000 Goods in Transit insurance and £5,000,000 Public Liability cover at zero extra cost.</p>
+            <p class="coverage-faq-a">Yes, we are fully insured. Every move automatically includes comprehensive Goods in Transit and Public Liability cover at zero extra cost.</p>
           </div>
         </div>
       </section>

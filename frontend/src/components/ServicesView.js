@@ -19,7 +19,7 @@ export function renderServicesView() {
         <div class="services-status-row">
           <span class="services-pill-badge">
             <span class="depot-pulse-dot"></span>
-            100% Dedicated Vans • Zero Shared Loads • Insured up to £50,000
+            100% Dedicated Vans • Zero Shared Loads • Fully Insured Moves
           </span>
         </div>
 
@@ -47,7 +47,7 @@ export function renderServicesView() {
           </div>
           <div class="s-trust-item">
             <span style="font-size: 1.25rem;">🛡️</span>
-            <span><strong>£50k Insurance:</strong> Goods in transit included free</span>
+            <span><strong>Fully Insured:</strong> Comprehensive transit & public liability</span>
           </div>
           <div class="s-trust-item">
             <span style="font-size: 1.25rem;">🪜</span>
@@ -94,7 +94,7 @@ export function renderServicesView() {
                 <li>2 or 3 vetted, uniformed removals specialists</li>
                 <li>Heavy-duty mattress bags & quilted sofa covers</li>
                 <li>Carpet protection floor runners for hallways and stairs</li>
-                <li>£50,000 Goods in Transit & £5m Public Liability</li>
+                <li>Fully insured: Goods in Transit & Public Liability cover</li>
               </ul>
             </div>
           </div>
@@ -123,7 +123,7 @@ export function renderServicesView() {
             <div class="service-inclusions-box">
               <span class="inclusions-title">Specialist Tenement Moving Kit:</span>
               <ul class="inclusions-list">
-                <li>Heavy-duty stair climbers & padded stair crawlers</li>
+                <li>High-tensile lifting straps & padded furniture blankets</li>
                 <li>Door frame bumpers & balustrade protective wraps</li>
                 <li>Customer reserves curb space outside for direct loading</li>
                 <li>Fixed pricing guarantee with zero hidden stair surcharges</li>
@@ -192,7 +192,7 @@ export function renderServicesView() {
                 <li>Color-coded security crates for sensitive files & documents</li>
                 <li>Specialist anti-static foam wraps for servers & desktop PCs</li>
                 <li>Office desk, benching & boardroom table dismantling</li>
-                <li>Formal corporate VAT invoicing & method statements</li>
+                <li>Formal itemized commercial invoicing & method statements</li>
                 <li>Coverage across Dundee, Perth, Fife, and Central Scotland</li>
               </ul>
             </div>
@@ -330,9 +330,9 @@ export function renderServicesView() {
           </div>
 
           <div class="fleet-card spotlight-card">
-            <span class="fleet-card-icon">🪜</span>
-            <h3 class="fleet-card-title">Heavy-Duty Stair Climbers</h3>
-            <p class="fleet-card-desc">Specialized pneumatic stair crawlers and dollies that safely carry heavy washing machines, sofas, and wardrobes up traditional high-floor spiral tenement closes.</p>
+            <span class="fleet-card-icon">🎗️</span>
+            <h3 class="fleet-card-title">High-Tensile Lifting Straps & Blankets</h3>
+            <p class="fleet-card-desc">Specialized ergonomic shoulder lifting straps and thick quilted furniture blankets that safely carry heavy washing machines, sofas, and wardrobes up traditional high-floor spiral tenement closes.</p>
           </div>
         </div>
       </section>

@@ -31,8 +31,8 @@ export function renderBentoServices() {
             </div>
             <div class="bento-visual-accent">
               <div class="accent-box">
-                <span class="accent-number">£50,000</span>
-                <span class="accent-label">Commercial Goods in Transit Insurance Included Free</span>
+                <span class="accent-number">Fully</span>
+                <span class="accent-label">Insured Commercial & Residential Moves</span>
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@ export function renderBentoServices() {
             <div class="bento-feature-tags">
               <span class="bento-mini-tag">Zero Downtime Weekend Moves</span>
               <span class="bento-mini-tag">IT Equipment & Server Transit</span>
-              <span class="bento-mini-tag">Corporate Invoicing & VAT Receipts</span>
+              <span class="bento-mini-tag">Itemized Invoicing & B2B Receipts</span>
             </div>
             <span class="bento-highlight-text text-emerald">Out-of-Hours & Weekend Slots Available</span>
           </div>
@@ -73,9 +73,9 @@ export function renderBentoServices() {
             </div>
             <h3 class="bento-title">Flats & Multi-Storey Homes</h3>
             <p class="bento-desc">
-              Top-floor flats, narrow stairwells, and spiral closes across the West End, DD1, and Stobswell. Our team is equipped with electric stair climbers and heavy-duty padded wraps.
+              Top-floor flats, narrow stairwells, and spiral closes across the West End, DD1, and Stobswell. Our team is equipped with high-tensile lifting straps and heavy-duty padded furniture blankets.
             </p>
-            <span class="bento-highlight-text">Direct Curb Loading & Tenement Stair Gear</span>
+            <span class="bento-highlight-text">Direct Curb Loading & Tenement Lifting Gear</span>
           </div>
 
           <!-- UK-Wide Long Distance Move Card -->

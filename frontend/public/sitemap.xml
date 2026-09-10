@@ -149,6 +149,18 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://dundeemovers.co.uk/terms</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://dundeemovers.co.uk/privacy</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://dundeemovers.co.uk/llms.txt</loc>
     <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>

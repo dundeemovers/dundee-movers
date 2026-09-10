@@ -24,7 +24,7 @@ export const SERVICE_OPTIONS = [
   'Full Packing Service (Boxes & Wrap Supplied)',
   'Furniture Dismantling & Reassembly',
   'Fragile Items Specialist Packing',
-  'Secure Storage (Short or Long Term)'
+  'Transit to Your Chosen Self-Storage'
 ];
 
 function renderPropertyAccessCard(propKey, title, badgeClass, addressText, accessState) {

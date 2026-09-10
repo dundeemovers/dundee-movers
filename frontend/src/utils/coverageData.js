@@ -13,7 +13,7 @@ export const COVERAGE_DATA = {
       { name: 'City Centre & Waterfront (DD1)', notes: 'Customer reserves curb space; high-floor flat stair gear supplied.' },
       { name: 'West End & University (DD2)', notes: 'Specialists in traditional high-floor flats, spiral staircases, and student moves.' },
       { name: 'Stobswell & Coldside (DD3)', notes: 'Fast local transit for traditional flats, terraces, and family homes.' },
-      { name: 'Craigie & Pitkerro (DD4)', notes: 'Residential family home relocations, bungalows, and commercial storage moves.' },
+      { name: 'Craigie & Pitkerro (DD4)', notes: 'Residential family home relocations, bungalows, and moves to local self-storage.' },
       { name: 'Broughty Ferry & Barnhill (DD5)', notes: 'Multi-bedroom detached villas, coastal seafront properties, and estate packing.' }
     ]
   },
@@ -68,7 +68,7 @@ export function getPostcodeCoverageResult(inputVal) {
       type: 'available',
       badge: '✓',
       title: `Dundee Core Zone (${clean}) — Daily Slots Available!`,
-      desc: 'Depot response within 15–30 mins. Includes high-floor flat stair gear and direct curb loading support.',
+      desc: 'Local response within 15–30 mins. Includes high-floor flat lifting gear and direct curb loading support.',
       ctaText: `Get Quote for ${clean} ➔`
     };
   }
@@ -112,7 +112,7 @@ export function getPostcodeCoverageResult(inputVal) {
       type: 'uk',
       badge: '🚚',
       title: `Direct Door-to-Door UK Relocation (${clean}) — Dedicated Non-Stop Run!`,
-      desc: 'Your Luton van is 100% exclusive to your home with zero shared courier freight and £50,000 insurance included.',
+      desc: 'Your Luton van is 100% exclusive to your home with zero shared courier freight and fully insured transit included.',
       ctaText: `Get Tailored UK Quote for ${clean} ➔`
     };
   }

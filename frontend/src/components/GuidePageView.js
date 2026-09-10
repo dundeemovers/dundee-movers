@@ -105,7 +105,7 @@ export function renderGuidePageView(articleId) {
               <div class="signature-icon">${article.icon}</div>
               <div class="signature-content">
                 <h4>Need Professional Help With Your Upcoming Move?</h4>
-                <p>Dundee Movers operates a strict 1-move-at-a-time guarantee. Our van and crew are 100% exclusive to your relocation with zero shared loads, £50,000 Goods in Transit insurance, and direct non-stop transit.</p>
+                <p>Dundee Movers operates a strict 1-move-at-a-time guarantee. Our van and crew are 100% exclusive to your relocation with zero shared loads, full transit insurance, and direct non-stop transit.</p>
                 <div class="signature-ctas">
                   <a href="#quote-calculator" class="btn btn-primary">
                     <span>Get Free Tailored Moving Quote</span>
@@ -136,7 +136,7 @@ export function renderGuidePageView(articleId) {
             <div class="sidebar-trust-points">
               <div class="s-trust-item">✓ 100% Dedicated Vehicle</div>
               <div class="s-trust-item">✓ Zero Shared Cargo</div>
-              <div class="s-trust-item">✓ £50,000 Transit Insurance</div>
+              <div class="s-trust-item">✓ Fully Insured Removals</div>
             </div>
           </div>
 

@@ -71,7 +71,7 @@ export function renderHomeView() {
                     <h4 class="item-title">High-Floor & Narrow Stair Specialists</h4>
                     <span class="item-pill pro-pill">Up to 4th Floor</span>
                   </div>
-                  <p class="item-desc">Equipped with electric stair crawlers, heavy-duty quilted wraps, and door frame covers for spiral staircases and multi-storey closes.</p>
+                  <p class="item-desc">Equipped with high-tensile lifting straps, padded furniture blankets, and door frame covers for spiral staircases and multi-storey closes.</p>
                 </div>
               </div>
 
@@ -94,8 +94,8 @@ export function renderHomeView() {
                 </div>
                 <div class="item-content">
                   <div class="item-heading-row">
-                    <h4 class="item-title">£50,000 Goods in Transit & £2M Public Liability</h4>
-                    <span class="item-pill pro-pill">Commercial Cover</span>
+                    <h4 class="item-title">Fully Insured Removals Cover</h4>
+                    <span class="item-pill pro-pill">Comprehensive</span>
                   </div>
                   <p class="item-desc">Full commercial removals policy covering all your furniture, electronics, and belongings from lift to placement.</p>
                 </div>
@@ -165,7 +165,7 @@ export function renderHomeView() {
                     <h4 class="item-title">Stair Refusals & Extra Demands</h4>
                     <span class="item-pill danger-pill">Unprepared</span>
                   </div>
-                  <p class="item-desc">Arrive on moving day with no stair trolleys. Often refuse to carry heavy items up 2nd or 3rd floor stairs or dump them in the entrance.</p>
+                  <p class="item-desc">Arrive unprepared for tenement stairs without lifting straps or protective blankets. Often refuse to carry heavy items up 2nd or 3rd floor stairs or dump them in the entrance.</p>
                 </div>
               </div>
 
@@ -222,7 +222,7 @@ export function renderHomeView() {
         <div class="why-us-trust-strip">
           <div class="trust-strip-item">
             <span class="trust-icon">🛡️</span>
-            <span><strong>£50k Insurance</strong> Included</span>
+            <span><strong>Fully Insured</strong> on Every Move</span>
           </div>
           <div class="trust-strip-divider"></div>
           <div class="trust-strip-item">

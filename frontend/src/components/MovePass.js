@@ -219,7 +219,7 @@ function renderPassCard(container, lead) {
           </div>
           <div style="text-align: right;">
             <div style="font-size: 0.72rem; color: #a7f3d0; text-transform: uppercase;">Goods In Transit</div>
-            <div style="font-size: 1.1rem; font-weight: 800; color: #ffffff;">£50,000 Covered</div>
+            <div style="font-size: 1.1rem; font-weight: 800; color: #ffffff;">Fully Insured</div>
           </div>
         </div>
 

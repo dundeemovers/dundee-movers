@@ -123,7 +123,7 @@ export function renderCorridorPageView(corridorId) {
             <div class="glass-panel guide-author-signature" style="margin-top: 2.5rem;">
               <div class="signature-content">
                 <h4>Moving To or From ${corridor.areaName}?</h4>
-                <p>Lock in your dedicated vehicle slot. Our vans operate strictly one move at a time with £50,000 Goods in Transit insurance and zero shared cargo.</p>
+                <p>Lock in your dedicated vehicle slot. Our vans operate strictly one move at a time with full transit insurance and zero shared cargo.</p>
                 <div class="signature-ctas">
                   <a href="/#quote-calculator" class="btn btn-primary">
                     <span>Calculate Price for This Route</span>
@@ -153,7 +153,7 @@ export function renderCorridorPageView(corridorId) {
               <div class="sidebar-trust-points">
                 <div class="s-trust-item">✓ 100% Dedicated Vehicle</div>
                 <div class="s-trust-item">✓ Zero Mixed Cargo</div>
-                <div class="s-trust-item">✓ £50,000 Transit Cover</div>
+                <div class="s-trust-item">✓ Fully Insured Removals</div>
               </div>
             </div>
 

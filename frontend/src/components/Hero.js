@@ -40,7 +40,7 @@ export function renderHero() {
             <div class="trust-divider"></div>
             <div class="trust-item">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span class="trust-text">£50k Goods in Transit Included</span>
+              <span class="trust-text">Fully Insured Removals</span>
             </div>
             <div class="trust-divider"></div>
             <div class="trust-item">
@@ -53,7 +53,7 @@ export function renderHero() {
         <div class="hero-visual">
           <div class="glass-panel hero-card spotlight-card">
             <div class="hero-card-header">
-              <span class="badge">Dundee Central Depot</span>
+              <span class="badge">Dundee Operating Base</span>
               <span class="hero-status-live"><span class="pulse-emerald"></span> Dedicated Crew Ready</span>
             </div>
             
@@ -91,8 +91,8 @@ export function renderHero() {
                 <span class="stat-desc">Door-to-Door</span>
               </div>
               <div class="hero-stat-box">
-                <span class="stat-number">£50k</span>
-                <span class="stat-desc">Cover Included</span>
+                <span class="stat-number">Full</span>
+                <span class="stat-desc">Insurance Cover</span>
               </div>
             </div>
           </div>

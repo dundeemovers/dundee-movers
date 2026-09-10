@@ -14,7 +14,7 @@ export const LOCAL_AREAS = [
     title: 'Removals Broughty Ferry & Barnhill DD5 | Dundee Movers',
     h1: 'Dedicated House Removals in Broughty Ferry & Barnhill (DD5)',
     metaTitle: 'Removals Broughty Ferry & Barnhill DD5 | Dundee Movers',
-    metaDesc: 'Premier house & flat removals in Broughty Ferry (DD5). 100% dedicated vans, zero shared loads, £50k insurance & specialist villa packing. Get a quote today.',
+    metaDesc: 'Premier house & flat removals in Broughty Ferry (DD5). 100% dedicated vans, zero shared loads, fully insured & specialist villa packing. Get a quote today.',
     transitBadge: 'Local Dundee & Coastal Move Specialists',
     heroSubtitle: 'Premier residential removals for Broughty Ferry detached villas, coastal flats, and family homes in Barnhill. Van and crew 100% dedicated to your move.',
     highlights: [
@@ -55,7 +55,7 @@ export const LOCAL_AREAS = [
       },
       {
         q: 'Can you handle fragile antiques and upright pianos in Broughty Ferry homes?',
-        a: 'Yes. Our crews carry specialist piano dollies, heavy-duty quilted covers, and stair crawlers for high-value family heirlooms.'
+        a: 'Yes. Our crews carry heavy-duty quilted furniture blankets, high-tensile lifting straps, and specialized protective wrapping for upright pianos and delicate family heirlooms.'
       }
     ]
   },
@@ -122,13 +122,13 @@ export const LOCAL_AREAS = [
     title: 'Removals Monifieth & Balmossie DD5 | Dundee Movers',
     h1: 'Reliable House Removals in Monifieth & Balmossie',
     metaTitle: 'Removals Monifieth & Balmossie DD5 | Dundee Movers',
-    metaDesc: 'Trusted removals in Monifieth & Balmossie (DD5). Dedicated vans, £50k insurance, detached villa moving, and coastal removals. Get your free fixed quote.',
+    metaDesc: 'Trusted removals in Monifieth & Balmossie (DD5). Dedicated vans, fully insured, detached villa moving, and coastal removals. Get your free fixed quote.',
     transitBadge: 'Local Monifieth & Coastal Family Moves',
     heroSubtitle: 'Serving Monifieth, Balmossie, and coastal Angus with dedicated vehicles, professional furniture packing, and guaranteed fixed prices.',
     highlights: [
       'Comprehensive family house removals for Monifieth & Balmossie estates',
       'Careful handling of modern detached properties, bungalows & seafront flats',
-      'Free £50,000 Goods in Transit insurance on every move',
+      'Fully insured: Goods in Transit protection on every move',
       '1-move-at-a-time guarantee: your van is never shared'
     ],
     propertyTypes: [
@@ -171,10 +171,10 @@ export const LOCAL_AREAS = [
     transitBadge: 'Direct Cross-Tay Road Bridge Service',
     heroSubtitle: 'From historic townhouses and University of St Andrews student flats to coastal country properties across North East Fife.',
     highlights: [
-      'Direct cross-Tay Bridge service from Dundee depot',
+      'Direct cross-Tay Bridge service from our Dundee base',
       'University student flat & halls relocation specialists',
       'Academic library, archive, and book collection moving',
-      'Full £50,000 Goods in Transit insurance included'
+      'Fully insured: Goods in Transit protection included'
     ],
     propertyTypes: [
       { name: 'Historic Townhouses', desc: 'Navigating cobbled lanes, stone stairwells, and historic properties around Market Street and South Street.' },
@@ -186,7 +186,7 @@ export const LOCAL_AREAS = [
       points: [
         'Optimal parking positioning on busy cobbled streets in central St Andrews (Market St, North St, South St).',
         'Direct A92 corridor route over the Tay Road Bridge with reliable transit scheduling.',
-        'Stair climbing equipment for traditional tenement and university accommodation stairs.'
+        'Heavy-duty lifting straps and padded blankets for traditional tenement and university accommodation stairs.'
       ]
     },
     reviews: [
@@ -212,14 +212,14 @@ export const LOCAL_AREAS = [
     title: 'Removals Perth Scotland & Perthshire | Dundee Movers',
     h1: 'Reliable House Removals in Perth & Perthshire (PH1, PH2)',
     metaTitle: 'Removals Perth Scotland & Perthshire | Dundee Movers',
-    metaDesc: 'Trusted removals in Perth & Perthshire. Local house moves, Scone, Kinnoull, Bridge of Earn, and Dundee to Perth relocations. £50k insurance included.',
+    metaDesc: 'Trusted removals in Perth & Perthshire. Local house moves, Scone, Kinnoull, Bridge of Earn, and Dundee to Perth relocations. Fully insured.',
     transitBadge: 'Perthshire & Strathmore Moving Specialists',
     heroSubtitle: 'Connecting Dundee to Perth, Scone, Kinnoull, and rural Perthshire with dedicated Luton vans, careful handling, and fixed prices.',
     highlights: [
-      'Direct A90 20-minute route from Dundee Central Depot',
+      'Direct A90 20-minute route from our Dundee base',
       'Expert care for Georgian townhouses, suburban villas & rural farm properties',
       'Complete furniture dismantling and reassembly service',
-      '£50,000 Goods in Transit insurance free on every booking'
+      'Fully insured: Goods in Transit protection free on every booking'
     ],
     propertyTypes: [
       { name: 'Kinnoull & Scone Family Homes', desc: 'Large 3–5 bedroom residential properties, executive villas, and detached family estates.' },
@@ -257,7 +257,7 @@ export const LOCAL_AREAS = [
     title: 'Removals Cupar Fife KY15 | Dundee Movers',
     h1: 'Local House Removals in Cupar & Howe of Fife (KY15)',
     metaTitle: 'Removals Cupar Fife KY15 | Dundee Movers',
-    metaDesc: 'Professional house removals in Cupar (KY15) & Fife villages. Cross-Tay Bridge service, dedicated vans, £50k insurance, and rural home moves. Free quotes.',
+    metaDesc: 'Professional house removals in Cupar (KY15) & Fife villages. Cross-Tay Bridge service, dedicated vans, fully insured, and rural home moves. Free quotes.',
     transitBadge: 'Fife Market Town & Country Movers',
     heroSubtitle: 'Serving Cupar, Ceres, Springfield, and the Howe of Fife with direct cross-bridge removals and dedicated vehicle service.',
     highlights: [
@@ -302,7 +302,7 @@ export const LOCAL_AREAS = [
     title: 'Removals Arbroath, Forfar & Angus Towns | Dundee Movers',
     h1: 'Local Removals across Arbroath, Forfar, Carnoustie & Angus',
     metaTitle: 'Removals Arbroath, Forfar & Angus Towns | Dundee Movers',
-    metaDesc: 'Trusted house removals in Arbroath, Forfar, Carnoustie & Montrose. Dedicated vans, £50k insurance, and rural property specialists. Free tailored quotes.',
+    metaDesc: 'Trusted house removals in Arbroath, Forfar, Carnoustie & Montrose. Dedicated vans, fully insured, and rural property specialists. Free tailored quotes.',
     transitBadge: 'County-Wide Angus & Rural Coverage',
     heroSubtitle: 'Complete residential removals, farm cottage relocations, and coastal moves throughout the County of Angus and Strathmore valley.',
     highlights: [

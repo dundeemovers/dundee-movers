@@ -14,14 +14,14 @@ export const UK_ROUTES = [
     title: 'Dundee to London Removals | Dedicated Non-Stop UK Transit | Dundee Movers',
     h1: 'Direct Non-Stop Removals: Dundee to London & South England',
     metaTitle: 'Dundee to London Removals | Dedicated Non-Stop UK Transit | Dundee Movers',
-    metaDesc: 'Dedicated Dundee to London removals. 100% exclusive van with zero shared freight, direct transit, and £50k Goods in Transit insurance. Book your direct run.',
+    metaDesc: 'Dedicated Dundee to London removals. 100% exclusive van with zero shared freight, direct transit, and fully insured Goods in Transit cover. Book your direct run.',
     transitBadge: 'Direct Door-to-Door • Zero Shared Cargo',
     heroSubtitle: 'Never share van space on long-distance moves. Your vehicle is 100% dedicated to your home from loading in Dundee straight to delivery in London.',
     highlights: [
       'Strict 1-move-at-a-time guarantee: zero shared courier loads',
       'Non-stop direct transit: no depot transfers or lost boxes',
       'Next-day delivery available with confirmed arrival windows',
-      '£50,000 Goods in Transit & £5M Public Liability cover included'
+      'Fully insured: Goods in Transit & Public Liability cover included'
     ],
     propertyTypes: [
       { name: 'City Flat Relocations', desc: 'Seamless moves from Dundee tenements to London apartments with lift or stair navigation.' },
@@ -68,17 +68,17 @@ export const UK_ROUTES = [
     title: 'Dundee to Edinburgh Removals | Same-Day Scottish Transit | Dundee Movers',
     h1: 'Express Same-Day Removals: Dundee to Edinburgh & Lothians',
     metaTitle: 'Dundee to Edinburgh Removals | Same-Day Scottish Transit | Dundee Movers',
-    metaDesc: 'Fast same-day house and flat removals from Dundee to Edinburgh. 1-move-at-a-time dedicated vans, Queensferry Crossing routes, and £50k insurance included.',
+    metaDesc: 'Fast same-day house and flat removals from Dundee to Edinburgh. 1-move-at-a-time dedicated vans, Queensferry Crossing routes, and fully insured transit.',
     transitBadge: 'Same-Day Scottish Intercity Removals',
     heroSubtitle: 'Morning load in Dundee, direct Queensferry Crossing transit, and afternoon delivery in Edinburgh. Express same-day service with exclusive vehicles.',
     highlights: [
       'Same-day morning load and afternoon delivery',
       'Edinburgh New Town & Old Town high-floor tenement specialists',
       'Full transit over the Queensferry Crossing with zero delay',
-      '£50k Goods in Transit insurance automatically included'
+      'Fully insured with Goods in Transit cover automatically included'
     ],
     propertyTypes: [
-      { name: 'City Centre Flats & Tenements', desc: 'Equipped with stair trolleys for high-floor tenements across Marchmont, Bruntsfield, and Leith.' },
+      { name: 'City Centre Flats & Tenements', desc: 'Equipped with high-tensile lifting straps and padded furniture blankets for high-floor tenements across Marchmont, Bruntsfield, and Leith.' },
       { name: 'Suburban Houses', desc: 'Detached and semi-detached homes moving between Dundee and Edinburgh suburbs.' },
       { name: 'Commercial Office Moves', desc: 'Rapid intercity business moves between Dundee tech hubs and Edinburgh financial centers.' }
     ],
@@ -86,7 +86,7 @@ export const UK_ROUTES = [
       title: 'Edinburgh Access & Street Parking',
       points: [
         'Customer keeps a parking space outside their property; our team handles direct loading swiftly.',
-        'Stair climbing gear for 3rd and 4th floor traditional tenements.',
+        'High-tensile lifting straps and padded furniture blankets for 3rd and 4th floor traditional tenements.',
         'LEZ compliant fleet for low-emission central Edinburgh zones.'
       ]
     },
@@ -109,7 +109,7 @@ export const UK_ROUTES = [
       },
       {
         q: 'Do you handle Edinburgh top-floor flats with spiral stairs?',
-        a: 'Yes. Our crews are specially equipped with stair climbers and protective harness wraps to safely transport heavy furniture through Edinburgh tenement stairwells.'
+        a: 'Yes. Our crews are specially equipped with high-tensile lifting straps, padded furniture blankets, and corner protectors to safely transport heavy furniture through Edinburgh tenement stairwells.'
       }
     ]
   },
@@ -122,14 +122,14 @@ export const UK_ROUTES = [
     title: 'Dundee to Glasgow Removals | Dedicated Van Moves | Dundee Movers',
     h1: 'Direct Removals from Dundee to Glasgow & Central Belt',
     metaTitle: 'Dundee to Glasgow Removals | Dedicated Van Moves | Dundee Movers',
-    metaDesc: 'Professional house & flat removals from Dundee to Glasgow. Same-day direct delivery via A9/M80, West End tenement stairs & £50k insurance included. Get a quote.',
+    metaDesc: 'Professional house & flat removals from Dundee to Glasgow. Same-day direct delivery via A9/M80, West End tenement stairs & fully insured transit. Get a quote.',
     transitBadge: 'Same-Day Scottish Intercity Removals',
     heroSubtitle: 'Connecting Dundee to Glasgow, the West End, Southside, and Central Belt with 100% dedicated vans, expert handling, and zero shared loads.',
     highlights: [
       'Same-day direct moving via the A90 ➔ A9 ➔ M80 route',
       'Glasgow West End (Byres Road, Hillhead) and Shawlands tenement stairs specialists',
       'Dedicated vehicles: your furniture travels alone with zero transfers',
-      '£50,000 Goods in Transit insurance free on every run'
+      'Fully insured: Goods in Transit protection on every run'
     ],
     propertyTypes: [
       { name: 'Traditional Glasgow Tenements', desc: 'Navigating high-ceiling stone tenements, close stairs, and communal entrances across Glasgow.' },
@@ -167,14 +167,14 @@ export const UK_ROUTES = [
     title: 'Dundee to Aberdeen Removals | Direct A90 Moves | Dundee Movers',
     h1: 'Direct Removals: Dundee to Aberdeen & North East Scotland',
     metaTitle: 'Dundee to Aberdeen Removals | Direct A90 Moves | Dundee Movers',
-    metaDesc: 'Reliable removals between Dundee and Aberdeen. Direct A90 dual-carriageway transit, corporate & NHS relocations, and £50k insurance. Get a free fixed quote.',
+    metaDesc: 'Reliable removals between Dundee and Aberdeen. Direct A90 dual-carriageway transit, corporate & NHS relocations, and fully insured transit. Get a free fixed quote.',
     transitBadge: 'Direct A90 North-East Corridor Removals',
     heroSubtitle: 'Direct non-stop removals between Dundee and the Granite City via the dual-carriageway A90 corridor. Van and crew dedicated exclusively to your move.',
     highlights: [
       'Direct 75-minute non-stop transit straight up the A90 corridor',
       'Granite city townhouses, modern apartments, and coastal Aberdeenshire homes',
       'Corporate and energy-sector relocation experience',
-      'Full £50,000 Goods in Transit insurance included'
+      'Fully insured: Goods in Transit protection included'
     ],
     propertyTypes: [
       { name: 'Aberdeen City Flats & Townhouses', desc: 'Expert care for granite flats around Rosemount, West End, and Holburn.' },
@@ -212,14 +212,14 @@ export const UK_ROUTES = [
     title: 'Dundee to Manchester Removals | Dedicated UK Moves | Dundee Movers',
     h1: 'Dedicated Removals: Dundee to Manchester & North West England',
     metaTitle: 'Dundee to Manchester Removals | Dedicated UK Moves | Dundee Movers',
-    metaDesc: 'Direct Dundee to Manchester removals. 100% exclusive Luton van with zero shared freight, direct door-to-door transit & £50k insurance. Book your direct move.',
+    metaDesc: 'Direct Dundee to Manchester removals. 100% exclusive Luton van with zero shared freight, direct door-to-door transit & fully insured protection. Book your direct move.',
     transitBadge: 'Direct Scottish ➔ England Dedicated Route',
     heroSubtitle: 'Long-distance relocations connecting Dundee and Scotland to Manchester, Salford, and Cheshire with zero shared cargo and direct door-to-door transit.',
     highlights: [
       '100% dedicated vehicle: your belongings travel alone with zero multi-drop delays',
       'Direct M74 ➔ M6 non-stop route with guaranteed delivery windows',
       'Manchester city center apartment and Cheshire suburban house experience',
-      '£50,000 Goods in Transit & £5,000,000 Public Liability insurance included'
+      'Fully insured: Goods in Transit & Public Liability insurance included'
     ],
     propertyTypes: [
       { name: 'Manchester City Center Apartments', desc: 'Dock access, lift bookings, and concierge coordination for high-rise city center flats.' },

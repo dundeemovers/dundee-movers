@@ -101,7 +101,7 @@ export function renderStepSummary(state) {
           <div class="quote-trust-row">
             <span>🔒 100% Free & No Obligation</span>
             <span>📋 Tailored Fixed-Price Quote</span>
-            <span>🛡️ £50,000 Goods in Transit Included</span>
+            <span>🛡️ Fully Insured on Every Move</span>
             <span>🚚 1 Move At A Time (Zero Shared Loads)</span>
           </div>
         </form>
