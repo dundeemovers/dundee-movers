@@ -221,19 +221,7 @@ function mountApp() {
   // 5. Coverage & Corridors View
   } else if (pathname === '/coverage') {
     activeRoute = 'coverage';
-    viewHtml = `
-      ${renderViewHeader(
-        'Coverage & Corridors',
-        'Dundee, Angus, Fife & UK Coverage Map',
-        'Interactive service territory, daily departures from Dundee Central Depot, and corridor transit times.'
-      )}
-      <div class="modular-view-body">
-        ${renderCoverageMap()}
-      </div>
-      <div class="container modular-view-footer-cta">
-        <a href="/#quote-calculator" class="btn btn-primary">Book Your Dedicated Move ➔</a>
-      </div>
-    `;
+    viewHtml = renderCoverageMap();
     viewInitializer = () => initCoverageMap();
     updateRouteMetadata({
       title: 'Removals Coverage Dundee, Angus, Fife & UK | Dundee Movers',

@@ -98,13 +98,7 @@ const routes = [
     render: () => `
       ${renderNavbar('coverage')}
       <main class="modular-main-content">
-        ${renderViewHeader('Coverage & Corridors', 'Dundee, Angus, Fife & UK Coverage Map', 'Interactive service territory, daily departures from Dundee Central Depot, and corridor transit times.')}
-        <div class="modular-view-body">
-          ${renderCoverageMap()}
-        </div>
-        <div class="container modular-view-footer-cta">
-          <a href="/#quote-calculator" class="btn btn-primary">Book Your Dedicated Move ➔</a>
-        </div>
+        ${renderCoverageMap()}
       </main>
       ${renderFooter()}
     `,

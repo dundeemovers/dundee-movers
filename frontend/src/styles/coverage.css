@@ -1,0 +1,610 @@
+/* ==========================================================================
+   Coverage & Regional Corridors Master Hub Styles
+   Engineered for Rich Aesthetics, Mobile Touch UX & Senior Technical SEO
+   ========================================================================== */
+
+.coverage-hub-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 7.75rem 1.25rem 3.5rem;
+}
+
+@media (max-width: 768px) {
+  .coverage-hub-container {
+    padding: 5.75rem 1rem 2.5rem;
+  }
+}
+
+/* 1. Master Coverage Hero */
+.coverage-hero-card {
+  padding: 2.25rem;
+  margin-bottom: 2.5rem;
+  border-radius: var(--radius-xl, 1.25rem);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.85) 100%);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+}
+
+@media (max-width: 768px) {
+  .coverage-hero-card {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.coverage-status-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.coverage-depot-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #065f46;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+}
+
+.depot-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  animation: pulseEmerald 2s infinite;
+}
+
+@keyframes pulseEmerald {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.coverage-main-title {
+  font-size: clamp(1.85rem, 3.8vw, 2.75rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin-bottom: 0.85rem;
+}
+
+.coverage-hero-desc {
+  font-size: clamp(0.95rem, 1.8vw, 1.125rem);
+  color: #475569;
+  line-height: 1.6;
+  max-width: 860px;
+  margin-bottom: 1.75rem;
+}
+
+/* 2. Interactive Instant Postcode Checker */
+.postcode-checker-box {
+  background: #ffffff;
+  border: 1px solid rgba(203, 213, 225, 0.8);
+  border-radius: var(--radius-lg, 1rem);
+  padding: 1.5rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.checker-prompt-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checker-prompt-subtitle {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+.checker-input-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .checker-input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.checker-input {
+  flex: 1;
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 0.6rem;
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.checker-input:focus {
+  outline: none;
+  border-color: var(--color-accent-primary, #064e3b);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.15);
+}
+
+.checker-btn {
+  min-height: 48px;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.checker-result-card {
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.checker-result-card.result-available {
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  color: #14532d;
+}
+
+.checker-result-card.result-uk {
+  background: #eff6ff;
+  border: 1px solid #93c5fd;
+  color: #1e3a8a;
+}
+
+.checker-result-card.result-invalid {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+/* 3. Hero Trust Ribbon */
+.coverage-trust-ribbon {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+@media (max-width: 640px) {
+  .coverage-trust-ribbon {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+}
+
+.c-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.86rem;
+  color: #334155;
+}
+
+.c-trust-item strong {
+  color: #0f172a;
+}
+
+/* 4. Interactive Region Explorer Tabs */
+.coverage-explorer-section {
+  margin-bottom: 3.5rem;
+}
+
+.section-subheading-group {
+  margin-bottom: 1.5rem;
+}
+
+.subheading-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #064e3b;
+  margin-bottom: 0.35rem;
+}
+
+.subheading-title {
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.coverage-tabs-nav {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.35rem;
+  background: rgba(241, 245, 249, 0.9);
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.coverage-tabs-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.coverage-tab-btn {
+  flex: 1;
+  min-width: 140px;
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: transparent;
+  color: #475569;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.coverage-tab-btn:hover {
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.coverage-tab-btn.active {
+  background: #ffffff;
+  color: #064e3b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* 5. Region Detail Card */
+.coverage-content-area {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-xl, 1.25rem);
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+@media (max-width: 768px) {
+  .coverage-content-area {
+    padding: 1.25rem;
+  }
+}
+
+.region-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  margin-bottom: 1.5rem;
+}
+
+.region-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.region-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.region-time-badge {
+  font-size: 0.85rem;
+  color: #b45309;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.districts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .districts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.district-card {
+  display: flex;
+  gap: 0.85rem;
+  background: #f8fafc;
+  padding: 1.15rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.district-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+}
+
+.district-pin {
+  color: #064e3b;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.district-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.25rem;
+}
+
+.district-notes {
+  font-size: 0.84rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* 6. Strategic Local Corridors Grid */
+.corridors-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+@media (max-width: 640px) {
+  .corridors-bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.corridor-hub-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-lg, 1rem);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.corridor-hub-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-accent-primary, #064e3b);
+  box-shadow: 0 12px 30px -10px rgba(6, 78, 59, 0.12);
+}
+
+.c-hub-top {
+  margin-bottom: 1.25rem;
+}
+
+.c-hub-badge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.c-postcode-pill {
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: #f1f5f9;
+  color: #334155;
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.35rem;
+}
+
+.c-time-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #b45309;
+}
+
+.c-hub-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.c-hub-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.c-hub-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #064e3b;
+  text-decoration: none;
+}
+
+.c-hub-link:hover {
+  text-decoration: underline;
+}
+
+/* 7. Local Logistics Guide */
+.logistics-guide-section {
+  margin-bottom: 3.5rem;
+}
+
+.logistics-cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1.25rem;
+}
+
+.logistics-info-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-lg, 1rem);
+  padding: 1.5rem;
+}
+
+.logistics-card-icon {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.logistics-card-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.logistics-card-text {
+  font-size: 0.86rem;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+/* 8. Postcode SEO Matrix Table */
+.postcode-matrix-section {
+  margin-bottom: 3.5rem;
+}
+
+.table-responsive-wrapper {
+  overflow-x: auto;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: var(--radius-lg, 1rem);
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+}
+
+.postcode-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.postcode-table th {
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 800;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.postcode-table td {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: #475569;
+}
+
+.postcode-table tr:last-child td {
+  border-bottom: none;
+}
+
+.postcode-code-badge {
+  font-family: monospace;
+  font-weight: 700;
+  color: #064e3b;
+  background: #ecfdf5;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.3rem;
+}
+
+/* 9. Coverage FAQs */
+.coverage-faq-section {
+  margin-bottom: 3.5rem;
+}
+
+.coverage-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.coverage-faq-item {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 0.75rem;
+  padding: 1.35rem;
+}
+
+.coverage-faq-q {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.4rem;
+}
+
+.coverage-faq-a {
+  font-size: 0.86rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* 10. Bottom Banner */
+.coverage-footer-cta-card {
+  background: linear-gradient(135deg, #064e3b 0%, #042f24 100%);
+  color: #ffffff;
+  border-radius: var(--radius-xl, 1.25rem);
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: 0 20px 40px -15px rgba(6, 78, 59, 0.35);
+}
+
+.coverage-footer-cta-card h2 {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.coverage-footer-cta-card p {
+  color: #a7f3d0;
+  font-size: 1rem;
+  max-width: 680px;
+  margin: 0 auto 1.75rem;
+}
+
+.coverage-cta-btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
