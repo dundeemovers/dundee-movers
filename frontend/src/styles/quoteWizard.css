@@ -363,53 +363,6 @@
   line-height: 1.4;
 }
 
-.quote-media-file-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px dashed #cbd5e1;
-  text-align: left;
-}
-
-.media-file-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  padding: 0.35rem 0.65rem;
-  font-size: 0.75rem;
-  color: #0f172a;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-}
-
-.media-file-chip .chip-name {
-  max-width: 160px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-weight: 600;
-}
-
-.media-file-chip .chip-size {
-  color: #64748b;
-  font-size: 0.7rem;
-}
-
-.media-file-chip .chip-remove {
-  background: transparent;
-  border: none;
-  color: #ef4444;
-  font-weight: 800;
-  cursor: pointer;
-  padding: 0 2px;
-  font-size: 0.95rem;
-  line-height: 1;
-}
-
 /* Mobile Optimizations for Quote Wizard (<= 640px) */
 @media (max-width: 640px) {
   .quote-section {

@@ -214,23 +214,35 @@ export function initStepSummary(container, onRestart, state) {
       fileListContainer.innerHTML = '';
       return;
     }
-    fileListContainer.style.display = 'flex';
+    fileListContainer.style.display = 'grid';
     fileListContainer.innerHTML = selectedFiles.map((file, idx) => {
       const isVideo = file.type.startsWith('video');
+      const previewUrl = URL.createObjectURL(file);
       const sizeStr = file.size > 1024 * 1024 
         ? `${(file.size / (1024 * 1024)).toFixed(1)} MB` 
         : `${Math.round(file.size / 1024)} KB`;
+
       return `
-        <div class="media-file-chip">
-          <span>${isVideo ? '🎥' : '📷'}</span>
-          <span class="chip-name" title="${file.name}">${file.name}</span>
-          <span class="chip-size">(${sizeStr})</span>
-          <button type="button" class="chip-remove" data-index="${idx}" aria-label="Remove file">×</button>
+        <div class="media-preview-card" data-index="${idx}">
+          <button type="button" class="media-card-remove" data-index="${idx}" title="Remove file" aria-label="Remove file">×</button>
+          <div class="media-preview-thumb">
+            ${isVideo ? `
+              <video src="${previewUrl}" preload="metadata" muted playsinline></video>
+              <span class="media-type-badge">▶ Video</span>
+            ` : `
+              <img src="${previewUrl}" alt="${file.name}" loading="lazy" />
+              <span class="media-type-badge">📷 Photo</span>
+            `}
+          </div>
+          <div class="media-card-info">
+            <span class="media-card-name" title="${file.name}">${file.name}</span>
+            <span class="media-card-size">${sizeStr}</span>
+          </div>
         </div>
       `;
     }).join('');
 
-    fileListContainer.querySelectorAll('.chip-remove').forEach(btn => {
+    fileListContainer.querySelectorAll('.media-card-remove').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const index = parseInt(btn.getAttribute('data-index'), 10);

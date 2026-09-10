@@ -4,8 +4,6 @@
  * and lock in their guaranteed price and reservation.
  */
 import confetti from 'canvas-confetti';
-import '../styles/movePass.css';
-import '../styles/movePassEssentials.css';
 import { renderMovePassCompletion, initMovePassCompletion } from './movepass/MovePassCompletion.js';
 
 const ADDON_CATALOG = [
