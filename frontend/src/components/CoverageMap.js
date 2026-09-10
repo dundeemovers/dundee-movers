@@ -72,7 +72,7 @@ export function renderCoverageMap() {
               <span class="area-badge">Local Dundee Specialists</span>
               <h3 class="area-card-title">📍 Dundee City & Suburbs (DD1 – DD5)</h3>
               <p class="area-card-locations"><strong>Key Districts:</strong> City Centre, West End, Broughty Ferry, Barnhill, Stobswell, Coldside, Craigie.</p>
-              <p class="area-card-text">Specialists in traditional high-floor tenement flats, narrow spiral staircases, Dundee City Council parking bay permits, and family homes throughout Dundee.</p>
+              <p class="area-card-text">Specialists in traditional high-floor tenement flats, narrow spiral staircases, and family homes throughout Dundee.</p>
             </div>
             <div class="area-card-bottom" style="display: flex; flex-direction: column; gap: 0.35rem;">
               <a href="/areas/broughty-ferry" class="area-card-link">View Broughty Ferry & Barnhill ➔</a>
@@ -139,9 +139,9 @@ export function renderCoverageMap() {
         <div class="logistics-cards-row">
           <div class="logistics-info-card">
             <span class="logistics-card-icon">🅿️</span>
-            <h3 class="logistics-card-title">Parking & Council Permits</h3>
+            <h3 class="logistics-card-title">Street Parking & Curb Access</h3>
             <p class="logistics-card-text">
-              Moving on a busy Dundee street like Perth Road or City Quay? We assist with booking official Dundee City Council parking bay suspensions to ensure curb access right outside your door.
+              Moving on a busy street like Perth Road or City Quay? Customers usually keep a parking space outside for the removals van (e.g. using their own car), ensuring our team can pull right up for swift loading.
             </p>
           </div>
 

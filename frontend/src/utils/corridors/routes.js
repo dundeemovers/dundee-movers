@@ -83,9 +83,9 @@ export const UK_ROUTES = [
       { name: 'Commercial Office Moves', desc: 'Rapid intercity business moves between Dundee tech hubs and Edinburgh financial centers.' }
     ],
     localLogistics: {
-      title: 'Edinburgh Access & Parking Permits',
+      title: 'Edinburgh Access & Street Parking',
       points: [
-        'Navigating Edinburgh City Council parking bay suspensions and narrow New Town closes.',
+        'Customer keeps a parking space outside their property; our team handles direct loading swiftly.',
         'Stair climbing gear for 3rd and 4th floor traditional tenements.',
         'LEZ compliant fleet for low-emission central Edinburgh zones.'
       ]

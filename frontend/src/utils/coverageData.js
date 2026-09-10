@@ -10,7 +10,7 @@ export const COVERAGE_DATA = {
     corridorPath: '/areas/broughty-ferry',
     corridorLabel: 'Explore Broughty Ferry & DD5 Area Hub ➔',
     districts: [
-      { name: 'City Centre & Waterfront (DD1)', notes: 'Council parking permits, multi-storey flat stairs, and loading bays arranged.' },
+      { name: 'City Centre & Waterfront (DD1)', notes: 'Customer reserves curb space; high-floor flat stair gear supplied.' },
       { name: 'West End & University (DD2)', notes: 'Specialists in traditional high-floor flats, spiral staircases, and student moves.' },
       { name: 'Stobswell & Coldside (DD3)', notes: 'Fast local transit for traditional flats, terraces, and family homes.' },
       { name: 'Craigie & Pitkerro (DD4)', notes: 'Residential family home relocations, bungalows, and commercial storage moves.' },
@@ -68,7 +68,7 @@ export function getPostcodeCoverageResult(inputVal) {
       type: 'available',
       badge: '✓',
       title: `Dundee Core Zone (${clean}) — Daily Slots Available!`,
-      desc: 'Depot response within 15–30 mins. Includes high-floor flat stair gear and Dundee City Council parking permit support.',
+      desc: 'Depot response within 15–30 mins. Includes high-floor flat stair gear and direct curb loading support.',
       ctaText: `Get Quote for ${clean} ➔`
     };
   }

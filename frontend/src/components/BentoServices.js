@@ -75,7 +75,7 @@ export function renderBentoServices() {
             <p class="bento-desc">
               Top-floor flats, narrow stairwells, and spiral closes across the West End, DD1, and Stobswell. Our team is equipped with electric stair climbers and heavy-duty padded wraps.
             </p>
-            <span class="bento-highlight-text">Council Parking Permits & Access Handled</span>
+            <span class="bento-highlight-text">Direct Curb Loading & Tenement Stair Gear</span>
           </div>
 
           <!-- UK-Wide Long Distance Move Card -->

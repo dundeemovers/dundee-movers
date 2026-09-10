@@ -55,7 +55,7 @@ export function renderServicesView() {
           </div>
           <div class="s-trust-item">
             <span style="font-size: 1.25rem;">🅿️</span>
-            <span><strong>Parking Permits:</strong> Dundee Council bay suspensions</span>
+            <span><strong>Curb Parking:</strong> Customer keeps space outside</span>
           </div>
         </div>
       </section>
@@ -125,7 +125,7 @@ export function renderServicesView() {
               <ul class="inclusions-list">
                 <li>Heavy-duty stair climbers & padded stair crawlers</li>
                 <li>Door frame bumpers & balustrade protective wraps</li>
-                <li>Assistance securing Dundee City Council parking suspensions</li>
+                <li>Customer reserves curb space outside for direct loading</li>
                 <li>Fixed pricing guarantee with zero hidden stair surcharges</li>
                 <li>Student & academic flat packages for university terms</li>
               </ul>
@@ -291,7 +291,7 @@ export function renderServicesView() {
           <div class="process-step-card spotlight-card">
             <div class="process-step-num">02</div>
             <h3 class="process-step-title">Parking & Access Setup</h3>
-            <p class="process-step-text">We coordinate curb space, Council parking bay suspensions, and stairwell access to ensure smooth loading right outside your door.</p>
+            <p class="process-step-text">Customer reserves a parking space outside for the van (e.g. using their own car). We review stairwell access to ensure smooth loading right outside your door.</p>
           </div>
 
           <div class="process-step-card spotlight-card">

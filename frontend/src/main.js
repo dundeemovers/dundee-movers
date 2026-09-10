@@ -231,7 +231,7 @@ function mountApp() {
       ${renderViewHeader(
         'Moving Knowledge Hub',
         'Scottish Moving Guides & Logistics Advice',
-        'Stairwell moving logistics, Dundee parking suspension guidelines, and packing advice from professional movers.'
+        'Stairwell moving logistics, street parking tips, and packing advice from professional movers.'
       )}
       <div class="modular-view-body">
         ${renderGuidesBlog()}
@@ -243,7 +243,7 @@ function mountApp() {
     viewInitializer = () => initGuidesBlog();
     updateRouteMetadata({
       title: 'Moving Guides & Scottish Relocation Advice | Dundee Movers',
-      description: 'Expert Scottish moving guides: Scottish legal missives, Dundee City Council parking suspensions, multi-storey flat advice, and packing tips.',
+      description: 'Expert Scottish moving guides: Scottish legal missives, street parking advice, multi-storey flat advice, and packing tips.',
       canonicalPath: '/guides'
     });
 

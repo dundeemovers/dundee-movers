@@ -17,7 +17,7 @@ export const CHECKLIST_PHASES = [
     tasks: [
       { id: 't5', text: 'Notify Dundee City Council for Council Tax update', category: 'Council' },
       { id: 't6', text: 'Update address with GP, bank, DVLA, and Royal Mail redirection', category: 'Admin' },
-      { id: 't7', text: 'Arrange parking bay suspension with Dundee Council if in City Centre / West End', category: 'Parking' },
+      { id: 't7', text: 'Reserve parking space outside close for removals van (park car outside)', category: 'Parking' },
       { id: 't8', text: 'Pack non-essential items (books, off-season clothes, decor)', category: 'Packing' }
     ]
   },

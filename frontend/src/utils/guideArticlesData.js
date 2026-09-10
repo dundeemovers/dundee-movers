@@ -28,7 +28,7 @@ export const GUIDE_ARTICLES = [
       },
       {
         heading: '4 to 2 Weeks Before: Dundee Council & Utility Handover',
-        content: `Two weeks out, begin the formal change-of-address notifications. If you are moving within Dundee, you must notify Dundee City Council for Council Tax adjustments across bands A through H. If your pickup or destination address is in a restricted parking zone (such as Perth Road, Dundee City Centre DD1, or narrow Stobswell streets), arrange a parking bay suspension with the council to ensure the removals truck has legal curb space directly outside your door.`,
+        content: `Two weeks out, begin the formal change-of-address notifications. If you are moving within Dundee, you must notify Dundee City Council for Council Tax adjustments across bands A through H. If your pickup or destination address is on a busy street (such as Perth Road, Dundee City Centre DD1, or narrow Stobswell streets), plan to keep a parking space directly outside for the removals van (most customers park their own car outside their close and move it when our van arrives).`,
         tips: [
           'Notify Dundee City Council online for Council Tax transfer between old and new properties.',
           'Update your registered address with your GP surgery, dental clinic, DVLA, bank, and HMRC.',
@@ -130,8 +130,8 @@ Long-distance moves (e.g. Dundee to London or Manchester) include mileage, fuel 
     category: 'Local Dundee & UK',
     categoryTag: 'Local Dundee Tips',
     icon: '🏛️',
-    title: 'Moving Dundee Flats: Navigating Narrow Stairs & Council Parking Permits',
-    desc: 'How to safely move bulky furniture through multi-storey Victorian flats, spiral stairs, and secured council parking bays.',
+    title: 'Moving Dundee Flats: Navigating Narrow Stairs & Street Parking',
+    desc: 'How to safely move bulky furniture through multi-storey Victorian flats, spiral stairs, and keeping curb parking space.',
     readTime: '4 min read',
     updatedDate: 'Updated September 2026',
     author: 'Dundee Crew Foreman',
@@ -147,12 +147,12 @@ Long-distance moves (e.g. Dundee to London or Manchester) include mileage, fuel 
         ]
       },
       {
-        heading: 'Securing Dundee City Council Parking Bay Suspensions',
-        content: `Parking restrictions on busy Dundee streets (like Perth Road, Commercial Street, and Nethergate) can result in £60–£100 Penalty Charge Notices (PCNs) if an unauthorized vehicle blocks bus corridors or loading bays. You can apply for a formal Parking Bay Suspension directly via Dundee City Council at least 5 working days in advance, ensuring our dedicated removals van has reserved curb space directly outside your close.`,
+        heading: 'Reserving Street Parking for the Removals Van',
+        content: `Parking on busy Dundee streets (like Perth Road, Commercial Street, and Nethergate) can be competitive. Customers usually keep a parking space directly outside their close by parking their personal car there the evening before or on moving morning, then moving it when our removals van arrives. This ensures legal, close-up curb space for quick loading.`,
         checklist: [
-          'Check street signs outside both properties for "No Waiting" restrictions or resident-permit-only zones.',
-          'Submit a bay suspension application to Dundee City Council Roads Department if in DD1 or DD2.',
-          'Place safety cones or coordinate with building neighbors the evening prior to hold curbside space.'
+          'Check street signs outside both properties for any time-limited restrictions or loading zones.',
+          'Park your own car outside your close early to hold space for the removals van.',
+          'Coordinate with building neighbors the evening prior to ensure clear curbside access.'
         ]
       }
     ]

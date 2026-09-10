@@ -68,12 +68,12 @@ export const LOCAL_AREAS = [
     title: 'Removals Dundee West End & Perth Road DD2 | Dundee Movers',
     h1: 'Tenement & Residential Removals in Dundee West End (DD2)',
     metaTitle: 'Removals Dundee West End & Perth Road DD2 | Dundee Movers',
-    metaDesc: 'Expert removals in Dundee West End (DD2). Specialists in multi-storey Victorian flats, spiral stairs, Perth Road parking permits & Ninewells Hospital staff moves.',
+    metaDesc: 'Expert removals in Dundee West End (DD2). Specialists in multi-storey Victorian flats, spiral stairs, Perth Road curb access & Ninewells Hospital staff moves.',
     transitBadge: 'West End Tenement & Doctor Relocation Specialists',
     heroSubtitle: 'From traditional 3rd-floor Victorian flats along Perth Road to Ninewells medical staff moves and Magdalene Green townhouses.',
     highlights: [
       'Specialized equipment for narrow spiral stairwells and 3rd/4th floor flats',
-      'Dundee City Council parking bay suspension coordination for Perth Road',
+      'Guidance on keeping curb parking space outside narrow Perth Road closes',
       'Flexible scheduling for Ninewells Hospital doctors and University academics',
       '100% dedicated Luton vans: your items are never mixed with other cargo'
     ],
@@ -85,7 +85,7 @@ export const LOCAL_AREAS = [
     localLogistics: {
       title: 'West End Tenement & Parking Logistics',
       points: [
-        'Assistance booking Dundee City Council parking bay suspensions for narrow Perth Road closes.',
+        'Customers usually reserve a parking space outside using their personal car so our van can load swiftly.',
         'High-tensile lifting straps and padded door jamb protectors for tight stone turns.',
         'LEZ compliant fleet for smooth access across Dundee inner ring roads.'
       ]
@@ -108,8 +108,8 @@ export const LOCAL_AREAS = [
         a: 'No hidden fees. We price your move upfront based on your declared floor level, with zero surprise surcharges on moving morning.'
       },
       {
-        q: 'Can you help arrange parking permits for busy Perth Road moving days?',
-        a: 'Yes, we provide step-by-step guidance on securing official Dundee City Council parking bay suspensions directly outside your close.'
+        q: 'How should I arrange parking on busy Perth Road moving days?',
+        a: 'Customers usually keep a space for our van directly outside their close by parking their car there and moving it when we arrive, ensuring quick and legal loading.'
       }
     ]
   },
