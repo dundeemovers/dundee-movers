@@ -23,7 +23,7 @@ const baseTemplate = fs.readFileSync(templatePath, 'utf8');
 import { renderNavbar } from '../src/components/Navbar.js';
 import { renderFooter } from '../src/components/Footer.js';
 import { renderHomeView } from '../src/components/HomeView.js';
-import { renderBentoServices } from '../src/components/BentoServices.js';
+import { renderServicesView } from '../src/components/ServicesView.js';
 import { renderCoverageMap } from '../src/components/CoverageMap.js';
 import { renderGuidesBlog } from '../src/components/GuidesBlog.js';
 import { renderGuidePageView } from '../src/components/GuidePageView.js';
@@ -73,21 +73,121 @@ const routes = [
     path: '/services',
     filePath: 'services/index.html',
     title: 'Removal Services Dundee, Angus & UK | Dundee Movers',
-    description: 'Explore bespoke residential house moves, high-floor Victorian flat specialists, commercial office relocations, and nationwide UK transit.',
+    description: 'Professional house removals, tenement flat moves, packing services & office relocations in Dundee (DD1–DD5), Angus & UK. 100% dedicated vans, £50k insurance.',
     render: () => `
       ${renderNavbar('services')}
       <main class="modular-main-content">
-        ${renderViewHeader('Specialist Services', 'Bespoke Scottish Removal Services', 'From high-floor flats and townhouses to express direct UK long-distance relocations.')}
-        <div class="modular-view-body">
-          ${renderBentoServices()}
-        </div>
-        <div class="container modular-view-footer-cta">
-          <a href="/#quote-calculator" class="btn btn-primary">Ready to Move? Calculate Price ➔</a>
-        </div>
+        ${renderServicesView()}
       </main>
       ${renderFooter()}
     `,
-    schema: null
+    schema: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Service",
+          "name": "Professional Removal Services Dundee",
+          "serviceType": "Removals and Relocations",
+          "provider": {
+            "@type": "MovingCompany",
+            "name": "Dundee Movers",
+            "telephone": "+44-7308-420884",
+            "url": "https://dundeemovers.co.uk"
+          },
+          "areaServed": [
+            { "@type": "AdministrativeArea", "name": "Dundee" },
+            { "@type": "AdministrativeArea", "name": "Angus" },
+            { "@type": "AdministrativeArea", "name": "Fife" },
+            { "@type": "Country", "name": "United Kingdom" }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Removals & Moving Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Residential House & Home Removals"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Flats, Tenements & High-Floor Removals"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Professional Packing Services Dundee"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Commercial & Office Relocations"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Direct Whole UK Long-Distance Removals"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Furniture Dismantling & Assembly"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Do you charge extra for tenement stairs or top-floor flats in Dundee?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No hidden surprises. When you request a quote, simply let us know your floor level. We calculate the crew size and equipment required into your guaranteed fixed price upfront."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can you provide packing boxes and materials before moving day?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. If you book our packing service or prefer to pack yourself, we can arrange early delivery of double-walled boxes, bubble wrap, tape, and wardrobe cartons across Dundee and Angus."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does your 1-move-at-a-time guarantee protect my move?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our 1-move-at-a-time commitment means your van and crew are 100% dedicated to your relocation from pickup to delivery. The vehicle is exclusive to you with zero shared loads."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Are out-of-hours or weekend office moves available?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. For commercial and office relocations, we offer dedicated weekend and evening time slots across Dundee, Fife, and Angus to ensure zero business disruption."
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   // 3. Coverage Map
   {

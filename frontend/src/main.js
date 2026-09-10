@@ -7,7 +7,7 @@ import './styles/main.css';
 import { renderNavbar, initNavbar, setActiveNav } from './components/Navbar.js';
 import { renderHomeView, initHomeView } from './components/HomeView.js';
 import { renderQuoteEstimator, initQuoteEstimator } from './components/QuoteEstimator.js';
-import { renderBentoServices } from './components/BentoServices.js';
+import { renderServicesView } from './components/ServicesView.js';
 import { renderCoverageMap, initCoverageMap } from './components/CoverageMap.js';
 import { renderGuidesBlog, initGuidesBlog } from './components/GuidesBlog.js';
 import { renderGuidePageView, updateGuideSeoMetadata } from './components/GuidePageView.js';
@@ -192,22 +192,10 @@ function mountApp() {
   // 3. Specialist Services View
   } else if (pathname === '/services') {
     activeRoute = 'services';
-    viewHtml = `
-      ${renderViewHeader(
-        'Specialist Services',
-        'Bespoke Scottish Removal Services',
-        'From high-floor flats and townhouses to express direct UK long-distance relocations.'
-      )}
-      <div class="modular-view-body">
-        ${renderBentoServices()}
-      </div>
-      <div class="container modular-view-footer-cta">
-        <a href="/#quote-calculator" class="btn btn-primary">Ready to Move? Calculate Price ➔</a>
-      </div>
-    `;
+    viewHtml = renderServicesView();
     updateRouteMetadata({
       title: 'Removal Services Dundee, Angus & UK | Dundee Movers',
-      description: 'Explore bespoke residential house moves, high-floor Victorian flat specialists, commercial office relocations, and nationwide UK transit.',
+      description: 'Professional house removals, tenement flat moves, packing services & office relocations in Dundee (DD1–DD5), Angus & UK. 100% dedicated vans, £50k insurance.',
       canonicalPath: '/services'
     });
 
