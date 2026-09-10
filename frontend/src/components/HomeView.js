@@ -274,9 +274,9 @@ export function renderHomeView() {
 
           <div class="glass-panel home-feature-card spotlight-card">
             <div class="h-card-icon">🚚</div>
-            <h3 class="h-card-title">Express Nationwide UK Transit</h3>
-            <p class="h-card-text">Direct door-to-door relocations from Dundee to Edinburgh, Glasgow, Manchester, Birmingham, and London with zero depot delay.</p>
-            <a href="/coverage" class="h-card-link">View UK Routes & Transit Times ➔</a>
+            <h3 class="h-card-title">Direct Nationwide UK Removals</h3>
+            <p class="h-card-text">Direct door-to-door relocations from Dundee to Edinburgh, Glasgow, Manchester, Birmingham, and London with zero shared cargo.</p>
+            <a href="/coverage" class="h-card-link">View Coverage Areas ➔</a>
           </div>
         </div>
       </section>

@@ -14,7 +14,7 @@ export const CORRIDOR_DATA = [
     h1: 'Dedicated House Removals in Broughty Ferry & Barnhill (DD5)',
     metaTitle: 'Removals Broughty Ferry & Barnhill DD5 | Dundee Movers',
     metaDesc: 'Premier house & flat removals in Broughty Ferry (DD5). 100% dedicated vans, zero shared loads, £50k insurance & specialist villa packing. Get a quote today.',
-    transitBadge: '10–20 Mins from Dundee Central Depot',
+    transitBadge: 'Local Dundee & Coastal Move Specialists',
     heroSubtitle: 'Premier residential removals for Broughty Ferry detached villas, coastal flats, and family homes in Barnhill. Van and crew 100% dedicated to your move.',
     highlights: [
       'Victorian & Edwardian villa moving specialists',
@@ -68,7 +68,7 @@ export const CORRIDOR_DATA = [
     h1: 'Professional House & Student Removals in St Andrews (KY16)',
     metaTitle: 'Removals St Andrews & East Neuk Fife | Dundee Movers',
     metaDesc: 'Top-rated removals in St Andrews (KY16). University student moves, academic library packing & luxury family home relocations across North East Fife.',
-    transitBadge: '25–35 Mins via Tay Road Bridge (A92)',
+    transitBadge: 'Direct Cross-Tay Road Bridge Service',
     heroSubtitle: 'From historic townhouses and University of St Andrews student flats to coastal country properties across North East Fife.',
     highlights: [
       'Direct cross-Tay Bridge express transit from Dundee',
@@ -122,7 +122,7 @@ export const CORRIDOR_DATA = [
     h1: 'Direct Non-Stop Removals: Dundee to London & South England',
     metaTitle: 'Dundee to London Removals | Dedicated Non-Stop UK Transit | Dundee Movers',
     metaDesc: 'Dedicated Dundee to London removals. 100% exclusive van with zero shared freight, direct transit, and £50k Goods in Transit insurance. Book your direct run.',
-    transitBadge: 'Direct Door-to-Door • Non-Stop Transit',
+    transitBadge: 'Direct Door-to-Door • Zero Shared Cargo',
     heroSubtitle: 'Never share van space on long-distance moves. Your vehicle is 100% dedicated to your home from loading in Dundee straight to delivery in London.',
     highlights: [
       'Strict 1-move-at-a-time guarantee: zero shared courier loads',
@@ -176,7 +176,7 @@ export const CORRIDOR_DATA = [
     h1: 'Express Same-Day Removals: Dundee to Edinburgh & Lothians',
     metaTitle: 'Dundee to Edinburgh Removals | Same-Day Scottish Transit | Dundee Movers',
     metaDesc: 'Fast same-day house and flat removals from Dundee to Edinburgh. 1-move-at-a-time dedicated vans, Queensferry Crossing routes, and £50k insurance included.',
-    transitBadge: '1 hr 20 mins via A90 & M90 Corridor',
+    transitBadge: 'Same-Day Scottish Intercity Removals',
     heroSubtitle: 'Morning load in Dundee, direct Queensferry Crossing transit, and afternoon delivery in Edinburgh. Express same-day service with exclusive vehicles.',
     highlights: [
       'Same-day morning load and afternoon delivery',
@@ -230,7 +230,7 @@ export const CORRIDOR_DATA = [
     h1: 'Local Removals across Arbroath, Forfar, Carnoustie & Angus',
     metaTitle: 'Removals Arbroath, Forfar & Angus Towns | Dundee Movers',
     metaDesc: 'Trusted house removals in Arbroath, Forfar, Carnoustie & Montrose. Dedicated vans, £50k insurance, and rural property specialists. Free tailored quotes.',
-    transitBadge: '20–40 Mins via A92 / A90 Corridors',
+    transitBadge: 'County-Wide Angus & Rural Coverage',
     heroSubtitle: 'Complete residential removals, farm cottage relocations, and coastal moves throughout the County of Angus and Strathmore valley.',
     highlights: [
       'Comprehensive coverage across Arbroath, Forfar, Montrose, Carnoustie & Brechin',
