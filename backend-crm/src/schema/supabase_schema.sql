@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS public.leads_quotes (
     
     -- Pipeline Status
     status TEXT NOT NULL DEFAULT 'new' 
-        CHECK (status IN ('new', 'auto_quoted', 'survey_booked', 'confirmed', 'deposit_paid', 'completed', 'lost')),
+        CHECK (status IN ('new', 'quoted', 'auto_quoted', 'survey_booked', 'confirmed', 'deposit_paid', 'completed', 'lost', 'booked')),
     source TEXT NOT NULL DEFAULT 'website_wizard'
 );
 

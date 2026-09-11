@@ -1,0 +1,426 @@
+/* ==========================================================================
+   Dundee Movers CRM — Horizontal Collapsible Pipeline Lanes & Clean Cards
+   Inspired by modern enterprise CRM pipeline designs with accordion lanes.
+   ========================================================================== */
+
+.pipeline-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 3rem;
+}
+
+/* --- Top Header & Controls Strip --- */
+.pipeline-header-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #ffffff;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.pipeline-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.pipeline-page-heading {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.pipeline-page-subtext {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.pipeline-actions-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.pipeline-search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-width: 280px;
+}
+
+.pipeline-search-bar input {
+  width: 100%;
+  padding: 0.6rem 0.85rem 0.6rem 2.25rem;
+  font-size: 0.875rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.pipeline-search-bar input:focus {
+  border-color: #059669;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.pipeline-search-bar .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+/* --- Collapsible Stage Lanes (Accordion Rows) --- */
+.pipeline-lanes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pipeline-lane-row {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.pipeline-lane-row:hover {
+  border-color: #cbd5e1;
+}
+
+/* Lane Header */
+.lane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.25rem;
+  background: #ffffff;
+  cursor: pointer;
+  user-select: none;
+  border-bottom: 1px solid transparent;
+  transition: background 0.15s ease;
+}
+
+.lane-header:hover {
+  background: #f8fafc;
+}
+
+.pipeline-lane-row.open .lane-header {
+  border-bottom-color: #f1f5f9;
+}
+
+.lane-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lane-toggle-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+  color: #64748b;
+  transition: transform 0.2s ease;
+}
+
+.pipeline-lane-row.open .lane-toggle-arrow {
+  transform: rotate(90deg);
+}
+
+.lane-title {
+  font-size: 0.975rem;
+  font-weight: 700;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lane-count-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.15rem 0.55rem;
+  border-radius: 12px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.lane-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lane-value-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #059669;
+}
+
+.lane-collapse-toggle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.lane-collapse-toggle:hover {
+  color: #0f172a;
+  background: #e2e8f0;
+}
+
+/* Lane Content (Card Grid) */
+.lane-content {
+  display: none;
+  padding: 1.25rem;
+  background: #fafbfc;
+}
+
+.pipeline-lane-row.open .lane-content {
+  display: block;
+}
+
+.lane-cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  min-height: 50px;
+}
+
+.lane-empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 2.25rem 1rem;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  font-style: normal;
+  text-align: center;
+  background: #ffffff;
+  border: 1px dashed #e2e8f0;
+  border-radius: 10px;
+}
+
+/* --- Clean Modern Pipeline Card --- */
+.clean-pipeline-card {
+  flex: 1 1 290px;
+  max-width: 350px;
+  min-width: 260px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1rem;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  user-select: none;
+}
+
+.clean-pipeline-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+  border-color: #cbd5e1;
+}
+
+/* Stage-specific accent borders */
+.clean-pipeline-card.stage-new {
+  border-left: 4px solid #f59e0b; /* Amber */
+}
+
+.clean-pipeline-card.stage-quoted {
+  border-left: 4px solid #8b5cf6; /* Purple / Iris matching reference */
+}
+
+.clean-pipeline-card.stage-confirmed {
+  border-left: 4px solid #10b981; /* Emerald Green */
+}
+
+/* Card Header */
+.cp-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.cp-customer-name {
+  font-size: 0.975rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.cp-menu-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.cp-menu-btn:hover {
+  color: #0f172a;
+  background: #f1f5f9;
+}
+
+/* Card Subtitle & Route */
+.cp-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cp-route-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cp-sub-details {
+  font-size: 0.775rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+/* Card Chips Row */
+.cp-chips-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.cp-micro-chip {
+  font-size: 0.725rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.cp-micro-chip.chip-stairs {
+  background: #fff1f2;
+  color: #be123c;
+  border: 1px solid #fecdd3;
+}
+
+.cp-micro-chip.chip-lift {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.cp-micro-chip.chip-media {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+/* Card Bottom Status Strip */
+.cp-bottom-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.cp-status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cp-status-badge.badge-needs-review {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.cp-status-badge.badge-pass-sent {
+  background: #f3e8ff;
+  color: #6b21a8;
+}
+
+.cp-status-badge.badge-confirmed {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.cp-price-pill {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .pipeline-header-strip {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+  }
+
+  .pipeline-search-bar {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .clean-pipeline-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .lane-content {
+    padding: 0.75rem;
+  }
+}

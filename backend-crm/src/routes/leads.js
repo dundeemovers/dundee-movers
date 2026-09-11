@@ -7,7 +7,8 @@ import {
   createLead,
   updateLeadStatus,
   prepareAndSendMovePass,
-  acceptQuotePass
+  acceptQuotePass,
+  attachMediaToLead
 } from '../services/leadsService.js';
 
 export async function handleLeadsRoute(req, res, pathname, query, body) {
@@ -40,6 +41,21 @@ export async function handleLeadsRoute(req, res, pathname, query, body) {
       const payload = typeof body === 'string' ? JSON.parse(body || '{}') : body;
       const result = await acceptQuotePass(matchAccept[1], payload);
       res.writeHead(result.success ? 200 : 400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify(result, null, 2));
+    } catch (err) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: err.message }));
+    }
+  }
+
+  // POST /api/leads/:id/media
+  const matchMedia = pathname.match(/^\/api\/leads\/([^/]+)\/media$/);
+  if (req.method === 'POST' && matchMedia) {
+    try {
+      const payload = typeof body === 'string' ? JSON.parse(body || '{}') : body;
+      const mediaFiles = payload.mediaFiles || (Array.isArray(payload) ? payload : [payload]);
+      const result = await attachMediaToLead(matchMedia[1], mediaFiles);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
       return res.end(JSON.stringify(result, null, 2));
     } catch (err) {
       res.writeHead(400, { 'Content-Type': 'application/json' });

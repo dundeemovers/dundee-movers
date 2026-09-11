@@ -200,21 +200,17 @@
     box-shadow: 0 2px 6px rgba(16, 185, 129, 0.15);
   }
 
-  /* Native Touch Scroll-Snap Carousel Container */
+  /* Vertical Mobile Pipeline Stack (No horizontal swiping or gesture trapping) */
   .pipeline-board {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    gap: 0.75rem;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+    gap: 1.25rem !important;
     padding-bottom: 2.5rem;
     margin: 0;
     width: 100%;
     box-sizing: border-box;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
   }
 
   .pipeline-board::-webkit-scrollbar {
@@ -222,15 +218,16 @@
   }
 
   .pipeline-column {
-    flex: 0 0 100%;
-    width: 100%;
-    min-width: 100%;
-    max-width: 100%;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    min-height: auto;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+    min-height: auto !important;
     border-radius: 0.875rem;
     box-sizing: border-box;
+    scroll-margin-top: 4.25rem;
   }
 
   .column-header {

@@ -319,6 +319,33 @@ export function initStepSummary(container, onRestart, state) {
       ? ` | Attached Media (${selectedFiles.length} files): ${selectedFiles.map(f => `${f.name} (${Math.round(f.size/1024)}KB)`).join(', ')}`
       : '';
 
+    // Encode selected photos and videos to Data URLs for CRM preview and storage
+    let preparedMedia = [];
+    if (selectedFiles.length > 0) {
+      preparedMedia = await Promise.all(
+        selectedFiles.map(file => new Promise((resolve) => {
+          if (file.size > 25 * 1024 * 1024) {
+            resolve({ name: file.name, size: file.size, type: file.type, dataUrl: null });
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = () => resolve({
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            dataUrl: reader.result
+          });
+          reader.onerror = () => resolve({
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            dataUrl: null
+          });
+          reader.readAsDataURL(file);
+        }))
+      );
+    }
+
     const payload = {
       customerName: name,
       customerPhone: phone,
@@ -338,7 +365,7 @@ export function initStepSummary(container, onRestart, state) {
       recommendedCrew: 'Manual Dispatch Review',
       items: state.items,
       mediaCount: selectedFiles.length,
-      mediaFiles: selectedFiles.map(f => ({ name: f.name, size: f.size, type: f.type })),
+      mediaFiles: preparedMedia,
       notes: `Ref: #${quoteRef}${customNotes ? ' | Notes: ' + customNotes : ''}${itemsSummary ? ' | Manifest: ' + itemsSummary : ''}${mediaSummary}`
     };
 

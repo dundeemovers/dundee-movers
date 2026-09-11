@@ -1,0 +1,216 @@
+/* ==========================================================================
+   CRM Customer Media Attachments & Previews Styles
+   ========================================================================== */
+
+.crm-media-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.crm-media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.85rem;
+  margin-top: 0.75rem;
+}
+
+.crm-media-card {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.crm-media-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-color: #059669;
+}
+
+.crm-media-preview-box {
+  width: 100%;
+  height: 125px;
+  background: #0f172a;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.crm-media-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.crm-media-preview-box img:hover {
+  transform: scale(1.05);
+}
+
+.crm-media-preview-box video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.crm-media-info {
+  padding: 0.6rem 0.75rem;
+  background: #ffffff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.crm-media-filename {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.crm-media-filesize {
+  font-size: 0.7rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.crm-media-actions {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.crm-media-btn {
+  flex: 1;
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid #cbd5e1;
+  background: #f1f5f9;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.crm-media-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.crm-media-btn.btn-view {
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #065f46;
+}
+
+.crm-media-btn.btn-view:hover {
+  background: #d1fae5;
+}
+
+.crm-media-btn.btn-whatsapp {
+  background: #25d366;
+  border-color: #22c55e;
+  color: #ffffff;
+}
+
+.crm-media-btn.btn-whatsapp:hover {
+  background: #16a34a;
+}
+
+/* Lightbox Modal */
+.crm-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.crm-lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.crm-lightbox-content img,
+.crm-lightbox-content video {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.crm-lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.crm-lightbox-footer {
+  margin-top: 1rem;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.crm-media-dropzone {
+  margin-top: 0.85rem;
+  border: 2px dashed #94a3b8;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.crm-media-dropzone:hover,
+.crm-media-dropzone.dragover {
+  border-color: #059669;
+  background: #ecfdf5;
+}
+
+.crm-media-empty-note {
+  color: #64748b;
+  font-size: 0.85rem;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+

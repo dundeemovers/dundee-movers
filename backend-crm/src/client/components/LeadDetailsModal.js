@@ -5,6 +5,7 @@
  */
 import { parseManifestItems, extractCustomerNotes, generateWhatsAppMessage } from '../utils/leadFormatters.js';
 import { calculateSuggestedPrice } from '../utils/smartPricing.js';
+import { renderLeadMediaGallery, initLeadMediaGalleryEvents } from './LeadMediaGallery.js';
 
 export function renderLeadDetailsModal(lead) {
   if (!lead) return '';
@@ -105,6 +106,9 @@ export function renderLeadDetailsModal(lead) {
             ` : ''}
           </div>
 
+          <!-- Customer Attached Photos & Video Walkthrough -->
+          ${renderLeadMediaGallery(lead)}
+
           <!-- Fleet & Crew Sizing -->
           <div class="survey-section-title">🚐 Sizing & Vehicle Allocation</div>
           <div class="fleet-metrics-bar">
@@ -132,9 +136,6 @@ export function renderLeadDetailsModal(lead) {
               <div>
                 <span style="font-weight: 800; font-size: 0.95rem; color: #064e3b;">
                   💰 Guaranteed Quote & Deposit Setup
-                </span>
-                <span class="smart-estimate-chip">
-                  💡 Smart Suggested Range: £${pricing.suggestedMin} – £${pricing.suggestedMax}
                 </span>
               </div>
               <div style="display: flex; gap: 0.35rem; align-items: center;">
@@ -244,4 +245,24 @@ export function initLeadDetailsModalEvents(container, lead, onSendPassWithPrice,
       }, 1500);
     });
   }
+
+  // Media gallery inspection and drag-and-drop events
+  initLeadMediaGalleryEvents(container, lead, (updatedLead) => {
+    const currentContainer = container.querySelector('#crm-media-section-container');
+    if (currentContainer && currentContainer.parentElement) {
+      const activeLead = updatedLead || lead;
+      const temp = document.createElement('div');
+      temp.innerHTML = renderLeadMediaGallery(activeLead);
+      const newContainer = temp.querySelector('#crm-media-section-container');
+      const newTitle = temp.querySelector('.survey-section-title');
+      const oldTitle = currentContainer.previousElementSibling;
+      if (oldTitle && newTitle && oldTitle.classList.contains('survey-section-title')) {
+        oldTitle.replaceWith(newTitle);
+      }
+      if (newContainer) {
+        currentContainer.replaceWith(newContainer);
+      }
+      initLeadMediaGalleryEvents(container, activeLead);
+    }
+  });
 }

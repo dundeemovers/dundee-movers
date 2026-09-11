@@ -3,6 +3,7 @@
  * Synchronizes with Supabase leads_quotes table with zero-config local fallback.
  */
 import { executeSupabaseQuery, isSupabaseConfigured } from './supabaseClient.js';
+import { saveLeadMediaFiles, getLeadMediaFiles } from './mediaStorageService.js';
 import {
   sendEmailWithResend,
   generateInquiryReceivedEmailHtml,
@@ -122,7 +123,8 @@ function mapLeadRow(r) {
     quoteExpiresAt: r.quote_expires_at || null,
     acceptedAt: r.accepted_at || null,
     acceptedSignature: r.accepted_signature || null,
-    selectedAddons: r.selected_addons || []
+    selectedAddons: r.selected_addons || [],
+    mediaFiles: getLeadMediaFiles(r.id, r.custom_notes)
   };
 }
 
@@ -136,7 +138,10 @@ export async function getAllLeads(filter = {}) {
     } catch (_) {}
   }
 
-  let result = [...leadsDatabase];
+  let result = leadsDatabase.map(lead => ({
+    ...lead,
+    mediaFiles: getLeadMediaFiles(lead.id, lead.notes)
+  }));
   if (filter.status) {
     result = result.filter(lead => lead.status === filter.status);
   }
@@ -152,7 +157,8 @@ export async function getLeadById(id) {
       }
     } catch (_) {}
   }
-  return leadsDatabase.find(lead => lead.id === id) || null;
+  const lead = leadsDatabase.find(l => l.id === id);
+  return lead ? { ...lead, mediaFiles: getLeadMediaFiles(lead.id, lead.notes) } : null;
 }
 
 export async function createLead(leadData) {
@@ -181,7 +187,10 @@ export async function createLead(leadData) {
     quoteExpiresAt: null,
     acceptedAt: null,
     acceptedSignature: null,
-    selectedAddons: []
+    selectedAddons: [],
+    mediaFiles: (leadData.mediaFiles && leadData.mediaFiles.length > 0)
+      ? saveLeadMediaFiles(`lead-${Date.now().toString(36)}`, leadData.mediaFiles)
+      : getLeadMediaFiles(`lead-${Date.now().toString(36)}`, leadData.notes)
   };
 
   leadsDatabase.unshift(newLead);
@@ -436,3 +445,10 @@ export function updateLeadStatus(id, newStatus) {
   }
   return lead;
 }
+
+export async function attachMediaToLead(leadId, mediaFiles) {
+  const saved = saveLeadMediaFiles(leadId, mediaFiles);
+  const lead = await getLeadById(leadId);
+  return { success: true, count: saved.length, mediaFiles: saved, lead };
+}
+

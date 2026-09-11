@@ -9,9 +9,6 @@ export const NAV_ITEMS = [
   { id: 'calendar', label: 'Dispatch Calendar', icon: '📅', hash: '#calendar', badge: 'New' },
   { id: 'leads', label: 'Quotes & Leads', icon: '📥', hash: '#leads', badge: 'Active' },
   { id: 'archive', label: 'Completed Archive', icon: '📁', hash: '#archive' },
-  { id: 'calculator', label: 'Cubic Estimator', icon: '📐', hash: '#calculator' },
-  { id: 'materials', label: 'Packing Depot', icon: '📦', hash: '#materials' },
-  { id: 'analytics', label: 'Telemetry & Funnel', icon: '📊', hash: '#analytics' },
   { id: 'emails', label: 'Email Automations', icon: '✉️', hash: '#emails' },
   { id: 'settings', label: 'Supabase & Settings', icon: '⚙️', hash: '#settings' }
 ];

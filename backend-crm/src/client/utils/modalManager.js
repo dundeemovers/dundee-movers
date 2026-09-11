@@ -5,7 +5,7 @@
 import { renderJobSheetModal, initJobSheetModalEvents } from '../components/JobSheetModal.js';
 import { renderInvoiceModal, initInvoiceModalEvents } from '../components/InvoiceModal.js';
 import { renderNewLeadModal, initNewLeadModalEvents } from '../components/NewLeadModal.js';
-import { renderLeadDetailsModal, initLeadDetailsModalEvents } from '../components/LeadDetailsModal.js';
+import { openLeadDrawer } from '../components/LeadDrawer.js';
 
 export function openJobSheetModal(job, onSaveSignature) {
   if (!job) return;
@@ -32,8 +32,8 @@ export function openNewLeadModal(callbacks = {}) {
 
 export function openLeadSurveyModal(lead, onSendPassWithPrice, onSavePrice) {
   if (!lead) return;
-  const modalWrap = document.createElement('div');
-  modalWrap.innerHTML = renderLeadDetailsModal(lead);
-  document.body.appendChild(modalWrap);
-  initLeadDetailsModalEvents(modalWrap, lead, onSendPassWithPrice, onSavePrice);
+  openLeadDrawer(lead, {
+    onSendPass: onSendPassWithPrice,
+    onSavePrice: onSavePrice
+  });
 }

@@ -36,6 +36,13 @@ const MIME_TYPES = {
   '.js': 'application/javascript; charset=utf-8',
   '.json': 'application/json',
   '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.gif': 'image/gif',
+  '.mp4': 'video/mp4',
+  '.mov': 'video/quicktime',
+  '.webm': 'video/webm',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon'
 };
@@ -50,8 +57,14 @@ function serveStaticFile(req, res, pathname) {
   let relativePath = pathname === '/' ? 'index.html' : pathname.replace(/^\//, '');
   let filePath = path.join(CLIENT_DIR, relativePath);
 
-  // If path doesn't exist or doesn't have an extension, serve index.html (SPA routing)
-  if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+  // If request is under /uploads/ and file does not exist, return 404 (do not fallback to index.html)
+  if (pathname.startsWith('/uploads/')) {
+    if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      return res.end('Attachment not found');
+    }
+  } else if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+    // If SPA route without extension, serve index.html
     filePath = path.join(CLIENT_DIR, 'index.html');
   }
 
@@ -83,6 +96,8 @@ function isProtectedEndpoint(pathname, method) {
   if (pathname.match(/^\/api\/leads\/[^/]+$/) && method === 'GET') return false;
   // Customer accepting digital Move Pass
   if (pathname.match(/^\/api\/leads\/[^/]+\/accept$/) && method === 'POST') return false;
+  // Customer or wizard uploading media files to a lead
+  if (pathname.match(/^\/api\/leads\/[^/]+\/media$/) && method === 'POST') return false;
   // Email template previews
   if (pathname.startsWith('/api/emails/preview/')) return false;
   return true;

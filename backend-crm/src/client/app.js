@@ -6,10 +6,7 @@ import { renderSidebar, initSidebarEvents } from './components/SidebarNav.js';
 import { renderFrontDeskView, initFrontDeskEvents } from './components/FrontDeskView.js';
 import { renderConfirmedJobsView, initConfirmedJobsEvents } from './components/ConfirmedJobsView.js';
 import { renderCalendarView, initCalendarEvents } from './components/CalendarView.js';
-import { renderLeadsView, initLeadsEvents } from './components/LeadsView.js?v=3';
-import { renderVolumeCalculatorView, initVolumeCalculatorEvents } from './components/VolumeCalculatorView.js';
-import { renderMaterialsView, initMaterialsEvents } from './components/MaterialsView.js';
-import { renderAnalyticsView } from './components/AnalyticsView.js';
+import { renderLeadsView, initLeadsEvents } from './components/LeadsView.js?v=15';
 import { renderEmailsView } from './components/EmailsView.js';
 import { renderSettingsView } from './components/SettingsView.js';
 import { renderLoginView, initLoginViewEvents } from './components/LoginView.js';
@@ -19,6 +16,7 @@ import {
   openNewLeadModal,
   openLeadSurveyModal
 } from './utils/modalManager.js';
+import { openLeadDrawer } from './components/LeadDrawer.js?v=15';
 import {
   getSavedSession,
   persistSession,
@@ -35,7 +33,6 @@ const state = {
   activeFrontDeskTab: 'today',
   calendarViewMode: 'week',
   calendarAnchorDate: new Date(),
-  calculatorActiveTab: 'living',
   confirmedSearch: '',
   confirmedFilter: 'active',
   leadsFilter: 'all',
@@ -170,9 +167,6 @@ function renderApp() {
     'archive': { title: 'Completed Removals Archive', subtitle: 'Historical records, signed Bills of Lading & permanent invoices' },
     'calendar': { title: 'Fleet Dispatch Calendar', subtitle: 'Weekly & monthly schedule and crew roster' },
     'leads': { title: 'Quotes & Inquiries Pipeline', subtitle: 'Live submissions from the website wizard' },
-    'calculator': { title: 'Cubic Volume Estimator', subtitle: 'Room-by-room m³, cubic feet & van recommendation' },
-    'materials': { title: 'Depot Materials & Supplies', subtitle: 'Packaging stock, moving boxes & preset bundles' },
-    'analytics': { title: 'Operations Telemetry & Funnel', subtitle: 'Revenue, conversions & tenement characteristics' },
     'emails': { title: 'Automated Communications', subtitle: 'Instant quotes, follow-ups & review boosters' },
     'settings': { title: 'System Settings & Supabase', subtitle: 'Database connection & operational rules' }
   };
@@ -315,21 +309,6 @@ function renderApp() {
       onNewMove: handleOpenNewMove,
       onOpenJobSheet: handleOpenJobSheet
     });
-  } else if (state.currentRoute === 'calculator') {
-    viewContainer.innerHTML = renderVolumeCalculatorView(state.calculatorActiveTab);
-    initVolumeCalculatorEvents(
-      viewContainer,
-      newTab => {
-        if (newTab) state.calculatorActiveTab = newTab;
-        renderApp();
-      },
-      () => handleOpenNewMove()
-    );
-  } else if (state.currentRoute === 'materials') {
-    viewContainer.innerHTML = renderMaterialsView();
-    initMaterialsEvents(viewContainer);
-  } else if (state.currentRoute === 'analytics') {
-    viewContainer.innerHTML = renderAnalyticsView(state.leads, state.allJobs);
   } else if (state.currentRoute === 'leads') {
     viewContainer.innerHTML = renderLeadsView(state.leads, state.leadsFilter, state.leadsSearch);
 
@@ -388,7 +367,20 @@ function renderApp() {
       onSavePrice: handleSavePrice,
       onViewSurvey: leadId => {
         const lead = state.leads.find(l => l.id === leadId);
-        openLeadSurveyModal(lead, handleSendPassWithPrice, handleSavePrice);
+        openLeadDrawer(lead, {
+          onSendPass: handleSendPassWithPrice,
+          onSavePrice: handleSavePrice,
+          onUpdateStatus: async (id, newStatus) => {
+            await crmFetch(`/api/leads/${id}/status`, {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ status: newStatus })
+            });
+            showToast(`Lead status updated to ${newStatus}!`);
+            await fetchCrmData();
+            renderApp();
+          }
+        });
       },
       onFilterChange: filter => {
         state.leadsFilter = filter;
@@ -422,7 +414,7 @@ function handleHashChange() {
     return;
   }
   const hash = window.location.hash.replace('#', '') || 'front-desk';
-  const validRoutes = ['front-desk', 'confirmed', 'archive', 'calendar', 'leads', 'calculator', 'materials', 'analytics', 'emails', 'settings'];
+  const validRoutes = ['front-desk', 'confirmed', 'archive', 'calendar', 'leads', 'emails', 'settings'];
   if (validRoutes.includes(hash)) {
     state.currentRoute = hash;
   }

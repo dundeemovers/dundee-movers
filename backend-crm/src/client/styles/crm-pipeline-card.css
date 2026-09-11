@@ -192,6 +192,51 @@
 }
 
 
+/* Customer Cargo & Inventory Summary */
+.pcard-cargo-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.65rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.pcard-cargo-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+}
+.pcard-spec-chip {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #0f172a;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  padding: 0.12rem 0.45rem;
+  border-radius: 0.3rem;
+}
+.pcard-media-chip {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #065f46;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 0.12rem 0.45rem;
+  border-radius: 0.3rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.pcard-manifest-preview {
+  font-size: 0.73rem;
+  color: #334155;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
 /* Customer Notes Callout */
 .pcard-customer-note {
   background: #fffbeb;
@@ -221,21 +266,17 @@
 }
 
 /* Stage 1: New Inquiry (Pricing & Pass Dispatch) */
-.pdeck-pricing-bar {
+.pdeck-presets-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.35rem;
   flex-wrap: wrap;
 }
-.pdeck-suggested {
+.pdeck-presets-label {
   font-size: 0.72rem;
-  color: #0f172a;
-  background: #fefce8;
-  padding: 0.2rem 0.45rem;
-  border-radius: 0.35rem;
-  border: 1px solid #fef08a;
-  white-space: nowrap;
+  font-weight: 700;
+  color: #64748b;
 }
 .pdeck-presets { display: flex; gap: 0.25rem; flex-wrap: wrap; }
 .btn-preset-chip {
