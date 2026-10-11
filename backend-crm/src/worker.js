@@ -28,7 +28,7 @@ import {
   generateTailoredQuoteEmailHtml,
   generateInquiryReceivedEmailHtml
 } from './services/emailService.js';
-import { getSupabaseConfig, setSupabaseCredentials } from './services/supabaseClient.js';
+import { getSupabaseConfig, setSupabaseCredentials, pingSupabase } from './services/supabaseClient.js';
 import {
   setCrmAccessKey,
   setCrmJwtSecret,
@@ -86,6 +86,14 @@ export default {
         timestamp: new Date().toISOString(),
         supabase: getSupabaseConfig()
       });
+    }
+
+    if (pathname === '/api/health/ping-supabase' && request.method === 'GET') {
+      const pingResult = await pingSupabase();
+      return jsonResponse({
+        message: 'Supabase keep-alive probe executed',
+        ...pingResult
+      }, pingResult.success ? 200 : 503);
     }
 
     // 2. Authentication API
@@ -146,7 +154,7 @@ export default {
     // Guard sensitive CRM routes
     function isProtectedEdgeEndpoint(path, method) {
       if (!path.startsWith('/api/')) return false;
-      if (path === '/api/health') return false;
+      if (path.startsWith('/api/health')) return false;
       if (path.startsWith('/api/auth/')) return false;
       if (path === '/api/leads' && method === 'POST') return false;
       if (path.match(/^\/api\/leads\/[^/]+$/) && method === 'GET') return false;
@@ -374,5 +382,16 @@ export default {
     }
 
     return new Response('Not Found', { status: 404, headers: CORS_HEADERS });
+  },
+
+  /**
+   * Scheduled cron trigger to ping Supabase and keep the project active on Free Tier.
+   */
+  async scheduled(event, env, ctx) {
+    if (env && (env.SUPABASE_URL || env.SUPABASE_ANON_KEY)) {
+      setSupabaseCredentials(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
+    }
+    const result = await pingSupabase();
+    console.log(`[Supabase Keep-Alive Cron @ ${new Date().toISOString()}]:`, JSON.stringify(result));
   }
 };

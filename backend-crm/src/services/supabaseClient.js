@@ -73,3 +73,64 @@ export async function executeSupabaseQuery(table, options = {}) {
     return null;
   }
 }
+
+/**
+ * Lightweight keep-alive probe to prevent Supabase dormancy/pausing on Free Tier.
+ * Queries PostgREST (PostgreSQL compute) so Supabase registers active usage
+ * and resets its 7-day automatic inactivity pause countdown.
+ */
+export async function pingSupabase() {
+  const { url, key } = getCredentials();
+  if (!url || !key) {
+    return { success: false, reason: 'Supabase credentials not configured', timestamp: new Date().toISOString() };
+  }
+
+  try {
+    // Primary probe: Query database via PostgREST to register compute usage
+    const dbEndpoint = `${url}/rest/v1/leads_quotes?select=id&limit=1`;
+    const response = await fetch(dbEndpoint, {
+      method: 'GET',
+      headers: {
+        'apikey': key,
+        'Authorization': `Bearer ${key}`
+      }
+    });
+
+    if (response.ok) {
+      return {
+        success: true,
+        status: response.status,
+        statusText: response.statusText,
+        service: 'postgrest_database',
+        timestamp: new Date().toISOString()
+      };
+    }
+
+    // Secondary fallback: Auth health gateway
+    const authEndpoint = `${url}/auth/v1/health`;
+    const authResponse = await fetch(authEndpoint, {
+      method: 'GET',
+      headers: {
+        'apikey': key,
+        'Authorization': `Bearer ${key}`
+      }
+    });
+
+    return {
+      success: authResponse.ok,
+      status: authResponse.status,
+      statusText: authResponse.statusText,
+      service: 'auth_gateway',
+      dbStatus: response.status,
+      timestamp: new Date().toISOString()
+    };
+  } catch (err) {
+    return {
+      success: false,
+      error: err.message,
+      timestamp: new Date().toISOString()
+    };
+  }
+}
+
+

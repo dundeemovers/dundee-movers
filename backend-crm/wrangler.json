@@ -22,5 +22,10 @@
     "EMAIL_FROM": "Dundee Movers <bookings@dundeemovers.co.uk>",
     "NOTIFICATION_EMAIL": "bookings@dundeemovers.co.uk",
     "REPLY_TO_EMAIL": "bookings@dundeemovers.co.uk"
+  },
+  "triggers": {
+    "crons": [
+      "0 8 */2 * *"
+    ]
   }
 }

@@ -3,15 +3,32 @@
  * Persists uploaded customer survey photos and video walkthroughs to local disk
  * and serves them directly through the CRM dashboard.
  */
-import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const UPLOADS_ROOT = path.join(__dirname, '..', 'client', 'uploads');
+let fs = null;
+let UPLOADS_ROOT = '';
+
+// Safely initialize local filesystem references only in Node.js environment
+try {
+  if (typeof process !== 'undefined' && process.versions?.node && typeof navigator === 'undefined') {
+    const fsModName = 'node:fs';
+    const urlModName = 'node:url';
+    const [fsMod, urlMod] = await Promise.all([
+      import(/* @vite-ignore */ fsModName),
+      import(/* @vite-ignore */ urlModName)
+    ]);
+    fs = fsMod.default || fsMod;
+    if (urlMod.fileURLToPath && import.meta?.url) {
+      const __dirname = path.dirname(urlMod.fileURLToPath(import.meta.url));
+      UPLOADS_ROOT = path.join(__dirname, '..', 'client', 'uploads');
+    }
+  }
+} catch (_) {
+  fs = null;
+}
 
 export function ensureUploadsDir(leadId) {
+  if (!fs || !UPLOADS_ROOT) return null;
   const targetDir = leadId ? path.join(UPLOADS_ROOT, leadId) : UPLOADS_ROOT;
   if (!fs.existsSync(targetDir)) {
     fs.mkdirSync(targetDir, { recursive: true });
@@ -41,6 +58,7 @@ export function determineMediaType(filename, mime = '') {
 export function saveLeadMediaFiles(leadId, mediaFiles = []) {
   if (!leadId || !Array.isArray(mediaFiles) || mediaFiles.length === 0) return [];
   const targetDir = ensureUploadsDir(leadId);
+  if (!fs || !targetDir) return [];
   const results = [];
 
   for (const item of mediaFiles) {
@@ -95,26 +113,28 @@ export function saveLeadMediaFiles(leadId, mediaFiles = []) {
 
 export function getLeadMediaFiles(leadId, notes = '') {
   if (!leadId) return [];
-  const targetDir = path.join(UPLOADS_ROOT, leadId);
   const diskFiles = [];
 
-  if (fs.existsSync(targetDir)) {
-    try {
-      const files = fs.readdirSync(targetDir);
-      for (const f of files) {
-        const fullPath = path.join(targetDir, f);
-        const stat = fs.statSync(fullPath);
-        if (stat.isFile()) {
-          diskFiles.push({
-            name: f,
-            size: stat.size,
-            type: determineMediaType(f),
-            url: `/uploads/${leadId}/${encodeURIComponent(f)}`,
-            exists: true
-          });
+  if (fs && UPLOADS_ROOT) {
+    const targetDir = path.join(UPLOADS_ROOT, leadId);
+    if (fs.existsSync(targetDir)) {
+      try {
+        const files = fs.readdirSync(targetDir);
+        for (const f of files) {
+          const fullPath = path.join(targetDir, f);
+          const stat = fs.statSync(fullPath);
+          if (stat.isFile()) {
+            diskFiles.push({
+              name: f,
+              size: stat.size,
+              type: determineMediaType(f),
+              url: `/uploads/${leadId}/${encodeURIComponent(f)}`,
+              exists: true
+            });
+          }
         }
-      }
-    } catch (_) {}
+      } catch (_) {}
+    }
   }
 
   // Also parse historical notes (e.g. Attached Media (2 files): 2.png (1026KB), Snapchat-1748851596.mp4 (5711KB))

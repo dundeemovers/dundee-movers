@@ -1,0 +1,53 @@
+name: Supabase Keep-Alive Probe
+
+on:
+  schedule:
+    # Runs every 48 hours at 07:00 UTC (well within Supabase's 7-day inactivity pause window)
+    - cron: '0 7 */2 * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions dashboard at any time
+
+jobs:
+  keepalive:
+    name: Supabase Database Keep-Alive
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase PostgREST & Worker Keep-Alive Probe
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL || 'https://ozcttsokgyscukrdgxfp.supabase.co' }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY || 'sb_publishable_VnlNAAw4kVm7CaWlmjxXZQ_reFOSDzV' }}
+          CRM_PING_URL: ${{ secrets.CRM_PING_URL || 'https://crm.dundeemovers.co.uk/api/health/ping-supabase' }}
+        run: |
+          echo "=========================================================="
+          echo "Dundee Movers Supabase Keep-Alive Probe"
+          echo "Timestamp: $(date -u)"
+          echo "=========================================================="
+
+          # 1. Primary probe: Direct query against PostgREST (exercises PostgreSQL compute engine)
+          echo "1. Probing Supabase PostgreSQL via PostgREST table query..."
+          DB_HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
+            "$SUPABASE_URL/rest/v1/leads_quotes?select=id&limit=1")
+
+          echo "   PostgREST Status Code: $DB_HTTP_CODE"
+
+          # 2. Secondary probe: Edge Worker ping endpoint
+          echo "2. Probing Cloudflare CRM worker keep-alive endpoint..."
+          WORKER_HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$CRM_PING_URL" || true)
+          echo "   CRM Worker Status Code: $WORKER_HTTP_CODE"
+
+          # Evaluate success
+          if [ "$DB_HTTP_CODE" -eq 200 ] || [ "$DB_HTTP_CODE" -eq 206 ]; then
+            echo "✅ SUCCESS: Supabase PostgreSQL compute query executed successfully. Inactivity counter reset."
+            exit 0
+          elif [ "$WORKER_HTTP_CODE" -eq 200 ]; then
+            echo "✅ SUCCESS: CRM Edge Worker keep-alive probe reported healthy."
+            exit 0
+          else
+            echo "⚠️ WARNING: PostgREST returned $DB_HTTP_CODE, Worker returned $WORKER_HTTP_CODE"
+            # If project is starting or 503, print diagnostic output
+            curl -i -s "$SUPABASE_URL/rest/v1/leads_quotes?select=id&limit=1" \
+              -H "apikey: $SUPABASE_ANON_KEY" \
+              -H "Authorization: Bearer $SUPABASE_ANON_KEY" || true
+            exit 1
+          fi

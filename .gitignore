@@ -8,6 +8,8 @@ dist/
 dist-ssr/
 frontend/dist/
 *.local
+.wrangler/
+backend-crm/.wrangler/
 
 # Environment variables & secrets
 .env
