@@ -14,7 +14,10 @@ export const NAV_ITEMS = [
 ];
 
 export function renderSidebar(currentRoute = 'front-desk', user = null) {
-  const operatorTitle = user?.title || 'Active Dispatcher';
+  const isSuper = user?.isSuperAdmin || user?.email === 'dundeemovers@gmail.com';
+  const operatorBadge = isSuper ? '👑 Super Admin' : 'Authenticated Staff';
+  const operatorName = user?.email || user?.name || user?.title || 'Active Dispatcher';
+
   return `
     <aside class="crm-sidebar" id="crm-sidebar">
       <div class="crm-sidebar-header">
@@ -25,13 +28,13 @@ export function renderSidebar(currentRoute = 'front-desk', user = null) {
         </div>
       </div>
 
-      <div class="crm-sidebar-operator">
+      <div class="crm-sidebar-operator ${isSuper ? 'super-admin' : ''}">
         <div class="crm-sidebar-operator-info">
-          <span class="crm-sidebar-operator-title">Authenticated</span>
-          <span class="crm-sidebar-operator-name">${operatorTitle}</span>
+          <span class="crm-sidebar-operator-title" style="${isSuper ? 'color: #fbbf24; font-weight: 800;' : ''}">${operatorBadge}</span>
+          <span class="crm-sidebar-operator-name" style="word-break: break-all; font-size: 0.76rem;" title="${operatorName}">${operatorName}</span>
         </div>
-        <button type="button" class="crm-sidebar-lock-btn" id="crm-lock-btn" title="Lock Cockpit and exit session">
-          🔒 Lock
+        <button type="button" class="crm-sidebar-lock-btn" id="crm-lock-btn" title="Sign out of operations session">
+          🚪 Exit
         </button>
       </div>
 

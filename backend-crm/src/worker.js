@@ -33,6 +33,12 @@ import { getSupabaseConfig, setSupabaseCredentials, pingSupabase } from './servi
 import {
   setCrmAccessKey,
   setCrmJwtSecret,
+  setAuthSupabaseCredentials,
+  signInWithSupabase,
+  verifySupabaseToken,
+  requestSupabasePasswordReset,
+  updateSupabasePassword,
+  signOutSupabase,
   verifyPassword,
   generateSessionToken,
   validateSessionToken,
@@ -63,6 +69,7 @@ export default {
     // Set Supabase & Resend credentials from Worker environment bindings
     if (env && (env.SUPABASE_URL || env.SUPABASE_ANON_KEY)) {
       setSupabaseCredentials(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
+      setAuthSupabaseCredentials(env.SUPABASE_URL, env.SUPABASE_ANON_KEY);
     }
     if (env && (env.RESEND_API_KEY || env.EMAIL_FROM || env.NOTIFICATION_EMAIL || env.REPLY_TO_EMAIL)) {
       setEmailCredentials(env.RESEND_API_KEY, env.EMAIL_FROM, env.NOTIFICATION_EMAIL, env.REPLY_TO_EMAIL);
@@ -97,33 +104,40 @@ export default {
       }, pingResult.success ? 200 : 503);
     }
 
-    // 2. Authentication API
+    // 2. Authentication API (Supabase GoTrue Native Auth)
     if (pathname === '/api/auth/login' && request.method === 'POST') {
       try {
-        const body = await request.json();
-        const { accessKey, role } = body || {};
+        const body = await request.json().catch(() => ({}));
+        const { email, password, accessKey, role } = body || {};
 
-        if (!accessKey) {
-          return jsonResponse({ success: false, error: 'Master passkey is required' }, 400);
+        if (email && password) {
+          const result = await signInWithSupabase(email, password);
+          return jsonResponse(result, result.success ? 200 : (result.status || 401));
         }
 
-        const isValid = verifyPassword(accessKey);
-        if (!isValid) {
-          return jsonResponse({ success: false, error: 'Incorrect master passkey. Access denied.' }, 401);
-        }
-
-        const assignedRole = role || 'dispatch_coordinator';
-        const token = await generateSessionToken(assignedRole);
-
-        return jsonResponse({
-          success: true,
-          token,
-          user: {
-            role: assignedRole,
-            title: 'Operations Dispatcher',
-            portal: 'Dundee Operations Cockpit'
+        if (accessKey) {
+          const isValid = verifyPassword(accessKey);
+          if (!isValid) {
+            return jsonResponse({ success: false, error: 'Incorrect master passkey. Access denied.' }, 401);
           }
-        });
+
+          const assignedRole = role || 'dispatch_coordinator';
+          const token = await generateSessionToken(assignedRole);
+
+          return jsonResponse({
+            success: true,
+            token,
+            user: {
+              email: 'admin@dundeemovers.co.uk',
+              role: assignedRole,
+              title: 'Operations Dispatcher',
+              portal: 'Dundee Operations Cockpit',
+              isSuperAdmin: false
+            }
+          });
+        }
+
+        return jsonResponse({ success: false, error: 'Email and password are required to sign in.' }, 400);
       } catch (err) {
         return jsonResponse({ success: false, error: 'Failed to process login: ' + err.message }, 400);
       }
@@ -146,10 +160,48 @@ export default {
           return jsonResponse({ valid: false, error: validation.reason }, 401);
         }
 
-        return jsonResponse({ valid: true, payload: validation.payload });
+        return jsonResponse({ valid: true, user: validation.user || validation.payload });
       } catch (err) {
-        return jsonResponse({ valid: false, error: 'Token verification failed' }, 401);
+        return jsonResponse({ valid: false, error: 'Token verification failed: ' + err.message }, 401);
       }
+    }
+
+    if (pathname === '/api/auth/forgot-password' && request.method === 'POST') {
+      try {
+        const body = await request.json().catch(() => ({}));
+        const { email, redirectTo } = body || {};
+        if (!email) {
+          return jsonResponse({ success: false, error: 'Email address is required' }, 400);
+        }
+        const result = await requestSupabasePasswordReset(email, redirectTo);
+        return jsonResponse(result, result.success ? 200 : 400);
+      } catch (err) {
+        return jsonResponse({ success: false, error: err.message }, 500);
+      }
+    }
+
+    if (pathname === '/api/auth/reset-password' && request.method === 'POST') {
+      try {
+        const body = await request.json().catch(() => ({}));
+        const token = extractBearerToken(request.headers.get('Authorization')) || body?.token;
+        const { newPassword } = body || {};
+
+        if (!token) {
+          return jsonResponse({ success: false, error: 'Recovery token is required' }, 401);
+        }
+
+        const result = await updateSupabasePassword(token, newPassword);
+        return jsonResponse(result, result.success ? 200 : 400);
+      } catch (err) {
+        return jsonResponse({ success: false, error: err.message }, 500);
+      }
+    }
+
+    if (pathname === '/api/auth/logout' && request.method === 'POST') {
+      const body = await request.json().catch(() => ({}));
+      const token = extractBearerToken(request.headers.get('Authorization')) || body?.token;
+      await signOutSupabase(token);
+      return jsonResponse({ success: true, message: 'Logged out successfully' });
     }
 
     // Guard sensitive CRM routes

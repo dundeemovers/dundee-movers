@@ -24,11 +24,21 @@ import {
   showToast,
   crmFetch as rawCrmFetch
 } from './utils/sessionManager.js';
+import {
+  checkInitialAuthSession,
+  loginUser,
+  requestPasswordReset,
+  resetPasswordWithToken,
+  logoutUser
+} from './utils/authController.js';
 
 const state = {
   isAuthenticated: false,
   authToken: null,
   currentUser: null,
+  authMode: 'login',
+  authEmail: '',
+  recoveryToken: null,
   currentRoute: 'front-desk',
   activeFrontDeskTab: 'today',
   calendarViewMode: 'week',
@@ -137,25 +147,39 @@ function renderApp() {
   if (!appContainer) return;
 
   if (!state.isAuthenticated) {
-    appContainer.innerHTML = renderLoginView();
-    initLoginViewEvents(async (passkey, remember) => {
-      try {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ accessKey: passkey })
-        });
-        const data = await res.json();
-        if (data.success && data.token) {
-          persistSession(data.token, data.user, remember);
-          showToast('✓ Dispatch Cockpit unlocked');
+    appContainer.innerHTML = renderLoginView(state.authMode, '', state.authEmail);
+    initLoginViewEvents({
+      onLogin: async (email, password, remember) => {
+        const res = await loginUser(email, password, remember);
+        if (res.success) {
+          state.authToken = res.token;
+          state.currentUser = res.user;
+          state.isAuthenticated = true;
           await fetchCrmData();
           renderApp();
           return { success: true };
         }
-        return { success: false, error: data.error || 'Incorrect master passkey.' };
-      } catch (_) {
-        return { success: false, error: 'Network error connecting to auth service.' };
+        return res;
+      },
+      onForgotPassword: async (email) => {
+        state.authEmail = email;
+        return await requestPasswordReset(email);
+      },
+      onResetPassword: async (newPassword) => {
+        const res = await resetPasswordWithToken(state.recoveryToken, newPassword);
+        if (res.success) {
+          showToast('✓ Password updated! Please sign in with your new password.');
+          state.authMode = 'login';
+          state.recoveryToken = null;
+          renderApp();
+          return { success: true };
+        }
+        return res;
+      },
+      onSwitchMode: (mode, email = '') => {
+        state.authMode = mode;
+        if (email) state.authEmail = email;
+        renderApp();
       }
     });
     return;
@@ -206,10 +230,13 @@ function renderApp() {
       state.currentRoute = newRoute;
       renderApp();
     },
-    () => {
-      clearSession();
+    async () => {
+      await logoutUser(state.authToken);
+      state.isAuthenticated = false;
+      state.authToken = null;
+      state.currentUser = null;
+      state.authMode = 'login';
       renderApp();
-      showToast('Dispatch session locked.');
     }
   );
 
@@ -424,28 +451,15 @@ function handleHashChange() {
 window.addEventListener('hashchange', handleHashChange);
 
 (async () => {
-  const { token, user } = getSavedSession();
-  if (token) {
-    try {
-      const verifyRes = await fetch('/api/auth/verify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      const verifyData = await verifyRes.json();
-      if (verifyData.valid) {
-        state.authToken = token;
-        state.currentUser = user || { title: 'Operations Dispatcher' };
-        state.isAuthenticated = true;
-        await fetchCrmData();
-      } else {
-        clearSession();
-      }
-    } catch (_) {
-      clearSession();
-    }
+  const session = await checkInitialAuthSession();
+  if (session.recoveryToken) {
+    state.recoveryToken = session.recoveryToken;
+    state.authMode = 'reset-password';
+  } else if (session.isAuthenticated) {
+    state.authToken = session.token;
+    state.currentUser = session.user;
+    state.isAuthenticated = true;
+    await fetchCrmData();
   }
 
   handleHashChange();
