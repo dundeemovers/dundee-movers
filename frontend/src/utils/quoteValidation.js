@@ -98,7 +98,7 @@ export function validateStep1(state) {
 export function validateStep2(state) {
   const errors = [];
   const totalItems = Object.values(state.items || {}).reduce((acc, qty) => acc + (qty || 0), 0);
-  const notes = (state.customNotes || '').trim();
+  const notes = (state.inventoryNotes || state.customNotes || '').trim();
 
   if (totalItems === 0 && notes.length === 0) {
     errors.push({

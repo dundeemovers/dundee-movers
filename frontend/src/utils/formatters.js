@@ -47,7 +47,8 @@ export function formatAccessDescription(access) {
 }
 
 export function generateItemizedWhatsAppLink(state) {
-  const itemList = formatInventoryList(state.items, state.customNotes);
+  const itemList = formatInventoryList(state.items, state.inventoryNotes || state.customNotes);
+  const timingNotesStr = state.timingNotes ? `\n⏱️ *Move Timing & Notes:* ${state.timingNotes}` : '';
   const addons = state.selectedServices.length > 0 ? state.selectedServices.join(', ') : 'Standard Removals Only';
 
   const pickupFull = formatFullAddress(state.pickupAddr);
@@ -64,7 +65,7 @@ export function generateItemizedWhatsAppLink(state) {
     `🏁 *DELIVERY ADDRESS:* ${destFull}\n` +
     `🏢 *Delivery Floor & Access:* ${destAccessStr}\n` +
     `📅 *Preferred Date:* ${state.moveDate || 'Flexible / Soon'}\n\n` +
-    `📦 *Items to Move:*\n${itemList}\n\n` +
+    `📦 *Items to Move:*\n${itemList}${timingNotesStr}\n\n` +
     `🛠️ *Additional Services:* ${addons}\n\n` +
     `👤 *Customer:* ${state.userName ? state.userName : 'Customer'} (${state.userPhone ? state.userPhone : 'Via WhatsApp'})`;
 

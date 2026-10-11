@@ -3,7 +3,7 @@
  * Allows dispatchers to review full move logistics, manifest, photos/videos,
  * and calculate & dispatch guaranteed prices and Move Passes.
  */
-import { parseManifestItems, extractCustomerNotes, generateWhatsAppMessage } from '../utils/leadFormatters.js';
+import { parseManifestItems, extractCustomerNotes, extractInventoryNotes, extractTimingNotes, generateWhatsAppMessage } from '../utils/leadFormatters.js';
 import { calculateSuggestedPrice } from '../utils/smartPricing.js';
 import { renderLeadMediaGallery, initLeadMediaGalleryEvents } from './LeadMediaGallery.js';
 
@@ -11,6 +11,8 @@ export function renderLeadDrawer(lead) {
   if (!lead) return '';
 
   const manifestItems = parseManifestItems(lead);
+  const inventoryNotes = extractInventoryNotes(lead);
+  const timingNotes = extractTimingNotes(lead);
   const cleanNotes = extractCustomerNotes(lead.notes);
   const pricing = calculateSuggestedPrice(lead);
   const defaultPrice = lead.quotedPrice || pricing.recommendedPrice;
@@ -147,12 +149,24 @@ export function renderLeadDrawer(lead) {
             </p>
           `}
 
-          ${cleanNotes ? `
+          ${inventoryNotes ? `
+            <div class="drawer-notes-box" style="background: #f0fdf4; border: 1.5px solid #86efac; color: #065f46; margin-top: 0.75rem;">
+              <strong style="color: #065f46;">🏷️ Additional Items / Heavy Goods:</strong><br>
+              <em style="font-weight: 600;">"${inventoryNotes}"</em>
+            </div>
+          ` : ''}
+
+          ${timingNotes ? `
+            <div class="drawer-notes-box" style="background: #fffbeb; border: 1.5px solid #fde68a; color: #92400e; margin-top: 0.75rem;">
+              <strong style="color: #92400e;">⏱️ Move Timing & Logistics Notes:</strong><br>
+              <em style="font-weight: 600; color: #78350f;">"${timingNotes}"</em>
+            </div>
+          ` : (cleanNotes ? `
             <div class="drawer-notes-box">
               <strong>Customer Special Instructions:</strong><br>
               <em>"${cleanNotes}"</em>
             </div>
-          ` : ''}
+          ` : '')}
         </div>
 
         <!-- 4. Photos & Videos Media Gallery -->

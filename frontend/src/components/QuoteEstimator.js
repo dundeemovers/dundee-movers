@@ -99,6 +99,8 @@ export function initQuoteEstimator() {
       conditions: []
     },
     items: {},
+    inventoryNotes: '',
+    timingNotes: '',
     customNotes: '',
     selectedServices: [],
     userName: '',

@@ -3,7 +3,7 @@
  * Gives the dispatcher 100% visibility into customer manifest items,
  * stair flight access, vehicle sizing, and inline smart pricing.
  */
-import { parseManifestItems, extractCustomerNotes, generateWhatsAppMessage } from '../utils/leadFormatters.js';
+import { parseManifestItems, extractCustomerNotes, extractInventoryNotes, extractTimingNotes, generateWhatsAppMessage } from '../utils/leadFormatters.js';
 import { calculateSuggestedPrice } from '../utils/smartPricing.js';
 import { renderLeadMediaGallery, initLeadMediaGalleryEvents } from './LeadMediaGallery.js';
 
@@ -11,6 +11,8 @@ export function renderLeadDetailsModal(lead) {
   if (!lead) return '';
 
   const manifestItems = parseManifestItems(lead);
+  const inventoryNotes = extractInventoryNotes(lead);
+  const timingNotes = extractTimingNotes(lead);
   const cleanNotes = extractCustomerNotes(lead.notes);
   const pricing = calculateSuggestedPrice(lead);
   const defaultPrice = lead.quotedPrice || pricing.recommendedPrice;
@@ -99,12 +101,24 @@ export function renderLeadDetailsModal(lead) {
               </p>
             `}
 
-            ${cleanNotes ? `
-              <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px dashed #e2e8f0; font-size: 0.85rem; color: #334155;">
-                <strong>Special Customer Instructions:</strong> <em>${cleanNotes}</em>
+            ${inventoryNotes ? `
+              <div style="margin-top: 0.75rem; padding: 0.75rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 6px; font-size: 0.85rem; color: #065f46;">
+                <strong>🏷️ Additional Items / Heavy Goods / Unlisted Inventory:</strong><br>
+                <em style="display: block; margin-top: 0.25rem; font-weight: 600;">"${inventoryNotes}"</em>
               </div>
             ` : ''}
           </div>
+
+          ${timingNotes ? `
+            <div style="background: #fffbeb; border: 1.5px solid #fde68a; border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1.25rem; font-size: 0.85rem; color: #92400e;">
+              <strong>⏱️ Move Timing & Logistics Notes (From Customer):</strong><br>
+              <em style="display: block; margin-top: 0.25rem; color: #78350f; font-weight: 600;">"${timingNotes}"</em>
+            </div>
+          ` : (cleanNotes ? `
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1.25rem; font-size: 0.85rem; color: #334155;">
+              <strong>Special Customer Instructions:</strong> <em>"${cleanNotes}"</em>
+            </div>
+          ` : '')}
 
           <!-- Customer Attached Photos & Video Walkthrough -->
           ${renderLeadMediaGallery(lead)}

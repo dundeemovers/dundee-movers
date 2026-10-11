@@ -316,6 +316,12 @@ export function generateQuoteAcceptedEmailHtml(lead, acceptanceData = {}) {
  */
 export function generateInternalLeadNotificationHtml(lead) {
   const refCode = lead.id ? String(lead.id).slice(-6).toUpperCase() : 'NEW';
+  const invMatch = (lead.notes || '').match(/Additional Items:\s*([^|]+)/i) || (lead.notes || '').match(/Special Notes \/ Other Items:\s*([^|]+)/i);
+  const invNotes = lead.inventoryNotes || (invMatch ? invMatch[1].trim() : '');
+
+  const timeMatch = (lead.notes || '').match(/Timing Notes:\s*([^|]+)/i);
+  const timeNotes = lead.timingNotes || (timeMatch ? timeMatch[1].trim() : '');
+
   return `<!DOCTYPE html>
 <html>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; padding: 24px; margin: 0;">
@@ -332,7 +338,9 @@ export function generateInternalLeadNotificationHtml(lead) {
         <tr><td><strong>Move Type:</strong></td><td>${lead.moveType || 'General'}</td></tr>
         <tr><td><strong>Collection:</strong></td><td>${lead.pickupAddress} (Floor: ${lead.pickupFloor}, Lift: ${lead.pickupLift ? 'Yes' : 'No'})</td></tr>
         <tr><td><strong>Destination:</strong></td><td>${lead.deliveryAddress} (Floor: ${lead.deliveryFloor}, Lift: ${lead.deliveryLift ? 'Yes' : 'No'})</td></tr>
-        <tr><td><strong>Notes / Manifest:</strong></td><td>${lead.notes || 'None'}</td></tr>
+        ${invNotes ? `<tr><td><strong>Additional Items:</strong></td><td style="color: #065f46; font-weight: 700;">🏷️ ${invNotes}</td></tr>` : ''}
+        ${timeNotes ? `<tr><td><strong>Timing & Notes:</strong></td><td style="color: #92400e; font-weight: 700;">⏱️ ${timeNotes}</td></tr>` : ''}
+        <tr><td><strong>Full Manifest:</strong></td><td>${lead.notes || 'None'}</td></tr>
       </table>
       <div style="margin-top: 20px; text-align: center;">
         <a href="https://crm.dundeemovers.co.uk/#leads" style="display: inline-block; background: #064e3b; color: #ffffff; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 800; font-size: 13px;">

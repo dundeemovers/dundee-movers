@@ -136,8 +136,10 @@ export function renderStepInventory(state) {
 
       <!-- Additional Custom Notes Box -->
       <div class="custom-items-box">
-        <label class="form-label" for="custom-notes-input">Additional Items, Heavy Goods or Special Instructions:</label>
-        <textarea class="input-control textarea-notes" id="custom-notes-input" rows="3" placeholder="e.g. 6-seater oak dining set, 15 book boxes, gym bench, fragile antique mirror, garden shed tools...">${state.customNotes}</textarea>
+        <label class="form-label" for="custom-notes-input">
+          🏷️ Additional Items, Heavy Goods or Special Instructions:
+        </label>
+        <textarea class="input-control textarea-notes" id="custom-notes-input" rows="3" placeholder="e.g. 6-seater oak dining set, 15 book boxes, gym bench, fragile antique mirror, upright piano, garden shed tools...">${state.inventoryNotes || state.customNotes || ''}</textarea>
       </div>
 
       <div class="wizard-actions">
@@ -151,6 +153,7 @@ export function renderStepInventory(state) {
 export function initStepInventory(container, state, onBack, onNext, reRender, onSyncNav) {
   // Sync custom notes input
   container.querySelector('#custom-notes-input')?.addEventListener('input', (e) => {
+    state.inventoryNotes = e.target.value;
     state.customNotes = e.target.value;
     clearValidationFeedback(container);
   });
@@ -291,7 +294,10 @@ export function initStepInventory(container, state, onBack, onNext, reRender, on
   container.querySelector('.prev-step-btn')?.addEventListener('click', () => onBack());
   container.querySelector('.next-step-btn')?.addEventListener('click', () => {
     const notesVal = container.querySelector('#custom-notes-input')?.value?.trim();
-    if (notesVal !== undefined) state.customNotes = notesVal;
+    if (notesVal !== undefined) {
+      state.inventoryNotes = notesVal;
+      state.customNotes = notesVal;
+    }
 
     const validation = validateStep2(state);
     if (!validation.isValid) {

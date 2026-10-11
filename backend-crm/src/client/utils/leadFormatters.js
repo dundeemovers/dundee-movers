@@ -56,8 +56,63 @@ export function extractCustomerNotes(notes) {
     .replace(/Manifest:[^|]+/gi, '')
     .replace(/Attached Media\s*\([^)]*\):[^|]+/gi, '')
     .replace(/Attached Media:[^|]+/gi, '')
+    .replace(/Additional Items:\s*[^|]+/gi, '')
+    .replace(/Timing Notes:\s*[^|]+/gi, '')
+    .replace(/Move Timing:\s*[^|]+/gi, '')
     .replace(/^\|\s*|\s*\|\s*$/g, '')
     .trim();
+}
+
+/**
+ * Extract specific additional inventory / heavy goods notes (from Step 2)
+ */
+export function extractInventoryNotes(lead) {
+  if (!lead) return '';
+  if (lead.inventoryNotes && typeof lead.inventoryNotes === 'string' && lead.inventoryNotes.trim()) {
+    return lead.inventoryNotes.trim();
+  }
+  if (lead.inventory_notes && typeof lead.inventory_notes === 'string' && lead.inventory_notes.trim()) {
+    return lead.inventory_notes.trim();
+  }
+
+  const notes = lead.notes || lead.custom_notes || '';
+  if (typeof notes === 'string') {
+    const match = notes.match(/Additional Items:\s*([^|]+)/i) || notes.match(/Special Notes \/ Other Items:\s*([^|]+)/i);
+    if (match && match[1]) {
+      return match[1].trim();
+    }
+  }
+
+  return '';
+}
+
+/**
+ * Extract specific move timing / logistics notes (from Step 4)
+ */
+export function extractTimingNotes(lead) {
+  if (!lead) return '';
+  if (lead.timingNotes && typeof lead.timingNotes === 'string' && lead.timingNotes.trim()) {
+    return lead.timingNotes.trim();
+  }
+  if (lead.timing_notes && typeof lead.timing_notes === 'string' && lead.timing_notes.trim()) {
+    return lead.timing_notes.trim();
+  }
+
+  const notes = lead.notes || lead.custom_notes || '';
+  if (typeof notes === 'string') {
+    const match = notes.match(/Timing Notes:\s*([^|]+)/i) || notes.match(/Move Timing Notes:\s*([^|]+)/i);
+    if (match && match[1]) {
+      return match[1].trim();
+    }
+
+    // Legacy fallback: if notes has a generic Notes: section without partitioned tags
+    const legacyNotesMatch = notes.match(/Notes:\s*([^|]+)/i);
+    if (legacyNotesMatch && legacyNotesMatch[1]) {
+      return legacyNotesMatch[1].trim();
+    }
+  }
+
+  return '';
 }
 
 /**

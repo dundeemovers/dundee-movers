@@ -53,10 +53,16 @@ export function renderStepSummary(state) {
           <span>Specified Items:</span>
           <strong>${activeItems.length > 0 ? activeItems.map(([name, count]) => `${count}x ${name}`).join(', ') : 'Standard Household'}</strong>
         </div>
-        ${state.customNotes ? `
+        ${(state.inventoryNotes || state.customNotes) ? `
           <div class="breakdown-row">
-            <span>Special Notes / Other Items:</span>
-            <strong>${state.customNotes}</strong>
+            <span>Additional Items / Heavy Goods:</span>
+            <strong style="color: #065f46;">🏷️ ${(state.inventoryNotes || state.customNotes)}</strong>
+          </div>
+        ` : ''}
+        ${state.timingNotes ? `
+          <div class="breakdown-row">
+            <span>Move Timing & Logistics:</span>
+            <strong style="color: #92400e;">⏱️ ${state.timingNotes}</strong>
           </div>
         ` : ''}
         ${state.selectedServices.length > 0 ? `
@@ -94,8 +100,8 @@ export function renderStepSummary(state) {
           </div>
 
           <div class="quote-form-field" style="margin-bottom: 1.25rem;">
-            <label for="quote-notes">Additional Move Notes / Specific Timing (Optional)</label>
-            <textarea id="quote-notes" rows="2" placeholder="Any fragile items, parking access details, or specific move timing preferences...">${state.customNotes || ''}</textarea>
+            <label for="quote-timing-notes">Additional Move Notes / Specific Timing (Optional)</label>
+            <textarea id="quote-timing-notes" rows="2" placeholder="e.g. Keys released at 1pm, parking bay reserved outside, morning arrival preferred...">${state.timingNotes || ''}</textarea>
           </div>
 
           <!-- Optional Photos & Videos Walkthrough Attachment -->
@@ -300,17 +306,17 @@ export function initStepSummary(container, onRestart, state) {
     const nameInput = container.querySelector('#quote-name');
     const phoneInput = container.querySelector('#quote-phone');
     const emailInput = container.querySelector('#quote-email');
-    const notesInput = container.querySelector('#quote-notes');
+    const notesInput = container.querySelector('#quote-timing-notes') || container.querySelector('#quote-notes');
 
     const name = nameInput?.value.trim() || 'Website Customer';
     const phone = phoneInput?.value.trim() || '';
     const email = emailInput?.value.trim() || '';
-    const customNotes = notesInput?.value.trim() || state.customNotes || '';
+    const timingNotes = notesInput?.value.trim() || state.timingNotes || '';
 
     state.userName = name;
     state.userPhone = phone;
     state.userEmail = email;
-    state.customNotes = customNotes;
+    state.timingNotes = timingNotes;
 
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -359,6 +365,9 @@ export function initStepSummary(container, onRestart, state) {
       );
     }
 
+    const inventoryNotes = (state.inventoryNotes || state.customNotes || '').trim();
+    const timingNotesClean = (state.timingNotes || '').trim();
+
     const payload = {
       customerName: name,
       customerPhone: phone,
@@ -379,9 +388,11 @@ export function initStepSummary(container, onRestart, state) {
       recommendedVan: 'Manual Dispatch Review',
       recommendedCrew: 'Manual Dispatch Review',
       items: state.items,
+      inventoryNotes: inventoryNotes,
+      timingNotes: timingNotesClean,
       mediaCount: selectedFiles.length,
       mediaFiles: preparedMedia,
-      notes: `Ref: #${quoteRef}${state.isFlexibleDate ? ' | Move Timing: Flexible (' + (state.dateRange || 'Range TBD') + ')' : ''}${customNotes ? ' | Notes: ' + customNotes : ''}${itemsSummary ? ' | Manifest: ' + itemsSummary : ''}${mediaSummary}`
+      notes: `Ref: #${quoteRef}${state.isFlexibleDate ? ' | Move Timing: Flexible (' + (state.dateRange || 'Range TBD') + ')' : ''}${inventoryNotes ? ' | Additional Items: ' + inventoryNotes : ''}${timingNotesClean ? ' | Timing Notes: ' + timingNotesClean : ''}${itemsSummary ? ' | Manifest: ' + itemsSummary : ''}${mediaSummary}`
     };
 
     // Send to live CRM endpoints (custom domain -> edge worker -> local fallback)
