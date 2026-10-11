@@ -9,6 +9,7 @@ import { renderStepAddresses, initStepAddresses } from './quote/QuoteStepAddress
 import { renderStepInventory, initStepInventory } from './quote/QuoteStepInventory.js';
 import { renderStepAccess, initStepAccess } from './quote/QuoteStepAccess.js';
 import { renderStepSummary, initStepSummary } from './quote/QuoteStepSummary.js';
+import { initAdminAutofill } from '../utils/adminAutofill.js';
 
 export function renderQuoteEstimator() {
   return `
@@ -243,4 +244,11 @@ export function initQuoteEstimator() {
   // Initial render & sync
   renderCurrentStep(false);
   syncNavInventoryBadge();
+
+  // Admin / QA shortcut ('dmadmin') to test wizard
+  initAdminAutofill(
+    () => state,
+    (isTransition) => renderCurrentStep(isTransition),
+    () => syncNavInventoryBadge()
+  );
 }
