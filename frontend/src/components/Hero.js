@@ -53,8 +53,20 @@ export function renderHero() {
         <div class="hero-visual">
           <div class="glass-panel hero-card spotlight-card">
             <div class="hero-card-header">
-              <span class="badge">Dundee Operating Base</span>
-              <span class="hero-status-live"><span class="pulse-emerald"></span> Dedicated Crew Ready</span>
+              <div class="hero-operating-badge">
+                <span class="operating-icon">📍</span>
+                <span class="operating-label">
+                  <span class="label-full">Dundee Operating Base</span>
+                  <span class="label-short">Dundee Base</span>
+                </span>
+              </div>
+              <div class="hero-live-status">
+                <span class="radar-pulse">
+                  <span class="radar-ring"></span>
+                  <span class="radar-dot"></span>
+                </span>
+                <span class="live-label">Dedicated Crew Ready</span>
+              </div>
             </div>
             
             <div class="hero-quick-features">
