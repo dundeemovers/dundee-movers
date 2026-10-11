@@ -166,27 +166,51 @@ export function renderStepAccess(state) {
 export function initStepAccess(container, state, onBack, onNext, reRender) {
   // Floor selection buttons
   container.querySelectorAll('.floor-pill-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       const propKey = btn.getAttribute('data-prop');
       const floor = btn.getAttribute('data-floor');
       if (propKey && floor && state[propKey]) {
         state[propKey].floor = floor;
-        if (floor.includes('Ground') || floor.includes('Bungalow')) {
+        const isGround = floor.includes('Ground') || floor.includes('Bungalow');
+        if (isGround) {
           state[propKey].hasLift = false;
         }
-        reRender();
+
+        // Update active states in-place without resetting scroll
+        const card = btn.closest('.property-access-card');
+        if (card) {
+          card.querySelectorAll('.floor-pill-btn').forEach(b => {
+            const isMatch = b.getAttribute('data-floor') === floor;
+            b.classList.toggle('selected', isMatch);
+            b.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
+          });
+
+          if (isGround) {
+            card.querySelectorAll('.lift-btn').forEach(lb => {
+              const isNoLift = lb.getAttribute('data-lift') === 'false';
+              lb.classList.toggle('selected', isNoLift);
+            });
+          }
+        }
       }
     });
   });
 
   // Lift toggle buttons
   container.querySelectorAll('.lift-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       const propKey = btn.getAttribute('data-prop');
       const hasLift = btn.getAttribute('data-lift') === 'true';
       if (propKey && state[propKey]) {
         state[propKey].hasLift = hasLift;
-        reRender();
+        const card = btn.closest('.property-access-card');
+        if (card) {
+          card.querySelectorAll('.lift-btn').forEach(lb => {
+            lb.classList.toggle('selected', lb === btn);
+          });
+        }
       }
     });
   });
@@ -205,22 +229,28 @@ export function initStepAccess(container, state, onBack, onNext, reRender) {
         } else {
           state[propKey].conditions = state[propKey].conditions.filter(c => c !== condition);
         }
-        reRender();
+        const chip = chk.closest('.condition-chip');
+        if (chip) chip.classList.toggle('selected', chk.checked);
       }
     });
   });
 
   // Additional services checkboxes
   container.querySelectorAll('.service-option-card').forEach(card => {
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
+      // Avoid double toggling if clicking the input directly
+      if (e.target.tagName.toLowerCase() === 'input') return;
       const srv = card.getAttribute('data-service');
       if (srv) {
-        if (state.selectedServices.includes(srv)) {
+        const isSelected = state.selectedServices.includes(srv);
+        if (isSelected) {
           state.selectedServices = state.selectedServices.filter(s => s !== srv);
         } else {
           state.selectedServices.push(srv);
         }
-        reRender();
+        card.classList.toggle('selected', !isSelected);
+        const chk = card.querySelector('.service-checkbox');
+        if (chk) chk.checked = !isSelected;
       }
     });
   });
@@ -228,3 +258,4 @@ export function initStepAccess(container, state, onBack, onNext, reRender) {
   container.querySelector('.prev-step-btn')?.addEventListener('click', () => onBack());
   container.querySelector('.next-step-btn')?.addEventListener('click', () => onNext());
 }
+

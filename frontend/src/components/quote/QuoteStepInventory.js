@@ -71,24 +71,56 @@ export function initStepInventory(container, state, onBack, onNext, reRender, on
     state.customNotes = e.target.value;
   });
 
+  function updateItemRow(rowEl, count) {
+    if (!rowEl) return;
+    const valEl = rowEl.querySelector('.qty-val');
+    if (valEl) valEl.textContent = String(count);
+
+    const minusBtn = rowEl.querySelector('.minus-btn');
+    if (minusBtn) {
+      minusBtn.disabled = count <= 0;
+      minusBtn.classList.toggle('disabled', count <= 0);
+    }
+
+    rowEl.classList.toggle('item-selected', count > 0);
+  }
+
+  // Initialize initial counts and disabled states
+  container.querySelectorAll('.item-chip-row').forEach(row => {
+    const itemName = row.querySelector('.plus-btn')?.getAttribute('data-item');
+    const count = (itemName && state.items[itemName]) || 0;
+    updateItemRow(row, count);
+  });
+
+  // In-place increment without full re-render or scroll jumping
   container.querySelectorAll('.plus-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       const item = btn.getAttribute('data-item');
       if (item) {
         state.items[item] = (state.items[item] || 0) + 1;
-        reRender();
-        onSyncNav();
+        const row = btn.closest('.item-chip-row');
+        updateItemRow(row, state.items[item]);
+        if (typeof onSyncNav === 'function') onSyncNav();
       }
     });
   });
 
+  // In-place decrement without full re-render or scroll jumping
   container.querySelectorAll('.minus-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       const item = btn.getAttribute('data-item');
       if (item && state.items[item] > 0) {
         state.items[item]--;
-        reRender();
-        onSyncNav();
+        if (state.items[item] === 0) {
+          delete state.items[item];
+        }
+        const row = btn.closest('.item-chip-row');
+        updateItemRow(row, state.items[item] || 0);
+        if (typeof onSyncNav === 'function') onSyncNav();
       }
     });
   });
@@ -96,3 +128,4 @@ export function initStepInventory(container, state, onBack, onNext, reRender, on
   container.querySelector('.prev-step-btn')?.addEventListener('click', () => onBack());
   container.querySelector('.next-step-btn')?.addEventListener('click', () => onNext());
 }
+
