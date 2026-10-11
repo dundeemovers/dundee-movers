@@ -153,7 +153,7 @@ export function initStepInventory(container, state, onBack, onNext, reRender, on
   });
 
   // Tab switching logic
-  function switchTab(targetTabId) {
+  function switchTab(targetTabId, shouldAlignView = false) {
     state.activeInventoryTab = targetTabId;
 
     // Update active tab buttons
@@ -161,6 +161,11 @@ export function initStepInventory(container, state, onBack, onNext, reRender, on
       const isMatch = pill.getAttribute('data-tab') === targetTabId;
       pill.classList.toggle('active', isMatch);
       pill.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+      if (isMatch) {
+        try {
+          pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        } catch (_) {}
+      }
     });
 
     // Toggle visibility of panels
@@ -172,13 +177,29 @@ export function initStepInventory(container, state, onBack, onNext, reRender, on
         block.style.display = 'none';
       }
     });
+
+    // Realign viewport so customer immediately sees top of the newly chosen room
+    if (shouldAlignView) {
+      const tabsBar = container.querySelector('.room-tabs-nav');
+      if (tabsBar) {
+        const navWrapper = document.querySelector('.moving-skeuo-nav-wrapper');
+        const navHeight = navWrapper ? navWrapper.offsetHeight + 14 : 76;
+        const rect = tabsBar.getBoundingClientRect();
+        if (rect.top < navHeight) {
+          window.scrollTo({
+            top: window.pageYOffset + rect.top - navHeight,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }
   }
 
   // Bind tab buttons
   container.querySelectorAll('.room-tab-pill').forEach(pill => {
     pill.addEventListener('click', () => {
       const targetTab = pill.getAttribute('data-tab');
-      if (targetTab) switchTab(targetTab);
+      if (targetTab) switchTab(targetTab, true);
     });
   });
 
@@ -186,7 +207,7 @@ export function initStepInventory(container, state, onBack, onNext, reRender, on
   container.querySelectorAll('.btn-room-switch').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetTab = btn.getAttribute('data-target-tab');
-      if (targetTab) switchTab(targetTab);
+      if (targetTab) switchTab(targetTab, true);
     });
   });
 

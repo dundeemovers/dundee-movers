@@ -248,3 +248,76 @@
 
 .custom-items-box { margin-bottom: 2rem; }
 .textarea-notes { resize: vertical; min-height: 80px; }
+
+/* Mobile Optimizations for Room Tabs & Inventory (<= 640px) */
+@media (max-width: 640px) {
+  .room-tabs-nav {
+    gap: 0.4rem;
+    padding: 0.25rem 0.15rem 0.65rem;
+    scrollbar-width: none;
+  }
+
+  .room-tabs-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .room-tab-pill {
+    padding: 0.55rem 0.85rem;
+    font-size: 0.78rem;
+    min-height: 40px;
+  }
+
+  .items-chips-grid {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .item-chip-row {
+    padding: 0.75rem 0.95rem;
+    min-height: 52px;
+    border-radius: 0.6rem;
+  }
+
+  .chip-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .qty-counter {
+    gap: 0.65rem;
+  }
+
+  .qty-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 1.15rem;
+    border-radius: 0.45rem;
+    touch-action: manipulation;
+  }
+
+  .qty-btn:active:not(:disabled) {
+    transform: scale(0.92);
+  }
+
+  .qty-val {
+    font-size: 1rem;
+    min-width: 1.5rem;
+  }
+
+  .room-panel-nav-row {
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .btn-room-switch {
+    width: 100%;
+    min-height: 44px;
+    font-size: 0.85rem;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+}
+

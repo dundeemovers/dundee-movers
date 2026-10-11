@@ -1,6 +1,7 @@
 /**
  * Interactive Itemized Move Inventory & Quote Wizard Orchestrator.
  * Fully modularized complying with AGENTS.md SRP & 500-line limit.
+ * Features smooth mobile step transitions and intelligent viewport alignment.
  */
 import { updateNavbarInventoryCount } from './Navbar.js';
 import confetti from 'canvas-confetti';
@@ -21,6 +22,19 @@ export function renderQuoteEstimator() {
         </div>
 
         <div class="glass-panel quote-wizard-card spotlight-card">
+          <!-- Mobile Dynamic Step Progress Tracker -->
+          <div class="mobile-wizard-progress" aria-hidden="true">
+            <div class="mobile-progress-header">
+              <span class="mobile-step-pill">
+                Step <strong id="mobile-step-num">1</strong> of 4
+              </span>
+              <span class="mobile-step-title" id="mobile-step-title">Addresses & Date</span>
+            </div>
+            <div class="mobile-progress-track">
+              <div class="mobile-progress-fill" id="mobile-progress-fill" style="width: 25%;"></div>
+            </div>
+          </div>
+
           <!-- Step Indicator Header -->
           <div class="wizard-steps-nav" aria-label="Quote steps">
             <button class="step-nav-btn active" data-step="1" type="button">
@@ -104,12 +118,44 @@ export function initQuoteEstimator() {
     sessionStorage.removeItem('dm_quick_dest');
   }
 
+  const STEP_TITLES = {
+    1: 'Addresses & Move Date',
+    2: 'Items & Furniture',
+    3: 'Access & Services',
+    4: 'Review & Fixed Quote'
+  };
+
   function updateStepNav() {
     document.querySelectorAll('.step-nav-btn').forEach(btn => {
       const step = parseInt(btn.getAttribute('data-step') || '1', 10);
       btn.classList.toggle('active', step === state.currentStep);
       btn.classList.toggle('completed', step < state.currentStep);
     });
+
+    const mobileStepNum = document.getElementById('mobile-step-num');
+    const mobileStepTitle = document.getElementById('mobile-step-title');
+    const mobileProgressFill = document.getElementById('mobile-progress-fill');
+
+    if (mobileStepNum) mobileStepNum.textContent = String(state.currentStep);
+    if (mobileStepTitle) mobileStepTitle.textContent = STEP_TITLES[state.currentStep] || '';
+    if (mobileProgressFill) mobileProgressFill.style.width = `${state.currentStep * 25}%`;
+  }
+
+  function scrollToWizardStep(behavior = 'smooth') {
+    const wizardCard = document.querySelector('.quote-wizard-card') || document.getElementById('quote-calculator');
+    if (!wizardCard) return;
+
+    const navWrapper = document.querySelector('.moving-skeuo-nav-wrapper');
+    const navHeight = navWrapper ? navWrapper.offsetHeight + 14 : 76;
+    const cardTop = wizardCard.getBoundingClientRect().top + window.pageYOffset;
+    const targetY = cardTop - navHeight;
+
+    if (Math.abs(window.pageYOffset - targetY) > 25) {
+      window.scrollTo({
+        top: Math.max(0, targetY),
+        behavior
+      });
+    }
   }
 
   function syncNavInventoryBadge() {
@@ -117,59 +163,63 @@ export function initQuoteEstimator() {
     updateNavbarInventoryCount(totalCount);
   }
 
-  function renderCurrentStep() {
+  function renderCurrentStep(isStepTransition = false) {
     updateStepNav();
 
+    if (isStepTransition) {
+      scrollToWizardStep('smooth');
+    }
+
     if (state.currentStep === 1) {
-      wizardBody.innerHTML = renderStepAddresses(state);
+      wizardBody.innerHTML = `<div class="wizard-step-transition">${renderStepAddresses(state)}</div>`;
       initStepAddresses(
         wizardBody,
         state,
         () => {
           state.currentStep = 2;
-          renderCurrentStep();
+          renderCurrentStep(true);
         },
-        () => renderCurrentStep()
+        () => renderCurrentStep(false)
       );
     } else if (state.currentStep === 2) {
-      wizardBody.innerHTML = renderStepInventory(state);
+      wizardBody.innerHTML = `<div class="wizard-step-transition">${renderStepInventory(state)}</div>`;
       initStepInventory(
         wizardBody,
         state,
         () => {
           state.currentStep = 1;
-          renderCurrentStep();
+          renderCurrentStep(true);
         },
         () => {
           state.currentStep = 3;
-          renderCurrentStep();
+          renderCurrentStep(true);
         },
-        () => renderCurrentStep(),
+        () => renderCurrentStep(false),
         () => syncNavInventoryBadge()
       );
     } else if (state.currentStep === 3) {
-      wizardBody.innerHTML = renderStepAccess(state);
+      wizardBody.innerHTML = `<div class="wizard-step-transition">${renderStepAccess(state)}</div>`;
       initStepAccess(
         wizardBody,
         state,
         () => {
           state.currentStep = 2;
-          renderCurrentStep();
+          renderCurrentStep(true);
         },
         () => {
           state.currentStep = 4;
-          renderCurrentStep();
+          renderCurrentStep(true);
           confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
         },
-        () => renderCurrentStep()
+        () => renderCurrentStep(false)
       );
     } else if (state.currentStep === 4) {
-      wizardBody.innerHTML = renderStepSummary(state);
+      wizardBody.innerHTML = `<div class="wizard-step-transition">${renderStepSummary(state)}</div>`;
       initStepSummary(
         wizardBody,
         () => {
           state.currentStep = 1;
-          renderCurrentStep();
+          renderCurrentStep(true);
         },
         state
       );
@@ -182,12 +232,12 @@ export function initQuoteEstimator() {
       const targetStep = parseInt(btn.getAttribute('data-step') || '1', 10);
       if (targetStep < state.currentStep) {
         state.currentStep = targetStep;
-        renderCurrentStep();
+        renderCurrentStep(true);
       }
     });
   });
 
   // Initial render & sync
-  renderCurrentStep();
+  renderCurrentStep(false);
   syncNavInventoryBadge();
 }
