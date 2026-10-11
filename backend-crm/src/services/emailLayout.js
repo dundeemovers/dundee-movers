@@ -140,7 +140,6 @@ export function wrapEmailLayout({
               <table border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td align="center" style="font-size: 12px; color: #94a3b8; line-height: 1.8;">
-                    <span style="color: #f59e0b; font-weight: 800;">★★★★★ 4.9/5 Rating</span> &nbsp;•&nbsp; 
                     <span style="color: #ffffff; font-weight: 700;">£50,000 Goods in Transit Covered</span> &nbsp;•&nbsp; 
                     <span style="color: #6ee7b7; font-weight: 700;">Tenement Stair Specialists</span>
                   </td>
@@ -152,9 +151,6 @@ export function wrapEmailLayout({
           <!-- Footer -->
           <tr>
             <td style="background-color: #090d16; padding: 24px 28px; text-align: center; font-size: 11px; color: #64748b; line-height: 1.7;">
-              <p style="margin: 0 0 6px 0; color: #cbd5e1; font-weight: 700;">
-                Dundee Movers Ltd • 30 Whitehall Street, Dundee, Scotland, DD1 4AF
-              </p>
               <p style="margin: 0;">
                 Serving Dundee, Broughty Ferry, Angus, Fife, Perthshire, Edinburgh, Glasgow & Nationwide UK.<br />
                 <a href="${WEBSITE_URL}" target="_blank" style="color: #10b981; text-decoration: none; font-weight: 700;">Visit Official Website</a> &nbsp;|&nbsp; 
