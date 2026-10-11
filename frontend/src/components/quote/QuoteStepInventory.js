@@ -2,6 +2,8 @@
  * Step 2 Sub-Component: Itemized Furniture & Box Inventory Selector with Room Tabs.
  * Replaces long scrolling with clean, responsive Room Category Tabs and in-place counters.
  */
+import { validateStep2, showValidationFeedback, clearValidationFeedback } from '../../utils/quoteValidation.js';
+
 export const ROOM_CATEGORIES = [
   {
     id: 'living',
@@ -150,6 +152,7 @@ export function initStepInventory(container, state, onBack, onNext, reRender, on
   // Sync custom notes input
   container.querySelector('#custom-notes-input')?.addEventListener('input', (e) => {
     state.customNotes = e.target.value;
+    clearValidationFeedback(container);
   });
 
   // Tab switching logic
@@ -260,6 +263,7 @@ export function initStepInventory(container, state, onBack, onNext, reRender, on
         updateItemRow(row, state.items[item]);
         if (catId) updateCatBadge(catId);
         if (typeof onSyncNav === 'function') onSyncNav();
+        clearValidationFeedback(container);
       }
     });
   });
@@ -285,5 +289,16 @@ export function initStepInventory(container, state, onBack, onNext, reRender, on
   });
 
   container.querySelector('.prev-step-btn')?.addEventListener('click', () => onBack());
-  container.querySelector('.next-step-btn')?.addEventListener('click', () => onNext());
+  container.querySelector('.next-step-btn')?.addEventListener('click', () => {
+    const notesVal = container.querySelector('#custom-notes-input')?.value?.trim();
+    if (notesVal !== undefined) state.customNotes = notesVal;
+
+    const validation = validateStep2(state);
+    if (!validation.isValid) {
+      showValidationFeedback(container, validation.errors, '.wizard-actions');
+      return;
+    }
+
+    onNext();
+  });
 }

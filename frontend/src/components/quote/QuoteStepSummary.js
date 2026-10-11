@@ -4,6 +4,7 @@
  */
 import { formatFullAddress, formatAccessDescription } from '../../utils/formatters.js';
 import { calculateMoveVolumeAndVan } from '../../utils/quoteCalculator.js';
+import { validateStep4, showValidationFeedback } from '../../utils/quoteValidation.js';
 import confetti from 'canvas-confetti';
 
 export function renderStepSummary(state) {
@@ -79,15 +80,15 @@ export function renderStepSummary(state) {
         <form id="quote-direct-submit-form">
           <div class="quote-form-grid">
             <div class="quote-form-field">
-              <label for="quote-name">Full Name *</label>
+              <label for="quote-name">Full Name <span class="required-star">*</span></label>
               <input type="text" id="quote-name" required placeholder="e.g. Fiona MacLeod" value="${state.userName || ''}" />
             </div>
             <div class="quote-form-field">
-              <label for="quote-phone">Phone Number *</label>
+              <label for="quote-phone">Phone Number <span class="required-star">*</span></label>
               <input type="tel" id="quote-phone" required placeholder="e.g. 07700 900123" value="${state.userPhone || ''}" />
             </div>
             <div class="quote-form-field">
-              <label for="quote-email">Email Address *</label>
+              <label for="quote-email">Email Address <span class="required-star">*</span></label>
               <input type="email" id="quote-email" required placeholder="e.g. fiona@example.co.uk" value="${state.userEmail || ''}" />
             </div>
           </div>
@@ -290,10 +291,9 @@ export function initStepSummary(container, onRestart, state) {
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const termsCheck = container.querySelector('#quote-terms-checkbox');
-    if (termsCheck && !termsCheck.checked) {
-      alert('Please agree to the Terms & Conditions to proceed with your quote request.');
-      termsCheck.focus();
+    const validation = validateStep4(container);
+    if (!validation.isValid) {
+      showValidationFeedback(container, validation.errors, '#quote-submit-btn');
       return;
     }
 

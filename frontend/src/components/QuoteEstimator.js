@@ -224,13 +224,16 @@ export function initQuoteEstimator() {
     }
   }
 
-  // Allow clicking on previous completed steps in header
+  // Allow clicking on previous completed steps in header or validate if clicking ahead
   document.querySelectorAll('.step-nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetStep = parseInt(btn.getAttribute('data-step') || '1', 10);
       if (targetStep < state.currentStep) {
         state.currentStep = targetStep;
         renderCurrentStep(true);
+      } else if (targetStep > state.currentStep) {
+        const nextBtn = wizardBody.querySelector('.next-step-btn') || wizardBody.querySelector('#quote-submit-btn');
+        if (nextBtn) nextBtn.click();
       }
     });
   });

@@ -3,6 +3,7 @@
  * Allows users to search any UK postcode and choose their exact address from a dropdown menu.
  */
 import { lookupAddressesByPostcode, extractUKPostcode } from '../../utils/addressSearch.js';
+import { validateStep1, showValidationFeedback } from '../../utils/quoteValidation.js';
 
 export function renderStepAddresses(state) {
   return `
@@ -23,7 +24,8 @@ export function renderStepAddresses(state) {
 
         <div class="form-field move-date-picker-col">
           <label class="form-label" for="move-date-input" id="move-date-label">
-            ${state.isFlexibleDate ? 'Target / Earliest Date (Optional):' : 'Preferred Move Date:'}
+            <span id="move-date-label-text">${state.isFlexibleDate ? 'Target / Earliest Date (Optional):' : 'Preferred Move Date:'}</span>
+            <span class="required-star" id="move-date-star" style="${state.isFlexibleDate ? 'display: none;' : ''}">*</span>
           </label>
           <input type="date" class="input-control" id="move-date-input" value="${state.moveDate || ''}">
 
@@ -38,7 +40,7 @@ export function renderStepAddresses(state) {
           <!-- Date Range Input Box (revealed when flexible is selected) -->
           <div class="flexible-range-panel" id="flexible-range-panel" style="${state.isFlexibleDate ? 'display: block;' : 'display: none;'}">
             <label class="form-label" for="date-range-input" style="font-size: 0.78rem; font-weight: 700; color: #065f46; margin-bottom: 0.25rem;">
-              Preferred Date Range / Estimated Timeframe:
+              Preferred Date Range / Estimated Timeframe: <span class="required-star">*</span>
             </label>
             <input 
               type="text" 
@@ -175,13 +177,17 @@ export function initStepAddresses(container, state, onNext, reRender) {
 
   flexibleToggle?.addEventListener('change', (e) => {
     state.isFlexibleDate = e.target.checked;
+    const moveDateLabelText = container.querySelector('#move-date-label-text');
+    const moveDateStar = container.querySelector('#move-date-star');
     if (state.isFlexibleDate) {
       if (flexiblePanel) flexiblePanel.style.display = 'block';
-      if (moveDateLabel) moveDateLabel.textContent = 'Target / Earliest Date (Optional):';
+      if (moveDateLabelText) moveDateLabelText.textContent = 'Target / Earliest Date (Optional):';
+      if (moveDateStar) moveDateStar.style.display = 'none';
       dateRangeInput?.focus();
     } else {
       if (flexiblePanel) flexiblePanel.style.display = 'none';
-      if (moveDateLabel) moveDateLabel.textContent = 'Preferred Move Date:';
+      if (moveDateLabelText) moveDateLabelText.textContent = 'Preferred Move Date:';
+      if (moveDateStar) moveDateStar.style.display = 'inline-block';
     }
   });
 
@@ -296,6 +302,11 @@ export function initStepAddresses(container, state, onNext, reRender) {
           if (cityEl) cityEl.value = chosen.city;
           if (postcodeEl) postcodeEl.value = chosen.postcode;
 
+          // Clear any active validation error styles upon selection
+          houseEl?.classList.remove('input-error');
+          postcodeEl?.classList.remove('input-error');
+          container.querySelectorAll(`.field-error-text[data-error-for="${prefix}-house"], .field-error-text[data-error-for="${prefix}-postcode"]`).forEach(m => m.remove());
+
           statusMsg.className = 'postcode-status-msg success';
           statusMsg.innerHTML = `<span class="address-selected-pill">✓ Address Selected: ${chosen.display}</span>`;
         }
@@ -306,5 +317,32 @@ export function initStepAddresses(container, state, onNext, reRender) {
   setupPostcodeLookup('pickup', 'pickupAddr');
   setupPostcodeLookup('dest', 'destAddr');
 
-  container.querySelector('.next-step-btn')?.addEventListener('click', () => onNext());
+  container.querySelector('.next-step-btn')?.addEventListener('click', () => {
+    // Read and synchronize input values before validation
+    const moveDateVal = container.querySelector('#move-date-input')?.value;
+    if (moveDateVal !== undefined) state.moveDate = moveDateVal;
+
+    const dateRangeVal = container.querySelector('#date-range-input')?.value;
+    if (dateRangeVal !== undefined) state.dateRange = dateRangeVal;
+
+    const pHouse = container.querySelector('#pickup-house')?.value?.trim();
+    if (pHouse !== undefined) state.pickupAddr.house = pHouse;
+
+    const pPostcode = container.querySelector('#pickup-postcode')?.value?.trim();
+    if (pPostcode !== undefined) state.pickupAddr.postcode = pPostcode;
+
+    const dHouse = container.querySelector('#dest-house')?.value?.trim();
+    if (dHouse !== undefined) state.destAddr.house = dHouse;
+
+    const dPostcode = container.querySelector('#dest-postcode')?.value?.trim();
+    if (dPostcode !== undefined) state.destAddr.postcode = dPostcode;
+
+    const validation = validateStep1(state);
+    if (!validation.isValid) {
+      showValidationFeedback(container, validation.errors, '.wizard-actions');
+      return;
+    }
+
+    onNext();
+  });
 }

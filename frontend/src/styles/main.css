@@ -2,6 +2,7 @@
 @import './components.css';
 @import './interactive.css';
 @import './quoteWizard.css';
+@import './quoteValidation.css';
 @import './quoteInventory.css';
 @import './quoteSummary.css';
 @import './quoteFloorAccess.css';
