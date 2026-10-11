@@ -8,7 +8,8 @@ import {
   createLead,
   updateLeadStatus,
   prepareAndSendMovePass,
-  acceptQuotePass
+  acceptQuotePass,
+  attachMediaToLead
 } from './services/leadsService.js';
 import {
   getAllJobs,
@@ -217,6 +218,18 @@ export default {
         return jsonResponse({ success: true, lead: created }, 201);
       } catch (_) {
         return jsonResponse({ error: 'Invalid JSON payload' }, 400);
+      }
+    }
+
+    const leadMediaMatch = pathname.match(/^\/api\/leads\/([^/]+)\/media$/);
+    if (leadMediaMatch && request.method === 'POST') {
+      try {
+        const body = await request.json();
+        const mediaFiles = body.mediaFiles || (Array.isArray(body) ? body : [body]);
+        const result = await attachMediaToLead(leadMediaMatch[1], mediaFiles);
+        return jsonResponse(result);
+      } catch (err) {
+        return jsonResponse({ error: 'Failed to attach media: ' + err.message }, 400);
       }
     }
 

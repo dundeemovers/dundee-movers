@@ -44,7 +44,9 @@ function mapLeadRow(r) {
     acceptedAt: r.accepted_at || null,
     acceptedSignature: r.accepted_signature || null,
     selectedAddons: r.selected_addons || [],
-    mediaFiles: getLeadMediaFiles(r.id, r.custom_notes)
+    mediaFiles: (Array.isArray(r.media_files) && r.media_files.length > 0)
+      ? r.media_files
+      : getLeadMediaFiles(r.id, r.custom_notes)
   };
 }
 
@@ -64,7 +66,9 @@ export async function getAllLeads(filter = {}) {
 
   let result = leadsDatabase.map(lead => ({
     ...lead,
-    mediaFiles: getLeadMediaFiles(lead.id, lead.notes)
+    mediaFiles: (Array.isArray(lead.mediaFiles) && lead.mediaFiles.length > 0)
+      ? lead.mediaFiles
+      : getLeadMediaFiles(lead.id, lead.notes)
   }));
   if (filter.status) {
     result = result.filter(lead => lead.status === filter.status);
@@ -82,12 +86,25 @@ export async function getLeadById(id) {
     } catch (_) {}
   }
   const lead = leadsDatabase.find(l => l.id === id);
-  return lead ? { ...lead, mediaFiles: getLeadMediaFiles(lead.id, lead.notes) } : null;
+  return lead ? {
+    ...lead,
+    mediaFiles: (Array.isArray(lead.mediaFiles) && lead.mediaFiles.length > 0)
+      ? lead.mediaFiles
+      : getLeadMediaFiles(lead.id, lead.notes)
+  } : null;
 }
 
 export async function createLead(leadData) {
+  const leadId = `lead-${Date.now().toString(36)}`;
+  let savedMedia = [];
+  if (leadData.mediaFiles && leadData.mediaFiles.length > 0) {
+    savedMedia = await saveLeadMediaFiles(leadId, leadData.mediaFiles);
+  } else {
+    savedMedia = getLeadMediaFiles(leadId, leadData.notes);
+  }
+
   const newLead = {
-    id: `lead-${Date.now().toString(36)}`,
+    id: leadId,
     createdAt: new Date().toISOString(),
     customerName: leadData.customerName || 'Inquiry Customer',
     customerPhone: leadData.customerPhone || '',
@@ -114,9 +131,7 @@ export async function createLead(leadData) {
     acceptedAt: null,
     acceptedSignature: null,
     selectedAddons: [],
-    mediaFiles: (leadData.mediaFiles && leadData.mediaFiles.length > 0)
-      ? saveLeadMediaFiles(`lead-${Date.now().toString(36)}`, leadData.mediaFiles)
-      : getLeadMediaFiles(`lead-${Date.now().toString(36)}`, leadData.notes)
+    mediaFiles: savedMedia
   };
 
   leadsDatabase.unshift(newLead);
@@ -142,6 +157,7 @@ export async function createLead(leadData) {
         recommended_crew: newLead.recommendedCrew,
         custom_notes: newLead.notes,
         items: newLead.items,
+        media_files: savedMedia,
         status: 'new',
         source: 'website_wizard'
       };
@@ -395,8 +411,19 @@ export function updateLeadStatus(id, newStatus) {
 }
 
 export async function attachMediaToLead(leadId, mediaFiles) {
-  const saved = saveLeadMediaFiles(leadId, mediaFiles);
+  const saved = await saveLeadMediaFiles(leadId, mediaFiles);
   const lead = await getLeadById(leadId);
+  if (lead) {
+    const existing = Array.isArray(lead.mediaFiles) ? lead.mediaFiles : [];
+    const merged = [...existing, ...saved];
+    if (isSupabaseConfigured()) {
+      await executeSupabaseQuery(`leads_quotes?id=eq.${leadId}`, {
+        method: 'PATCH',
+        body: { media_files: merged, updated_at: new Date().toISOString() }
+      }).catch(() => {});
+    }
+    lead.mediaFiles = merged;
+  }
   return { success: true, count: saved.length, mediaFiles: saved, lead };
 }
 

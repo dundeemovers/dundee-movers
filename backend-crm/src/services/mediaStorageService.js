@@ -4,6 +4,7 @@
  * and serves them directly through the CRM dashboard.
  */
 import path from 'node:path';
+import { uploadToSupabaseStorage, isSupabaseConfigured } from './supabaseClient.js';
 
 let fs = null;
 let UPLOADS_ROOT = '';
@@ -55,46 +56,75 @@ export function determineMediaType(filename, mime = '') {
   return 'file';
 }
 
-export function saveLeadMediaFiles(leadId, mediaFiles = []) {
+export async function saveLeadMediaFiles(leadId, mediaFiles = []) {
   if (!leadId || !Array.isArray(mediaFiles) || mediaFiles.length === 0) return [];
   const targetDir = ensureUploadsDir(leadId);
-  if (!fs || !targetDir) return [];
   const results = [];
 
   for (const item of mediaFiles) {
     if (!item) continue;
     const safeName = sanitizeFilename(item.name || `media-${Date.now()}`);
-    const filePath = path.join(targetDir, safeName);
     const mediaType = determineMediaType(safeName, item.type);
+    let publicUrl = null;
+    let fileBytes = null;
 
     if (item.dataUrl && typeof item.dataUrl === 'string') {
       try {
         const matches = item.dataUrl.match(/^data:([^;]+);base64,(.+)$/);
+        const mime = matches ? matches[1] : (item.type || 'image/jpeg');
         const base64Data = matches ? matches[2] : item.dataUrl.replace(/^data:[^,]+,/, '');
-        const buffer = Buffer.from(base64Data, 'base64');
-        fs.writeFileSync(filePath, buffer);
 
-        results.push({
-          name: safeName,
-          size: buffer.length,
-          type: mediaType,
-          url: `/uploads/${leadId}/${encodeURIComponent(safeName)}`,
-          exists: true
-        });
-        continue;
+        if (typeof Buffer !== 'undefined') {
+          fileBytes = Buffer.from(base64Data, 'base64');
+        } else {
+          const bin = atob(base64Data);
+          const arr = new Uint8Array(bin.length);
+          for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+          fileBytes = arr;
+        }
+
+        // 1. Upload to Supabase Storage if configured
+        if (isSupabaseConfigured()) {
+          const sPath = `${leadId}/${safeName}`;
+          publicUrl = await uploadToSupabaseStorage('lead-attachments', sPath, fileBytes, mime);
+        }
+
+        // 2. Save to local disk if Node fs exists
+        if (fs && targetDir) {
+          const filePath = path.join(targetDir, safeName);
+          fs.writeFileSync(filePath, fileBytes);
+          if (!publicUrl) {
+            publicUrl = `/uploads/${leadId}/${encodeURIComponent(safeName)}`;
+          }
+        }
       } catch (err) {
-        console.warn(`[MediaStorage] Failed to save base64 media ${safeName}:`, err.message);
+        console.warn(`[MediaStorage] Error processing media ${safeName}:`, err.message);
       }
     }
 
-    // If already exists on disk
-    if (fs.existsSync(filePath)) {
-      const stats = fs.statSync(filePath);
+    if (publicUrl) {
       results.push({
         name: safeName,
-        size: stats.size,
+        size: item.size || (fileBytes ? fileBytes.length : 0),
         type: mediaType,
-        url: `/uploads/${leadId}/${encodeURIComponent(safeName)}`,
+        url: publicUrl,
+        exists: true
+      });
+    } else if (item.url) {
+      results.push({
+        name: safeName,
+        size: item.size || 0,
+        type: mediaType,
+        url: item.url,
+        exists: true
+      });
+    } else if (item.dataUrl && typeof item.dataUrl === 'string') {
+      // Direct Data URL fallback (allows immediate preview even if offline/storage failed)
+      results.push({
+        name: safeName,
+        size: item.size || 0,
+        type: mediaType,
+        url: item.dataUrl,
         exists: true
       });
     } else {
@@ -114,6 +144,7 @@ export function saveLeadMediaFiles(leadId, mediaFiles = []) {
 export function getLeadMediaFiles(leadId, notes = '') {
   if (!leadId) return [];
   const diskFiles = [];
+  const normKey = (s) => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 
   if (fs && UPLOADS_ROOT) {
     const targetDir = path.join(UPLOADS_ROOT, leadId);
@@ -155,7 +186,7 @@ export function getLeadMediaFiles(leadId, notes = '') {
         }
 
         const safeName = sanitizeFilename(name);
-        const alreadyOnDisk = diskFiles.find(df => df.name.toLowerCase() === safeName.toLowerCase());
+        const alreadyOnDisk = diskFiles.find(df => normKey(df.name) === normKey(safeName) || normKey(df.name) === normKey(name));
 
         if (!alreadyOnDisk) {
           diskFiles.push({

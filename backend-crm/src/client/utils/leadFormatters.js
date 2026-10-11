@@ -129,8 +129,13 @@ export function formatFileSize(bytes) {
   return `${bytes} B`;
 }
 
+export function normalizeMediaKey(name) {
+  return (name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
 /**
- * Extract media attachments from lead.mediaFiles or fallback to regex parsing of lead.notes
+ * Extract media attachments from lead.mediaFiles or fallback to regex parsing of lead.notes.
+ * Strictly de-duplicates entries so uploaded files never appear duplicated in the UI.
  */
 export function parseAttachedMedia(lead) {
   if (!lead) return [];
@@ -145,23 +150,24 @@ export function parseAttachedMedia(lead) {
       for (const entry of match[1].split(',')) {
         const itemMatch = entry.trim().match(/^(.+?)\s*\(([0-9.]+)\s*([A-Za-z]+)\)$/);
         if (itemMatch) {
-          const name = itemMatch[1].trim().toLowerCase();
+          const rawName = itemMatch[1].trim();
+          const normK = normalizeMediaKey(rawName);
           const num = parseFloat(itemMatch[2]);
           const unit = itemMatch[3].toUpperCase();
-          reportedSizes[name] = unit.startsWith('M') ? Math.round(num * 1024 * 1024) : Math.round(num * 1024);
+          reportedSizes[normK] = unit.startsWith('M') ? Math.round(num * 1024 * 1024) : Math.round(num * 1024);
         }
       }
     }
   }
 
-  // 1. Check lead.mediaFiles
+  // 1. Process structured lead.mediaFiles
   if (Array.isArray(lead.mediaFiles) && lead.mediaFiles.length > 0) {
     for (const f of lead.mediaFiles) {
       if (!f || !f.name) continue;
-      const key = f.name.toLowerCase();
-      if (!seen.has(key)) {
-        seen.add(key);
-        const effectiveSize = (f.size && f.size > 1024) ? f.size : (reportedSizes[key] || f.size || 0);
+      const normK = normalizeMediaKey(f.name);
+      if (!seen.has(normK)) {
+        seen.add(normK);
+        const effectiveSize = (f.size && f.size > 1024) ? f.size : (reportedSizes[normK] || f.size || 0);
         results.push({
           name: f.name,
           size: effectiveSize,
@@ -174,7 +180,7 @@ export function parseAttachedMedia(lead) {
     }
   }
 
-  // 2. Parse from notes string
+  // 2. Fallback to notes only for any files not already covered in mediaFiles
   if (lead.notes && typeof lead.notes === 'string') {
     const match = lead.notes.match(/Attached Media\s*\([^)]*\):\s*([^|]+)/i);
     if (match && match[1]) {
@@ -191,9 +197,9 @@ export function parseAttachedMedia(lead) {
           sizeInBytes = unit.startsWith('M') ? Math.round(num * 1024 * 1024) : Math.round(num * 1024);
         }
 
-        const key = name.toLowerCase();
-        if (!seen.has(key)) {
-          seen.add(key);
+        const normK = normalizeMediaKey(name);
+        if (!seen.has(normK)) {
+          seen.add(normK);
           results.push({
             name,
             size: sizeInBytes,

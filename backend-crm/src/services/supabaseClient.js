@@ -75,6 +75,40 @@ export async function executeSupabaseQuery(table, options = {}) {
 }
 
 /**
+ * Upload binary media buffer to Supabase Storage and return public CDN URL
+ */
+export async function uploadToSupabaseStorage(bucket, filePath, dataBuffer, mimeType = 'image/jpeg') {
+  if (!isSupabaseConfigured()) return null;
+  const { url, key } = getCredentials();
+  if (!url || !key) return null;
+
+  try {
+    const endpoint = `${url}/storage/v1/object/${bucket}/${filePath}`;
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'apikey': key,
+        'Authorization': `Bearer ${key}`,
+        'Content-Type': mimeType,
+        'x-upsert': 'true'
+      },
+      body: dataBuffer
+    });
+
+    if (response.ok) {
+      return `${url}/storage/v1/object/public/${bucket}/${filePath}`;
+    } else {
+      const errText = await response.text();
+      console.warn(`[Supabase Storage] Upload error ${response.status}:`, errText);
+      return null;
+    }
+  } catch (err) {
+    console.warn(`[Supabase Storage] Network error during upload:`, err.message);
+    return null;
+  }
+}
+
+/**
  * Lightweight keep-alive probe to prevent Supabase dormancy/pausing on Free Tier.
  * Queries PostgREST (PostgreSQL compute) so Supabase registers active usage
  * and resets its 7-day automatic inactivity pause countdown.
