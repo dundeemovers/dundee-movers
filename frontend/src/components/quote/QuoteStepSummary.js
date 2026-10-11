@@ -26,7 +26,11 @@ export function renderStepSummary(state) {
       <div class="summary-breakdown-card">
         <div class="breakdown-row">
           <span>Move Type & Date:</span>
-          <strong>${state.moveType} ${state.moveDate ? `(${state.moveDate})` : ''}</strong>
+          <strong>${state.moveType} ${
+            state.isFlexibleDate
+              ? (state.dateRange ? `• 🗓️ Flexible (${state.dateRange})` : '• 🗓️ Flexible Date')
+              : (state.moveDate ? `• 📅 ${state.moveDate}` : '')
+          }</strong>
         </div>
         <div class="breakdown-row">
           <span>Exact Pickup Address:</span>
@@ -125,6 +129,15 @@ export function renderStepSummary(state) {
                 I agree to the <a href="/terms" target="_blank" style="color: #047857; font-weight: 700; text-decoration: underline;">Terms & Conditions</a>. I understand that payment is strictly by <strong>cash or bank transfer only</strong> upon completion, waiting time for key delays is charged at £40/hr per van, and reasonable parking space must be kept outside the property.
               </span>
             </label>
+          </div>
+
+          <!-- 100% Spam-Free Guarantee Reassurance Card -->
+          <div class="quote-spam-guarantee-card">
+            <div class="spam-guarantee-icon">🔒</div>
+            <div class="spam-guarantee-content">
+              <strong class="spam-guarantee-heading">100% Spam-Free Guarantee:</strong>
+              <span class="spam-guarantee-text">No sales calls. Your details are only used to send your fixed quote.</span>
+            </div>
           </div>
 
           <button type="submit" id="quote-submit-btn" class="btn-submit-quote">
@@ -351,7 +364,9 @@ export function initStepSummary(container, onRestart, state) {
       customerPhone: phone,
       customerEmail: email,
       moveType: state.moveType,
-      moveDate: state.moveDate,
+      moveDate: state.isFlexibleDate
+        ? (state.dateRange ? `Flexible: ${state.dateRange}` : 'Flexible Date')
+        : (state.moveDate || ''),
       pickupAddress: formatFullAddress(state.pickupAddr),
       pickupPostcode: state.pickupAddr?.postcode || '',
       pickupFloor: state.pickupAccess?.floor || 'Ground Floor / Bungalow',
@@ -366,7 +381,7 @@ export function initStepSummary(container, onRestart, state) {
       items: state.items,
       mediaCount: selectedFiles.length,
       mediaFiles: preparedMedia,
-      notes: `Ref: #${quoteRef}${customNotes ? ' | Notes: ' + customNotes : ''}${itemsSummary ? ' | Manifest: ' + itemsSummary : ''}${mediaSummary}`
+      notes: `Ref: #${quoteRef}${state.isFlexibleDate ? ' | Move Timing: Flexible (' + (state.dateRange || 'Range TBD') + ')' : ''}${customNotes ? ' | Notes: ' + customNotes : ''}${itemsSummary ? ' | Manifest: ' + itemsSummary : ''}${mediaSummary}`
     };
 
     // Send to live CRM endpoints (custom domain -> edge worker -> local fallback)

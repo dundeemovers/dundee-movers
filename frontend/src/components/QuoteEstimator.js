@@ -60,6 +60,9 @@ export function initQuoteEstimator() {
     currentStep: 1,
     moveType: 'House / Flat Move',
     moveDate: '',
+    isFlexibleDate: false,
+    dateRange: '',
+    activeInventoryTab: 'living',
     pickupAddr: {
       house: '',
       street: '',

@@ -21,9 +21,34 @@ export function renderStepAddresses(state) {
           </select>
         </div>
 
-        <div class="form-field">
-          <label class="form-label" for="move-date-input">Preferred Move Date:</label>
-          <input type="date" class="input-control" id="move-date-input" value="${state.moveDate}">
+        <div class="form-field move-date-picker-col">
+          <label class="form-label" for="move-date-input" id="move-date-label">
+            ${state.isFlexibleDate ? 'Target / Earliest Date (Optional):' : 'Preferred Move Date:'}
+          </label>
+          <input type="date" class="input-control" id="move-date-input" value="${state.moveDate || ''}">
+
+          <!-- Flexible on Date Toggle -->
+          <div class="flexible-date-toggle-row">
+            <label class="flexible-toggle-label" for="flexible-date-toggle">
+              <input type="checkbox" id="flexible-date-toggle" ${state.isFlexibleDate ? 'checked' : ''}>
+              <span class="flexible-toggle-text">🗓️ I'm flexible on date / No exact date yet</span>
+            </label>
+          </div>
+
+          <!-- Date Range Input Box (revealed when flexible is selected) -->
+          <div class="flexible-range-panel" id="flexible-range-panel" style="${state.isFlexibleDate ? 'display: block;' : 'display: none;'}">
+            <label class="form-label" for="date-range-input" style="font-size: 0.78rem; font-weight: 700; color: #065f46; margin-bottom: 0.25rem;">
+              Preferred Date Range / Estimated Timeframe:
+            </label>
+            <input 
+              type="text" 
+              class="input-control" 
+              id="date-range-input" 
+              placeholder="e.g. Late October, 20th–28th Oct, or any weekend next month" 
+              value="${state.dateRange || ''}"
+            >
+            <span class="flexible-range-hint">💡 Flexible dates help our dispatch team prioritize optimal vehicle availability and pricing.</span>
+          </div>
         </div>
       </div>
 
@@ -141,6 +166,28 @@ export function initStepAddresses(container, state, onNext, reRender) {
   // Top-level meta bindings
   container.querySelector('#move-type-input')?.addEventListener('change', (e) => state.moveType = e.target.value);
   container.querySelector('#move-date-input')?.addEventListener('change', (e) => state.moveDate = e.target.value);
+
+  // Flexible Date Toggle & Range Handlers
+  const flexibleToggle = container.querySelector('#flexible-date-toggle');
+  const flexiblePanel = container.querySelector('#flexible-range-panel');
+  const dateRangeInput = container.querySelector('#date-range-input');
+  const moveDateLabel = container.querySelector('#move-date-label');
+
+  flexibleToggle?.addEventListener('change', (e) => {
+    state.isFlexibleDate = e.target.checked;
+    if (state.isFlexibleDate) {
+      if (flexiblePanel) flexiblePanel.style.display = 'block';
+      if (moveDateLabel) moveDateLabel.textContent = 'Target / Earliest Date (Optional):';
+      dateRangeInput?.focus();
+    } else {
+      if (flexiblePanel) flexiblePanel.style.display = 'none';
+      if (moveDateLabel) moveDateLabel.textContent = 'Preferred Move Date:';
+    }
+  });
+
+  dateRangeInput?.addEventListener('input', (e) => {
+    state.dateRange = e.target.value;
+  });
 
   // Direct manual input listeners for Pickup
   container.querySelector('#pickup-house')?.addEventListener('input', (e) => state.pickupAddr.house = e.target.value);

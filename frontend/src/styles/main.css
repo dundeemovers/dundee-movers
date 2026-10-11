@@ -2,6 +2,8 @@
 @import './components.css';
 @import './interactive.css';
 @import './quoteWizard.css';
+@import './quoteInventory.css';
+@import './quoteSummary.css';
 @import './quoteFloorAccess.css';
 @import './modular-views.css';
 @import './comparisonMatrix.css';

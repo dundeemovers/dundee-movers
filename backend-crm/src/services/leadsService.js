@@ -124,7 +124,7 @@ export async function createLead(leadData) {
         customer_phone: newLead.customerPhone,
         customer_email: newLead.customerEmail,
         move_type: newLead.moveType,
-        preferred_date: newLead.moveDate || null,
+        preferred_date: (newLead.moveDate && /^\d{4}-\d{2}-\d{2}$/.test(newLead.moveDate)) ? newLead.moveDate : null,
         pickup_address: newLead.pickupAddress,
         pickup_postcode: leadData.pickupPostcode || 'DD1 1AA',
         pickup_floor: newLead.pickupFloor,
