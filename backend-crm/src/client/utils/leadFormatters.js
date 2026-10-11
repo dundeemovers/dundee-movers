@@ -217,8 +217,8 @@ export function parseAttachedMedia(lead) {
 }
 
 function determineTypeFromName(filename) {
-  if (/\.(mp4|mov|webm|m4v|mkv|avi)$/i.test(filename)) return 'video';
-  if (/\.(png|jpe?g|webp|gif|svg|bmp)$/i.test(filename)) return 'image';
+  if (/\.(mp4|mov|webm|m4v|mkv|avi|3gp|wmv|flv|ts)$/i.test(filename)) return 'video';
+  if (/\.(png|jpe?g|webp|gif|svg|bmp|heic|heif|tiff)$/i.test(filename)) return 'image';
   return 'file';
 }
 

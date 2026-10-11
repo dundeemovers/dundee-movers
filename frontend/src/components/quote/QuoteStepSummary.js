@@ -338,30 +338,63 @@ export function initStepSummary(container, onRestart, state) {
       ? ` | Attached Media (${selectedFiles.length} files): ${selectedFiles.map(f => `${f.name} (${Math.round(f.size/1024)}KB)`).join(', ')}`
       : '';
 
-    // Encode selected photos and videos to Data URLs for CRM preview and storage
+    // Upload survey photos & video walkthroughs directly to cloud storage (up to 50MB)
     let preparedMedia = [];
     if (selectedFiles.length > 0) {
+      const SUPABASE_STORAGE_URL = 'https://ozcttsokgyscukrdgxfp.supabase.co';
+      const SUPABASE_ANON_KEY = 'sb_publishable_VnlNAAw4kVm7CaWlmjxXZQ_reFOSDzV';
+
       preparedMedia = await Promise.all(
-        selectedFiles.map(file => new Promise((resolve) => {
-          if (file.size > 25 * 1024 * 1024) {
-            resolve({ name: file.name, size: file.size, type: file.type, dataUrl: null });
-            return;
+        selectedFiles.map(async (file, fIdx) => {
+          if (submitBtn) {
+            const btnSpan = submitBtn.querySelector('span');
+            if (btnSpan) btnSpan.textContent = `Uploading media (${fIdx + 1}/${selectedFiles.length})...`;
           }
-          const reader = new FileReader();
-          reader.onload = () => resolve({
-            name: file.name,
-            size: file.size,
-            type: file.type,
-            dataUrl: reader.result
+          const isVideo = file.type?.startsWith('video') || /\.(mp4|mov|webm|m4v|mkv|avi)$/i.test(file.name);
+          const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_');
+          const storagePath = `${quoteRef}/${Date.now()}_${safeName}`;
+
+          try {
+            // Direct binary streaming upload (supports full video walkthroughs with zero memory blowup)
+            const uploadRes = await fetch(`${SUPABASE_STORAGE_URL}/storage/v1/object/lead-attachments/${storagePath}`, {
+              method: 'POST',
+              headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Content-Type': file.type || (isVideo ? 'video/mp4' : 'image/jpeg'),
+                'x-upsert': 'true'
+              },
+              body: file
+            });
+
+            if (uploadRes.ok) {
+              return {
+                name: file.name,
+                size: file.size,
+                type: isVideo ? 'video' : 'image',
+                url: `${SUPABASE_STORAGE_URL}/storage/v1/object/public/lead-attachments/${storagePath}`,
+                exists: true
+              };
+            }
+          } catch (_) {}
+
+          // Fallback to base64 Data URL if direct upload fails
+          return new Promise((resolve) => {
+            if (file.size > 25 * 1024 * 1024) {
+              resolve({ name: file.name, size: file.size, type: isVideo ? 'video' : 'image', url: null, dataUrl: null });
+              return;
+            }
+            const reader = new FileReader();
+            reader.onload = () => resolve({
+              name: file.name,
+              size: file.size,
+              type: isVideo ? 'video' : 'image',
+              dataUrl: reader.result
+            });
+            reader.onerror = () => resolve({ name: file.name, size: file.size, type: isVideo ? 'video' : 'image', url: null });
+            reader.readAsDataURL(file);
           });
-          reader.onerror = () => resolve({
-            name: file.name,
-            size: file.size,
-            type: file.type,
-            dataUrl: null
-          });
-          reader.readAsDataURL(file);
-        }))
+        })
       );
     }
 

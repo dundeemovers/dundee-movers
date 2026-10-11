@@ -140,19 +140,52 @@ async function handleFilesUpload(filesList, lead, dropzone, onMediaRefreshed) {
   const originalText = dropzone.innerHTML;
   dropzone.innerHTML = `<span style="font-size: 0.9rem; color: #065f46; font-weight: 700;">⏳ Uploading ${files.length} file(s)...</span>`;
 
+  const SUPABASE_STORAGE_URL = 'https://ozcttsokgyscukrdgxfp.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_VnlNAAw4kVm7CaWlmjxXZQ_reFOSDzV';
+
   try {
     const mediaFiles = await Promise.all(
-      files.map(file => new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve({
-          name: file.name,
-          size: file.size,
-          type: file.type,
-          dataUrl: reader.result
+      files.map(async (file, fIdx) => {
+        dropzone.innerHTML = `<span style="font-size: 0.9rem; color: #065f46; font-weight: 700;">⏳ Uploading (${fIdx + 1}/${files.length})...</span>`;
+        const isVideo = file.type?.startsWith('video') || /\.(mp4|mov|webm|m4v|mkv|avi)$/i.test(file.name);
+        const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_');
+        const storagePath = `${lead.id}/${Date.now()}_${safeName}`;
+
+        try {
+          const uploadRes = await fetch(`${SUPABASE_STORAGE_URL}/storage/v1/object/lead-attachments/${storagePath}`, {
+            method: 'POST',
+            headers: {
+              'apikey': SUPABASE_ANON_KEY,
+              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+              'Content-Type': file.type || (isVideo ? 'video/mp4' : 'image/jpeg'),
+              'x-upsert': 'true'
+            },
+            body: file
+          });
+
+          if (uploadRes.ok) {
+            return {
+              name: file.name,
+              size: file.size,
+              type: isVideo ? 'video' : 'image',
+              url: `${SUPABASE_STORAGE_URL}/storage/v1/object/public/lead-attachments/${storagePath}`,
+              exists: true
+            };
+          }
+        } catch (_) {}
+
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve({
+            name: file.name,
+            size: file.size,
+            type: isVideo ? 'video' : 'image',
+            dataUrl: reader.result
+          });
+          reader.onerror = () => resolve(null);
+          reader.readAsDataURL(file);
         });
-        reader.onerror = () => resolve(null);
-        reader.readAsDataURL(file);
-      }))
+      })
     );
 
     const validFiles = mediaFiles.filter(Boolean);

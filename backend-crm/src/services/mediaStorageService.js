@@ -47,10 +47,10 @@ export function determineMediaType(filename, mime = '') {
   const lowerMime = (mime || '').toLowerCase();
   const lowerName = (filename || '').toLowerCase();
 
-  if (lowerMime.startsWith('video/') || /\.(mp4|mov|webm|m4v|mkv|avi)$/i.test(lowerName)) {
+  if (lowerMime.startsWith('video/') || /\.(mp4|mov|webm|m4v|mkv|avi|3gp|wmv|flv|ts)$/i.test(lowerName)) {
     return 'video';
   }
-  if (lowerMime.startsWith('image/') || /\.(png|jpe?g|webp|gif|svg|bmp)$/i.test(lowerName)) {
+  if (lowerMime.startsWith('image/') || /\.(png|jpe?g|webp|gif|svg|bmp|heic|heif|tiff)$/i.test(lowerName)) {
     return 'image';
   }
   return 'file';
