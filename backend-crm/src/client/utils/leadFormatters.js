@@ -174,7 +174,8 @@ export function parseAttachedMedia(lead) {
           formattedSize: formatFileSize(effectiveSize),
           type: f.type || determineTypeFromName(f.name),
           url: f.url || null,
-          exists: Boolean(f.exists && f.url)
+          chunks: Array.isArray(f.chunks) && f.chunks.length > 0 ? f.chunks : (f.url ? [f.url] : []),
+          exists: Boolean((f.exists || (f.chunks && f.chunks.length > 0)) && (f.url || (f.chunks && f.chunks.length > 0)))
         });
       }
     }

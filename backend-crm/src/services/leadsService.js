@@ -415,7 +415,14 @@ export async function attachMediaToLead(leadId, mediaFiles) {
   const lead = await getLeadById(leadId);
   if (lead) {
     const existing = Array.isArray(lead.mediaFiles) ? lead.mediaFiles : [];
-    const merged = [...existing, ...saved];
+    const mediaMap = new Map();
+    for (const item of existing) {
+      if (item && item.name) mediaMap.set(item.name.toLowerCase().trim(), item);
+    }
+    for (const item of saved) {
+      if (item && item.name) mediaMap.set(item.name.toLowerCase().trim(), item);
+    }
+    const merged = Array.from(mediaMap.values());
     if (isSupabaseConfigured()) {
       await executeSupabaseQuery(`leads_quotes?id=eq.${leadId}`, {
         method: 'PATCH',

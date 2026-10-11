@@ -4,6 +4,7 @@
  * and direct dispatcher dropzone for attaching survey media.
  */
 import { parseAttachedMedia } from '../utils/leadFormatters.js';
+import { uploadMultipleFiles, resolvePlayableMediaUrl } from '../utils/supabaseStorage.js';
 
 export function renderLeadMediaGallery(lead) {
   if (!lead) return '';
@@ -29,9 +30,9 @@ export function renderLeadMediaGallery(lead) {
             return `
               <div class="crm-media-card" data-media-index="${idx}">
                 <div class="crm-media-preview-box">
-                  ${item.exists && item.url ? (
+                  ${item.exists && (item.url || (item.chunks && item.chunks.length > 0)) ? (
                     isVideo ? `
-                      <video src="${item.url}" preload="metadata" controls playsinline></video>
+                      <video src="${item.url || ''}" data-media-chunks="${(item.chunks || []).join(',')}" preload="metadata" controls playsinline></video>
                     ` : `
                       <img src="${item.url}" alt="${item.name}" loading="lazy" class="crm-lightbox-trigger" data-media-url="${item.url}" data-media-name="${item.name}" data-media-type="image" />
                     `
@@ -53,17 +54,20 @@ export function renderLeadMediaGallery(lead) {
                   </div>
 
                   <div class="crm-media-actions">
-                    ${item.exists && item.url ? `
-                      <button type="button" class="crm-media-btn btn-view crm-lightbox-trigger" data-media-url="${item.url}" data-media-name="${item.name}" data-media-type="${isVideo ? 'video' : 'image'}">
+                    ${item.exists && (item.url || (item.chunks && item.chunks.length > 0)) ? `
+                      <button type="button" class="crm-media-btn btn-view crm-lightbox-trigger" data-media-url="${item.url || ''}" data-media-chunks="${(item.chunks || []).join(',')}" data-media-name="${item.name}" data-media-type="${isVideo ? 'video' : 'image'}">
                         ${isVideo ? '▶ Full Player' : '🔍 Zoom'}
                       </button>
-                      <a href="${item.url}" download="${item.name}" class="crm-media-btn" title="Download to PC">
+                      <a href="${item.url || '#'}" download="${item.name}" class="crm-media-btn crm-media-download-btn" title="Download to PC">
                         ⬇️ Save
                       </a>
                     ` : `
                       <a href="${waLink}" target="_blank" class="crm-media-btn btn-whatsapp" title="Request file via WhatsApp">
                         💬 Request on WA
                       </a>
+                      <button type="button" class="crm-media-btn btn-attach-single" title="Upload this file directly">
+                        ⬆️ Upload
+                      </button>
                     `}
                   </div>
                 </div>
@@ -91,16 +95,53 @@ export function initLeadMediaGalleryEvents(container, lead, onMediaRefreshed) {
   const dropzone = container.querySelector('#modal-media-dropzone');
   const fileInput = container.querySelector('#modal-media-input');
 
+  // Resolve and mount multi-chunk videos automatically
+  container.querySelectorAll('video[data-media-chunks]').forEach(async (vid) => {
+    const rawChunks = vid.getAttribute('data-media-chunks');
+    const chunks = rawChunks ? rawChunks.split(',').filter(Boolean) : [];
+    if (chunks.length > 1) {
+      try {
+        const objectUrl = await resolvePlayableMediaUrl({ chunks, type: 'video' });
+        if (objectUrl) {
+          vid.src = objectUrl;
+          const card = vid.closest('.crm-media-card');
+          if (card) {
+            const dl = card.querySelector('.crm-media-download-btn');
+            if (dl) dl.href = objectUrl;
+          }
+        }
+      } catch (err) {
+        console.warn('Could not reassemble video chunks:', err);
+      }
+    }
+  });
+
   // Lightbox Trigger Handling
   container.querySelectorAll('.crm-lightbox-trigger').forEach(el => {
-    el.addEventListener('click', (e) => {
+    el.addEventListener('click', async (e) => {
       e.stopPropagation();
-      const url = el.getAttribute('data-media-url');
+      let url = el.getAttribute('data-media-url');
       const name = el.getAttribute('data-media-name') || 'Media Preview';
       const type = el.getAttribute('data-media-type') || 'image';
-      if (!url) return;
+      const rawChunks = el.getAttribute('data-media-chunks');
+      const chunks = rawChunks ? rawChunks.split(',').filter(Boolean) : [];
 
+      if (chunks.length > 1) {
+        try {
+          url = await resolvePlayableMediaUrl({ chunks, type: 'video' });
+        } catch (_) {}
+      }
+
+      if (!url) return;
       openMediaLightbox(url, name, type);
+    });
+  });
+
+  // Pending attachment direct upload button
+  container.querySelectorAll('.btn-attach-single').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (fileInput) fileInput.click();
     });
   });
 
@@ -140,55 +181,19 @@ async function handleFilesUpload(filesList, lead, dropzone, onMediaRefreshed) {
   const originalText = dropzone.innerHTML;
   dropzone.innerHTML = `<span style="font-size: 0.9rem; color: #065f46; font-weight: 700;">⏳ Uploading ${files.length} file(s)...</span>`;
 
-  const SUPABASE_STORAGE_URL = 'https://ozcttsokgyscukrdgxfp.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_VnlNAAw4kVm7CaWlmjxXZQ_reFOSDzV';
-
   try {
-    const mediaFiles = await Promise.all(
-      files.map(async (file, fIdx) => {
-        dropzone.innerHTML = `<span style="font-size: 0.9rem; color: #065f46; font-weight: 700;">⏳ Uploading (${fIdx + 1}/${files.length})...</span>`;
-        const isVideo = file.type?.startsWith('video') || /\.(mp4|mov|webm|m4v|mkv|avi)$/i.test(file.name);
-        const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_');
-        const storagePath = `${lead.id}/${Date.now()}_${safeName}`;
+    const mediaFiles = await uploadMultipleFiles(files, {
+      pathPrefix: lead.id,
+      onProgress: (fIdx, total, progress) => {
+        dropzone.innerHTML = `<span style="font-size: 0.9rem; color: #065f46; font-weight: 700;">⏳ Uploading (${fIdx + 1}/${total}) ${progress.percent > 0 ? progress.percent + '%' : ''}...</span>`;
+      }
+    });
 
-        try {
-          const uploadRes = await fetch(`${SUPABASE_STORAGE_URL}/storage/v1/object/lead-attachments/${storagePath}`, {
-            method: 'POST',
-            headers: {
-              'apikey': SUPABASE_ANON_KEY,
-              'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-              'Content-Type': file.type || (isVideo ? 'video/mp4' : 'image/jpeg'),
-              'x-upsert': 'true'
-            },
-            body: file
-          });
+    const validFiles = mediaFiles.filter(item => item && (item.url || item.dataUrl));
+    if (validFiles.length === 0) {
+      throw new Error('Upload was unable to process selected file(s)');
+    }
 
-          if (uploadRes.ok) {
-            return {
-              name: file.name,
-              size: file.size,
-              type: isVideo ? 'video' : 'image',
-              url: `${SUPABASE_STORAGE_URL}/storage/v1/object/public/lead-attachments/${storagePath}`,
-              exists: true
-            };
-          }
-        } catch (_) {}
-
-        return new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve({
-            name: file.name,
-            size: file.size,
-            type: isVideo ? 'video' : 'image',
-            dataUrl: reader.result
-          });
-          reader.onerror = () => resolve(null);
-          reader.readAsDataURL(file);
-        });
-      })
-    );
-
-    const validFiles = mediaFiles.filter(Boolean);
     const res = await fetch(`/api/leads/${lead.id}/media`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -202,13 +207,13 @@ async function handleFilesUpload(filesList, lead, dropzone, onMediaRefreshed) {
         if (onMediaRefreshed) onMediaRefreshed(data.lead || lead);
       }, 500);
     } else {
-      dropzone.innerHTML = `<span style="font-size: 0.9rem; color: #dc2626; font-weight: 700;">⚠️ Upload failed</span>`;
-      setTimeout(() => { dropzone.innerHTML = originalText; }, 2000);
+      dropzone.innerHTML = `<span style="font-size: 0.9rem; color: #dc2626; font-weight: 700;">⚠️ Server failed to attach media</span>`;
+      setTimeout(() => { dropzone.innerHTML = originalText; }, 2500);
     }
   } catch (err) {
     console.error('Error uploading media:', err);
-    dropzone.innerHTML = `<span style="font-size: 0.9rem; color: #dc2626; font-weight: 700;">⚠️ Error uploading: ${err.message}</span>`;
-    setTimeout(() => { dropzone.innerHTML = originalText; }, 2500);
+    dropzone.innerHTML = `<span style="font-size: 0.9rem; color: #dc2626; font-weight: 700;">⚠️ Upload error: ${err.message}</span>`;
+    setTimeout(() => { dropzone.innerHTML = originalText; }, 3000);
   }
 }
 
