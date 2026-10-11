@@ -219,41 +219,63 @@ export async function createLead(leadData) {
         status: 'new',
         source: 'website_wizard'
       };
-      await executeSupabaseQuery('leads_quotes', {
+      const spResult = await executeSupabaseQuery('leads_quotes', {
         method: 'POST',
         body: spPayload
       });
+      if (Array.isArray(spResult) && spResult[0]?.id) {
+        newLead.id = spResult[0].id;
+      }
     } catch (err) {
       console.warn('[LeadsService] Error syncing lead to Supabase:', err.message);
     }
   }
 
-  // Asynchronously dispatch confirmation and team notification emails
-  (async () => {
-    try {
-      if (newLead.customerEmail && newLead.customerEmail.includes('@')) {
-        await sendEmailWithResend({
+  // Dispatch confirmation and team notification emails before returning response
+  // (Crucial for Cloudflare Workers: prevents isolate termination before Resend API finishes)
+  try {
+    const emailPromises = [];
+
+    // 1. Customer confirmation email
+    if (newLead.customerEmail && newLead.customerEmail.includes('@')) {
+      emailPromises.push(
+        sendEmailWithResend({
           to: newLead.customerEmail,
           subject: 'We Have Received Your Move Details — Dundee Movers',
           html: generateInquiryReceivedEmailHtml(newLead),
           customerName: newLead.customerName,
           templateType: 'inquiry_received',
           quoteId: newLead.id
-        });
-      }
-
-      await sendEmailWithResend({
-        to: getAdminNotificationEmail(),
-        subject: `🚨 New Move Inquiry: ${newLead.customerName} (${newLead.pickupFloor} ➔ ${newLead.deliveryFloor})`,
-        html: generateInternalLeadNotificationHtml(newLead),
-        customerName: 'Dundee Movers Team',
-        templateType: 'internal_lead_alert',
-        quoteId: newLead.id
-      });
-    } catch (emailErr) {
-      console.warn('[LeadsService] Automatic email dispatch exception:', emailErr.message);
+        })
+      );
     }
-  })();
+
+    // 2. Internal Operations notification alert
+    const adminEmail = getAdminNotificationEmail();
+    if (adminEmail) {
+      const adminRecipients = Array.from(new Set([
+        adminEmail,
+        'dundeemovers@gmail.com'
+      ])).filter(Boolean);
+
+      emailPromises.push(
+        sendEmailWithResend({
+          to: adminRecipients,
+          subject: `🚨 New Move Inquiry: ${newLead.customerName} (${newLead.pickupFloor} ➔ ${newLead.deliveryFloor})`,
+          html: generateInternalLeadNotificationHtml(newLead),
+          customerName: 'Dundee Movers Team',
+          templateType: 'internal_lead_alert',
+          quoteId: newLead.id
+        })
+      );
+    }
+
+    if (emailPromises.length > 0) {
+      await Promise.allSettled(emailPromises);
+    }
+  } catch (emailErr) {
+    console.warn('[LeadsService] Automatic email dispatch exception:', emailErr.message);
+  }
 
   return newLead;
 }
