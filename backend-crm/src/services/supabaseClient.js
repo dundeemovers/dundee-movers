@@ -89,8 +89,7 @@ export async function uploadToSupabaseStorage(bucket, filePath, dataBuffer, mime
       headers: {
         'apikey': key,
         'Authorization': `Bearer ${key}`,
-        'Content-Type': mimeType,
-        'x-upsert': 'true'
+        'Content-Type': mimeType
       },
       body: dataBuffer
     });

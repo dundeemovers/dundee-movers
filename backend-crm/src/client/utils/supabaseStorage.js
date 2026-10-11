@@ -21,8 +21,7 @@ async function uploadChunkWithRetry(blob, storagePath, bucket = DEFAULT_BUCKET, 
         headers: {
           'apikey': SUPABASE_ANON_KEY,
           'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Content-Type': blob.type || 'application/octet-stream',
-          'x-upsert': 'true'
+          'Content-Type': blob.type || 'application/octet-stream'
         },
         body: blob
       });
