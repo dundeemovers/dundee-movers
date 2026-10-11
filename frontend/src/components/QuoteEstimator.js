@@ -4,7 +4,6 @@
  * Features smooth mobile step transitions and intelligent viewport alignment.
  */
 import { updateNavbarInventoryCount } from './Navbar.js';
-import confetti from 'canvas-confetti';
 
 import { renderStepAddresses, initStepAddresses } from './quote/QuoteStepAddresses.js';
 import { renderStepInventory, initStepInventory } from './quote/QuoteStepInventory.js';
@@ -209,7 +208,6 @@ export function initQuoteEstimator() {
         () => {
           state.currentStep = 4;
           renderCurrentStep(true);
-          confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
         },
         () => renderCurrentStep(false)
       );

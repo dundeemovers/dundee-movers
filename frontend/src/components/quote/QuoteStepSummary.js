@@ -16,11 +16,11 @@ export function renderStepSummary(state) {
   return `
     <div class="wizard-step-content quote-summary-content">
       <div class="summary-badge-top">
-        <span class="badge">Guaranteed Move Manifest Ready</span>
+        <span class="badge">Final Step: Complete Details to Receive Fixed Quote</span>
       </div>
 
       <h3 class="summary-hero-title">Your Tailored Move Summary</h3>
-      <p class="summary-hero-sub">Review your collection route, floor access, and itemized manifest below.</p>
+      <p class="summary-hero-sub">Review your move details below, then enter your name, phone & email to receive your fixed quote.</p>
 
       <!-- Itemized Manifest & Route Breakdown -->
       <div class="summary-breakdown-card">
@@ -69,11 +69,11 @@ export function renderStepSummary(state) {
       <!-- Primary Customer Online Submission Form -->
       <div class="quote-submit-card">
         <div class="quote-submit-header">
-          <span class="quote-submit-badge">📋 Tailored Quote Request</span>
-          <h4 class="quote-submit-title">Request Your Fixed-Price Move Quote</h4>
+          <span class="quote-submit-badge">🔒 Final Step • Instant Dispatch Review</span>
+          <h4 class="quote-submit-title">Where Should We Send Your Fixed-Price Quote?</h4>
         </div>
         <p class="quote-submit-sub">
-          Enter your contact details below. Our team will review your inventory, property access, and route details to assign the appropriate vehicle and calculate your tailored fixed quote. Once you review and accept the quote, we will confirm your moving date and take your deposit to secure your booking.
+          Enter your contact details below. Our dispatch team will inspect your inventory, property access, and route to calculate your guaranteed fixed quote with zero sales calls.
         </p>
 
         <form id="quote-direct-submit-form">
