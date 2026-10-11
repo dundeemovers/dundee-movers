@@ -14,11 +14,11 @@ export function renderHero() {
           </div>
 
           <h1 class="hero-title">
-            Bespoke Relocations for Dundee & Across the <span class="text-thistle-gradient">Whole UK.</span>
+            Dundee Removals & House Moving Across the <span class="text-thistle-gradient">Whole UK.</span>
           </h1>
 
           <p class="hero-subtitle">
-            Reliable, friendly, and fully insured removals. We operate a strict <strong>one-move-at-a-time commitment</strong>: our van and crew are 100% dedicated to your home, so your belongings are never mixed with other customers or delayed on multi-stop runs.
+            Premier house removals and flat moves in Dundee (DD1–DD5), Angus, and Fife. We operate a strict <strong>one-move-at-a-time commitment</strong>: our van and crew are 100% dedicated to your home, so your belongings are never mixed with other customers or delayed on multi-stop runs.
           </p>
 
           <div class="hero-cta-group">

@@ -58,8 +58,8 @@ const routes = [
   {
     path: '/',
     filePath: 'index.html',
-    title: 'Dundee Movers | Removals Dundee, Angus, Fife & UK',
-    description: 'Premier house and flat removals in Dundee (DD1–DD5), Angus & Fife. 1-move-at-a-time dedicated vans, zero shared loads, fully insured with direct UK-wide transit. Get a quote today.',
+    title: 'Removals Dundee | House Removals & Moving Company | Dundee Movers',
+    description: 'Premier house removals and flat moves in Dundee (DD1–DD5), Angus & Fife. Dedicated 1-move-at-a-time vans, zero shared loads, fully insured with UK-wide transit. Get a quote today.',
     render: () => `
       ${renderNavbar('home')}
       <main class="modular-main-content">
@@ -73,8 +73,8 @@ const routes = [
   {
     path: '/services',
     filePath: 'services/index.html',
-    title: 'Removal Services Dundee, Angus & UK | Dundee Movers',
-    description: 'Professional house removals, tenement flat moves, packing services & office relocations in Dundee (DD1–DD5), Angus & UK. 100% dedicated vans, fully insured.',
+    title: 'Removals Dundee | House Removals, Flat & Student Moving | Dundee Movers',
+    description: 'Premier house removals in Dundee (DD1–DD5), tenement flat moves, student moving & office relocations. 100% dedicated vans, zero shared loads, fully insured.',
     render: () => `
       ${renderNavbar('services')}
       <main class="modular-main-content">
@@ -145,6 +145,13 @@ const routes = [
                 "itemOffered": {
                   "@type": "Service",
                   "name": "Furniture Dismantling & Assembly"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Student Removals Dundee & St Andrews"
                 }
               }
             ]

@@ -23,7 +23,7 @@ export function renderServicesView() {
           </span>
         </div>
 
-        <h1 class="services-main-title">Professional Removal & Relocation Services in Dundee & the UK</h1>
+        <h1 class="services-main-title">Dundee Removals & Professional Relocation Services</h1>
         <p class="services-hero-desc">
           Bespoke Scottish removals tailored to your property. From Victorian tenement flats on Perth Road and detached family villas in Broughty Ferry to zero-downtime office relocations and direct express long-distance moving across the entire UK.
         </p>
@@ -62,8 +62,9 @@ export function renderServicesView() {
 
       <!-- 2. Interactive Category Jump Nav -->
       <nav class="services-jump-nav" aria-label="Services Navigation">
-        <a href="#residential-house" class="jump-pill">🏡 Residential Houses</a>
+        <a href="#residential-house" class="jump-pill">🏡 House Removals</a>
         <a href="#flats-tenements" class="jump-pill">🏛️ Flats & Tenements</a>
+        <a href="#student-removals" class="jump-pill">🎓 Student Moves</a>
         <a href="#packing-services" class="jump-pill">📦 Packing Services</a>
         <a href="#commercial-office" class="jump-pill">🏢 Office & Commercial</a>
         <a href="#long-distance-uk" class="jump-pill">🚚 Long-Distance UK</a>
@@ -83,7 +84,7 @@ export function renderServicesView() {
                 <span class="service-tag">Detached & Villas</span>
               </div>
             </div>
-            <h2 class="service-module-title">Residential House & Family Home Removals</h2>
+            <h2 class="service-module-title">House Removals Dundee & Residential Moves</h2>
             <p class="service-module-desc">
               Comprehensive home relocations across Dundee, Broughty Ferry, Carnoustie, St Andrews, and Angus. Every house move is coordinated room-by-room, ensuring large furniture, garden items, and delicate family belongings arrive safely.
             </p>
@@ -268,6 +269,39 @@ export function renderServicesView() {
               <span>Read Furniture Protection Tips</span> ➔
             </a>
             <a href="/#quote-calculator" class="service-quote-btn">Add Assembly Service</a>
+          </div>
+        </article>
+
+        <!-- Module 7: Student Removals Dundee -->
+        <article id="student-removals" class="service-module-card spotlight-card">
+          <div>
+            <div class="service-card-top-row">
+              <div class="service-icon-wrap">🎓</div>
+              <div class="service-badge-stack">
+                <span class="service-tag accent">Student Rates</span>
+                <span class="service-tag">Uni & Abertay</span>
+              </div>
+            </div>
+            <h2 class="service-module-title">Student Removals Dundee & St Andrews</h2>
+            <p class="service-module-desc">
+              Affordable, reliable moving for University of Dundee, Abertay, and St Andrews students. Whether relocating between campus halls (Belmont, Heathfield, Seabraes) or moving into private West End shared flats.
+            </p>
+            <div class="service-inclusions-box">
+              <span class="inclusions-title">Student Relocation Features:</span>
+              <ul class="inclusions-list">
+                <li>Budget-friendly rates with room-only and shared van options</li>
+                <li>Halls of residence and student flat stairwell specialists</li>
+                <li>End-of-term summer storage transit and return delivery</li>
+                <li>Multi-student flat moves: split the van with flatmates</li>
+                <li>Fully insured Goods in Transit cover included</li>
+              </ul>
+            </div>
+          </div>
+          <div class="service-bottom-actions">
+            <a href="/guides/student-relocation-guide-dundee" class="service-guide-link">
+              <span>Read Student Moving Guide</span> ➔
+            </a>
+            <a href="/#quote-calculator" class="service-quote-btn">Quote Student Move</a>
           </div>
         </article>
 

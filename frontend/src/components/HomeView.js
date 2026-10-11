@@ -5,6 +5,7 @@
  */
 import { renderHero } from './Hero.js';
 import { renderQuoteEstimator, initQuoteEstimator } from './QuoteEstimator.js';
+import { renderHomeLocalFAQ } from './HomeLocalFAQ.js';
 
 export function renderHomeView() {
   return `
@@ -246,14 +247,14 @@ export function renderHomeView() {
       <section class="container home-features-section">
         <div class="home-section-header">
           <span class="badge">Comprehensive Removal Services</span>
-          <h2 class="home-section-title">Everything You Need for a Seamless Move</h2>
-          <p class="home-section-desc">From family homes and student flats to commercial offices and nationwide relocations.</p>
+          <h2 class="home-section-title">Professional Dundee Removals & Moving Services</h2>
+          <p class="home-section-desc">From premier house removals in Dundee (DD1–DD5) and Angus family villas to student flat moves and UK-wide relocations.</p>
         </div>
 
         <div class="home-features-grid four-col-grid">
           <div class="glass-panel home-feature-card spotlight-card">
             <div class="h-card-icon">🏡</div>
-            <h3 class="h-card-title">Residential House Removals</h3>
+            <h3 class="h-card-title">House Removals Dundee & Angus</h3>
             <p class="h-card-text">Complete household moves for 1 to 5-bedroom houses, flats, and villas across Dundee, Broughty Ferry, Angus, and Fife.</p>
             <a href="/services" class="h-card-link">Explore House Removals ➔</a>
           </div>
@@ -280,6 +281,9 @@ export function renderHomeView() {
           </div>
         </div>
       </section>
+
+      <!-- 5. Direct-Answer FAQ & Local Moving Authority -->
+      ${renderHomeLocalFAQ()}
 
       <!-- 5. Customer Trust & Social Proof Preview -->
       <section class="container home-reviews-preview">
