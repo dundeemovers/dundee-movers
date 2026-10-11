@@ -63,20 +63,98 @@
 
 .access-card-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 0.75rem;
   border-bottom: 1px solid var(--color-border-subtle);
-  padding-bottom: 0.65rem;
+  padding-bottom: 0.85rem;
 }
 
-.access-location-name {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  font-weight: 600;
-  max-width: 60%;
-  text-overflow: ellipsis;
-  overflow: hidden;
+.access-header-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.access-header-meta .addr-badge {
   white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  line-height: 1.2;
+}
+
+.access-role-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.access-address-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.65rem;
+  border: 1.5px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.access-address-strip.pickup-strip {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.access-address-strip.dest-strip {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.access-address-icon {
+  font-size: 1.15rem;
+  line-height: 1.25;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.access-address-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.access-address-caption {
+  font-size: 0.66rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+}
+
+.access-address-text {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.4;
+  word-break: break-word;
+  white-space: normal;
+}
+
+@media (max-width: 480px) {
+  .access-card-header { gap: 0.6rem; padding-bottom: 0.75rem; }
+  .access-address-strip { padding: 0.6rem 0.75rem; gap: 0.5rem; }
+  .access-address-text { font-size: 0.84rem; line-height: 1.35; }
+  .access-header-meta .addr-badge { font-size: 0.74rem; padding: 0.3rem 0.65rem; }
 }
 
 .access-sub-block {
@@ -367,128 +445,36 @@
 
 /* Quote Direct Submission Form & Card */
 .quote-submit-card {
-  background: #f8fafc;
-  border: 1.5px solid #064e3b;
-  border-radius: 12px;
-  padding: 1.75rem;
-  margin: 1.75rem 0 1.25rem;
-  text-align: left;
-  box-shadow: 0 4px 16px rgba(6, 78, 59, 0.08);
+  background: #f8fafc; border: 1.5px solid #064e3b; border-radius: 12px;
+  padding: 1.75rem; margin: 1.75rem 0 1.25rem; text-align: left; box-shadow: 0 4px 16px rgba(6, 78, 59, 0.08);
 }
-
-.quote-submit-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.35rem;
-  flex-wrap: wrap;
-}
-
+.quote-submit-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.35rem; flex-wrap: wrap; }
 .quote-submit-badge {
-  background: rgba(6, 78, 59, 0.1);
-  color: #064e3b;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.25rem 0.65rem;
-  border-radius: 9999px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  background: rgba(6, 78, 59, 0.1); color: #064e3b; font-size: 0.75rem; font-weight: 700;
+  padding: 0.25rem 0.65rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.05em;
 }
+.quote-submit-title { font-size: 1.2rem; font-weight: 800; color: #0f172a; margin: 0; }
 
-.quote-submit-title {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: #0f172a;
-  margin: 0;
+.quote-submit-sub { font-size: 0.85rem; color: #475569; margin: 0.25rem 0 1.25rem; line-height: 1.5; }
+.quote-form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+.quote-form-field { display: flex; flex-direction: column; gap: 0.35rem; }
+.quote-form-field label { font-size: 0.8rem; font-weight: 700; color: #1e293b; }
+.quote-form-field input, .quote-form-field textarea {
+  padding: 0.75rem 1rem; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px;
+  font-size: 0.95rem; color: #0f172a; transition: border-color 0.2s, box-shadow 0.2s; font-family: inherit; box-sizing: border-box;
 }
-
-.quote-submit-sub {
-  font-size: 0.85rem;
-  color: #475569;
-  margin: 0.25rem 0 1.25rem;
-  line-height: 1.5;
+.quote-form-field input:focus, .quote-form-field textarea:focus {
+  border-color: #064e3b; outline: none; box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.15);
 }
-
-.quote-form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.quote-form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.quote-form-field label {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #1e293b;
-}
-
-.quote-form-field input,
-.quote-form-field textarea {
-  padding: 0.75rem 1rem;
-  background: #ffffff;
-  border: 1.5px solid #cbd5e1;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  color: #0f172a;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  font-family: inherit;
-  box-sizing: border-box;
-}
-
-.quote-form-field input:focus,
-.quote-form-field textarea:focus {
-  border-color: #064e3b;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.15);
-}
-
 .btn-submit-quote {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  background: #064e3b;
-  color: #ffffff;
-  font-size: 1.05rem;
-  font-weight: 800;
-  padding: 1rem 1.75rem;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  background: #064e3b; color: #ffffff; font-size: 1.05rem; font-weight: 800; padding: 1rem 1.75rem;
+  border-radius: 8px; border: none; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
   box-shadow: 0 4px 12px rgba(6, 78, 59, 0.2);
 }
-
-.btn-submit-quote:hover {
-  background: #065f46;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(6, 78, 59, 0.28);
-}
-
+.btn-submit-quote:hover { background: #065f46; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(6, 78, 59, 0.28); }
 .quote-trust-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-  font-size: 0.78rem;
-  color: #64748b;
-  margin-top: 1rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid #e2e8f0;
+  display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1.25rem;
+  font-size: 0.78rem; color: #64748b; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid #e2e8f0;
 }
-
-.quote-success-box {
-  background: #f0fdf4;
-  border: 2px solid #16a34a;
-  border-radius: 12px;
-  padding: 2.25rem 1.75rem;
-  text-align: center;
-}
+.quote-success-box { background: #f0fdf4; border: 2px solid #16a34a; border-radius: 12px; padding: 2.25rem 1.75rem; text-align: center; }

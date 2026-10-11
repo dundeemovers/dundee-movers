@@ -30,12 +30,24 @@ export const SERVICE_OPTIONS = [
 
 function renderPropertyAccessCard(propKey, title, badgeClass, addressText, accessState) {
   const isGround = Boolean(accessState.floor && (accessState.floor.includes('Ground') || accessState.floor.includes('Bungalow')));
+  const isPickup = propKey === 'pickupAccess';
+  const roleLabel = isPickup ? 'Pickup Origin' : 'Drop-off Destination';
+  const locationIcon = isPickup ? '🏡' : '🏢';
 
   return `
     <div class="property-access-card" data-prop="${propKey}">
       <div class="access-card-header">
-        <span class="addr-badge ${badgeClass}">${title}</span>
-        <span class="access-location-name" title="${addressText}">${addressText}</span>
+        <div class="access-header-meta">
+          <span class="addr-badge ${badgeClass}">${title}</span>
+          <span class="access-role-tag">${roleLabel}</span>
+        </div>
+        <div class="access-address-strip ${isPickup ? 'pickup-strip' : 'dest-strip'}">
+          <span class="access-address-icon" aria-hidden="true">${locationIcon}</span>
+          <div class="access-address-body">
+            <span class="access-address-caption">${isPickup ? 'Exact Collection Address' : 'Exact Delivery Address'}</span>
+            <div class="access-address-text" title="${addressText}">${addressText}</div>
+          </div>
+        </div>
       </div>
 
       <!-- Floor Level Selection -->
