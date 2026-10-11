@@ -71,7 +71,7 @@ export function initQuoteEstimator() {
 
   const state = {
     currentStep: 1,
-    moveType: 'House / Flat Move',
+    moveType: '',
     moveDate: '',
     isFlexibleDate: false,
     dateRange: '',
@@ -89,13 +89,13 @@ export function initQuoteEstimator() {
       postcode: ''
     },
     pickupAccess: {
-      floor: 'Ground Floor / Bungalow',
-      hasLift: false,
+      floor: '',
+      hasLift: null,
       conditions: []
     },
     destAccess: {
-      floor: 'Ground Floor / Bungalow',
-      hasLift: false,
+      floor: '',
+      hasLift: null,
       conditions: []
     },
     items: {},

@@ -13,6 +13,15 @@
 export function validateStep1(state) {
   const errors = [];
 
+  // 0. Relocation Type validation
+  if (!state.moveType || !state.moveType.trim()) {
+    errors.push({
+      fieldId: 'move-type-input',
+      label: 'Type of Relocation',
+      message: 'Please select your relocation type'
+    });
+  }
+
   // 1. Move Date validation
   if (!state.isFlexibleDate) {
     if (!state.moveDate || !state.moveDate.trim()) {
@@ -97,6 +106,56 @@ export function validateStep2(state) {
       label: 'Inventory Items',
       message: 'Please select at least 1 item from the room tabs above or write what you are moving in the notes box below'
     });
+  }
+
+  return {
+    isValid: errors.length === 0,
+    errors
+  };
+}
+
+/**
+ * Validates Step 3: Property Access & Floor Heights
+ * @param {Object} state - Wizard state
+ * @returns {{ isValid: boolean, errors: Array<{ fieldId: string, label: string, message: string }> }}
+ */
+export function validateStep3(state) {
+  const errors = [];
+
+  // 1. Collection Property Floor
+  if (!state.pickupAccess?.floor) {
+    errors.push({
+      fieldId: 'pickupAccess-floor-grid',
+      label: 'Collection Floor Level',
+      message: 'Collection Property: Please select your exact floor level'
+    });
+  } else {
+    const isGround = state.pickupAccess.floor.includes('Ground') || state.pickupAccess.floor.includes('Bungalow');
+    if (!isGround && (state.pickupAccess.hasLift === null || state.pickupAccess.hasLift === undefined)) {
+      errors.push({
+        fieldId: 'pickupAccess-lift-row',
+        label: 'Collection Lift Availability',
+        message: 'Collection Property: Please specify if a working lift is available or stairs only'
+      });
+    }
+  }
+
+  // 2. Delivery Property Floor
+  if (!state.destAccess?.floor) {
+    errors.push({
+      fieldId: 'destAccess-floor-grid',
+      label: 'Delivery Floor Level',
+      message: 'Delivery Property: Please select your exact floor level'
+    });
+  } else {
+    const isGround = state.destAccess.floor.includes('Ground') || state.destAccess.floor.includes('Bungalow');
+    if (!isGround && (state.destAccess.hasLift === null || state.destAccess.hasLift === undefined)) {
+      errors.push({
+        fieldId: 'destAccess-lift-row',
+        label: 'Delivery Lift Availability',
+        message: 'Delivery Property: Please specify if a working lift is available or stairs only'
+      });
+    }
   }
 
   return {
@@ -258,7 +317,7 @@ export function showValidationFeedback(container, errors, bannerAnchorSelector =
       inlineMsg.innerHTML = `<span class="error-dot">●</span> <span>${err.message}</span>`;
 
       // Insert right after the input or its parent group
-      const parentGroup = el.closest('.form-field, .quote-form-field, .postcode-lookup-box, .quote-terms-agreement-box') || el.parentNode;
+      const parentGroup = el.closest('.form-field, .quote-form-field, .postcode-lookup-box, .quote-terms-agreement-box, .access-sub-block, .property-access-card') || el.parentNode;
       if (parentGroup) {
         parentGroup.appendChild(inlineMsg);
       }
@@ -284,10 +343,12 @@ export function showValidationFeedback(container, errors, bannerAnchorSelector =
 
         el.removeEventListener('input', clearHandler);
         el.removeEventListener('change', clearHandler);
+        el.removeEventListener('click', clearHandler);
       };
 
       el.addEventListener('input', clearHandler);
       el.addEventListener('change', clearHandler);
+      el.addEventListener('click', clearHandler);
     }
   });
 

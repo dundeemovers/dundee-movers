@@ -13,8 +13,9 @@ export function renderStepAddresses(state) {
       
       <div class="form-grid-2 top-meta-grid">
         <div class="form-field">
-          <label class="form-label" for="move-type-input">Type of Relocation:</label>
+          <label class="form-label" for="move-type-input">Type of Relocation: <span class="required-star">*</span></label>
           <select class="input-control" id="move-type-input">
+            <option value="" disabled ${!state.moveType ? 'selected' : ''}>-- Select Type of Relocation * --</option>
             <option value="House / Flat Move" ${state.moveType === 'House / Flat Move' ? 'selected' : ''}>House or Flat Relocation</option>
             <option value="Student Move" ${state.moveType === 'Student Move' ? 'selected' : ''}>Student Move (University / Halls)</option>
             <option value="Office / Commercial" ${state.moveType === 'Office / Commercial' ? 'selected' : ''}>Office / Commercial Relocation</option>
@@ -166,7 +167,12 @@ export function renderStepAddresses(state) {
 
 export function initStepAddresses(container, state, onNext, reRender) {
   // Top-level meta bindings
-  container.querySelector('#move-type-input')?.addEventListener('change', (e) => state.moveType = e.target.value);
+  const moveTypeInput = container.querySelector('#move-type-input');
+  moveTypeInput?.addEventListener('change', (e) => {
+    state.moveType = e.target.value;
+    moveTypeInput.classList.remove('input-error');
+    container.querySelectorAll('.field-error-text[data-error-for="move-type-input"]').forEach(m => m.remove());
+  });
   container.querySelector('#move-date-input')?.addEventListener('change', (e) => state.moveDate = e.target.value);
 
   // Flexible Date Toggle & Range Handlers
@@ -319,6 +325,9 @@ export function initStepAddresses(container, state, onNext, reRender) {
 
   container.querySelector('.next-step-btn')?.addEventListener('click', () => {
     // Read and synchronize input values before validation
+    const mTypeVal = container.querySelector('#move-type-input')?.value;
+    if (mTypeVal) state.moveType = mTypeVal;
+
     const moveDateVal = container.querySelector('#move-date-input')?.value;
     if (moveDateVal !== undefined) state.moveDate = moveDateVal;
 

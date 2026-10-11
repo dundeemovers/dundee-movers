@@ -4,6 +4,7 @@
  * for both Collection (Pickup) and Delivery (Drop-Off) properties.
  */
 import { formatFullAddress } from '../../utils/formatters.js';
+import { validateStep3, showValidationFeedback } from '../../utils/quoteValidation.js';
 
 export const FLOOR_LEVEL_OPTIONS = [
   { id: 'ground', label: 'Ground Floor / Bungalow', shortNum: '0' },
@@ -28,7 +29,7 @@ export const SERVICE_OPTIONS = [
 ];
 
 function renderPropertyAccessCard(propKey, title, badgeClass, addressText, accessState) {
-  const isGround = accessState.floor.includes('Ground') || accessState.floor.includes('Bungalow');
+  const isGround = Boolean(accessState.floor && (accessState.floor.includes('Ground') || accessState.floor.includes('Bungalow')));
 
   return `
     <div class="property-access-card" data-prop="${propKey}">
@@ -40,9 +41,9 @@ function renderPropertyAccessCard(propKey, title, badgeClass, addressText, acces
       <!-- Floor Level Selection -->
       <div class="access-sub-block">
         <label class="access-sub-label">
-          <span>🏢 Exact Floor Level:</span>
+          <span>🏢 Exact Floor Level: <span class="required-star">*</span></span>
         </label>
-        <div class="floor-selector-grid">
+        <div class="floor-selector-grid" id="${propKey}-floor-grid">
           ${FLOOR_LEVEL_OPTIONS.map(opt => {
             const isSelected = accessState.floor === opt.label;
             return `
@@ -62,14 +63,17 @@ function renderPropertyAccessCard(propKey, title, badgeClass, addressText, acces
       </div>
 
       <!-- Lift Availability -->
-      <div class="access-sub-block">
+      <div class="access-sub-block lift-sub-block" id="${propKey}-lift-sub-block">
         <label class="access-sub-label">
-          <span>🛗 Lift Availability:</span>
+          <span>🛗 Lift Availability: <span class="required-star" id="${propKey}-lift-star" style="${isGround ? 'display: none;' : ''}">*</span></span>
         </label>
-        <div class="lift-toggle-row">
+        <div class="ground-lift-note" id="${propKey}-ground-note" style="${isGround ? 'display: flex;' : 'display: none;'}">
+          <span>✅ Direct Ground Level (No stairs or lift required)</span>
+        </div>
+        <div class="lift-toggle-row" id="${propKey}-lift-row" style="${isGround ? 'display: none;' : 'display: grid;'}">
           <button 
             type="button" 
-            class="lift-btn ${!accessState.hasLift ? 'selected' : ''}" 
+            class="lift-btn ${accessState.hasLift === false ? 'selected' : ''}" 
             data-lift="false"
             data-prop="${propKey}"
           >
@@ -77,7 +81,7 @@ function renderPropertyAccessCard(propKey, title, badgeClass, addressText, acces
           </button>
           <button 
             type="button" 
-            class="lift-btn ${accessState.hasLift ? 'selected' : ''}" 
+            class="lift-btn ${accessState.hasLift === true ? 'selected' : ''}" 
             data-lift="true"
             data-prop="${propKey}"
           >
@@ -173,11 +177,7 @@ export function initStepAccess(container, state, onBack, onNext, reRender) {
       if (propKey && floor && state[propKey]) {
         state[propKey].floor = floor;
         const isGround = floor.includes('Ground') || floor.includes('Bungalow');
-        if (isGround) {
-          state[propKey].hasLift = false;
-        }
 
-        // Update active states in-place without resetting scroll
         const card = btn.closest('.property-access-card');
         if (card) {
           card.querySelectorAll('.floor-pill-btn').forEach(b => {
@@ -186,12 +186,29 @@ export function initStepAccess(container, state, onBack, onNext, reRender) {
             b.setAttribute('aria-pressed', isMatch ? 'true' : 'false');
           });
 
+          const groundNote = card.querySelector('.ground-lift-note');
+          const liftRow = card.querySelector('.lift-toggle-row');
+          const liftStar = card.querySelector(`#${propKey}-lift-star`);
+
           if (isGround) {
-            card.querySelectorAll('.lift-btn').forEach(lb => {
-              const isNoLift = lb.getAttribute('data-lift') === 'false';
-              lb.classList.toggle('selected', isNoLift);
-            });
+            state[propKey].hasLift = false;
+            if (liftRow) liftRow.style.display = 'none';
+            if (groundNote) groundNote.style.display = 'flex';
+            if (liftStar) liftStar.style.display = 'none';
+            // Clear lift error if ground chosen
+            card.querySelector('.lift-toggle-row')?.classList.remove('input-error');
+            card.querySelectorAll(`.field-error-text[data-error-for="${propKey}-lift-row"]`).forEach(m => m.remove());
+          } else {
+            // Upper floors: show lift toggle row
+            if (liftRow) liftRow.style.display = 'grid';
+            if (groundNote) groundNote.style.display = 'none';
+            if (liftStar) liftStar.style.display = 'inline-block';
           }
+
+          // Clear active floor error on this card
+          const floorGrid = card.querySelector('.floor-selector-grid');
+          floorGrid?.classList.remove('input-error');
+          card.querySelectorAll(`.field-error-text[data-error-for="${propKey}-floor-grid"]`).forEach(m => m.remove());
         }
       }
     });
@@ -210,6 +227,9 @@ export function initStepAccess(container, state, onBack, onNext, reRender) {
           card.querySelectorAll('.lift-btn').forEach(lb => {
             lb.classList.toggle('selected', lb === btn);
           });
+          const liftRow = card.querySelector('.lift-toggle-row');
+          liftRow?.classList.remove('input-error');
+          card.querySelectorAll(`.field-error-text[data-error-for="${propKey}-lift-row"]`).forEach(m => m.remove());
         }
       }
     });
@@ -256,6 +276,13 @@ export function initStepAccess(container, state, onBack, onNext, reRender) {
   });
 
   container.querySelector('.prev-step-btn')?.addEventListener('click', () => onBack());
-  container.querySelector('.next-step-btn')?.addEventListener('click', () => onNext());
+  container.querySelector('.next-step-btn')?.addEventListener('click', () => {
+    const validation = validateStep3(state);
+    if (!validation.isValid) {
+      showValidationFeedback(container, validation.errors, '.wizard-actions');
+      return;
+    }
+    onNext();
+  });
 }
 
