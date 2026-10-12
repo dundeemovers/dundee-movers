@@ -17,7 +17,7 @@ export const DEDICATED_SERVICES = [
     heroHighlights: [
       '100% dedicated van: your items are never mixed with other customers',
       'Fully insured: commercial Goods in Transit & Public Liability included',
-      'High-floor & tenement stair specialists with high-tensile lifting straps',
+      'High-floor & multi-storey flat stair specialists with high-tensile lifting straps',
       'Guaranteed fixed quotes: zero surprise fuel or traffic clock-running fees'
     ],
     idealFor: [
@@ -48,7 +48,7 @@ export const DEDICATED_SERVICES = [
       points: [
         { feature: 'Vehicle Exclusivity', us: '100% dedicated to your move only', them: 'Shared multi-drop loads with strangers' },
         { feature: 'Commercial Insurance', us: 'Comprehensive Goods in Transit included', them: 'Uninsured cash-in-hand drivers' },
-        { feature: 'High-Floor Tenements', us: 'Equipped with straps, blankets & door guards', them: 'Refuse stairs or dump items on ground floor' },
+        { feature: 'High-Floor Flat Stairs', us: 'Equipped with straps, blankets & door guards', them: 'Refuse stairs or dump items on ground floor' },
         { feature: 'Price Guarantee', us: 'Written fixed price with zero surprises', them: 'Verbal quotes doubled upon delivery' },
         { feature: 'Reliability', us: 'Confirmed booking with 100% turnout', them: 'High risk of morning cancellations' }
       ]
@@ -80,7 +80,7 @@ export const DEDICATED_SERVICES = [
         a: 'We operate a strict 1-move-at-a-time guarantee. We never co-load your furniture with other people’s boxes, our crew carries commercial Goods in Transit insurance, and we provide guaranteed fixed written quotes with zero surprise surcharges.'
       },
       {
-        q: 'Do you carry furniture up tenement stairs?',
+        q: 'Do you carry furniture up steep flat stairs and high floors?',
         a: 'Yes! A large portion of our Dundee moves are 2nd, 3rd, and 4th-floor flats in Victorian closes. Our two-man crews come equipped with shoulder lifting straps and padded door frame covers.'
       },
       {
@@ -101,7 +101,7 @@ export const DEDICATED_SERVICES = [
     heroHighlights: [
       'Campus halls specialists: Belmont, Heathfield, Seabraes, West Park & Meadowside',
       'Affordable fixed student rates: room-only and shared flat options',
-      'West End tenement stair masters: no struggling with heavy study desks',
+      'West End flat and spiral stair specialists: no struggling with heavy study desks',
       'Term-end summer storage transit and return deliveries'
     ],
     idealFor: [
@@ -164,7 +164,7 @@ export const DEDICATED_SERVICES = [
         a: 'Yes, absolutely! Many students combine their bedroom belongings into our dedicated Luton box van. We can load from multiple hall rooms and deliver straight to your new shared flat address.'
       },
       {
-        q: 'Do you charge extra for tenement flat stairs in Dundee?',
+        q: 'Do you charge extra for stairs or high floors in Dundee flats?',
         a: 'No hidden surprises. When you request a quote, simply tell us which floor you are on. We calculate the crew and time into your guaranteed fixed price upfront.'
       },
       {

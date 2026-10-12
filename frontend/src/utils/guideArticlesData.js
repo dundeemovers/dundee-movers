@@ -267,11 +267,11 @@ Long-distance moves (e.g. Dundee to London or Manchester) include mileage, fuel 
     readTime: '4 min read',
     updatedDate: 'Updated October 2026',
     author: 'Student Logistics Team',
-    summary: 'The complete moving guide for students in Dundee: navigating Heathfield, Belmont, Seabraes halls, private West End tenement flats, and summer storage.',
+    summary: 'The complete moving guide for students in Dundee: navigating Heathfield, Belmont, Seabraes halls, private West End flats, and summer storage.',
     sections: [
       {
         heading: 'Student Flat Moves & Hall Relocations in Dundee',
-        content: `Dundee is home to over 20,000 university students across the University of Dundee and Abertay University. Whether moving into campus accommodation (such as Belmont Tower, Heathfield, West Park, or Meadowside Halls) or into traditional West End student tenements along Perth Road and Hawkhill, student moves come with distinct logistics. Dundee Movers provides dedicated, budget-conscious student removals with transparent fixed prices.`,
+        content: `Dundee is home to over 20,000 university students across the University of Dundee and Abertay University. Whether moving into campus accommodation (such as Belmont Tower, Heathfield, West Park, or Meadowside Halls) or into traditional West End student flats along Perth Road and Hawkhill, student moves come with distinct logistics. Dundee Movers provides dedicated, budget-conscious student removals with transparent fixed prices.`,
         checklist: [
           'Coordinate loading times with campus hall reception or university security.',
           'Consolidate loose books, kitchenware, and study materials into double-walled cartons.',
@@ -280,8 +280,8 @@ Long-distance moves (e.g. Dundee to London or Manchester) include mileage, fuel 
         ]
       },
       {
-        heading: 'Navigating West End Tenements & Spiral Stairs',
-        content: `Most second- and third-year students in Dundee live in traditional stone-built tenement flats in DD1 and DD2. These properties often feature narrow spiral closes and top-floor landings. Rather than risking back injury or damaged desks, our experienced two-man crews carry desks, wardrobes, heavy textbooks, and gaming setups safely using professional lifting straps and padded furniture blankets.`,
+        heading: 'Navigating West End Flats & Spiral Stairs',
+        content: `Most second- and third-year students in Dundee live in traditional stone-built flats in DD1 and DD2. These properties often feature narrow spiral closes and top-floor landings. Rather than risking back injury or damaged desks, our experienced two-man crews carry desks, wardrobes, heavy textbooks, and gaming setups safely using professional lifting straps and padded furniture blankets.`,
         tips: [
           'Pack a separate study essentials box with laptop chargers, course textbooks, and student ID.',
           'Label every box with your room name if moving into a 3 or 4-person flat share.',

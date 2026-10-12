@@ -166,7 +166,7 @@ export function renderHomeView() {
                     <h4 class="item-title">Stair Refusals & Extra Demands</h4>
                     <span class="item-pill danger-pill">Unprepared</span>
                   </div>
-                  <p class="item-desc">Arrive unprepared for tenement stairs without lifting straps or protective blankets. Often refuse to carry heavy items up 2nd or 3rd floor stairs or dump them in the entrance.</p>
+                  <p class="item-desc">Arrive unprepared for narrow flat stairs without lifting straps or protective blankets. Often refuse to carry heavy items up 2nd or 3rd floor stairs or dump them in the entrance.</p>
                 </div>
               </div>
 

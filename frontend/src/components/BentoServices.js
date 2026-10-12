@@ -75,7 +75,7 @@ export function renderBentoServices() {
             <p class="bento-desc">
               Top-floor flats, narrow stairwells, and spiral closes across the West End, DD1, and Stobswell. Our team is equipped with high-tensile lifting straps and heavy-duty padded furniture blankets.
             </p>
-            <span class="bento-highlight-text">Direct Curb Loading & Tenement Lifting Gear</span>
+            <span class="bento-highlight-text">Direct Curb Loading & Heavy Stair Lifting Gear</span>
           </div>
 
           <!-- UK-Wide Long Distance Move Card -->

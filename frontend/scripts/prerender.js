@@ -76,7 +76,7 @@ const routes = [
     path: '/services',
     filePath: 'services/index.html',
     title: 'Removals Dundee | House Removals, Flat & Student Moving | Dundee Movers',
-    description: 'Premier house removals in Dundee (DD1–DD5), tenement flat moves, student moving & office relocations. 100% dedicated vans, zero shared loads, fully insured.',
+    description: 'Premier house removals in Dundee (DD1–DD5), flat & apartment moves, student moving & office relocations. 100% dedicated vans, zero shared loads, fully insured.',
     render: () => `
       ${renderNavbar('services')}
       <main class="modular-main-content">
@@ -118,7 +118,7 @@ const routes = [
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "name": "Flats, Tenements & High-Floor Removals"
+                  "name": "Flats, Apartments & High-Floor Removals"
                 }
               },
               {
@@ -164,7 +164,7 @@ const routes = [
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "Do you charge extra for tenement stairs or top-floor flats in Dundee?",
+              "name": "Do you charge extra for stairs or top-floor flats in Dundee?",
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "No hidden surprises. When you request a quote, simply let us know your floor level. We calculate the crew size and equipment required into your guaranteed fixed price upfront."

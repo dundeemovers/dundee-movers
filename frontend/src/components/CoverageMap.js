@@ -51,7 +51,7 @@ export function renderCoverageMap() {
           </div>
           <div class="c-trust-item">
             <span style="font-size: 1.25rem;">🪜</span>
-            <span><strong>Flats & Tenement Stairs</strong> Specialists</span>
+            <span><strong>Flats & Spiral Stairs</strong> Specialists</span>
           </div>
         </div>
       </section>
@@ -72,7 +72,7 @@ export function renderCoverageMap() {
               <span class="area-badge">Local Dundee Specialists</span>
               <h3 class="area-card-title">📍 Dundee City & Suburbs (DD1 – DD5)</h3>
               <p class="area-card-locations"><strong>Key Districts:</strong> City Centre, West End, Broughty Ferry, Barnhill, Stobswell, Coldside, Craigie.</p>
-              <p class="area-card-text">Specialists in traditional high-floor tenement flats, narrow spiral staircases, and family homes throughout Dundee.</p>
+              <p class="area-card-text">Specialists in traditional high-floor flats, narrow spiral staircases, and family homes throughout Dundee.</p>
             </div>
             <div class="area-card-bottom" style="display: flex; flex-direction: column; gap: 0.35rem;">
               <a href="/areas/broughty-ferry" class="area-card-link">View Broughty Ferry & Barnhill ➔</a>
@@ -147,7 +147,7 @@ export function renderCoverageMap() {
 
           <div class="logistics-info-card">
             <span class="logistics-card-icon">🪜</span>
-            <h3 class="logistics-card-title">Tenement Stairs & Bulky Items</h3>
+            <h3 class="logistics-card-title">Stairwells & Bulky Items</h3>
             <p class="logistics-card-text">
               Narrow turn stairwells and 3rd-floor flats are our everyday specialty. Our crews carry heavy-duty stair-climbing gear, protective door blankets, and quilted furniture covers to navigate tight spaces.
             </p>

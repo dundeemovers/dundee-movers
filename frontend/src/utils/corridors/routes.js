@@ -24,7 +24,7 @@ export const UK_ROUTES = [
       'Fully insured: Goods in Transit & Public Liability cover included'
     ],
     propertyTypes: [
-      { name: 'City Flat Relocations', desc: 'Seamless moves from Dundee tenements to London apartments with lift or stair navigation.' },
+      { name: 'City Flat Relocations', desc: 'Seamless moves from Dundee flats to London apartments with lift or stair navigation.' },
       { name: 'Full Family Home Relocations', desc: 'Direct transit of 2 to 4-bedroom houses from Tayside to Greater London and the South East.' },
       { name: 'Career & Corporate Relocations', desc: 'Timely, stress-free moves for professionals relocating to London with guaranteed delivery dates.' }
     ],
@@ -73,12 +73,12 @@ export const UK_ROUTES = [
     heroSubtitle: 'Morning load in Dundee, direct Queensferry Crossing transit, and afternoon delivery in Edinburgh. Express same-day service with exclusive vehicles.',
     highlights: [
       'Same-day morning load and afternoon delivery',
-      'Edinburgh New Town & Old Town high-floor tenement specialists',
+      'Edinburgh New Town & Old Town high-floor flat specialists',
       'Full transit over the Queensferry Crossing with zero delay',
       'Fully insured with Goods in Transit cover automatically included'
     ],
     propertyTypes: [
-      { name: 'City Centre Flats & Tenements', desc: 'Equipped with high-tensile lifting straps and padded furniture blankets for high-floor tenements across Marchmont, Bruntsfield, and Leith.' },
+      { name: 'City Centre Flats & Apartments', desc: 'Equipped with high-tensile lifting straps and padded furniture blankets for high-floor flats across Marchmont, Bruntsfield, and Leith.' },
       { name: 'Suburban Houses', desc: 'Detached and semi-detached homes moving between Dundee and Edinburgh suburbs.' },
       { name: 'Commercial Office Moves', desc: 'Rapid intercity business moves between Dundee tech hubs and Edinburgh financial centers.' }
     ],
@@ -86,7 +86,7 @@ export const UK_ROUTES = [
       title: 'Edinburgh Access & Street Parking',
       points: [
         'Customer keeps a parking space outside their property; our team handles direct loading swiftly.',
-        'High-tensile lifting straps and padded furniture blankets for 3rd and 4th floor traditional tenements.',
+        'High-tensile lifting straps and padded furniture blankets for 3rd and 4th floor traditional flats.',
         'LEZ compliant fleet for low-emission central Edinburgh zones.'
       ]
     },
@@ -109,7 +109,7 @@ export const UK_ROUTES = [
       },
       {
         q: 'Do you handle Edinburgh top-floor flats with spiral stairs?',
-        a: 'Yes. Our crews are specially equipped with high-tensile lifting straps, padded furniture blankets, and corner protectors to safely transport heavy furniture through Edinburgh tenement stairwells.'
+        a: 'Yes. Our crews are specially equipped with high-tensile lifting straps, padded furniture blankets, and corner protectors to safely transport heavy furniture through Edinburgh flat stairwells.'
       }
     ]
   },
@@ -122,17 +122,17 @@ export const UK_ROUTES = [
     title: 'Dundee to Glasgow Removals | Dedicated Van Moves | Dundee Movers',
     h1: 'Direct Removals from Dundee to Glasgow & Central Belt',
     metaTitle: 'Dundee to Glasgow Removals | Dedicated Van Moves | Dundee Movers',
-    metaDesc: 'Professional house & flat removals from Dundee to Glasgow. Same-day direct delivery via A9/M80, West End tenement stairs & fully insured transit. Get a quote.',
+    metaDesc: 'Professional house & flat removals from Dundee to Glasgow. Same-day direct delivery via A9/M80, West End flat stairs & fully insured transit. Get a quote.',
     transitBadge: 'Same-Day Scottish Intercity Removals',
     heroSubtitle: 'Connecting Dundee to Glasgow, the West End, Southside, and Central Belt with 100% dedicated vans, expert handling, and zero shared loads.',
     highlights: [
       'Same-day direct moving via the A90 ➔ A9 ➔ M80 route',
-      'Glasgow West End (Byres Road, Hillhead) and Shawlands tenement stairs specialists',
+      'Glasgow West End (Byres Road, Hillhead) and Shawlands flat stairs specialists',
       'Dedicated vehicles: your furniture travels alone with zero transfers',
       'Fully insured: Goods in Transit protection on every run'
     ],
     propertyTypes: [
-      { name: 'Traditional Glasgow Tenements', desc: 'Navigating high-ceiling stone tenements, close stairs, and communal entrances across Glasgow.' },
+      { name: 'Traditional Glasgow Flats', desc: 'Navigating high-ceiling stone flats, close stairs, and communal entrances across Glasgow.' },
       { name: 'Student & Academic Relocations', desc: 'Regular transfers between University of Dundee and University of Glasgow / Strathclyde.' },
       { name: 'Suburban Family Homes', desc: 'Family relocations to Bearsden, Milngavie, Giffnock, and Newton Mearns.' }
     ],
@@ -141,7 +141,7 @@ export const UK_ROUTES = [
       points: [
         'Navigating Glasgow City Council parking meters and loading restrictions in city and West End zones.',
         'LEZ compliant vehicles for city center Glasgow low-emission boundary compliance.',
-        'Stair climbing gear and heavy lifting harness equipment for high-floor tenements.'
+        'Stair climbing gear and heavy lifting harness equipment for high-floor flats.'
       ]
     },
     reviews: [

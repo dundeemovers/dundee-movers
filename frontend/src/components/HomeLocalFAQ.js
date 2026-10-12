@@ -15,7 +15,7 @@ export function renderHomeLocalFAQ() {
           Frequently Asked Questions About Removals in Dundee
         </h2>
         <p class="home-section-desc">
-          Everything you need to know about house removals, tenement flats, dedicated vans, and pricing across Dundee, Angus, and Fife.
+          Everything you need to know about house removals, flat moves, dedicated vans, and pricing across Dundee, Angus, and Fife.
         </p>
       </div>
 
@@ -47,16 +47,16 @@ export function renderHomeLocalFAQ() {
           </p>
         </article>
 
-        <!-- FAQ 3: Tenement Stairs & Spiral Closes -->
+        <!-- FAQ 3: Narrow Stairs & Spiral Closes -->
         <article class="home-faq-card spotlight-card">
           <div class="home-faq-header">
             <div class="home-faq-icon-box" aria-hidden="true">🏛️</div>
             <h3 class="home-faq-title">
-              Can you move furniture up narrow stairs in Dundee tenements?
+              Can you move furniture up narrow stairs in multi-storey Dundee flats?
             </h3>
           </div>
           <p class="home-faq-desc">
-            Yes. We are specialists in 2nd, 3rd, and 4th-floor traditional stone tenements across the West End (Perth Road), City Quay, and Stobswell. Our crews use high-tensile lifting straps, padded furniture blankets, and door jamb protectors for tight spiral landings.
+            Yes. We are specialists in 2nd, 3rd, and 4th-floor traditional stone flats and apartments across the West End (Perth Road), City Quay, and Stobswell. Our crews use high-tensile lifting straps, padded furniture blankets, and door jamb protectors for tight spiral landings.
           </p>
         </article>
 

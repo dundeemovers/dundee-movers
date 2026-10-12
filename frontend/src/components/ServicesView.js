@@ -25,7 +25,7 @@ export function renderServicesView() {
 
         <h1 class="services-main-title">Dundee Removals & Professional Relocation Services</h1>
         <p class="services-hero-desc">
-          Bespoke Scottish removals tailored to your property. From Victorian tenement flats on Perth Road and detached family villas in Broughty Ferry to zero-downtime office relocations and direct express long-distance moving across the entire UK.
+          Bespoke Scottish removals tailored to your property. From traditional stone flats and apartments on Perth Road and detached family villas in Broughty Ferry to zero-downtime office relocations and direct express long-distance moving across the entire UK.
         </p>
 
         <!-- Direct Action CTAs -->
@@ -51,7 +51,7 @@ export function renderServicesView() {
           </div>
           <div class="s-trust-item">
             <span style="font-size: 1.25rem;">🪜</span>
-            <span><strong>Tenement Specialists:</strong> High-floor stair navigation</span>
+            <span><strong>Flat Specialists:</strong> High-floor stair navigation</span>
           </div>
           <div class="s-trust-item">
             <span style="font-size: 1.25rem;">🅿️</span>
@@ -66,7 +66,7 @@ export function renderServicesView() {
         <a href="/services/man-and-van-dundee" class="jump-pill">🚐 Man & Van Dundee</a>
         <a href="/services/student-removals" class="jump-pill">🎓 Student Moves</a>
         <a href="/services/office-removals-dundee" class="jump-pill">🏢 Office Moves</a>
-        <a href="#flats-tenements" class="jump-pill">🏛️ Flats & Tenements</a>
+        <a href="#flats-apartments" class="jump-pill">🏛️ Flats & Apartments</a>
         <a href="#packing-services" class="jump-pill">📦 Packing Services</a>
         <a href="#long-distance-uk" class="jump-pill">🚚 Long-Distance UK</a>
       </nav>
@@ -107,8 +107,8 @@ export function renderServicesView() {
           </div>
         </article>
 
-        <!-- Module 2: Flats, Tenements & Multi-Storey Moves -->
-        <article id="flats-tenements" class="service-module-card spotlight-card">
+        <!-- Module 2: Flats, Apartments & Multi-Storey Moves -->
+        <article id="flats-apartments" class="service-module-card spotlight-card">
           <div>
             <div class="service-card-top-row">
               <div class="service-icon-wrap">🏛️</div>
@@ -117,12 +117,12 @@ export function renderServicesView() {
                 <span class="service-tag">West End & DD1</span>
               </div>
             </div>
-            <h2 class="service-module-title">Flats, Tenements & High-Floor Removals</h2>
+            <h2 class="service-module-title">Flats, Apartments & High-Floor Removals</h2>
             <p class="service-module-desc">
               Moving out of a traditional Victorian stone flat with narrow spiral stairs? We specialize in third and fourth-floor relocations across the West End, City Centre, and Stobswell without scuffing walls or damaging doorways.
             </p>
             <div class="service-inclusions-box">
-              <span class="inclusions-title">Specialist Tenement Moving Kit:</span>
+              <span class="inclusions-title">Specialist Flat & Stair Moving Kit:</span>
               <ul class="inclusions-list">
                 <li>High-tensile lifting straps & padded furniture blankets</li>
                 <li>Door frame bumpers & balustrade protective wraps</li>
@@ -366,7 +366,7 @@ export function renderServicesView() {
           <div class="fleet-card spotlight-card">
             <span class="fleet-card-icon">🎗️</span>
             <h3 class="fleet-card-title">High-Tensile Lifting Straps & Blankets</h3>
-            <p class="fleet-card-desc">Specialized ergonomic shoulder lifting straps and thick quilted furniture blankets that safely carry heavy washing machines, sofas, and wardrobes up traditional high-floor spiral tenement closes.</p>
+            <p class="fleet-card-desc">Specialized ergonomic shoulder lifting straps and thick quilted furniture blankets that safely carry heavy washing machines, sofas, and wardrobes up traditional high-floor spiral flat closes.</p>
           </div>
         </div>
       </section>
@@ -380,7 +380,7 @@ export function renderServicesView() {
 
         <div class="services-faq-grid">
           <div class="service-faq-card spotlight-card">
-            <h3 class="service-faq-q">Do you charge extra for tenement stairs or top-floor flats?</h3>
+            <h3 class="service-faq-q">Do you charge extra for stairs or top-floor flats?</h3>
             <p class="service-faq-a">No hidden surprises. When you request a quote, simply let us know your floor level. We calculate the crew size and equipment required into your guaranteed fixed price upfront, so the price you agree is the price you pay on moving day.</p>
           </div>
 

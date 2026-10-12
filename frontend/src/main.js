@@ -201,7 +201,7 @@ function mountApp() {
     viewHtml = renderServicesView();
     updateRouteMetadata({
       title: 'Removal Services Dundee, Angus & UK | Dundee Movers',
-      description: 'Professional house removals, tenement flat moves, packing services & office relocations in Dundee (DD1–DD5), Angus & UK. 100% dedicated vans, fully insured.',
+      description: 'Professional house removals, flat and apartment moves, packing services & office relocations in Dundee (DD1–DD5), Angus & UK. 100% dedicated vans, fully insured.',
       canonicalPath: '/services'
     });
 

@@ -66,10 +66,10 @@ export const LOCAL_AREAS = [
     areaName: 'Dundee West End & Perth Road',
     postcodes: 'DD2 (DD2 1, DD2 2, DD2 4)',
     title: 'Removals Dundee West End & Perth Road DD2 | Dundee Movers',
-    h1: 'Tenement & Residential Removals in Dundee West End (DD2)',
+    h1: 'Flat & Residential Removals in Dundee West End (DD2)',
     metaTitle: 'Removals Dundee West End & Perth Road DD2 | Dundee Movers',
     metaDesc: 'Expert removals in Dundee West End (DD2). Specialists in multi-storey Victorian flats, spiral stairs, Perth Road curb access & Ninewells Hospital staff moves.',
-    transitBadge: 'West End Tenement & Doctor Relocation Specialists',
+    transitBadge: 'West End Flat & Doctor Relocation Specialists',
     heroSubtitle: 'From traditional 3rd-floor Victorian flats along Perth Road to Ninewells medical staff moves and Magdalene Green townhouses.',
     highlights: [
       'Specialized equipment for narrow spiral stairwells and 3rd/4th floor flats',
@@ -78,12 +78,12 @@ export const LOCAL_AREAS = [
       '100% dedicated Luton vans: your items are never mixed with other cargo'
     ],
     propertyTypes: [
-      { name: 'Victorian Stone Tenements', desc: 'High-floor flats with spiral stairs around Perth Road, Roseangle, and Hawkhill.' },
+      { name: 'Victorian Stone Flats', desc: 'High-floor flats with spiral stairs around Perth Road, Roseangle, and Hawkhill.' },
       { name: 'Ninewells Medical Relocations', desc: 'Fast, dependable moves for NHS rotating doctors and healthcare staff near Ninewells Hospital.' },
       { name: 'Riverside & West End Villas', desc: 'Careful transport for detached family villas along Magdalene Green and Riverside Drive.' }
     ],
     localLogistics: {
-      title: 'West End Tenement & Parking Logistics',
+      title: 'West End Flat & Parking Logistics',
       points: [
         'Customers usually reserve a parking space outside using their personal car so our van can load swiftly.',
         'High-tensile lifting straps and padded door jamb protectors for tight stone turns.',
@@ -186,7 +186,7 @@ export const LOCAL_AREAS = [
       points: [
         'Optimal parking positioning on busy cobbled streets in central St Andrews (Market St, North St, South St).',
         'Direct A92 corridor route over the Tay Road Bridge with reliable transit scheduling.',
-        'Heavy-duty lifting straps and padded blankets for traditional tenement and university accommodation stairs.'
+        'Heavy-duty lifting straps and padded blankets for traditional flat and university accommodation stairs.'
       ]
     },
     reviews: [
