@@ -60,8 +60,8 @@ const routes = [
   {
     path: '/',
     filePath: 'index.html',
-    title: 'Removals Dundee | House Removals & Moving Company | Dundee Movers',
-    description: 'Premier house removals and flat moves in Dundee (DD1–DD5), Angus & Fife. Dedicated 1-move-at-a-time vans, zero shared loads, fully insured with UK-wide transit. Get a quote today.',
+    title: 'Removals Dundee | House Removals & Removal Company Dundee | Dundee Movers',
+    description: 'Trusted Dundee removal company for house removals, flat moves & nationwide UK relocations. 100% dedicated vans, zero shared loads, fully insured. Get your free quote in 60s.',
     render: () => `
       ${renderNavbar('home')}
       <main class="modular-main-content">

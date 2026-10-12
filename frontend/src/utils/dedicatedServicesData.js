@@ -178,14 +178,14 @@ export const DEDICATED_SERVICES = [
     slug: 'office-removals-dundee',
     path: '/services/office-removals-dundee',
     badge: 'Zero Downtime • Weekend Relocations • Commercial Insured',
-    metaTitle: 'Office Removals Dundee | Commercial & Business Relocations | Dundee Movers',
-    metaDesc: 'Expert office removals in Dundee, Angus & Fife. Zero business downtime with weekend relocations (Fri 5pm – Mon 8am), IT transport & commercial crate hire.',
-    h1: 'Commercial & Office Removals in Dundee',
-    subtitle: 'Zero-downtime office and corporate relocations executed out-of-hours and over weekends. Sensitive IT transit, color-coded crate hire, and itemized B2B invoicing.',
+    metaTitle: 'Commercial Removals Dundee | Office & Business Moving | Dundee Movers',
+    metaDesc: 'Professional commercial removals in Dundee, Angus & Fife. Zero-downtime office moves, IT equipment transit, crate hire & insured corporate relocations. Free quote.',
+    h1: 'Commercial Removals Dundee & Office Relocations',
+    subtitle: 'Zero-downtime commercial and office relocations executed out-of-hours and over weekends. Sensitive IT transit, color-coded crate hire, and itemized B2B invoicing.',
     heroHighlights: [
       'Zero weekday disruption: Friday 5:00 PM shutdown to Monday 8:00 AM boot-up',
       'Sensitive IT equipment & server rack anti-static protective transport',
-      'Color-coded security crate hire for confidential files & desk setups',
+      'Commercial Goods in Transit & £5M Public Liability cover included',
       'Full Health & Safety Method Statements (RAMS) and commercial invoicing'
     ],
     idealFor: [

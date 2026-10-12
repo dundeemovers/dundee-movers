@@ -247,8 +247,8 @@ export function renderHomeView() {
       <section class="container home-features-section">
         <div class="home-section-header">
           <span class="badge">Comprehensive Removal Services</span>
-          <h2 class="home-section-title">Professional Dundee Removals & Moving Services</h2>
-          <p class="home-section-desc">From premier house removals in Dundee (DD1–DD5) and Angus family villas to student flat moves and UK-wide relocations.</p>
+          <h2 class="home-section-title">Top-Rated Removal Company in Dundee & Angus</h2>
+          <p class="home-section-desc">Ranked among the trusted removal companies in Dundee, Angus & Fife. From house removals (DD1–DD5) and commercial relocations to student moves and UK-wide transit.</p>
         </div>
 
         <div class="home-features-grid four-col-grid">
@@ -261,9 +261,9 @@ export function renderHomeView() {
 
           <div class="glass-panel home-feature-card spotlight-card">
             <div class="h-card-icon">🏢</div>
-            <h3 class="h-card-title">Commercial & Office Moves</h3>
+            <h3 class="h-card-title">Commercial Removals Dundee</h3>
             <p class="h-card-text">Zero-downtime office relocations, IT & server transit, archive transport, and commercial crate hire with weekend flexibility.</p>
-            <a href="/services" class="h-card-link">Explore Commercial Moves ➔</a>
+            <a href="/services/office-removals-dundee" class="h-card-link">Explore Commercial Moves ➔</a>
           </div>
 
           <div class="glass-panel home-feature-card spotlight-card">

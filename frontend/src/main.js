@@ -310,8 +310,8 @@ function mountApp() {
     viewHtml = renderHomeView();
     viewInitializer = () => initHomeView();
     updateRouteMetadata({
-      title: 'Dundee Movers | Removals Dundee, Angus, Fife & UK',
-      description: 'Premier house and flat removals in Dundee (DD1–DD5), Angus & Fife. 1-move-at-a-time dedicated vans, zero shared loads, fully insured with direct UK-wide transit. Get a quote today.',
+      title: 'Removals Dundee | House Removals & Removal Company Dundee | Dundee Movers',
+      description: 'Trusted Dundee removal company for house removals, flat moves & nationwide UK relocations. 100% dedicated vans, zero shared loads, fully insured. Get your free quote in 60s.',
       canonicalPath: '/'
     });
   }

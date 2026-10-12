@@ -18,7 +18,7 @@ export function renderHero() {
           </h1>
 
           <p class="hero-subtitle">
-            Premier house removals and flat moves in Dundee (DD1–DD5), Angus, and Fife. We operate a strict <strong>one-move-at-a-time commitment</strong>: our van and crew are 100% dedicated to your home, so your belongings are never mixed with other customers or delayed on multi-stop runs.
+            Ranked among the trusted <strong>removal companies in Dundee, Angus & Fife</strong>. Specializing in house removals, flat moves, and commercial relocations with our strict <strong>1-move-at-a-time commitment</strong>: your van and crew are 100% dedicated to your home with zero shared loads.
           </p>
 
           <div class="hero-cta-group">
