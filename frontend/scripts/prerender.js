@@ -31,8 +31,10 @@ import { renderCorridorPageView } from '../src/components/CorridorPageView.js';
 import { renderReviews } from '../src/components/Reviews.js';
 import { renderFAQ } from '../src/components/FAQ.js';
 import { renderTermsView, renderPrivacyView } from '../src/components/LegalViews.js';
+import { renderServiceLandingPageView } from '../src/components/ServiceLandingPageView.js';
 
 // Import Route Data
+import { DEDICATED_SERVICES } from '../src/utils/dedicatedServicesData.js';
 import { GUIDE_ARTICLES } from '../src/utils/guideArticlesData.js';
 import { CORRIDOR_DATA } from '../src/utils/corridorData.js';
 
@@ -197,6 +199,47 @@ const routes = [
       ]
     }
   },
+  // 2b. Dedicated Service Landing Pages (/services/:slug)
+  ...DEDICATED_SERVICES.map(s => ({
+    path: s.path,
+    filePath: `${s.path.replace(/^\//, '')}/index.html`,
+    title: s.metaTitle,
+    description: s.metaDesc,
+    render: () => `
+      ${renderNavbar('services')}
+      <main class="modular-main-content">
+        ${renderServiceLandingPageView(s.id)}
+      </main>
+      ${renderFooter()}
+    `,
+    schema: {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Service",
+          "name": s.h1,
+          "serviceType": "Removals and Relocations",
+          "description": s.metaDesc,
+          "provider": {
+            "@type": "MovingCompany",
+            "name": "Dundee Movers",
+            "telephone": "+44-7308-420884",
+            "url": "https://dundeemovers.co.uk"
+          },
+          "areaServed": [{ "@type": "City", "name": "Dundee" }],
+          "offers": { "@type": "Offer", "priceCurrency": "GBP", "price": "0", "description": "Free Tailored Moving Quote" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": s.faqs.map(f => ({
+            "@type": "Question",
+            "name": f.q,
+            "acceptedAnswer": { "@type": "Answer", "text": f.a }
+          }))
+        }
+      ]
+    }
+  })),
   // 3. Coverage Map
   {
     path: '/coverage',

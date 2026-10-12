@@ -17,6 +17,7 @@ import { renderFAQ, initFAQ } from './components/FAQ.js';
 import { renderFooter } from './components/Footer.js';
 import { renderMovePass, initMovePass } from './components/MovePass.js';
 import { renderTermsView, renderPrivacyView } from './components/LegalViews.js';
+import { renderServiceLandingPageView, updateServiceSeoMetadata } from './components/ServiceLandingPageView.js';
 
 function initSpotlightEffect() {
   document.addEventListener('mousemove', (e) => {
@@ -134,6 +135,10 @@ function resetDefaultSeoMetadata() {
   if (corridorScript) {
     corridorScript.remove();
   }
+  const dedicatedServiceScript = document.getElementById('dedicated-service-schema');
+  if (dedicatedServiceScript) {
+    dedicatedServiceScript.remove();
+  }
 }
 
 function mountApp() {
@@ -190,7 +195,7 @@ function mountApp() {
       canonicalPath: '/'
     });
 
-  // 3. Specialist Services View
+  // 3. Specialist Services View & Dedicated Service Hubs
   } else if (pathname === '/services') {
     activeRoute = 'services';
     viewHtml = renderServicesView();
@@ -199,6 +204,13 @@ function mountApp() {
       description: 'Professional house removals, tenement flat moves, packing services & office relocations in Dundee (DD1–DD5), Angus & UK. 100% dedicated vans, fully insured.',
       canonicalPath: '/services'
     });
+
+  // 3b. Dedicated Service Landing Page (/services/:slug)
+  } else if (pathname.startsWith('/services/')) {
+    activeRoute = 'services';
+    const serviceSlug = pathname.replace(/^\/services\//, '').split('/')[0].split('?')[0];
+    viewHtml = renderServiceLandingPageView(serviceSlug);
+    viewInitializer = () => updateServiceSeoMetadata(serviceSlug);
 
   // 4. Dedicated Programmatic Local Corridor View (/areas/:slug or /routes/:slug)
   } else if (isAreaRoute) {

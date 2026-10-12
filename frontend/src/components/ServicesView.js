@@ -60,15 +60,15 @@ export function renderServicesView() {
         </div>
       </section>
 
-      <!-- 2. Interactive Category Jump Nav -->
+      <!-- 2. Interactive Category Jump Nav & Dedicated Hubs -->
       <nav class="services-jump-nav" aria-label="Services Navigation">
         <a href="#residential-house" class="jump-pill">🏡 House Removals</a>
+        <a href="/services/man-and-van-dundee" class="jump-pill">🚐 Man & Van Dundee</a>
+        <a href="/services/student-removals" class="jump-pill">🎓 Student Moves</a>
+        <a href="/services/office-removals-dundee" class="jump-pill">🏢 Office Moves</a>
         <a href="#flats-tenements" class="jump-pill">🏛️ Flats & Tenements</a>
-        <a href="#student-removals" class="jump-pill">🎓 Student Moves</a>
         <a href="#packing-services" class="jump-pill">📦 Packing Services</a>
-        <a href="#commercial-office" class="jump-pill">🏢 Office & Commercial</a>
         <a href="#long-distance-uk" class="jump-pill">🚚 Long-Distance UK</a>
-        <a href="#furniture-assembly" class="jump-pill">🛠️ Furniture Assembly</a>
       </nav>
 
       <!-- 3. The 6 Core Detailed Service Modules -->
@@ -199,8 +199,8 @@ export function renderServicesView() {
             </div>
           </div>
           <div class="service-bottom-actions">
-            <a href="/guides/office-commercial-relocation-checklist" class="service-guide-link">
-              <span>View Zero Downtime Office Guide</span> ➔
+            <a href="/services/office-removals-dundee" class="service-guide-link">
+              <span>View Dedicated Office Removals Hub</span> ➔
             </a>
             <a href="tel:+447308420884" class="service-quote-btn">Book Commercial Move</a>
           </div>
@@ -298,8 +298,8 @@ export function renderServicesView() {
             </div>
           </div>
           <div class="service-bottom-actions">
-            <a href="/guides/student-relocation-guide-dundee" class="service-guide-link">
-              <span>Read Student Moving Guide</span> ➔
+            <a href="/services/student-removals" class="service-guide-link">
+              <span>View Dedicated Student Removals Hub</span> ➔
             </a>
             <a href="/#quote-calculator" class="service-quote-btn">Quote Student Move</a>
           </div>

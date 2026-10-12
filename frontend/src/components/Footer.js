@@ -104,11 +104,11 @@ export function renderFooter() {
               <h4 class="footer-dark-heading">Removal Services</h4>
               <ul class="footer-dark-links">
                 <li><a href="/services">🏡 Residential House Removals</a></li>
-                <li><a href="/services">🏛️ Flats & Multi-Storey Homes</a></li>
-                <li><a href="/guides/packing-services-dundee">📦 Packing Service Dundee Removals</a></li>
-                <li><a href="/services">🏢 Commercial & Office Moves</a></li>
+                <li><a href="/services/man-and-van-dundee">🚐 Man and Van Dundee</a></li>
+                <li><a href="/services/student-removals">🎓 Student Removals Dundee</a></li>
+                <li><a href="/services/office-removals-dundee">🏢 Commercial & Office Moves</a></li>
+                <li><a href="/guides/packing-services-dundee">📦 Packing Services Dundee</a></li>
                 <li><a href="/coverage">🚚 Express Whole UK Corridors</a></li>
-                <li><a href="/#quote-calculator">📋 Free Tailored Quote Engine</a></li>
               </ul>
             </div>
 
